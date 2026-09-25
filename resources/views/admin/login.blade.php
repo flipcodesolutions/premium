@@ -32,7 +32,7 @@
         }
 
         /* =====================================================
-           FULL PAGE BACKGROUND IMAGE ACROSS THE ENTIRE SCREEN
+           FULL-PAGE BACKGROUND (100% SCREEN COVERAGE)
         ===================================================== */
         body {
             margin: 0;
@@ -41,75 +41,164 @@
             background:
                 linear-gradient(
                     135deg,
-                    rgba(8, 31, 58, 0.92),
-                    rgba(14, 52, 88, 0.86)
+                    rgba(7, 28, 52, 0.92),
+                    rgba(11, 49, 88, 0.86)
                 ),
                 url('{{ asset('images/service banner.jpg') }}') center/cover no-repeat fixed;
+        }
+
+        .admin-login-wrapper {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: stretch;
+            position: relative;
+        }
+
+        /* =====================================================
+           LEFT BRAND PANEL
+        ===================================================== */
+        .admin-brand-panel {
+            flex: 1.1;
+            min-height: 100vh;
+            background: transparent; /* Background image shines through completely */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 45px 15px;
+            padding: 60px 50px 60px 70px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* =====================================================
-           LOGIN CONTAINER
-        ===================================================== */
-        .admin-login-container {
+        .brand-content {
+            max-width: 540px;
             width: 100%;
-            max-width: 470px;
-            margin: 0 auto;
         }
 
         /* =====================================================
-           BRAND LOGO (NO WHITE BACKGROUND, PURE WHITE LOGO)
+           LOGO (NO WHITE BACKGROUND, PURE WHITE LOGO)
         ===================================================== */
-        .brand-logo-area {
-            text-align: center;
-            margin-bottom: 24px;
+        .brand-logo {
+            display: inline-block;
+            background: transparent !important; /* White box removed */
+            padding: 0 !important;
+            margin-bottom: 28px;
         }
 
-        .brand-logo-link {
+        .brand-logo a {
             display: inline-block;
-            background: transparent !important;
-            padding: 0 !important;
             text-decoration: none;
+        }
+
+        .brand-logo img,
+        .brand-logo img.white-logo,
+        img.white-logo {
+            max-width: 170px !important;
+            width: 170px !important;
+            height: auto !important;
+            display: block !important;
+            background: transparent !important;
+            /* Pure crisp white logo */
+            filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4)) !important;
             transition: transform 0.25s ease;
         }
 
-        .brand-logo-link:hover {
-            transform: scale(1.03);
+        .brand-logo img:hover {
+            transform: scale(1.04);
         }
 
-        .brand-white-logo {
-            max-width: 270px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            background: transparent !important;
-            /* Turns dark/colored logo into pure crisp white silhouette */
-            filter: brightness(0) invert(1) drop-shadow(0 3px 12px rgba(0, 0, 0, 0.3));
-        }
-
-        .brand-portal-badge {
+        /* BRAND TEXT */
+        .brand-small-title {
             display: inline-block;
             color: #7ee030;
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 2.2px;
             text-transform: uppercase;
-            margin-top: 12px;
+            margin-bottom: 12px;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
 
+        .brand-content h1 {
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(34px, 3.8vw, 50px);
+            line-height: 1.08;
+            font-weight: 900;
+            margin: 0 0 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-content h1 span {
+            display: block;
+            color: #7ee030;
+        }
+
+        .brand-description {
+            max-width: 480px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 13.5px;
+            line-height: 1.75;
+            margin-bottom: 34px;
+        }
+
+        /* TRUST ITEMS */
+        .brand-trust-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            max-width: 500px;
+        }
+
+        .brand-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 8px;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s ease;
+        }
+
+        .brand-trust-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .brand-trust-item i {
+            color: #7ee030;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
         /* =====================================================
-           LOGIN CARD
+           RIGHT LOGIN PANEL (FLOATING WHITE CARD ON FULL BG)
         ===================================================== */
+        .admin-login-panel {
+            flex: 0.95;
+            min-height: 100vh;
+            background: transparent; /* No white background covering half screen */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
         .login-card {
+            width: 100%;
+            max-width: 450px;
             background: #ffffff;
             border-radius: 12px;
             padding: 38px 36px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.38);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
@@ -349,7 +438,7 @@
 
         /* PAGE FOOTER */
         .login-page-footer {
-            margin-top: 24px;
+            margin-top: 20px;
             text-align: center;
             color: rgba(255, 255, 255, 0.75);
             font-size: 12px;
@@ -357,6 +446,32 @@
 
         .login-page-footer strong {
             color: #ffffff;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 991px) {
+            .admin-login-wrapper {
+                flex-direction: column;
+            }
+
+            .admin-brand-panel {
+                min-height: auto;
+                padding: 50px 30px 20px;
+                text-align: center;
+            }
+
+            .brand-content {
+                max-width: 600px;
+            }
+
+            .brand-trust-list {
+                margin: 0 auto;
+            }
+
+            .admin-login-panel {
+                min-height: auto;
+                padding: 20px 20px 50px;
+            }
         }
 
         @media (max-width: 575px) {
@@ -368,8 +483,12 @@
                 font-size: 23px;
             }
 
-            .brand-white-logo {
-                max-width: 230px;
+            .brand-content h1 {
+                font-size: 30px;
+            }
+
+            .brand-trust-list {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -377,170 +496,217 @@
 
 <body>
 
-    <div class="admin-login-container">
+    <div class="admin-login-wrapper">
 
         <!-- =====================================================
-             BRAND LOGO (PURE WHITE LOGO ON TRANSPARENT BG)
+             LEFT BRAND PANEL (WHITE LOGO ON TRANSPARENT BG)
         ====================================================== -->
-        <div class="brand-logo-area">
-            <a href="{{ route('home') }}" class="brand-logo-link" title="Return to Website">
-                <img
-                    src="{{ asset('images/logo.png') }}"
-                    alt="Premium Building & Pest Inspections"
-                    class="brand-white-logo"
-                >
-            </a>
-            <div class="brand-portal-badge">
-                ADMINISTRATION PORTAL
-            </div>
-        </div>
+        <section class="admin-brand-panel">
+            <div class="brand-content">
 
-        <!-- =====================================================
-             LOGIN CARD
-        ====================================================== -->
-        <div class="login-card">
-
-            <!-- HEADER -->
-            <div class="login-header">
-                <span class="login-label">
-                    SECURE ACCESS
-                </span>
-
-                <h2>
-                    Welcome Back
-                </h2>
-
-                <p>
-                    Sign in to access your Premium Building & Pest Inspections administration dashboard.
-                </p>
-            </div>
-
-            <!-- SUCCESS MESSAGE -->
-            @if(session('success'))
-                <div class="alert alert-success login-alert">
-                    <i class="bi bi-check-circle-fill me-1"></i>
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <!-- ERROR MESSAGE -->
-            @if($errors->any())
-                <div class="alert alert-danger login-alert">
-                    <div class="fw-bold mb-1">
-                        <i class="bi bi-exclamation-triangle-fill me-1"></i> Login failed
-                    </div>
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <!-- LOGIN FORM -->
-            <form action="{{ route('login') }}" method="POST" autocomplete="on">
-                @csrf
-
-                <!-- EMAIL -->
-                <div class="login-form-group">
-                    <label for="email" class="login-form-label">
-                        EMAIL ADDRESS
-                    </label>
-
-                    <div class="login-input-wrapper">
-                        <i class="bi bi-envelope login-input-icon"></i>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            class="login-input"
-                            placeholder="Enter your admin email"
-                            value="{{ old('email', session('registered_email')) }}"
-                            autocomplete="email"
-                            required
-                            autofocus
+                <!-- PURE WHITE LOGO -->
+                <div class="brand-logo">
+                    <a href="{{ route('home') }}" title="Return to Website">
+                        <img
+                            src="{{ asset('images/logo.png') }}"
+                            alt="Premium Building & Pest Inspections"
+                            class="white-logo"
+                            style="max-width: 170px !important; width: 170px !important; height: auto !important; filter: brightness(0) invert(1) !important; background: transparent !important; display: block;"
                         >
-                    </div>
-                </div>
-
-                <!-- PASSWORD -->
-                <div class="login-form-group">
-                    <label for="password" class="login-form-label">
-                        PASSWORD
-                    </label>
-
-                    <div class="login-input-wrapper">
-                        <i class="bi bi-lock login-input-icon"></i>
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="login-input"
-                            placeholder="Enter your password"
-                            autocomplete="current-password"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            id="passwordToggle"
-                            aria-label="Show password"
-                        >
-                            <i class="bi bi-eye" id="passwordIcon"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- OPTIONS -->
-                <div class="login-options">
-                    <label class="remember-check">
-                        <input
-                            type="checkbox"
-                            name="remember"
-                            value="1"
-                            {{ old('remember') ? 'checked' : '' }}
-                        >
-                        <span>Remember me</span>
-                    </label>
-
-                    <a href="#" class="forgot-link" onclick="return false;">
-                        Forgot Password?
                     </a>
                 </div>
 
-                <!-- LOGIN BUTTON -->
-                <button type="submit" class="login-button">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    SIGN IN TO ADMIN PANEL
-                </button>
+                <span class="brand-small-title">
+                    ADMINISTRATION PORTAL
+                </span>
 
-                <!-- SWITCH TO REGISTER -->
-                <div class="switch-auth-link">
-                    Don't have an admin account?
-                    <a href="{{ route('register') }}">Create an Account</a>
+                <h1>
+                    PREMIUM BUILDING
+                    <span>&amp; PEST INSPECTIONS</span>
+                </h1>
+
+                <p class="brand-description">
+                    Manage your inspection services, enquiries, bookings,
+                    customers, reviews and website content from one secure
+                    administration dashboard.
+                </p>
+
+                <!-- 4 TRUST ITEMS -->
+                <div class="brand-trust-list">
+                    <div class="brand-trust-item">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Secure Admin Access</span>
+                    </div>
+
+                    <div class="brand-trust-item">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Centralised Dashboard</span>
+                    </div>
+
+                    <div class="brand-trust-item">
+                        <i class="bi bi-calendar-check"></i>
+                        <span>Manage Bookings</span>
+                    </div>
+
+                    <div class="brand-trust-item">
+                        <i class="bi bi-chat-square-text"></i>
+                        <span>Manage Enquiries</span>
+                    </div>
                 </div>
 
-            </form>
+            </div>
+        </section>
 
-            <!-- SECURITY -->
-            <div class="login-security">
-                <i class="bi bi-shield-lock-fill"></i>
+        <!-- =====================================================
+             RIGHT LOGIN PANEL (FLOATING WHITE CARD OVER FULL BG)
+        ====================================================== -->
+        <section class="admin-login-panel">
+
+            <div class="login-card">
+
+                <!-- HEADER -->
+                <div class="login-header">
+                    <span class="login-label">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h2>
+                        Welcome Back
+                    </h2>
+
+                    <p>
+                        Sign in to access your Premium Building & Pest Inspections administration dashboard.
+                    </p>
+                </div>
+
+                <!-- SUCCESS MESSAGE -->
+                @if(session('success'))
+                    <div class="alert alert-success login-alert">
+                        <i class="bi bi-check-circle-fill me-1"></i>
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- ERROR MESSAGE -->
+                @if($errors->any())
+                    <div class="alert alert-danger login-alert">
+                        <div class="fw-bold mb-1">
+                            <i class="bi bi-exclamation-triangle-fill me-1"></i> Login failed
+                        </div>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <!-- LOGIN FORM -->
+                <form action="{{ route('login') }}" method="POST" autocomplete="on">
+                    @csrf
+
+                    <!-- EMAIL -->
+                    <div class="login-form-group">
+                        <label for="email" class="login-form-label">
+                            EMAIL ADDRESS
+                        </label>
+
+                        <div class="login-input-wrapper">
+                            <i class="bi bi-envelope login-input-icon"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="login-input"
+                                placeholder="Enter your admin email"
+                                value="{{ old('email', session('registered_email')) }}"
+                                autocomplete="email"
+                                required
+                                autofocus
+                            >
+                        </div>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="login-form-group">
+                        <label for="password" class="login-form-label">
+                            PASSWORD
+                        </label>
+
+                        <div class="login-input-wrapper">
+                            <i class="bi bi-lock login-input-icon"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="login-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password"
+                            >
+                                <i class="bi bi-eye" id="passwordIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- OPTIONS -->
+                    <div class="login-options">
+                        <label class="remember-check">
+                            <input
+                                type="checkbox"
+                                name="remember"
+                                value="1"
+                                {{ old('remember') ? 'checked' : '' }}
+                            >
+                            <span>Remember me</span>
+                        </label>
+
+                        <a href="#" class="forgot-link" onclick="return false;">
+                            Forgot Password?
+                        </a>
+                    </div>
+
+                    <!-- LOGIN BUTTON -->
+                    <button type="submit" class="login-button">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        SIGN IN TO ADMIN PANEL
+                    </button>
+
+                    <!-- SWITCH TO REGISTER -->
+                    <div class="switch-auth-link">
+                        Don't have an admin account?
+                        <a href="{{ route('register') }}">Create an Account</a>
+                    </div>
+
+                </form>
+
+                <!-- SECURITY -->
+                <div class="login-security">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    <p>
+                        Restricted administration area. Authorised administrators only.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="login-page-footer">
                 <p>
-                    Restricted administration area. Authorised administrators only.
+                    © {{ date('Y') }} <strong>Premium Building & Pest Inspections</strong>. All rights reserved.
                 </p>
             </div>
 
-        </div>
-
-        <!-- FOOTER -->
-        <div class="login-page-footer">
-            <p>
-                © {{ date('Y') }} <strong>Premium Building & Pest Inspections</strong>. All rights reserved.
-            </p>
-        </div>
+        </section>
 
     </div>
 
