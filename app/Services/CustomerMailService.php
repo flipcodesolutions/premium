@@ -11,6 +11,26 @@ use Illuminate\Support\Facades\Mail;
 class CustomerMailService
 {
     /**
+     * Get sender email address.
+     */
+    public static function getFromAddress(): string
+    {
+        $from = config('mail.from.address');
+        if (empty($from) || $from === 'hello@example.com') {
+            return config('mail.mailers.smtp.username') ?: 'info@premiumbuildingandpest.com.au';
+        }
+        return $from;
+    }
+
+    /**
+     * Get sender name.
+     */
+    public static function getFromName(): string
+    {
+        return config('mail.from.name') ?: 'Premium Building & Pest Inspections';
+    }
+
+    /**
      * Send automatic confirmation when customer submits an inspection booking.
      */
     public static function sendBookingConfirmation(Booking $booking): bool
@@ -21,14 +41,18 @@ class CustomerMailService
 
         try {
             $subject = 'Booking Request Received - Ref #' . $booking->id . ' - Premium Building & Pest Inspections';
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
 
             Mail::send('emails.booking-notification', [
                 'booking' => $booking,
                 'subjectLine' => $subject,
                 'introMessage' => 'Thank you for submitting your inspection booking request with Premium Building & Pest Inspections. We have received your booking details and our team will contact you shortly to confirm your scheduled appointment.',
                 'customMessage' => null,
-            ], function ($message) use ($booking, $subject) {
+            ], function ($message) use ($booking, $subject, $fromAddress, $fromName) {
                 $message->to($booking->email, $booking->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 
@@ -123,14 +147,18 @@ class CustomerMailService
 
         try {
             $subject = 'Quote Request Received - Ref #' . $quote->id . ' - Premium Building & Pest Inspections';
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
 
             Mail::send('emails.quote-notification', [
                 'quote' => $quote,
                 'subjectLine' => $subject,
                 'introMessage' => 'Thank you for requesting an estimate from Premium Building & Pest Inspections. We have received your inquiry and our team is preparing a comprehensive quote for your inspection needs.',
                 'customMessage' => null,
-            ], function ($message) use ($quote, $subject) {
+            ], function ($message) use ($quote, $subject, $fromAddress, $fromName) {
                 $message->to($quote->email, $quote->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 
@@ -225,6 +253,8 @@ class CustomerMailService
 
         try {
             $subject = 'We Received Your Message - Premium Building & Pest Inspections';
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
 
             Mail::send('emails.general-message', [
                 'recipientName' => $contactMessage->name,
@@ -235,8 +265,10 @@ class CustomerMailService
                     'Inquiry Ref' => '#' . $contactMessage->id,
                     'Date Received' => now()->format('d M Y, h:i A'),
                 ],
-            ], function ($message) use ($contactMessage, $subject) {
+            ], function ($message) use ($contactMessage, $subject, $fromAddress, $fromName) {
                 $message->to($contactMessage->email, $contactMessage->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 

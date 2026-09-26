@@ -45,7 +45,7 @@ class BookingController extends Controller
             ],
 
             'email' => [
-                'nullable',
+                'required',
                 'email',
                 'max:255',
             ],

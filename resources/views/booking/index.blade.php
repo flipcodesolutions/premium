@@ -142,14 +142,15 @@
                             <!-- Email -->
                             <div class="col-12">
                                 <label for="email" class="form-label fw-semibold small text-secondary">
-                                    Email Address <span class="text-muted fw-normal">(For sending inspection report)</span>
+                                    Email Address <span class="text-danger">*</span> <span class="text-muted fw-normal">(For receiving booking confirmation & report)</span>
                                 </label>
                                 <input type="email"
                                        class="form-control form-control-lg @error('email') is-invalid @enderror"
                                        id="email"
                                        name="email"
                                        value="{{ old('email') }}"
-                                       placeholder="e.g. john@example.com">
+                                       placeholder="e.g. john@example.com"
+                                       required>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
