@@ -373,6 +373,8 @@ Route::post(
     [BookingController::class, 'store']
 )->name('booking.store');
 
+Route::redirect('/book-now', '/booking');
+
 
 // =========================================================
 // ADMIN AUTHENTICATION

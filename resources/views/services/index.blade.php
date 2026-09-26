@@ -1395,7 +1395,7 @@
                     </a>
 
                     <a
-                        href="{{ route('contact') }}"
+                        href="{{ route('booking.create') }}"
                         class="schedule-book-btn btn-glow"
                     >
                         Book Inspection
