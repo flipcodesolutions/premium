@@ -1095,13 +1095,13 @@
 
     z-index: 999;
 
-    width: 42px;
+    width: 50px;
 
-    min-height: 155px;
+    min-height: 175px;
 
-    padding: 14px 0;
+    padding: 16px 0;
 
-    border-radius: 6px 0 0 6px;
+    border-radius: 8px 0 0 8px;
 
     background: var(--premium-green);
 
@@ -1117,9 +1117,9 @@
 
     flex-direction: column;
 
-    gap: 8px;
+    gap: 10px;
 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, .18);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .22);
 
     transition: .25s ease;
 
@@ -1130,7 +1130,7 @@
 
     font-family: 'Poppins', sans-serif;
 
-    font-size: 11px;
+    font-size: 12.5px;
 
     font-weight: 800;
 
@@ -1138,7 +1138,7 @@
 
     transform: rotate(180deg);
 
-    letter-spacing: .5px;
+    letter-spacing: .8px;
 
     text-transform: uppercase;
 
@@ -1147,18 +1147,20 @@
 
 .floating-quote i {
 
-    font-size: 14px;
+    font-size: 16px;
 
 }
 
 
 .floating-quote:hover {
 
-    width: 48px;
+    width: 56px;
 
     background: var(--premium-green-dark);
 
     color: #fff;
+
+    box-shadow: 0 6px 22px rgba(0, 0, 0, .28);
 
 }
 
@@ -1467,16 +1469,22 @@
 
     .floating-quote {
 
-        width: 38px;
+        width: 44px;
 
-        min-height: 125px;
+        min-height: 145px;
 
     }
 
 
     .floating-quote span {
 
-        font-size: 10px;
+        font-size: 11px;
+
+    }
+
+    .floating-quote i {
+
+        font-size: 14px;
 
     }
 
