@@ -1187,7 +1187,7 @@
 
 
                         <a
-                            href="{{ route('contact') }}"
+                            href="{{ route('booking.create') }}"
                             class="about-green-btn btn-glow"
                         >
 
@@ -1427,7 +1427,7 @@
                     {{-- CONTACT --}}
 
                     <a
-                        href="{{ route('contact') }}"
+                        href="{{ route('booking.create') }}"
                         class="about-green-btn btn-glow"
                     >
 
