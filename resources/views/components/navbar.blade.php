@@ -1091,15 +1091,15 @@
 
     right: 0;
 
-    top: 42%;
+    top: 40%;
 
     z-index: 999;
 
     width: 58px;
 
-    min-height: 205px;
+    min-height: 240px;
 
-    padding: 20px 0;
+    padding: 24px 0;
 
     border-radius: 10px 0 0 10px;
 
@@ -1117,7 +1117,7 @@
 
     flex-direction: column;
 
-    gap: 12px;
+    gap: 14px;
 
     box-shadow: 0 5px 22px rgba(0, 0, 0, .25);
 
@@ -1471,9 +1471,9 @@
 
         width: 48px;
 
-        min-height: 165px;
+        min-height: 190px;
 
-        padding: 16px 0;
+        padding: 18px 0;
 
     }
 
