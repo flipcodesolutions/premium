@@ -4,18 +4,48 @@
 
 @section('content')
 
+<style>
+.booking-hero {
+    background: linear-gradient(135deg, rgba(11,31,58,0.94), rgba(18,63,103,0.88)), url('{{ asset('images/service banner.jpg') }}') center/cover no-repeat;
+    padding: 110px 0 95px;
+    color: #ffffff;
+    position: relative;
+}
+.booking-hero h1 {
+    color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.1rem, 4.2vw, 3rem);
+    margin-bottom: 16px;
+    line-height: 1.25;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+.booking-hero p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.12rem;
+    line-height: 1.65;
+    max-width: 680px;
+    margin: 0 auto;
+}
+@media (max-width: 768px) {
+    .booking-hero {
+        padding: 70px 0 60px;
+    }
+}
+</style>
+
 <!-- =========================================================
      HERO BANNER
 ========================================================= -->
-<section style="background: linear-gradient(135deg, rgba(11,31,58,0.96), rgba(18,63,103,0.90)), url('{{ asset('images/service banner.jpg') }}') center/cover; padding: 70px 0 60px; color: #fff;">
+<section class="booking-hero">
     <div class="container text-center" data-aos="fade-down" data-aos-duration="800">
-        <span style="display: inline-block; background: rgba(72,169,0,0.25); color: #8ee346; border: 1px solid rgba(72,169,0,0.4); font-size: 0.8rem; font-weight: 700; padding: 6px 16px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px;">
+        <span style="display: inline-block; background: rgba(72,169,0,0.25); color: #8ee346; border: 1px solid rgba(72,169,0,0.45); font-size: 0.82rem; font-weight: 700; padding: 7px 18px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 16px;">
             Fast & Reliable Booking
         </span>
-        <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.5rem; margin-bottom: 12px;">
+        <h1>
             Book Your Property Inspection
         </h1>
-        <p style="max-width: 650px; margin: 0 auto; color: rgba(255,255,255,0.85); font-size: 1.05rem;">
+        <p>
             Schedule a certified, independent building & pest inspection across Melbourne. Receive your comprehensive report within 24 hours.
         </p>
     </div>
@@ -274,7 +304,7 @@
                     <div class="mb-3 d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 60px; height: 60px; background: rgba(72,169,0,0.25); color: #48A900; font-size: 1.8rem;">
                         <i class="bi bi-telephone-fill"></i>
                     </div>
-                    <h5 class="fw-bold mb-1" style="font-family: 'Montserrat', sans-serif;">Need Urgency?</h5>
+                    <h5 class="fw-bold mb-1" style="font-family: 'Montserrat', sans-serif; color: #ffffff !important;">Need Urgency?</h5>
                     <p class="small text-white-50 mb-3">Call us directly to secure same-day or next-day inspection times.</p>
                     <a href="tel:0466001551" class="btn text-white fw-bold px-4 py-2 rounded-pill d-inline-flex align-items-center gap-2 btn-glow" style="background: #48A900;">
                         <i class="bi bi-telephone-outbound"></i> 0466 001 551
