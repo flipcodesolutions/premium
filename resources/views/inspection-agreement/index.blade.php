@@ -462,7 +462,7 @@
     .agreement-main-heading {
         color: #082f57;
         font-family: 'Montserrat', sans-serif;
-        font-size: clamp(32px, 4.5vw, 42px);
+        font-size: clamp(34px, 4.5vw, 44px);
         font-weight: 900;
         letter-spacing: -0.5px;
         text-transform: uppercase;
@@ -474,27 +474,28 @@
     /* INTRO PARAGRAPHS */
     .agreement-intro-text p {
         color: #374151;
-        font-size: 14.5px;
-        line-height: 1.7;
+        font-size: 16.5px;
+        line-height: 1.75;
         margin-bottom: 16px;
     }
 
     .agreement-intro-text .agreement-prompt-text {
         color: #374151;
-        font-size: 14.5px;
-        line-height: 1.6;
+        font-size: 16.5px;
+        line-height: 1.75;
         margin-bottom: 24px;
+        font-weight: 600;
     }
 
     /* SCROLLABLE AGREEMENT BOX */
     .agreement-scroll-box {
         border: 1px solid #dcdfe3;
-        border-radius: 4px;
+        border-radius: 6px;
         background: #ffffff;
-        padding: 26px 30px;
-        max-height: 420px;
+        padding: 28px 32px;
+        max-height: 480px;
         overflow-y: scroll;
-        margin-bottom: 22px;
+        margin-bottom: 24px;
         box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
@@ -520,18 +521,18 @@
     /* TEXT CONTENT INSIDE SCROLL BOX */
     .agreement-text-content {
         color: #333333;
-        font-size: 13.5px;
-        line-height: 1.75;
+        font-size: 16px;
+        line-height: 1.85;
     }
 
     .agreement-box-heading {
-        color: #111827;
+        color: #0b1f3a;
         font-family: 'Montserrat', sans-serif;
-        font-size: 14.5px;
+        font-size: 18px;
         font-weight: 800;
         text-transform: uppercase;
-        margin-top: 22px;
-        margin-bottom: 10px;
+        margin-top: 26px;
+        margin-bottom: 12px;
         letter-spacing: 0.2px;
     }
 
@@ -540,44 +541,48 @@
     }
 
     .agreement-text-content p {
-        margin-bottom: 12px;
-    }
-
-    .agreement-ordered-list {
-        padding-left: 20px;
         margin-bottom: 14px;
     }
 
+    .agreement-ordered-list {
+        padding-left: 22px;
+        margin-bottom: 16px;
+    }
+
     .agreement-ordered-list li {
-        margin-bottom: 6px;
+        margin-bottom: 8px;
+        font-size: 16px;
     }
 
     .agreement-nested-list {
         list-style-type: none;
         padding-left: 0;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
     }
 
     .agreement-nested-list > li {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+        font-size: 16px;
     }
 
     .agreement-roman-list {
         list-style-type: lower-roman;
-        padding-left: 24px;
-        margin-top: 6px;
+        padding-left: 26px;
+        margin-top: 8px;
     }
 
     .agreement-roman-list li {
-        margin-bottom: 4px;
+        margin-bottom: 6px;
+        font-size: 16px;
     }
 
     .agreement-quote {
         border-left: 3px solid #cbd5e1;
         padding-left: 16px;
-        margin: 12px 0;
+        margin: 14px 0;
         font-style: italic;
         color: #4b5563;
+        font-size: 16px;
     }
 
     /* FORM STYLES */
@@ -588,10 +593,10 @@
     .agreement-input {
         background-color: #eef3f8 !important;
         border: 1px solid #e1e7ec !important;
-        border-radius: 4px !important;
-        height: 48px !important;
-        padding: 0 16px !important;
-        font-size: 14px !important;
+        border-radius: 6px !important;
+        height: 52px !important;
+        padding: 0 18px !important;
+        font-size: 15.5px !important;
         color: #1f2937 !important;
         box-shadow: none !important;
         transition: all 0.2s ease-in-out !important;
@@ -599,7 +604,7 @@
 
     .agreement-input::placeholder {
         color: #7b8a9c;
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .agreement-input:focus {
@@ -611,14 +616,14 @@
 
     .agreement-submit-btn {
         width: 100%;
-        height: 48px;
+        height: 52px;
         background-color: #43a900;
         color: #ffffff;
         font-family: 'Poppins', sans-serif;
         font-weight: 700;
-        font-size: 15px;
+        font-size: 16.5px;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -645,8 +650,8 @@
         }
 
         .agreement-scroll-box {
-            padding: 18px 20px;
-            max-height: 380px;
+            padding: 20px 20px;
+            max-height: 400px;
         }
 
         .agreement-main-heading {
@@ -655,7 +660,22 @@
         }
 
         .agreement-intro-text p {
-            font-size: 13.5px;
+            font-size: 15px;
+        }
+
+        .agreement-text-content {
+            font-size: 15px;
+        }
+
+        .agreement-box-heading {
+            font-size: 16.5px;
+        }
+
+        .agreement-ordered-list li,
+        .agreement-nested-list > li,
+        .agreement-roman-list li,
+        .agreement-quote {
+            font-size: 15px;
         }
     }
 </style>
