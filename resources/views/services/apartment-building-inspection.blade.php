@@ -938,7 +938,7 @@
 <div class="apt-page">
 
     {{-- FLOATING RIGHT TAB --}}
-    <a href="#apt-hero-form" class="apt-floating-tab">
+    <a href="#quote-form" class="apt-floating-tab">
         <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
     </a>
 
@@ -975,7 +975,7 @@
                 </div>
 
                 {{-- HERO FORM --}}
-                <div id="apt-hero-form" class="apt-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                <div id="quote-form" class="apt-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
                     @if(session('success'))
                         <div class="alert alert-success py-2 mb-2" style="font-size: 13.5px;">
                             {{ session('success') }}
@@ -1334,7 +1334,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="apt-price-btn">
+                    <a href="#quote-form" class="apt-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1361,7 +1361,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="apt-price-btn">
+                    <a href="#quote-form" class="apt-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1388,7 +1388,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="apt-price-btn">
+                    <a href="#quote-form" class="apt-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1412,7 +1412,7 @@
                     When purchasing an apartment, understanding the condition of both the property and accessible building elements gives you confidence. Schedule your inspection with Ronak Gami today.
                 </p>
 
-                <a href="{{ route('contact') }}" class="apt-btn btn-glow">
+                <a href="#quote-form" class="apt-btn btn-glow">
                     SCHEDULE AN INSPECTION TODAY
                 </a>
             </div>

@@ -943,7 +943,7 @@
 <div class="d-page">
 
     {{-- FLOATING RIGHT TAB --}}
-    <a href="#d-hero-form" class="d-floating-tab">
+    <a href="#quote-form" class="d-floating-tab">
         <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
     </a>
 
@@ -980,7 +980,7 @@
                 </div>
 
                 {{-- HERO FORM --}}
-                <div id="d-hero-form" class="d-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                <div id="quote-form" class="d-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
                     @if(session('success'))
                         <div class="alert alert-success py-2 mb-2" style="font-size: 15px;">
                             {{ session('success') }}
@@ -1088,7 +1088,7 @@
                     </div>
 
                     <div style="margin-top: 28px;">
-                        <a href="{{ route('contact') }}" class="d-btn btn-glow">
+                        <a href="#quote-form" class="d-btn btn-glow">
                             BOOK AN INSPECTION <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>
@@ -1354,7 +1354,7 @@
                             <li>Direct phone consultation with Ronak Gami</li>
                         </ul>
                     </div>
-                    <a href="{{ route('contact') }}" class="d-price-btn">
+                    <a href="#quote-form" class="d-price-btn">
                         BOOK NOW
                     </a>
                 </div>
@@ -1377,7 +1377,7 @@
                             <li>Direct phone consultation with Ronak Gami</li>
                         </ul>
                     </div>
-                    <a href="{{ route('contact') }}" class="d-price-btn">
+                    <a href="#quote-form" class="d-price-btn">
                         BOOK NOW
                     </a>
                 </div>
@@ -1400,7 +1400,7 @@
                             <li>Direct phone consultation with Ronak Gami</li>
                         </ul>
                     </div>
-                    <a href="{{ route('contact') }}" class="d-price-btn">
+                    <a href="#quote-form" class="d-price-btn">
                         BOOK NOW
                     </a>
                 </div>
@@ -1421,7 +1421,7 @@
                 <p>
                     Avoid unexpected renegotiations, price chipping, or contract terminations. Present serious buyers with a professional, independent building report and achieve top dollar for your property.
                 </p>
-                <a href="{{ route('contact') }}" class="d-btn btn-glow">
+                <a href="#quote-form" class="d-btn btn-glow">
                     BOOK AN INSPECTION NOW <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>

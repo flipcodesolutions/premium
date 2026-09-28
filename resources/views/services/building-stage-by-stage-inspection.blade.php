@@ -934,7 +934,7 @@
 <div class="stage-page">
 
     {{-- FLOATING RIGHT TAB --}}
-    <a href="#st-hero-form" class="st-floating-tab">
+    <a href="#quote-form" class="st-floating-tab">
         <i class="bi bi-calendar-check me-2"></i> BOOK AN INSPECTION
     </a>
 
@@ -964,7 +964,7 @@
             </div>
 
             {{-- HERO FORM --}}
-            <div id="st-hero-form" class="st-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+            <div id="quote-form" class="st-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
                 @if(session('success'))
                     <div class="alert alert-success py-2 mb-2" style="font-size: 13.5px;">
                         {{ session('success') }}
@@ -1291,7 +1291,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="st-price-btn">
+                    <a href="#quote-form" class="st-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1318,7 +1318,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="st-price-btn">
+                    <a href="#quote-form" class="st-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1345,7 +1345,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="st-price-btn">
+                    <a href="#quote-form" class="st-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1372,7 +1372,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="st-price-btn">
+                    <a href="#quote-form" class="st-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1396,7 +1396,7 @@
                     Avoid costly defects, delays and disputes. Partner with Melbourne's trusted independent building inspection specialist to protect your investment.
                 </p>
 
-                <a href="{{ route('contact') }}" class="st-btn btn-glow">
+                <a href="#quote-form" class="st-btn btn-glow">
                     SCHEDULE AN INSPECTION TODAY
                 </a>
             </div>

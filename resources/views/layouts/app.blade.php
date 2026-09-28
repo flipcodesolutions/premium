@@ -198,6 +198,8 @@
 
             scroll-behavior: smooth;
 
+            scroll-padding-top: 100px;
+
             overflow-x: hidden;
 
             width: 100%;

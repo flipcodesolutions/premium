@@ -942,7 +942,7 @@
 <div class="pool-page">
 
     {{-- FLOATING RIGHT TAB --}}
-    <a href="#pool-hero-form" class="pool-floating-tab">
+    <a href="#quote-form" class="pool-floating-tab">
         <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
     </a>
 
@@ -979,7 +979,7 @@
                 </div>
 
                 {{-- HERO FORM --}}
-                <div id="pool-hero-form" class="pool-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                <div id="quote-form" class="pool-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
                     @if(session('success'))
                         <div class="alert alert-success py-2 mb-2" style="font-size: 14px;">
                             {{ session('success') }}
@@ -1339,7 +1339,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="pool-price-btn">
+                    <a href="#quote-form" class="pool-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1366,7 +1366,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="pool-price-btn">
+                    <a href="#quote-form" class="pool-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1393,7 +1393,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="pool-price-btn">
+                    <a href="#quote-form" class="pool-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1417,7 +1417,7 @@
                     A professional pool barrier inspection can help identify observable safety and compliance concerns. Our inspection provides clear findings and professional reporting to help you protect your loved ones and satisfy compliance.
                 </p>
 
-                <a href="{{ route('contact') }}" class="pool-btn btn-glow">
+                <a href="#quote-form" class="pool-btn btn-glow">
                     SCHEDULE YOUR INSPECTION NOW
                 </a>
             </div>

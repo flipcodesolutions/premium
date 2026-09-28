@@ -189,7 +189,7 @@
             {{-- QUOTE FORM --}}
             <div class="col-lg-5" data-aos="fade-left">
 
-                <div class="service-quote-card hover-lift">
+                <div id="quote-form" class="service-quote-card hover-lift">
 
                     <div class="quote-header">
 
@@ -1101,7 +1101,7 @@
 
             <div class="cta-buttons">
 
-                <a href="{{ url('/#quote') }}"
+                <a href="#quote-form"
                    class="btn btn-orange btn-glow">
 
                     <i class="bi bi-calendar-check me-2"></i>

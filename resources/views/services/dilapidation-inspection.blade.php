@@ -942,7 +942,7 @@
 <div class="d-page">
 
     {{-- FLOATING RIGHT TAB --}}
-    <a href="#d-hero-form" class="d-floating-tab">
+    <a href="#quote-form" class="d-floating-tab">
         <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
     </a>
 
@@ -979,7 +979,7 @@
                 </div>
 
                 {{-- HERO FORM --}}
-                <div id="d-hero-form" class="d-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                <div id="quote-form" class="d-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
                     @if(session('success'))
                         <div class="alert alert-success py-2 mb-2" style="font-size: 14px;">
                             {{ session('success') }}
@@ -1339,7 +1339,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="d-price-btn">
+                    <a href="#quote-form" class="d-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1366,7 +1366,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="d-price-btn">
+                    <a href="#quote-form" class="d-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1393,7 +1393,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="d-price-btn">
+                    <a href="#quote-form" class="d-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1417,7 +1417,7 @@
                     Don't leave your property vulnerable during nearby construction projects. Our dilapidation inspection service provides a comprehensive record of your property's existing condition before work begins.
                 </p>
 
-                <a href="{{ route('contact') }}" class="d-btn btn-glow">
+                <a href="#quote-form" class="d-btn btn-glow">
                     SCHEDULE YOUR INSPECTION NOW
                 </a>
             </div>

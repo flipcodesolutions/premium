@@ -1226,7 +1226,7 @@
 
             {{-- HERO FORM --}}
 
-            <div class="pp-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+            <div id="quote-form" class="pp-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
 
                 <div class="pp-hero-form-title">
                     Book Your Inspection
@@ -1429,7 +1429,7 @@
 
 
                     <a
-                        href="{{ route('contact') }}"
+                        href="#quote-form"
                         class="pp-btn btn-glow"
                     >
                         Schedule Your Inspection
@@ -1772,7 +1772,7 @@
                     </ul>
 
                     <a
-                        href="{{ route('contact') }}"
+                        href="#quote-form"
                         class="pp-price-btn btn-glow"
                     >
                         Get A Quote
@@ -1812,7 +1812,7 @@
                     </ul>
 
                     <a
-                        href="{{ route('contact') }}"
+                        href="#quote-form"
                         class="pp-price-btn btn-glow"
                     >
                         Get A Quote
@@ -1852,7 +1852,7 @@
                     </ul>
 
                     <a
-                        href="{{ route('contact') }}"
+                        href="#quote-form"
                         class="pp-price-btn btn-glow"
                     >
                         Get A Quote
@@ -1988,7 +1988,7 @@
                 </p>
 
                 <a
-                    href="{{ route('contact') }}"
+                    href="#quote-form"
                     class="pp-btn btn-glow"
                 >
                     Schedule Your Inspection Now
@@ -2259,7 +2259,7 @@
         </p>
 
         <a
-            href="{{ route('contact') }}"
+            href="#quote-form"
             class="pp-btn pp-final-btn btn-glow"
         >
             Book Inspection Today

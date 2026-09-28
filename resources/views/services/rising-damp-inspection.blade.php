@@ -942,7 +942,7 @@
 <div class="rd-page">
 
     {{-- FLOATING RIGHT TAB --}}
-    <a href="#rd-hero-form" class="rd-floating-tab">
+    <a href="#quote-form" class="rd-floating-tab">
         <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
     </a>
 
@@ -979,7 +979,7 @@
                 </div>
 
                 {{-- HERO FORM --}}
-                <div id="rd-hero-form" class="rd-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                <div id="quote-form" class="rd-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
                     @if(session('success'))
                         <div class="alert alert-success py-2 mb-2" style="font-size: 14px;">
                             {{ session('success') }}
@@ -1339,7 +1339,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="rd-price-btn">
+                    <a href="#quote-form" class="rd-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1366,7 +1366,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="rd-price-btn">
+                    <a href="#quote-form" class="rd-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1393,7 +1393,7 @@
                         </ul>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="rd-price-btn">
+                    <a href="#quote-form" class="rd-price-btn">
                         GET STARTED
                     </a>
                 </div>
@@ -1417,7 +1417,7 @@
                     A professional rising damp inspection can help identify moisture-related concerns before they become more extensive. Our inspection provides clear observations and professional reporting to help you protect the condition of your property.
                 </p>
 
-                <a href="{{ route('contact') }}" class="rd-btn btn-glow">
+                <a href="#quote-form" class="rd-btn btn-glow">
                     SCHEDULE YOUR INSPECTION NOW
                 </a>
             </div>
