@@ -17,7 +17,7 @@ class CustomerMailService
     {
         $from = config('mail.from.address');
         if (empty($from) || $from === 'hello@example.com') {
-            return config('mail.mailers.smtp.username') ?: 'info@premiumbuildingandpest.com.au';
+            return config('mail.mailers.smtp.username') ?: 'info@premiumbuildinginspections.com.au';
         }
         return $from;
     }
@@ -76,6 +76,8 @@ class CustomerMailService
         try {
             $statusTitle = ucfirst($booking->status);
             $subject = "Booking #{$booking->id} Status Update: {$statusTitle} - Premium Building & Pest Inspections";
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
 
             $intro = match ($booking->status) {
                 'confirmed' => 'Good news! Your inspection booking has been officially CONFIRMED. Our inspector is scheduled to attend the property at the agreed date and time.',
@@ -89,8 +91,10 @@ class CustomerMailService
                 'subjectLine' => $subject,
                 'introMessage' => $intro,
                 'customMessage' => $customNote,
-            ], function ($message) use ($booking, $subject) {
+            ], function ($message) use ($booking, $subject, $fromAddress, $fromName) {
                 $message->to($booking->email, $booking->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 
@@ -112,6 +116,9 @@ class CustomerMailService
         }
 
         try {
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
+
             Mail::send('emails.general-message', [
                 'recipientName' => $booking->name,
                 'subjectLine' => $subject,
@@ -123,8 +130,10 @@ class CustomerMailService
                     'Property' => $booking->property_address,
                     'Booking Status' => ucfirst($booking->status),
                 ],
-            ], function ($message) use ($booking, $subject) {
+            ], function ($message) use ($booking, $subject, $fromAddress, $fromName) {
                 $message->to($booking->email, $booking->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 
@@ -190,13 +199,18 @@ class CustomerMailService
                 default => "Your quote request status has been updated to {$statusTitle}.",
             };
 
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
+
             Mail::send('emails.quote-notification', [
                 'quote' => $quote,
                 'subjectLine' => $subject,
                 'introMessage' => $intro,
                 'customMessage' => $customNote,
-            ], function ($message) use ($quote, $subject) {
+            ], function ($message) use ($quote, $subject, $fromAddress, $fromName) {
                 $message->to($quote->email, $quote->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 
@@ -218,6 +232,9 @@ class CustomerMailService
         }
 
         try {
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
+
             Mail::send('emails.general-message', [
                 'recipientName' => $quote->name,
                 'subjectLine' => $subject,
@@ -229,8 +246,10 @@ class CustomerMailService
                     'Property' => $quote->property_address ?? 'Not specified',
                     'Status' => ucfirst($quote->status),
                 ],
-            ], function ($message) use ($quote, $subject) {
+            ], function ($message) use ($quote, $subject, $fromAddress, $fromName) {
                 $message->to($quote->email, $quote->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 
@@ -290,6 +309,9 @@ class CustomerMailService
         }
 
         try {
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
+
             Mail::send('emails.general-message', [
                 'recipientName' => $contactMessage->name,
                 'subjectLine' => $subject,
@@ -299,8 +321,10 @@ class CustomerMailService
                     'Original Inquiry Ref' => '#' . $contactMessage->id,
                     'Original Subject' => $contactMessage->subject,
                 ],
-            ], function ($message) use ($contactMessage, $subject) {
+            ], function ($message) use ($contactMessage, $subject, $fromAddress, $fromName) {
                 $message->to($contactMessage->email, $contactMessage->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
             });
 

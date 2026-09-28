@@ -45,6 +45,18 @@
                 <td class="label">Contact Phone:</td>
                 <td class="val">{{ $booking->phone }}</td>
             </tr>
+            @if($booking->email)
+            <tr>
+                <td class="label">Customer Email:</td>
+                <td class="val">{{ $booking->email }}</td>
+            </tr>
+            @endif
+            @if(!empty($booking->message))
+            <tr>
+                <td class="label">Special Instructions:</td>
+                <td class="val">{{ $booking->message }}</td>
+            </tr>
+            @endif
         </table>
     </div>
 
@@ -58,7 +70,7 @@
     @endif
 
     <p style="margin-top: 20px;">
-        If you have any questions or need to make adjustments to your inspection schedule, please call our team directly at <strong>0468 444 786</strong> or reply to this email.
+        If you have any questions or need to make adjustments to your inspection schedule, please call our team directly at <strong>0466 001 551</strong> or reply to this email.
     </p>
 
     <div class="email-cta-bar">

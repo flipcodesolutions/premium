@@ -14,6 +14,12 @@ class QuoteController extends Controller
     public function store(Request $request)
     {
         // Support field aliases across different service forms
+        if ($request->filled('last_name') && $request->filled('name')) {
+            $request->merge([
+                'name' => trim($request->input('name') . ' ' . $request->input('last_name')),
+            ]);
+        }
+
         if (!$request->filled('property_address')) {
             $request->merge([
                 'property_address' => $request->input('address') ?? $request->input('suburb'),
@@ -24,6 +30,23 @@ class QuoteController extends Controller
             $request->merge([
                 'service_type' => $request->input('service'),
             ]);
+        }
+
+        $serviceType = $request->input('service_type');
+        $knownServices = [
+            'pre-purchase-building-and-pest-inspection' => 'Pre-Purchase Building & Pest Inspection',
+            'building-stage-by-stage-inspection' => 'Building Stage By Stage Inspection',
+            'apartment-building-inspection' => 'Apartment Building Inspection',
+            'rising-damp-inspection' => 'Rising Damp Inspection',
+            'pool-barrier-inspection' => 'Pool Barrier Inspection',
+            'dilapidation-report' => 'Dilapidation Inspection',
+            'dilapidation-inspection' => 'Dilapidation Inspection',
+            'new-build-handover-inspection' => 'New Build Handover Inspection',
+            'vendor-inspection' => 'Vendor Inspection',
+            'builders-warranty-inspection' => 'Builders Warranty Inspection',
+        ];
+        if ($serviceType && isset($knownServices[$serviceType])) {
+            $request->merge(['service_type' => $knownServices[$serviceType]]);
         }
 
         if ($request->filled('inspection_date')) {

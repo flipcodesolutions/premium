@@ -35,6 +35,18 @@
                 <td class="label">Contact Phone:</td>
                 <td class="val">{{ $quote->phone }}</td>
             </tr>
+            @if($quote->email)
+            <tr>
+                <td class="label">Customer Email:</td>
+                <td class="val">{{ $quote->email }}</td>
+            </tr>
+            @endif
+            @if(!empty($quote->message))
+            <tr>
+                <td class="label">Your Request / Message:</td>
+                <td class="val">{{ $quote->message }}</td>
+            </tr>
+            @endif
         </table>
     </div>
 
@@ -48,7 +60,7 @@
     @endif
 
     <p style="margin-top: 20px;">
-        Our licensed building and pest inspectors are ready to assist you. To confirm your booking or request further details, please reach out to us at <strong>0468 444 786</strong>.
+        Our licensed building and pest inspectors are ready to assist you. To confirm your booking or request further details, please reach out to us at <strong>0466 001 551</strong>.
     </p>
 
     <div class="email-cta-bar">

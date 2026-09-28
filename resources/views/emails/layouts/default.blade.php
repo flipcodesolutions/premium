@@ -165,7 +165,7 @@
             <!-- Footer -->
             <div class="email-footer">
                 <p style="color: #ffffff; font-weight: 700;">Premium Building & Pest Inspections</p>
-                <p>Phone: <a href="tel:0468444786">0468 444 786</a> &bull; Email: <a href="mailto:info@premiumbuildingandpest.com.au">info@premiumbuildingandpest.com.au</a></p>
+                <p>Phone: <a href="tel:0466001551">0466 001 551</a> &bull; Email: <a href="mailto:info@premiumbuildinginspections.com.au">info@premiumbuildinginspections.com.au</a></p>
                 <p>Website: <a href="{{ url('/') }}">{{ url('/') }}</a></p>
                 <p style="margin-top: 12px; font-size: 11px; color: #64748b;">
                     &copy; {{ date('Y') }} Premium Building & Pest Inspections. All rights reserved.
