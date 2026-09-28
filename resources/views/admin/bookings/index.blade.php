@@ -63,11 +63,6 @@
             <h5>Bookings List ({{ $bookings->total() }})</h5>
             <small class="text-muted">Inspection appointments booked online and over phone</small>
         </div>
-        <div>
-            <a href="{{ route('admin.bookings.create') }}" class="btn btn-green btn-sm d-flex align-items-center gap-1">
-                <i class="bi bi-plus-lg"></i> Add New Booking
-            </a>
-        </div>
     </div>
 
     <div class="table-responsive">

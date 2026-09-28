@@ -455,10 +455,6 @@
                     <span class="status-pulse-dot"></span>
                     <span>All Systems Live</span>
                 </div>
-                <a href="{{ route('admin.bookings.create') }}" class="btn btn-green shadow-sm d-inline-flex align-items-center gap-2">
-                    <i class="bi bi-calendar-plus"></i>
-                    <span>New Booking</span>
-                </a>
                 <a href="{{ route('admin.services.create') }}" class="btn btn-navy d-inline-flex align-items-center gap-2">
                     <i class="bi bi-plus-lg"></i>
                     <span>Add Service</span>
@@ -648,9 +644,6 @@
             <span>Command Shortcuts:</span>
         </div>
         <div class="d-flex flex-wrap gap-2">
-            <a href="{{ route('admin.bookings.create') }}" class="command-pill command-pill-primary">
-                <i class="bi bi-plus-circle-fill"></i> New Booking
-            </a>
             <a href="{{ route('admin.services.create') }}" class="command-pill">
                 <i class="bi bi-tools text-primary"></i> Add Service
             </a>
