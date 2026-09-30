@@ -136,12 +136,32 @@
         ================================================= */
 
         .hover-lift {
-            transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+            transition: transform 0.38s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.38s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease !important;
+            will-change: transform, box-shadow;
         }
 
         .hover-lift:hover {
-            transform: translateY(-7px) !important;
-            box-shadow: 0 16px 36px rgba(11, 49, 88, 0.12) !important;
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 40px rgba(11, 49, 88, 0.14) !important;
+        }
+
+        /* Micro-interactions for icons inside cards */
+        .hover-lift i,
+        .hover-lift .pbi-service-icon i,
+        .hover-lift .pbi-value-icon i,
+        .hover-lift .pbi-price-icon i,
+        .hover-lift .pbi-feature-icon i,
+        .hover-lift .green-icon-box i {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .hover-lift:hover i,
+        .hover-lift:hover .pbi-service-icon i,
+        .hover-lift:hover .pbi-value-icon i,
+        .hover-lift:hover .pbi-price-icon i,
+        .hover-lift:hover .pbi-feature-icon i,
+        .hover-lift:hover .green-icon-box i {
+            transform: scale(1.15) rotate(4deg);
         }
 
         .img-zoom-hover {
@@ -149,20 +169,87 @@
         }
 
         .img-zoom-hover img {
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.4s ease;
+            will-change: transform;
         }
 
-        .img-zoom-hover:hover img {
-            transform: scale(1.06);
+        .img-zoom-hover:hover img,
+        .hover-lift:hover .img-zoom-hover img,
+        .hover-lift:hover .pbi-service-image img,
+        .hover-lift:hover .service-card-image img {
+            transform: scale(1.08);
         }
 
-        .btn-glow {
-            transition: all 0.3s ease;
+        /* Interactive Buttons with Shimmer Sheen */
+        .btn-glow,
+        .pbi-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 1;
         }
 
-        .btn-glow:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(67, 169, 0, 0.38) !important;
+        .btn-glow::before,
+        .pbi-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -130%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+            transform: skewX(-25deg);
+            transition: left 0.8s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .btn-glow:hover::before,
+        .pbi-btn:hover::before {
+            left: 210%;
+        }
+
+        .btn-glow:hover,
+        .pbi-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(67, 169, 0, 0.35) !important;
+        }
+
+        /* Subtle button icon interactions */
+        .pbi-btn i,
+        .btn i {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .pbi-btn:hover i.fa-phone,
+        .pbi-btn:hover i.fa-phone-volume,
+        .pbi-btn:hover i.fa-phone-alt,
+        .btn:hover i.bi-telephone-fill {
+            transform: rotate(14deg) scale(1.15);
+        }
+
+        .pbi-btn:hover i.fa-arrow-right,
+        .pbi-btn:hover i.bi-arrow-right,
+        .pbi-btn:hover i.fa-file-alt,
+        .btn:hover i.fa-arrow-right,
+        .btn:hover i.bi-arrow-right {
+            transform: translateX(5px);
+        }
+
+        /* Breathing pulse animation */
+        @keyframes pulseGreenGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(67, 169, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 0 12px rgba(67, 169, 0, 0);
+            }
+        }
+
+        .pulse-glow,
+        .pbi-phone-btn {
+            animation: pulseGreenGlow 2.8s infinite;
         }
 
         @keyframes floatBadge {
@@ -170,12 +257,22 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-7px);
+                transform: translateY(-8px);
             }
         }
 
         .animate-float {
-            animation: floatBadge 3.5s ease-in-out infinite;
+            animation: floatBadge 3.6s ease-in-out infinite;
+        }
+
+        /* Smooth stat numbers */
+        .pbi-stat strong {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .pbi-stat:hover strong {
+            transform: scale(1.08);
+            color: var(--green-color);
         }
 
 
@@ -962,19 +1059,59 @@
 
 
     <!-- =====================================================
-         AOS ANIMATION JS (Animate On Scroll)
+         AOS ANIMATION JS & NUMBER COUNTER
     ====================================================== -->
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Initialize AOS
             if (typeof AOS !== 'undefined') {
                 AOS.init({
-                    duration: 750,
+                    duration: 800,
                     easing: 'ease-out-cubic',
                     once: true,
                     offset: 50
                 });
+            }
+
+            // Smooth Number Counters via IntersectionObserver
+            const counters = document.querySelectorAll('[data-counter]');
+            if (counters.length && 'IntersectionObserver' in window) {
+                const counterObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            const target = parseFloat(el.getAttribute('data-counter'));
+                            const prefix = el.getAttribute('data-prefix') || '';
+                            const suffix = el.getAttribute('data-suffix') || '';
+                            const duration = 1600;
+                            const startTime = performance.now();
+                            const isDecimal = String(target).includes('.');
+
+                            function updateCounter(currentTime) {
+                                const elapsed = currentTime - startTime;
+                                const progress = Math.min(elapsed / duration, 1);
+                                // easeOutCubic curve
+                                const ease = 1 - Math.pow(1 - progress, 3);
+                                const current = target * ease;
+
+                                el.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString()) + suffix;
+
+                                if (progress < 1) {
+                                    requestAnimationFrame(updateCounter);
+                                } else {
+                                    el.textContent = prefix + (isDecimal ? target.toFixed(1) : target.toLocaleString()) + suffix;
+                                }
+                            }
+
+                            requestAnimationFrame(updateCounter);
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.25 });
+
+                counters.forEach(counter => counterObserver.observe(counter));
             }
         });
     </script>

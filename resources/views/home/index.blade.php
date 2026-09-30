@@ -1031,7 +1031,7 @@
             Licensed & insured inspector with years of experience.
         </p>
 
-        <div class="pbi-license" data-aos="zoom-in" data-aos-delay="200">
+        <div class="pbi-license animate-float" data-aos="zoom-in" data-aos-delay="200">
             <strong>
                 Building Inspector Licence No: IN-PS 74654
             </strong>
@@ -1041,8 +1041,8 @@
             </strong>
         </div>
 
-        <div class="pbi-hero-buttons">
-            <a href="tel:0466001551" class="pbi-btn btn-glow">
+        <div class="pbi-hero-buttons" data-aos="fade-up" data-aos-delay="300">
+            <a href="tel:0466001551" class="pbi-btn btn-glow pulse-glow">
                 <i class="fas fa-phone"></i>
                 0466 001 551
             </a>
@@ -1082,33 +1082,33 @@
                 </p>
 
                 <div class="pbi-check-list">
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="100">
                         <i class="fas fa-check-circle"></i>
                         Licensed Inspectors
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="150">
                         <i class="fas fa-check-circle"></i>
                         Detailed Reports
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="200">
                         <i class="fas fa-check-circle"></i>
                         Modern Inspection Tools
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="250">
                         <i class="fas fa-check-circle"></i>
                         Melbourne Wide
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="300">
                         <i class="fas fa-check-circle"></i>
                         Experienced Service
                     </div>
-                    <div>
+                    <div data-aos="fade-up" data-aos-delay="350">
                         <i class="fas fa-check-circle"></i>
                         Professional Advice
                     </div>
                 </div>
 
-                <a href="{{ route('about') }}" class="pbi-btn pbi-about-btn btn-glow">
+                <a href="{{ route('about') }}" class="pbi-btn pbi-about-btn btn-glow" data-aos="fade-up" data-aos-delay="400">
                     Discover More
                 </a>
             </div>
@@ -1128,7 +1128,7 @@
                     RONAK GAMI | VBA LICENCE IN-PS 74654 | DOMESTIC BUILDER DB-L 100200
                 </div>
 
-                <a href="tel:0444001551" class="pbi-btn btn-glow">
+                <a href="tel:0444001551" class="pbi-btn btn-glow pulse-glow">
                     <i class="fas fa-phone"></i>
                     0444 001 551
                 </a>
@@ -1195,22 +1195,22 @@
         <div class="pbi-stats-grid">
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="50">
-                <strong>200+</strong>
+                <strong><span data-counter="200" data-suffix="+">200+</span></strong>
                 <span>Inspections</span>
             </div>
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="150">
-                <strong>2</strong>
+                <strong><span data-counter="2">2</span></strong>
                 <span>Licences</span>
             </div>
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="250">
-                <strong>4.9★</strong>
+                <strong><span data-counter="4.9" data-suffix="★">4.9★</span></strong>
                 <span>Rating</span>
             </div>
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="350">
-                <strong>12+</strong>
+                <strong><span data-counter="12" data-suffix="+">12+</span></strong>
                 <span>Services</span>
             </div>
 
@@ -1238,7 +1238,7 @@
 
             {{-- 1. Pre-Purchase Building and Pest Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="50">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/pre-purchase.png') }}"
                         alt="Pre Purchase Building and Pest Inspection"
@@ -1260,7 +1260,7 @@
 
             {{-- 2. Building Stage by Stage Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/building-stage.jpg') }}"
                         alt="Building Stage by Stage Inspection"
@@ -1282,7 +1282,7 @@
 
             {{-- 3. New Build Handover Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="150">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/new-build-handover.jpg') }}"
                         alt="New Build Handover Inspection"
@@ -1304,7 +1304,7 @@
 
             {{-- 4. Rising Damp Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="50">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/rising-damp.jpg') }}"
                         alt="Rising Damp Inspection"
@@ -1326,7 +1326,7 @@
 
             {{-- 5. Pool Barrier Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/pool-barrier.jpg') }}"
                         alt="Pool Barrier Inspection"
@@ -1348,7 +1348,7 @@
 
             {{-- 6. Apartment Building Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="150">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/apartment.jpeg') }}"
                         alt="Apartment Building Inspection"
@@ -1370,7 +1370,7 @@
 
             {{-- 7. Dilapidation Report --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="50">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/dilapidation.jpg') }}"
                         alt="Dilapidation Report"
@@ -1392,7 +1392,7 @@
 
             {{-- 8. Vendor Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/vendor.jpg') }}"
                         alt="Vendor Inspection"
@@ -1414,7 +1414,7 @@
 
             {{-- 9. Builders Warranty Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="150">
-                <div class="pbi-service-image">
+                <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/builders-warranty.jpg') }}"
                         alt="Builders Warranty Inspection"
@@ -1521,7 +1521,7 @@
             <p>
                 Don't wait to ensure your property is safe and sound. Contact Premium Building & Pest Inspections now to book a comprehensive evaluation and gain the peace of mind you deserve.
             </p>
-            <a href="tel:0466001551" class="pbi-btn pbi-phone-btn btn-glow">
+            <a href="tel:0466001551" class="pbi-btn pbi-phone-btn btn-glow pulse-glow">
                 <i class="fas fa-phone-volume"></i>
                 0466 001 551
             </a>

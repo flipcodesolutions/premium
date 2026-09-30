@@ -39,7 +39,7 @@
 ========================================================= -->
 <section class="booking-hero">
     <div class="container text-center" data-aos="fade-down" data-aos-duration="800">
-        <span style="display: inline-block; background: rgba(72,169,0,0.25); color: #8ee346; border: 1px solid rgba(72,169,0,0.45); font-size: 0.82rem; font-weight: 700; padding: 7px 18px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 16px;">
+        <span class="animate-float" style="display: inline-block; background: rgba(72,169,0,0.25); color: #8ee346; border: 1px solid rgba(72,169,0,0.45); font-size: 0.82rem; font-weight: 700; padding: 7px 18px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 16px;">
             Fast & Reliable Booking
         </span>
         <h1>
@@ -307,7 +307,7 @@
                     </div>
                     <h5 class="fw-bold mb-1" style="font-family: 'Montserrat', sans-serif; color: #ffffff !important;">Need Urgency?</h5>
                     <p class="small text-white-50 mb-3">Call us directly to secure same-day or next-day inspection times.</p>
-                    <a href="tel:0466001551" class="btn text-white fw-bold px-4 py-2 rounded-pill d-inline-flex align-items-center gap-2 btn-glow" style="background: #48A900;">
+                    <a href="tel:0466001551" class="btn text-white fw-bold px-4 py-2 rounded-pill d-inline-flex align-items-center gap-2 btn-glow pulse-glow" style="background: #48A900;">
                         <i class="bi bi-telephone-outbound"></i> 0466 001 551
                     </a>
                 </div>

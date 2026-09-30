@@ -790,24 +790,35 @@
 
 
 /* =========================================================
-   ACTIVE UNDERLINE
+   NAV UNDERLINE ANIMATION
 ========================================================= */
 
-.premium-navbar .nav-link.active::after {
+.premium-navbar .nav-link::after {
 
     content: "";
 
     position: absolute;
 
-    left: 12px;
+    left: 50%;
 
-    right: 12px;
+    right: 50%;
 
     bottom: 18px;
 
     height: 2px;
 
     background: var(--premium-green);
+
+    transition: left .28s cubic-bezier(0.165, 0.84, 0.44, 1), right .28s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+}
+
+.premium-navbar .nav-link:hover::after,
+.premium-navbar .nav-link.active::after {
+
+    left: 12px;
+
+    right: 12px;
 
 }
 
@@ -1029,14 +1040,53 @@
 
     margin-top: 0;
 
+    position: relative;
+
+    overflow: hidden;
+
+    transition: all .32s cubic-bezier(0.165, 0.84, 0.44, 1);
+
 }
 
+.premium-navbar .estimate-btn::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: -130%;
+
+    width: 60%;
+
+    height: 100%;
+
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+
+    transform: skewX(-25deg);
+
+    transition: left .85s ease;
+
+    pointer-events: none;
+
+}
+
+.premium-navbar .estimate-btn:hover::before {
+
+    left: 210%;
+
+}
 
 .premium-navbar .estimate-btn:hover {
 
     background: var(--premium-green-dark);
 
     color: #fff !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(67, 169, 0, 0.35);
 
 }
 

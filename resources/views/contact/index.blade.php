@@ -56,7 +56,7 @@
 
                 <div class="contact-details-list">
                     {{-- HEAD OFFICE --}}
-                    <div class="contact-detail-item">
+                    <div class="contact-detail-item hover-lift" data-aos="fade-up" data-aos-delay="100">
                         <div class="contact-detail-icon">
                             <i class="bi bi-geo-alt-fill"></i>
                         </div>
@@ -67,7 +67,7 @@
                     </div>
 
                     {{-- EMAIL SUPPORT --}}
-                    <div class="contact-detail-item">
+                    <div class="contact-detail-item hover-lift" data-aos="fade-up" data-aos-delay="200">
                         <div class="contact-detail-icon">
                             <i class="bi bi-envelope-fill"></i>
                         </div>
@@ -80,7 +80,7 @@
                     </div>
 
                     {{-- LET'S TALK --}}
-                    <div class="contact-detail-item">
+                    <div class="contact-detail-item hover-lift" data-aos="fade-up" data-aos-delay="300">
                         <div class="contact-detail-icon">
                             <i class="bi bi-telephone-fill"></i>
                         </div>
@@ -96,7 +96,7 @@
 
             {{-- RIGHT: GET QUICK QUOTE --}}
             <div class="col-lg-7" data-aos="fade-left" data-aos-duration="800">
-                <div class="contact-form-wrapper">
+                <div class="contact-form-wrapper hover-lift">
                     <h2 class="quick-quote-heading">GET QUICK QUOTE</h2>
 
                     <form action="{{ route('quote.store') }}" method="POST">
@@ -179,7 +179,7 @@
 
                             {{-- Submit Button --}}
                             <div class="col-12">
-                                <button type="submit" class="btn btn-quick-quote">
+                                <button type="submit" class="btn btn-quick-quote btn-glow">
                                     Get My Quote
                                 </button>
                             </div>
@@ -208,7 +208,7 @@
 
 <div class="reach-out-floating-wrap">
     <div class="container">
-        <div class="reach-out-call-card" data-aos="zoom-in" data-aos-duration="600">
+        <div class="reach-out-call-card hover-lift pulse-glow" data-aos="zoom-in" data-aos-duration="600">
             <div class="quick-call-icon">
                 <i class="bi bi-telephone-fill"></i>
             </div>

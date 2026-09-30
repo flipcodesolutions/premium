@@ -158,12 +158,12 @@
         overflow: hidden;
         border: 1px solid #e9edf2;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.38s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.38s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .gallery-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 30px rgba(4, 38, 67, 0.16);
+        transform: translateY(-8px);
+        box-shadow: 0 16px 36px rgba(4, 38, 67, 0.18);
     }
 
     .gallery-img-wrapper {
@@ -181,23 +181,23 @@
         object-fit: cover;
         object-position: center;
         display: block;
-        transition: transform 0.45s ease;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .gallery-card:hover .gallery-img-wrapper img {
-        transform: scale(1.06);
+        transform: scale(1.09);
     }
 
     /* HOVER OVERLAY */
     .gallery-hover-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(4, 38, 67, 0.38);
+        background: rgba(4, 38, 67, 0.42);
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.35s ease;
     }
 
     .gallery-card:hover .gallery-hover-overlay {
@@ -205,8 +205,8 @@
     }
 
     .gallery-zoom-icon {
-        width: 46px;
-        height: 46px;
+        width: 48px;
+        height: 48px;
         background: #43a900;
         color: #ffffff;
         border-radius: 50%;
@@ -214,13 +214,13 @@
         align-items: center;
         justify-content: center;
         font-size: 18px;
-        transform: scale(0.85);
-        transition: transform 0.25s ease;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        transform: scale(0.7) rotate(-15deg);
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
     }
 
     .gallery-card:hover .gallery-zoom-icon {
-        transform: scale(1);
+        transform: scale(1.08) rotate(0deg);
     }
 
     /* ---------------------------------------------------------

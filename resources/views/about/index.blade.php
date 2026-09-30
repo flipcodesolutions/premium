@@ -1325,7 +1325,7 @@
                 <div class="about-stat hover-lift" data-aos="zoom-in" data-aos-delay="50">
 
                     <strong>
-                        50+
+                        <span data-counter="50" data-suffix="+">50+</span>
                     </strong>
 
                     <span>
@@ -1338,7 +1338,7 @@
                 <div class="about-stat hover-lift" data-aos="zoom-in" data-aos-delay="150">
 
                     <strong>
-                        2
+                        <span data-counter="2">2</span>
                     </strong>
 
                     <span>
@@ -1351,7 +1351,7 @@
                 <div class="about-stat hover-lift" data-aos="zoom-in" data-aos-delay="250">
 
                     <strong>
-                        5★
+                        <span data-counter="5" data-suffix="★">5★</span>
                     </strong>
 
                     <span>
@@ -1364,7 +1364,7 @@
                 <div class="about-stat hover-lift" data-aos="zoom-in" data-aos-delay="350">
 
                     <strong>
-                        2+
+                        <span data-counter="2" data-suffix="+">2+</span>
                     </strong>
 
                     <span>
@@ -1414,7 +1414,7 @@
 
                     <a
                         href="tel:0466001551"
-                        class="schedule-phone btn-glow"
+                        class="schedule-phone btn-glow pulse-glow"
                     >
 
                         <i class="bi bi-telephone-fill"></i>

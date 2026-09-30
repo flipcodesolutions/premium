@@ -670,7 +670,8 @@
     background: #43A900;
     border-color: #43A900;
     color: #fff;
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 6px 16px rgba(67, 169, 0, 0.4);
 }
 
 
@@ -697,7 +698,7 @@
 
     line-height: 1.5;
 
-    transition: all .3s ease;
+    transition: all .28s cubic-bezier(0.165, 0.84, 0.44, 1);
 
     text-decoration: none;
 }
@@ -707,11 +708,16 @@
     font-size: 11px;
     margin-right: 9px;
     margin-top: 5px;
+    transition: transform .28s ease;
 }
 
 .footer-links a:hover {
     color: #43A900;
-    padding-left: 4px;
+    transform: translateX(6px);
+}
+
+.footer-links a:hover i {
+    transform: translateX(2px);
 }
 
 
