@@ -933,11 +933,6 @@
 
 <div class="stage-page">
 
-    {{-- FLOATING RIGHT TAB --}}
-    <a href="#quote-form" class="st-floating-tab">
-        <i class="bi bi-calendar-check me-2"></i> BOOK AN INSPECTION
-    </a>
-
     {{-- =====================================================
          1. HERO SECTION
     ====================================================== --}}

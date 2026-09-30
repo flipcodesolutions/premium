@@ -941,11 +941,6 @@
 
 <div class="pool-page">
 
-    {{-- FLOATING RIGHT TAB --}}
-    <a href="#quote-form" class="pool-floating-tab">
-        <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
-    </a>
-
     {{-- =====================================================
          1. HERO SECTION
     ====================================================== --}}
@@ -1014,7 +1009,7 @@
                         <textarea name="message" placeholder="Message / Details (e.g. In-ground pool, spa, barrier type, council notice)">{{ old('message') }}</textarea>
 
                         <button type="submit" class="pool-submit">
-                            BOOK MY QUOTE
+                            GET MY QUOTE
                         </button>
                     </form>
                 </div>

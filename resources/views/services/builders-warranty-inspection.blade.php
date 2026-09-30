@@ -942,11 +942,6 @@
 
 <div class="d-page">
 
-    {{-- FLOATING RIGHT TAB --}}
-    <a href="#quote-form" class="d-floating-tab">
-        <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
-    </a>
-
     {{-- =====================================================
          1. HERO SECTION
     ====================================================== --}}
@@ -1015,7 +1010,7 @@
                         <textarea name="message" placeholder="Message / Details (e.g. 11-month warranty ending next month, 4-bedroom house in Point Cook)">{{ old('message') }}</textarea>
 
                         <button type="submit" class="d-submit">
-                            BOOK MY QUOTE
+                            GET MY QUOTE
                         </button>
                     </form>
                 </div>
@@ -1089,7 +1084,7 @@
 
                     <div style="margin-top: 28px;">
                         <a href="#quote-form" class="d-btn btn-glow">
-                            BOOK AN INSPECTION <i class="bi bi-arrow-right ms-2"></i>
+                            GET A QUOTE <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -1422,7 +1417,7 @@
                     Don't let your builder's statutory warranty expire. Book a comprehensive builders warranty inspection and ensure all defects are officially documented and rectified at the builder's expense.
                 </p>
                 <a href="#quote-form" class="d-btn btn-glow">
-                    BOOK AN INSPECTION NOW <i class="bi bi-arrow-right ms-2"></i>
+                    GET A QUOTE NOW <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
         </div>

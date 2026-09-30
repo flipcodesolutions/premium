@@ -937,11 +937,6 @@
 
 <div class="apt-page">
 
-    {{-- FLOATING RIGHT TAB --}}
-    <a href="#quote-form" class="apt-floating-tab">
-        <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
-    </a>
-
     {{-- =====================================================
          1. HERO SECTION
     ====================================================== --}}
@@ -1010,7 +1005,7 @@
                         <textarea name="message" placeholder="Message / Details (e.g. 1 Bed, 2 Bed, Off-the-plan, Level)">{{ old('message') }}</textarea>
 
                         <button type="submit" class="apt-submit">
-                            BOOK MY QUOTE
+                            GET MY QUOTE
                         </button>
                     </form>
                 </div>

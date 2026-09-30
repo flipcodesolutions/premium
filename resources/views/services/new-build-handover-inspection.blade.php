@@ -942,11 +942,6 @@
 
 <div class="d-page">
 
-    {{-- FLOATING RIGHT TAB --}}
-    <a href="#quote-form" class="d-floating-tab">
-        <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
-    </a>
-
     {{-- =====================================================
          1. HERO SECTION
     ====================================================== --}}
@@ -1015,7 +1010,7 @@
                         <textarea name="message" placeholder="Message / Details (e.g. 4-bedroom double storey in Tarneit, handover next week)">{{ old('message') }}</textarea>
 
                         <button type="submit" class="d-submit">
-                            BOOK MY QUOTE
+                            GET MY QUOTE
                         </button>
                     </form>
                 </div>
@@ -1089,7 +1084,7 @@
 
                     <div style="margin-top: 28px;">
                         <a href="#quote-form" class="d-btn btn-glow">
-                            BOOK AN INSPECTION <i class="bi bi-arrow-right ms-2"></i>
+                            GET A QUOTE <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -1430,7 +1425,7 @@
                     Don't accept handover or release the final progress payment until you are 100% confident your builder has delivered the quality you paid for. Schedule your independent handover inspection today.
                 </p>
                 <a href="#quote-form" class="d-btn btn-glow">
-                    BOOK AN INSPECTION NOW <i class="bi bi-arrow-right ms-2"></i>
+                    GET A QUOTE NOW <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
         </div>

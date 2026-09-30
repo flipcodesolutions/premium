@@ -941,11 +941,6 @@
 
 <div class="rd-page">
 
-    {{-- FLOATING RIGHT TAB --}}
-    <a href="#quote-form" class="rd-floating-tab">
-        <i class="bi bi-calendar-check me-1"></i> BOOK AN INSPECTION
-    </a>
-
     {{-- =====================================================
          1. HERO SECTION
     ====================================================== --}}
@@ -1014,7 +1009,7 @@
                         <textarea name="message" placeholder="Message / Details (e.g. Lower wall stains, peeling paint, room location)">{{ old('message') }}</textarea>
 
                         <button type="submit" class="rd-submit">
-                            BOOK MY QUOTE
+                            GET MY QUOTE
                         </button>
                     </form>
                 </div>
