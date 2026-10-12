@@ -73,6 +73,7 @@ class QuoteController extends Controller
             'phone' => [
                 'required',
                 'string',
+                'regex:/^[0-9\s\+\-\(\)\#\*]{6,25}$/',
                 'max:30',
             ],
 
@@ -93,6 +94,12 @@ class QuoteController extends Controller
                 'string',
                 'max:2000',
             ],
+        ], [
+            'name.required' => 'The field is required.',
+            'email.required' => 'The field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'phone.required' => 'The field is required.',
+            'phone.regex' => 'The field accepts only numbers and phone characters (#, -, *, etc).',
         ]);
 
         $quote = QuoteRequest::create([
@@ -107,6 +114,13 @@ class QuoteController extends Controller
 
         if (!empty($quote->email)) {
             CustomerMailService::sendQuoteConfirmation($quote);
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you! Your inspection request has been submitted successfully.',
+            ]);
         }
 
         return redirect()

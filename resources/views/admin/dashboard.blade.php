@@ -122,7 +122,7 @@
     }
 
     .metric-number-pro {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 2.25rem;
         font-weight: 800;
         color: var(--admin-navy);
@@ -226,7 +226,7 @@
     }
 
     .highlight-value {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 1.35rem;
         font-weight: 800;
         color: var(--admin-navy);
@@ -358,7 +358,7 @@
     }
 
     .pipeline-count {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-weight: 700;
         font-size: 0.88rem;
         color: var(--admin-navy);
@@ -1143,7 +1143,7 @@
                                 borderRadius: 5,
                                 usePointStyle: true,
                                 font: {
-                                    family: 'Poppins',
+                                    family: 'Inter',
                                     size: 12,
                                     weight: '500'
                                 },
@@ -1152,8 +1152,8 @@
                         },
                         tooltip: {
                             backgroundColor: '#0B1F3A',
-                            titleFont: { family: 'Montserrat', size: 12, weight: '700' },
-                            bodyFont: { family: 'Poppins', size: 12 },
+                            titleFont: { family: 'Inter', size: 12, weight: '700' },
+                            bodyFont: { family: 'Inter', size: 12 },
                             padding: 12,
                             cornerRadius: 8,
                             boxPadding: 4
@@ -1163,7 +1163,7 @@
                         x: {
                             grid: { display: false },
                             ticks: {
-                                font: { family: 'Poppins', size: 11 },
+                                font: { family: 'Inter', size: 11 },
                                 color: '#64748B'
                             }
                         },
@@ -1171,7 +1171,7 @@
                             beginAtZero: true,
                             ticks: {
                                 precision: 0,
-                                font: { family: 'Poppins', size: 11 },
+                                font: { family: 'Inter', size: 11 },
                                 color: '#64748B'
                             },
                             grid: { color: '#F1F5F9' }
@@ -1219,8 +1219,8 @@
                         tooltip: {
                             enabled: hasData,
                             backgroundColor: '#0B1F3A',
-                            titleFont: { family: 'Montserrat', size: 12, weight: '700' },
-                            bodyFont: { family: 'Poppins', size: 12 },
+                            titleFont: { family: 'Inter', size: 12, weight: '700' },
+                            bodyFont: { family: 'Inter', size: 12 },
                             padding: 10,
                             cornerRadius: 8
                         }

@@ -449,7 +449,7 @@
         background-color: #ffffff;
         padding: 45px 0 65px;
         min-height: 80vh;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
 
     .agreement-container {
@@ -461,7 +461,7 @@
     /* MAIN HEADING */
     .agreement-main-heading {
         color: #082f57;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: clamp(34px, 4.5vw, 44px);
         font-weight: 900;
         letter-spacing: -0.5px;
@@ -527,7 +527,7 @@
 
     .agreement-box-heading {
         color: #0b1f3a;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 18px;
         font-weight: 800;
         text-transform: uppercase;
@@ -619,7 +619,7 @@
         height: 52px;
         background-color: #43a900;
         color: #ffffff;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-weight: 700;
         font-size: 16.5px;
         border: none;

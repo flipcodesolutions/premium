@@ -19,7 +19,7 @@
                  COMPANY INFORMATION
             ================================================== --}}
 
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="footer-widget footer-about">
 
@@ -75,13 +75,6 @@
                             aria-label="Instagram"
                         >
                             <i class="bi bi-instagram"></i>
-                        </a>
-
-                        <a
-                            href="#"
-                            aria-label="LinkedIn"
-                        >
-                            <i class="bi bi-linkedin"></i>
                         </a>
 
                     </div>
@@ -154,6 +147,12 @@
                             </a>
                         </li>
 
+                        <li>
+                            <a href="{{ route('privacy-policy') }}">
+                                <i class="bi bi-chevron-right"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
                     </ul>
 
                 </div>
@@ -279,7 +278,7 @@
                  CONTACT INFORMATION
             ================================================== --}}
 
-            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
 
                 <div class="footer-widget">
 
@@ -294,7 +293,7 @@
 
                         <div class="footer-contact-icon">
 
-                            <i class="bi bi-geo-alt"></i>
+                            <i class="bi bi-geo-alt-fill"></i>
 
                         </div>
 
@@ -323,7 +322,7 @@
 
                         <div class="footer-contact-icon">
 
-                            <i class="bi bi-telephone"></i>
+                            <i class="bi bi-telephone-fill"></i>
 
                         </div>
 
@@ -350,7 +349,7 @@
 
                         <div class="footer-contact-icon">
 
-                            <i class="bi bi-envelope"></i>
+                            <i class="bi bi-envelope-fill"></i>
 
                         </div>
 
@@ -372,31 +371,6 @@
                     </div>
 
 
-
-                    {{-- Service Area --}}
-
-                    <div class="footer-contact-item">
-
-                        <div class="footer-contact-icon">
-
-                            <i class="bi bi-map"></i>
-
-                        </div>
-
-
-                        <div class="footer-contact-text">
-
-                            <span>
-                                Service Area
-                            </span>
-
-                            <p>
-                                Melbourne & Victoria
-                            </p>
-
-                        </div>
-
-                    </div>
 
                 </div>
 
@@ -438,14 +412,8 @@
 
                 <div class="footer-bottom-links">
 
-                    <a href="#">
+                    <a href="{{ route('privacy-policy') }}">
                         Privacy Policy
-                    </a>
-
-                    <span>|</span>
-
-                    <a href="#">
-                        Terms & Conditions
                     </a>
 
                 </div>
@@ -493,7 +461,7 @@
 
 .footer-cta-content h2 {
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 36px;
     font-weight: 700;
     margin: 0 0 12px;
@@ -519,7 +487,7 @@
     border-radius: 4px;
     border: 2px solid #FF6B00;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 700;
 
@@ -550,7 +518,7 @@
 
 .footer-widget h4 {
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18.5px;
     font-weight: 700;
     margin-bottom: 25px;
@@ -629,7 +597,7 @@
 .footer-inspector strong {
     display: block;
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 15px;
     margin-bottom: 3px;
 }
@@ -733,18 +701,26 @@
 }
 
 .footer-contact-icon {
-    width: 36px;
-    min-width: 36px;
-    height: 36px;
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
 
     background: #43A900;
     color: #fff;
+    border-radius: 8px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 14px;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+.footer-contact-item:hover .footer-contact-icon {
+    transform: translateY(-2px) scale(1.05);
+    background: #399200;
+    box-shadow: 0 4px 12px rgba(67, 169, 0, 0.35);
 }
 
 .footer-contact-text span {
@@ -752,7 +728,7 @@
 
     color: #fff;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 13.5px;
     font-weight: 600;
 
@@ -769,8 +745,20 @@
 .footer-contact-text a {
     color: rgba(255,255,255,.75);
     font-size: 13px;
-    word-break: break-word;
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-contact-text a[href^="mailto:"] {
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+}
+
+@media (min-width: 992px) and (max-width: 1240px) {
+    .footer-contact-text a[href^="mailto:"] {
+        font-size: 11.5px;
+    }
 }
 
 .footer-contact-text a:hover {

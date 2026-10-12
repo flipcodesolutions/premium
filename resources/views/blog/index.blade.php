@@ -134,7 +134,7 @@
     }
 
     .blog-main-title {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 38px;
         font-weight: 900;
         color: #072448;
@@ -199,7 +199,7 @@
     }
 
     .blog-item-title {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 14.5px;
         font-weight: 900;
         line-height: 1.35;

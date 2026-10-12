@@ -13,7 +13,7 @@
 }
 .booking-hero h1 {
     color: #ffffff !important;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 800;
     font-size: clamp(2.1rem, 4.2vw, 3rem);
     margin-bottom: 16px;
@@ -89,7 +89,7 @@
                     <div class="d-flex align-items-center gap-2 mb-4 pb-3 border-bottom">
                         <i class="bi bi-calendar2-check-fill fs-3" style="color: #48A900;"></i>
                         <div>
-                            <h3 class="fw-bold mb-0 text-dark" style="font-family: 'Montserrat', sans-serif; font-size: 1.4rem;">
+                            <h3 class="fw-bold mb-0 text-dark" style="font-family: 'Inter', sans-serif; font-size: 1.4rem;">
                                 Inspection Booking Details
                             </h3>
                             <small class="text-muted">Fill out the details below and we will confirm the booking promptly.</small>
@@ -305,7 +305,7 @@
                     <div class="mb-3 d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 60px; height: 60px; background: rgba(72,169,0,0.25); color: #48A900; font-size: 1.8rem;">
                         <i class="bi bi-telephone-fill"></i>
                     </div>
-                    <h5 class="fw-bold mb-1" style="font-family: 'Montserrat', sans-serif; color: #ffffff !important;">Need Urgency?</h5>
+                    <h5 class="fw-bold mb-1" style="font-family: 'Inter', sans-serif; color: #ffffff !important;">Need Urgency?</h5>
                     <p class="small text-white-50 mb-3">Call us directly to secure same-day or next-day inspection times.</p>
                     <a href="tel:0466001551" class="btn text-white fw-bold px-4 py-2 rounded-pill d-inline-flex align-items-center gap-2 btn-glow pulse-glow" style="background: #48A900;">
                         <i class="bi bi-telephone-outbound"></i> 0466 001 551
@@ -314,7 +314,7 @@
 
                 <!-- Guarantee List -->
                 <div class="bg-white p-4 rounded-4 shadow-sm border mb-4 hover-lift" data-aos="fade-left" data-aos-delay="150" data-aos-duration="800">
-                    <h6 class="fw-bold text-dark mb-3 border-bottom pb-2" style="font-family: 'Montserrat', sans-serif;">
+                    <h6 class="fw-bold text-dark mb-3 border-bottom pb-2" style="font-family: 'Inter', sans-serif;">
                         Why Book With Us?
                     </h6>
                     <ul class="list-unstyled mb-0 d-flex flex-column gap-3 small text-secondary">

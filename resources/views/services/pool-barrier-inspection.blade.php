@@ -7,32 +7,28 @@
 <style>
 /* =========================================================
    POOL BARRIER INSPECTION PAGE STYLES
-   Designed 1:1 to match reference layout
-   With increased font sizes as requested
+   1:1 Pixel-Perfect Match with Reference Screenshot & Live Site
 ========================================================= */
 
-.pool-page {
+:root {
     --pool-navy: #073763;
     --pool-navy-dark: #052646;
     --pool-green: #42a900;
     --pool-green-dark: #358c00;
-    --pool-light-green: #eaf6e6;
-    --pool-choose-bg: #d8edd5;
-    --pool-cyan: #1b9eea;
-    --pool-text: #2d3748;
-    --pool-muted: #4a5568;
+    --pool-light-green: #eef7ed;
+    --pool-text: #333333;
+    --pool-muted: #555555;
     --pool-border: #e2e8f0;
-    --pool-orange: #ffb400;
+}
 
-    font-family: Arial, Helvetica, sans-serif;
+.pool-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--pool-text);
     overflow-x: hidden;
     position: relative;
-    font-size: 16px;
-    line-height: 1.7;
+    background: #ffffff;
 }
 
-/* Container */
 .pool-container {
     width: 92%;
     max-width: 1180px;
@@ -43,92 +39,64 @@
     padding: 70px 0;
 }
 
-/* Headings with increased font sizes */
-.pool-heading {
+/* Headings */
+.pool-badge {
+    display: inline-block;
+    color: var(--pool-green);
+    font-size: 13.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+}
+
+.pool-heading-center {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.pool-heading .small-title {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--pool-green);
-    font-size: 15px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-}
-
-.pool-heading h2 {
+.pool-heading-center h2 {
     margin: 0;
     color: var(--pool-navy);
-    font-size: clamp(26px, 3.4vw, 34px);
+    font-size: clamp(24px, 3.2vw, 34px);
     line-height: 1.25;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.pool-heading p {
-    max-width: 760px;
-    margin: 14px auto 0;
+.pool-heading-center p {
+    max-width: 720px;
+    margin: 12px auto 0;
     color: var(--pool-muted);
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 15px;
+    line-height: 1.7;
 }
 
 /* Buttons */
-.pool-btn {
+.pool-btn-green {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 14px 28px;
+    gap: 8px;
+    padding: 13px 28px;
     background: var(--pool-green);
-    color: #fff !important;
+    color: #ffffff !important;
     border: 0;
     border-radius: 4px;
-    font-size: 15.5px;
+    font-size: 14.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-decoration: none;
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 
-.pool-btn:hover {
+.pool-btn-green:hover {
     background: var(--pool-green-dark);
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(66, 169, 0, 0.35);
-}
-
-/* Floating Right Tab */
-.pool-floating-tab {
-    position: fixed;
-    right: 0;
-    top: 48%;
-    transform: translateY(-50%);
-    background: var(--pool-green);
-    color: #fff !important;
-    padding: 14px 11px;
-    font-size: 13.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border-radius: 6px 0 0 6px;
-    z-index: 999;
-    box-shadow: -3px 4px 16px rgba(0, 0, 0, 0.25);
-    text-decoration: none;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform-origin: center;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.25s ease;
-}
-
-.pool-floating-tab:hover {
-    background: var(--pool-green-dark);
-    padding-right: 15px;
 }
 
 /* =========================================================
@@ -139,13 +107,13 @@
     background:
         linear-gradient(
             90deg,
-            rgba(7, 43, 76, 0.95) 0%,
-            rgba(7, 43, 76, 0.88) 52%,
+            rgba(7, 43, 76, 0.94) 0%,
+            rgba(7, 43, 76, 0.88) 50%,
             rgba(7, 43, 76, 0.65) 100%
         ),
-        url("{{ asset('images/pool-barrier.jpg') }}") center center / cover no-repeat;
+        url("{{ asset('images/pre purchase service.jpeg') }}") center center / cover no-repeat;
     color: #fff;
-    padding: 25px 0;
+    padding: 30px 0;
 }
 
 .pool-hero-inner {
@@ -153,12 +121,22 @@
     grid-template-columns: 1.15fr 0.85fr;
     gap: 45px;
     align-items: center;
-    padding: 60px 0 70px;
+    padding: 50px 0 60px;
+}
+
+.pool-hero-content .pool-hero-badge {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
 }
 
 .pool-hero-content h1 {
-    font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.18;
+    font-size: clamp(26px, 3.5vw, 40px);
+    line-height: 1.2;
     font-weight: 900;
     color: #ffffff;
     margin: 0 0 16px;
@@ -166,40 +144,31 @@
     letter-spacing: 0.5px;
 }
 
-.pool-hero-tag {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 14.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-    opacity: 0.95;
-}
-
-.pool-hero-content p {
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 16.5px;
-    line-height: 1.75;
+.pool-hero-content .pool-hero-sub {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 17px;
+    line-height: 1.6;
     margin: 0 0 26px;
-    max-width: 600px;
-}
-
-.pool-hero-license {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 13.5px;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* Hero Form */
 .pool-hero-form {
     background: #ffffff;
     border-radius: 8px;
-    padding: 28px 26px;
+    padding: 26px 24px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
     color: var(--pool-text);
+}
+
+.pool-hero-form h3 {
+    margin: 0 0 16px;
+    color: var(--pool-navy);
+    font-size: 19px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
 }
 
 .pool-form-row {
@@ -213,45 +182,47 @@
 .pool-hero-form select,
 .pool-hero-form textarea {
     width: 100%;
-    padding: 12px 14px;
+    padding: 11px 14px;
     border: 1px solid #d2d6dc;
     border-radius: 4px;
-    font-size: 14.5px;
-    color: #2d3748;
+    font-size: 13.5px;
+    color: #333;
     outline: none;
     transition: border-color 0.2s ease;
     background: #fff;
-    margin-bottom: 12px;
+    box-sizing: border-box;
 }
 
 .pool-hero-form input:focus,
 .pool-hero-form select:focus,
 .pool-hero-form textarea:focus {
     border-color: var(--pool-green);
+    box-shadow: 0 0 0 3px rgba(66, 169, 0, 0.15);
 }
 
 .pool-hero-form textarea {
     resize: vertical;
     min-height: 75px;
+    margin-top: 12px;
 }
 
-.pool-hero-form .pool-submit {
+.pool-hero-form .pool-submit-btn {
     width: 100%;
-    padding: 14px;
+    padding: 13px;
     background: var(--pool-green);
     color: #fff;
     border: 0;
     border-radius: 4px;
-    font-size: 15.5px;
+    font-size: 15px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: background 0.2s ease;
-    margin-top: 4px;
+    margin-top: 14px;
 }
 
-.pool-hero-form .pool-submit:hover {
+.pool-hero-form .pool-submit-btn:hover {
     background: var(--pool-green-dark);
 }
 
@@ -262,388 +233,354 @@
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 50px;
-    align-items: center;
-}
-
-.pool-welcome-content .small-title {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--pool-green);
-    font-size: 14.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    align-items: start;
 }
 
 .pool-welcome-content h2 {
     color: var(--pool-navy);
-    font-size: clamp(26px, 3.3vw, 34px);
-    line-height: 1.25;
+    font-size: clamp(24px, 3vw, 32px);
     font-weight: 900;
-    margin: 0 0 18px;
     text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 16px;
 }
 
-.pool-welcome-content > p {
+.pool-welcome-content p {
     color: var(--pool-muted);
-    font-size: 16px;
-    line-height: 1.75;
-    margin: 0 0 18px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin: 0 0 14px;
 }
 
-.pool-feature-mini {
+.pool-feature-list {
+    margin: 22px 0 28px;
     display: flex;
+    flex-direction: column;
     gap: 16px;
-    margin-bottom: 16px;
-    align-items: flex-start;
 }
 
-.pool-feature-mini-icon {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+.pool-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.pool-feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    background: #eef6fc;
+    color: #1b9eea;
     border-radius: 50%;
-    background: #e8f4fc;
-    color: var(--pool-cyan);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
-    margin-top: 2px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(27, 158, 234, 0.15);
+    margin-top: 3px;
 }
 
-.pool-feature-mini h4 {
+.pool-feature-item h4 {
     margin: 0 0 4px;
     color: var(--pool-navy);
-    font-size: 15.5px;
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
 
-.pool-feature-mini p {
+.pool-feature-item p {
     margin: 0;
     color: var(--pool-muted);
-    font-size: 14.5px;
-    line-height: 1.6;
+    font-size: 13.5px;
+    line-height: 1.55;
 }
 
 /* Inspector Card */
 .pool-inspector-card {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e5e9f0;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
 }
 
-.pool-inspector-title {
-    background: #111111;
+.pool-inspector-header {
+    background: #000000;
     color: #ffffff;
-    font-size: 14.5px;
+    padding: 10px 14px;
+    font-size: 13.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 11px 16px;
 }
 
 .pool-inspector-card img {
     width: 100%;
-    height: 350px;
+    height: 360px;
     object-fit: cover;
     object-position: center top;
     display: block;
 }
 
-.pool-inspector-name {
-    padding: 15px 12px 10px;
-    font-size: 15px;
-    font-weight: 800;
+.pool-inspector-body {
+    padding: 18px 20px;
+}
+
+.pool-inspector-body h4 {
+    margin: 0 0 14px;
     color: var(--pool-navy);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.5;
     text-transform: uppercase;
 }
 
-.pool-inspector-btn {
+.pool-inspector-call {
     display: block;
+    width: 100%;
+    padding: 12px;
     background: var(--pool-green);
     color: #ffffff !important;
     text-decoration: none;
-    padding: 12px;
-    font-size: 15.5px;
+    border-radius: 4px;
+    font-size: 15px;
     font-weight: 800;
     letter-spacing: 0.5px;
     transition: background 0.2s ease;
 }
 
-.pool-inspector-btn:hover {
+.pool-inspector-call:hover {
     background: var(--pool-green-dark);
 }
 
 /* =========================================================
-   3. WHY POOL BARRIER INSPECTIONS MATTER (2x2 GRID)
+   3. WHY POOL BARRIER INSPECTIONS ARE IMPORTANT
 ========================================================= */
-.pool-matters {
-    background: #fbfcfc;
+.pool-important-section {
+    background: #ffffff;
 }
 
 .pool-matters-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    max-width: 1040px;
-    margin: 0 auto;
 }
 
 .pool-matters-card {
-    background: #ffffff;
-    border: 1px solid #e5e9ec;
-    border-radius: 6px;
-    padding: 20px 22px;
     display: flex;
     align-items: flex-start;
-    gap: 16px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease;
 }
 
 .pool-matters-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+    border-color: #cbd5e1;
 }
 
-.pool-check-icon {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    border-radius: 50%;
+.pool-matters-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
     background: var(--pool-green);
     color: #ffffff;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 900;
-    margin-top: 3px;
+    margin-top: 2px;
 }
 
-.pool-matters-card-content h4 {
-    margin: 0 0 6px;
-    color: var(--pool-navy);
-    font-size: 16px;
-    font-weight: 800;
-}
-
-.pool-matters-card-content p {
+.pool-matters-card p {
     margin: 0;
     color: var(--pool-muted);
-    font-size: 14.5px;
-    line-height: 1.65;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+.pool-matters-card strong {
+    color: var(--pool-navy);
+    font-weight: 700;
 }
 
 /* =========================================================
-   4. OUR POOL BARRIER INSPECTION PROCESS (SCOPE)
+   4. COMMON POOL BARRIER ISSUES WE FIND
 ========================================================= */
-.pool-scope-grid {
+.pool-issues-grid {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 45px;
     align-items: center;
 }
 
-.pool-scope-content h3 {
-    font-size: clamp(22px, 2.6vw, 28px);
-    line-height: 1.25;
+.pool-issues-content h2 {
+    color: var(--pool-navy);
+    font-size: clamp(22px, 2.8vw, 30px);
     font-weight: 900;
-    color: var(--pool-navy);
-    margin: 0 0 14px;
     text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 14px;
 }
 
-.pool-scope-content > p {
-    color: var(--pool-muted);
-    font-size: 15.5px;
-    line-height: 1.75;
-    margin-bottom: 22px;
-}
-
-.pool-scope-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.pool-scope-item {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 18px;
-    align-items: flex-start;
-}
-
-.pool-scope-badge {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    border-radius: 50%;
-    background: var(--pool-green);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-}
-
-.pool-scope-info strong {
-    display: block;
-    color: var(--pool-navy);
-    font-size: 15.5px;
-    font-weight: 800;
-    margin-bottom: 3px;
-}
-
-.pool-scope-info span {
-    display: block;
+.pool-issues-content > p {
     color: var(--pool-muted);
     font-size: 14.5px;
     line-height: 1.6;
+    margin: 0 0 18px;
 }
 
-.pool-scope-image-wrapper {
+.pool-issues-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pool-issues-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.pool-issues-item .bullet-icon {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    background: var(--pool-green);
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.pool-issues-item p {
+    margin: 0;
+    color: var(--pool-muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+
+.pool-issues-item strong {
+    color: var(--pool-navy);
+    font-weight: 700;
+}
+
+.pool-photo-box {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     height: 420px;
+    background: #000;
 }
 
-.pool-scope-image-wrapper img {
+.pool-photo-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
     display: block;
 }
 
-/* Slider Arrows on Image */
-.pool-slide-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
-    border: 0;
-    background: rgba(255, 255, 255, 0.85);
-    color: #333;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-}
-
-.pool-slide-arrow:hover {
-    background: #fff;
-    color: var(--pool-green);
-}
-
-.pool-slide-prev {
-    left: 12px;
-}
-
-.pool-slide-next {
-    right: 12px;
-}
-
 /* =========================================================
-   5. WHY CHOOSE US (LIGHT GREEN BOX)
+   5. WHY CHOOSE US (MINT GREEN CONTAINER)
 ========================================================= */
-.pool-choose {
-    padding: 55px 38px;
-    background: var(--pool-choose-bg);
+.pool-choose-section {
+    background: var(--pool-light-green);
     border-radius: 18px;
+    padding: 60px 40px;
 }
 
 .pool-choose-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
+    gap: 20px;
 }
 
-.pool-choose-item {
-    text-align: center;
+.pool-choose-card {
     background: #ffffff;
-    padding: 28px 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
 }
 
-.pool-choose-item:hover {
+.pool-choose-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-.pool-choose-icon {
-    width: 52px;
-    height: 52px;
+.pool-choose-icon-wrap {
+    width: 46px;
+    height: 46px;
     margin: 0 auto 16px;
+    background: var(--pool-green);
+    color: #ffffff;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--pool-green);
-    color: #fff;
-    border-radius: 6px;
-    font-size: 24px;
+    font-size: 22px;
 }
 
-.pool-choose-item h4 {
+.pool-choose-card h4 {
     margin: 0 0 10px;
     color: var(--pool-navy);
-    font-size: 15.5px;
-    font-weight: 900;
+    font-size: 14px;
+    font-weight: 800;
     text-transform: uppercase;
+    line-height: 1.35;
 }
 
-.pool-choose-item p {
+.pool-choose-card p {
     margin: 0;
-    color: #4a5568;
-    font-size: 14px;
-    line-height: 1.65;
+    color: #555555;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 /* =========================================================
    6. PRICING PACKAGES (3 CARDS)
 ========================================================= */
-.pool-pricing {
-    background: #fff;
-}
-
 .pool-price-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-    max-width: 1060px;
+    gap: 25px;
+    max-width: 1020px;
     margin: 0 auto;
 }
 
 .pool-price-card {
-    background: #fff;
-    border: 1px solid #e4e4e4;
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
     border-top: 3px solid var(--pool-green);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     padding: 30px 22px;
-    border-radius: 4px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pool-price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
 }
 
 .pool-price-icon {
-    font-size: 34px;
+    font-size: 32px;
     color: var(--pool-navy);
     margin-bottom: 12px;
 }
@@ -652,24 +589,26 @@
     margin: 0 0 10px;
     color: var(--pool-navy);
     font-size: 17px;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-weight: 800;
+    text-transform: capitalize;
 }
 
-.pool-price {
+.pool-price-amount {
     color: var(--pool-green);
     font-size: 36px;
     font-weight: 900;
-    margin-bottom: 16px;
+    line-height: 1;
+    margin-bottom: 4px;
 }
 
-.pool-price small {
-    color: #666;
+.pool-price-suffix {
+    color: #666666;
     font-size: 13px;
     font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.pool-price-list {
+.pool-price-features {
     list-style: none;
     padding: 0;
     margin: 0 0 24px;
@@ -677,36 +616,34 @@
     flex-grow: 1;
 }
 
-.pool-price-list li {
+.pool-price-features li {
     padding: 9px 0;
-    border-bottom: 1px solid #eee;
-    color: #4a5568;
-    font-size: 14.5px;
+    border-bottom: 1px solid #f0f2f5;
+    color: #444444;
+    font-size: 13.5px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    gap: 8px;
 }
 
-.pool-price-list li::before {
-    content: "✓";
+.pool-price-features li i {
     color: var(--pool-green);
-    margin-right: 10px;
-    font-weight: 900;
     font-size: 15px;
 }
 
 .pool-price-btn {
     display: block;
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     background: var(--pool-green);
-    color: #fff !important;
+    color: #ffffff !important;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-radius: 3px;
-    transition: all 0.25s ease;
+    border-radius: 4px;
+    transition: background 0.2s ease;
 }
 
 .pool-price-btn:hover {
@@ -714,178 +651,194 @@
 }
 
 /* =========================================================
-   7. CTA BANNER (SCHEDULE YOUR INSPECTION TODAY)
+   7. SCHEDULE CTA (DARK TIMBER BACKGROUND)
 ========================================================= */
 .pool-cta {
-    min-height: 390px;
+    position: relative;
+    min-height: 540px;
     display: flex;
     align-items: center;
     background:
         linear-gradient(
             90deg,
-            rgba(4, 43, 75, 0.96) 0%,
-            rgba(4, 43, 75, 0.88) 55%,
-            rgba(4, 43, 75, 0.40) 100%
+            rgba(7, 43, 76, 0.96) 0%,
+            rgba(7, 43, 76, 0.88) 50%,
+            rgba(7, 43, 76, 0.30) 100%
         ),
         url("{{ asset('images/schedule.jpeg') }}") center right / cover no-repeat;
+    color: #ffffff;
+    padding: 105px 0;
 }
 
-.pool-cta-content {
-    max-width: 660px;
-    color: #fff;
-    padding: 55px 0;
+.pool-cta-inner {
+    max-width: 820px;
 }
 
-.pool-cta-content h2 {
-    margin: 0 0 16px;
-    font-size: clamp(26px, 3.5vw, 36px);
-    line-height: 1.2;
+.pool-cta h2 {
+    color: #ffffff;
+    font-size: clamp(30px, 4vw, 46px);
     font-weight: 900;
     text-transform: uppercase;
-    color: #fff;
+    line-height: 1.2;
+    margin: 0 0 20px;
+    letter-spacing: 0.5px;
 }
 
-.pool-cta-content p {
-    margin: 0 0 24px;
-    color: rgba(255, 255, 255, 0.92);
-    font-size: 16.5px;
-    line-height: 1.75;
+.pool-cta p {
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 17.5px;
+    line-height: 1.85;
+    margin: 0 0 32px;
+}
+
+.pool-cta .pool-btn-green {
+    padding: 16px 38px;
+    font-size: 15.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
 }
 
 /* =========================================================
-   8. REVIEWS SECTION
+   8. CLIENT FEEDBACK & REVIEWS
 ========================================================= */
-.pool-reviews {
-    background: #fff;
-}
-
 .pool-review-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 24px;
 }
 
 .pool-review-card {
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 8px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease;
     text-align: center;
-    padding: 28px 22px;
-    border-bottom: 3px solid #eee;
-    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
-    background: #fff;
 }
 
-.pool-review-quote {
-    color: var(--pool-cyan);
-    font-size: 40px;
-    line-height: 1;
-    margin-bottom: 8px;
+.pool-review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.pool-review-icon {
+    font-size: 26px;
+    color: #1b9eea;
+    margin-bottom: 12px;
 }
 
 .pool-review-card p {
-    min-height: 75px;
-    color: #4a5568;
-    font-size: 15px;
-    line-height: 1.7;
+    color: var(--pool-muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+    margin: 0 0 16px;
+    flex-grow: 1;
 }
 
-.pool-stars {
-    color: var(--pool-orange);
-    letter-spacing: 3px;
-    font-size: 17px;
-    margin: 14px 0 16px;
+.pool-review-stars {
+    color: #ffb400;
+    font-size: 15px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
 }
 
 .pool-review-card h4 {
     margin: 0;
     color: var(--pool-navy);
-    font-size: 15.5px;
+    font-size: 15px;
     font-weight: 800;
 }
 
 /* =========================================================
-   9. FAQ ACCORDION SECTION
+   9. FAQS SECTION (ACCORDION)
 ========================================================= */
-.pool-faq {
-    background: #fff;
-    padding-bottom: 75px;
-}
-
 .pool-faq-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px 22px;
+    gap: 20px;
+    align-items: start;
+}
+
+.pool-faq-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .pool-faq-item {
-    border: 1px solid #e4e4e4;
-    background: #fff;
-    border-radius: 4px;
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
+    border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 10px;
+    transition: all 0.2s ease;
 }
 
 .pool-faq-question {
     width: 100%;
-    padding: 16px 18px;
+    padding: 16px 20px;
+    background: #f8fafc;
     border: 0;
-    background: #fff;
-    color: var(--pool-navy);
+    text-align: left;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: left;
-    font-size: 15.5px;
+    gap: 12px;
+    color: var(--pool-navy);
+    font-size: 14.5px;
     font-weight: 800;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.pool-faq-question:hover {
-    background: #f7f9fa;
-}
-
-.pool-faq-answer {
-    display: none;
-    padding: 0 18px 16px;
-    color: #4a5568;
-    font-size: 15px;
-    line-height: 1.7;
-}
-
-/* Active FAQ Item: Green background on header */
-.pool-faq-item.active .pool-faq-question {
-    background: var(--pool-green);
-    color: #fff;
-}
-
-.pool-faq-item.active .pool-faq-answer {
-    display: block;
-    background: #fff;
-    padding-top: 16px;
-}
-
-.pool-faq-item.active .pool-faq-icon {
-    transform: rotate(180deg);
-    color: #fff;
+.pool-faq-question span {
+    flex-grow: 1;
+    line-height: 1.4;
 }
 
 .pool-faq-icon {
-    transition: transform 0.25s ease;
+    font-size: 14px;
+    color: var(--pool-green);
+    transition: transform 0.3s ease;
 }
 
-/* =========================================================
-   RESPONSIVE MEDIA QUERIES
-========================================================= */
+.pool-faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: var(--pool-muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+    background: #ffffff;
+}
+
+/* Active State (Q1 & Q4 by default) */
+.pool-faq-item.active .pool-faq-question {
+    background: var(--pool-green);
+    color: #ffffff;
+}
+
+.pool-faq-item.active .pool-faq-icon {
+    color: #ffffff;
+    transform: rotate(180deg);
+}
+
+.pool-faq-item.active .pool-faq-answer {
+    padding: 16px 20px 20px;
+    max-height: 300px;
+}
+
+/* Responsive */
 @media (max-width: 991px) {
     .pool-hero-inner,
     .pool-welcome-grid,
-    .pool-scope-grid {
+    .pool-issues-grid {
         grid-template-columns: 1fr;
-        gap: 38px;
-    }
-
-    .pool-hero-inner {
-        padding: 50px 0;
+        gap: 35px;
     }
 
     .pool-choose-grid {
@@ -894,47 +847,35 @@
 
     .pool-price-grid {
         grid-template-columns: 1fr;
-        max-width: 480px;
+        max-width: 450px;
+    }
+
+    .pool-review-grid {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 767px) {
     .pool-section {
-        padding: 45px 0;
-    }
-
-    .pool-hero-inner {
-        padding: 40px 0;
+        padding: 50px 0;
     }
 
     .pool-form-row,
     .pool-matters-grid,
-    .pool-review-grid,
     .pool-faq-grid {
         grid-template-columns: 1fr;
     }
 
-    .pool-choose {
-        padding: 32px 20px;
+    .pool-choose-section {
+        padding: 35px 20px;
     }
 
-    .pool-choose-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 16px 12px;
-    }
-
-    .pool-scope-image-wrapper {
-        height: 320px;
-    }
-
-    .pool-floating-tab {
-        display: none;
-    }
-}
-
-@media (max-width: 500px) {
     .pool-choose-grid {
         grid-template-columns: 1fr;
+    }
+
+    .pool-photo-box {
+        height: 320px;
     }
 }
 </style>
@@ -942,41 +883,32 @@
 <div class="pool-page">
 
     {{-- =====================================================
-         1. HERO SECTION
+         1. HERO SECTION & QUICK QUOTE FORM
     ====================================================== --}}
     <section class="pool-hero">
         <div class="pool-container">
             <div class="pool-hero-inner">
 
-                <div class="pool-hero-content" data-aos="fade-right" data-aos-duration="850">
-                    <span class="pool-hero-tag">
-                        PREMIUM BUILDING & PEST INSPECTIONS
-                    </span>
-
-                    <h1>
-                        ENSURE YOUR POOL IS<br>SAFE AND COMPLIANT<br>WITH OUR POOL BARRIER<br>INSPECTION SERVICE
-                    </h1>
-
-                    <p>
-                        Protect your family and property with a professional pool barrier inspection designed to identify visible safety and compliance concerns across fences, gates, latches and access points.
-                    </p>
+                {{-- Left Content --}}
+                <div class="pool-hero-content">
+                    <span class="pool-hero-badge">PREMIUM BUILDING & PEST INSPECTIONS</span>
+                    <h1>ENSURE YOUR POOL IS SAFE AND COMPLIANT WITH OUR POOL BARRIER INSPECTION SERVICE</h1>
+                    <p class="pool-hero-sub">Comprehensive, Same-Day Inspections for Your Peace of Mind</p>
 
                     <div>
-                        <a href="tel:0466001551" class="pool-btn btn-glow">
-                            <i class="bi bi-telephone-fill me-2"></i>
+                        <a href="tel:0466001551" class="pool-btn-green">
+                            <i class="bi bi-telephone-fill"></i>
                             0466 001 551
                         </a>
                     </div>
-
-                    <div class="pool-hero-license">
-                        VBA Building Inspector Licence No. IN-PS 74654 &nbsp;|&nbsp; Domestic Builder Licence No. DB-L 100200
-                    </div>
                 </div>
 
-                {{-- HERO FORM --}}
-                <div id="quote-form" class="pool-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                {{-- Right Form --}}
+                <div id="quote-form" class="pool-hero-form">
+                    <h3>GET QUICK QUOTE</h3>
+
                     @if(session('success'))
-                        <div class="alert alert-success py-2 mb-2" style="font-size: 14px;">
+                        <div class="alert alert-success py-2 mb-3" style="font-size: 13.5px;">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -986,30 +918,35 @@
 
                         <div class="pool-form-row">
                             <input type="text" name="name" placeholder="Name *" value="{{ old('name') }}" required>
-                            <input type="tel" name="phone" placeholder="Phone *" value="{{ old('phone') }}" required>
+                            <input type="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
                         </div>
 
                         <div class="pool-form-row">
-                            <input type="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
+                            <input type="tel" name="phone" placeholder="Phone *" value="{{ old('phone') }}" required>
                             <input type="text" name="property_address" placeholder="Property Address" value="{{ old('property_address') }}">
                         </div>
 
                         <select name="service_type" required>
                             <option value="pool-barrier-inspection" selected>Pool Barrier Inspection</option>
-                            <option value="pre-purchase-building-and-pest-inspection">Pre-Purchase Building & Pest Inspection</option>
-                            <option value="building-stage-by-stage-inspection">Building Stage By Stage Inspection</option>
-                            <option value="new-build-handover-inspection">New Build Handover Inspection</option>
+                            <option value="pre-purchase-building-and-pest-inspection">Pre-Purchase Building and Pest Inspection</option>
+                            <option value="building-stage-by-stage-inspection">Building Stage by Stage Inspection</option>
                             <option value="apartment-building-inspection">Apartment Building Inspection</option>
                             <option value="rising-damp-inspection">Rising Damp Inspection</option>
+                            <option value="new-build-handover-inspection">New Build Handover Inspection</option>
                             <option value="dilapidation-report">Dilapidation Report</option>
                             <option value="vendor-inspection">Vendor Inspection</option>
                             <option value="builders-warranty-inspection">Builders Warranty Inspection</option>
                         </select>
 
-                        <textarea name="message" placeholder="Message / Details (e.g. In-ground pool, spa, barrier type, council notice)">{{ old('message') }}</textarea>
+                        <div class="pool-form-row" style="margin-top: 12px; margin-bottom: 0;">
+                            <input type="date" name="preferred_date" placeholder="Inspection Date">
+                            <input type="text" name="notes" placeholder="Notes (e.g. Pool type, Spa)">
+                        </div>
 
-                        <button type="submit" class="pool-submit">
-                            GET MY QUOTE
+                        <textarea name="message" placeholder="Message / Details (e.g. Existing pool, New pool, Council notice)">{{ old('message') }}</textarea>
+
+                        <button type="submit" class="pool-submit-btn">
+                            Get My Quote
                         </button>
                     </form>
                 </div>
@@ -1024,139 +961,120 @@
     ====================================================== --}}
     <section class="pool-section pool-welcome">
         <div class="pool-container">
-
             <div class="pool-welcome-grid">
 
-                <div class="pool-welcome-content" data-aos="fade-right">
-                    <span class="small-title">Expert Pool Barrier Inspections</span>
-                    <h2>
-                        WELCOME TO PREMIUM POOL BARRIER INSPECTION
-                    </h2>
+                {{-- Left Content --}}
+                <div class="pool-welcome-content">
+                    <span class="pool-badge">WELCOME TO PREMIUM POOL BARRIER INSPECTION</span>
+                    <h2>Welcome to Premium Pool Barrier Inspection</h2>
 
                     <p>
-                        Having a swimming pool comes with important safety responsibilities. A compliant pool barrier is an essential part of protecting children and other vulnerable people from accidental access to the pool area.
+                        Having a safe and compliant pool barrier is not just a legal requirement but a critical step in ensuring the safety of your loved ones, particularly children. Our Pool Barrier Inspection service in Melbourne is designed to help homeowners meet Victoria’s strict pool safety regulations with ease and confidence. With our experienced inspectors, detailed reports, and prompt service, we guarantee a hassle-free process, whether you are applying for a compliance certificate or need advice on improving your pool safety.
                     </p>
 
-                    <p>
-                        Our pool barrier inspection service assesses accessible components of the pool barrier and surrounding access points for observable safety and compliance concerns.
-                    </p>
+                    <p style="font-weight: 700; color: var(--pool-navy); margin-bottom: 12px;">We Offer:</p>
 
-                    <div class="pool-feature-mini">
-                        <div class="pool-feature-mini-icon">
-                            <i class="bi bi-search"></i>
+                    <div class="pool-feature-list">
+                        <div class="pool-feature-item">
+                            <div class="pool-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>COMPREHENSIVE INSPECTION</h4>
+                                <p>We conduct a detailed inspection of your pool’s safety barrier, including gates, fences, and any other parts of the barrier system.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4>COMPREHENSIVE VISUAL INSPECTION</h4>
-                            <p>Comprehensive visual pool barrier inspection covering accessible safety components.</p>
+
+                        <div class="pool-feature-item">
+                            <div class="pool-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>CHECK FOR NON-COMPLIANCES</h4>
+                                <p>During the inspection, we assess your pool barrier for any non-compliances, such as gaps in the fencing, faulty latches, or inappropriate materials.</p>
+                            </div>
+                        </div>
+
+                        <div class="pool-feature-item">
+                            <div class="pool-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>DETAILED COMPLIANCE REPORT</h4>
+                                <p>After the inspection, we provide a thorough report outlining any issues or potential risks. If your barrier is non-compliant, our report includes clear recommendations on how to rectify the issues. Once your pool is compliant, we issue a Certificate of Pool and Spa Barrier Compliance as required by Victorian law.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="pool-feature-mini">
-                        <div class="pool-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>ACCESS & GATE CONDITION CHECKS</h4>
-                            <p>Checks for observable access, gate latching, hinges and barrier conditions.</p>
-                        </div>
-                    </div>
-
-                    <div class="pool-feature-mini">
-                        <div class="pool-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>DETAILED COMPLIANCE REPORT</h4>
-                            <p>Detailed inspection findings, clear photographic evidence and reporting.</p>
-                        </div>
-                    </div>
-
-                    <div class="pool-feature-mini">
-                        <div class="pool-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>SAFETY FOCUSED ADVICE</h4>
-                            <p>Guidance on climbable objects, boundary barriers, and remediation steps.</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="{{ route('about') }}" class="pool-btn btn-glow">
-                            ABOUT US MORE <i class="bi bi-arrow-right ms-2"></i>
+                    <div>
+                        <a href="#quote-form" class="pool-btn-green">
+                            Schedule Inspection Now
                         </a>
                     </div>
                 </div>
 
-                {{-- INSPECTOR CARD --}}
-                <div class="pool-welcome-card-col" data-aos="fade-left">
-                    <div class="pool-inspector-card hover-lift">
-                        <div class="pool-inspector-title">
-                            VBA REGISTERED
+                {{-- Right Inspector Card --}}
+                <div class="pool-welcome-card-col">
+                    <div class="pool-inspector-card">
+                        <div class="pool-inspector-header">
+                            YOUR INSPECTOR
                         </div>
 
                         <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
 
-                        <div class="pool-inspector-name">
-                            VBA REGISTERED BUILDING INSPECTOR
+                        <div class="pool-inspector-body">
+                            <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
+                            <a href="tel:0466001551" class="pool-inspector-call">
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                0466 001 551
+                            </a>
                         </div>
-
-                        <a href="tel:0466001551" class="pool-inspector-btn">
-                            <i class="bi bi-telephone-fill me-2"></i>
-                            0466 001 551
-                        </a>
                     </div>
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         3. WHY POOL BARRIER INSPECTIONS MATTER (2x2 GRID)
+         3. WHY POOL BARRIER INSPECTIONS ARE IMPORTANT
     ====================================================== --}}
-    <section class="pool-section pool-matters">
+    <section class="pool-section pool-important-section" style="padding-top: 10px;">
         <div class="pool-container">
 
-            <div class="pool-heading" data-aos="fade-up">
-                <span class="small-title">Important Information</span>
+            <div class="pool-heading-center">
                 <h2>WHY POOL BARRIER INSPECTIONS ARE IMPORTANT</h2>
             </div>
 
             <div class="pool-matters-grid">
 
-                <div class="pool-matters-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                    <div class="pool-check-icon">✓</div>
-                    <div class="pool-matters-card-content">
-                        <h4>Legal Compliance</h4>
-                        <p>Pool barriers must satisfy applicable safety and Victorian compliance requirements. Regular inspections can help identify observable issues before council audits.</p>
-                    </div>
+                <div class="pool-matters-card">
+                    <div class="pool-matters-icon">✓</div>
+                    <p>
+                        <strong>Legal Compliance:</strong> Under the VBA's regulations, all swimming pools and spas in Victoria must have compliant safety barriers. Failure to comply can result in fines or legal action. Our service ensures your pool meets all legislative requirements.
+                    </p>
                 </div>
 
-                <div class="pool-matters-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div class="pool-check-icon">✓</div>
-                    <div class="pool-matters-card-content">
-                        <h4>Peace Of Mind</h4>
-                        <p>A professional inspection can provide greater confidence that visible pool barrier components are functioning as intended and keeping your family safe.</p>
-                    </div>
+                <div class="pool-matters-card">
+                    <div class="pool-matters-icon">✓</div>
+                    <p>
+                        <strong>Peace of Mind:</strong> Knowing your pool is safe and compliant provides peace of mind for you and your family, allowing you to enjoy the pool without worrying about potential hazards.
+                    </p>
                 </div>
 
-                <div class="pool-matters-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-                    <div class="pool-check-icon">✓</div>
-                    <div class="pool-matters-card-content">
-                        <h4>Preventive Maintenance</h4>
-                        <p>Identifying damaged, loose or deteriorated components early helps property owners address issues before they become severe compliance breaches.</p>
-                    </div>
+                <div class="pool-matters-card">
+                    <div class="pool-matters-icon">✓</div>
+                    <p>
+                        <strong>Preventing Accidents:</strong> The majority of pool-related accidents involve young children. A properly installed and maintained pool barrier can drastically reduce the risk of drowning or other injuries.
+                    </p>
                 </div>
 
-                <div class="pool-matters-card hover-lift" data-aos="fade-up" data-aos-delay="400">
-                    <div class="pool-check-icon">✓</div>
-                    <div class="pool-matters-card-content">
-                        <h4>Family Safety</h4>
-                        <p>A properly maintained pool barrier is an important part of reducing the risk of accidental access to the pool area by young children and pets.</p>
-                    </div>
+                <div class="pool-matters-card">
+                    <div class="pool-matters-icon">✓</div>
+                    <p>
+                        <strong>Avoid Penalties:</strong> Non-compliant pool barriers can result in heavy fines and penalties. By keeping your pool up to date with safety regulations, you can avoid these legal consequences.
+                    </p>
                 </div>
 
             </div>
@@ -1166,171 +1084,137 @@
 
 
     {{-- =====================================================
-         4. OUR POOL BARRIER INSPECTION PROCESS (SCOPE)
+         4. COMMON POOL BARRIER ISSUES WE FIND
     ====================================================== --}}
-    <section class="pool-section pool-scope">
+    <section class="pool-section pool-issues">
         <div class="pool-container">
+            <div class="pool-issues-grid">
 
-            <div class="pool-scope-grid">
+                {{-- Left Content --}}
+                <div class="pool-issues-content">
+                    <h2>COMMON POOL BARRIER ISSUES WE FIND</h2>
 
-                <div class="pool-scope-content" data-aos="fade-right">
-                    <span class="pool-heading" style="text-align: left; margin-bottom: 0;">
-                        <span class="small-title">OUR INSPECTION SCOPE</span>
-                    </span>
+                    <p>Through our experience, we often encounter the following problems during pool barrier inspections:</p>
 
-                    <h3>OUR POOL BARRIER INSPECTION PROCESS</h3>
-
-                    <p>
-                        Through our pool barrier inspections, we look for observable conditions that may affect the safety or compliance of the pool barrier system:
-                    </p>
-
-                    <ul class="pool-scope-list">
-                        <li class="pool-scope-item">
-                            <div class="pool-scope-badge">1</div>
-                            <div class="pool-scope-info">
-                                <strong>Gate Self-Closing & Self-Latching Audit</strong>
-                                <span>Verifying that gates swing outward away from the pool area and reliably self-close and latch from any open position.</span>
-                            </div>
+                    <ul class="pool-issues-list">
+                        <li class="pool-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Gaps in Fencing:</strong> Small gaps can create large risks. We identify spaces where a child could squeeze through or under the fence.</p>
                         </li>
 
-                        <li class="pool-scope-item">
-                            <div class="pool-scope-badge">2</div>
-                            <div class="pool-scope-info">
-                                <strong>Barrier Height & Ground Clearance Check</strong>
-                                <span>Ensuring the fence achieves compliant minimum vertical height (1200mm) and ground clearances do not exceed 100mm.</span>
-                            </div>
+                        <li class="pool-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Faulty Gates:</strong> Gates that don’t close or latch properly are one of the most common compliance failures. We ensure your gates meet the self-latching and self-closing requirements.</p>
                         </li>
 
-                        <li class="pool-scope-item">
-                            <div class="pool-scope-badge">3</div>
-                            <div class="pool-scope-info">
-                                <strong>Non-Climbable Zone (NCZ) Assessment</strong>
-                                <span>Auditing the 900mm non-climbable zone for nearby trees, pots, taps, horizontal rails, and outdoor furniture.</span>
-                            </div>
+                        <li class="pool-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Inadequate Barrier Height:</strong> Fences that are too low or climbable can be dangerous. We check the height and ensure it cannot be easily scaled.</p>
                         </li>
 
-                        <li class="pool-scope-item">
-                            <div class="pool-scope-badge">4</div>
-                            <div class="pool-scope-info">
-                                <strong>Boundary Fences & Direct Access Points</strong>
-                                <span>Checking boundary fences (min 1800mm where applicable), windows, doors, and potential child footholds.</span>
-                            </div>
+                        <li class="pool-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Vegetation Interference:</strong> Trees or shrubs growing too close to the barrier can provide climbing assistance for children. We advise on how to maintain clear zones around the fence.</p>
                         </li>
 
-                        <li class="pool-scope-item">
-                            <div class="pool-scope-badge">5</div>
-                            <div class="pool-scope-info">
-                                <strong>Structural Rigidity & Latches</strong>
-                                <span>Inspecting post firm footing, glass spigots, shield compliance, and gate latch mechanism security.</span>
-                            </div>
+                        <li class="pool-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Deteriorating Fences:</strong> Over time, fences can rust, warp, or become loose, compromising their safety. We check the integrity of all materials and fixtures.</p>
                         </li>
                     </ul>
                 </div>
 
-                {{-- IMAGE schedule.jpeg FROM public/images/schedule.jpeg AS IN SCREENSHOT --}}
-                <div class="pool-scope-image-wrapper hover-lift" data-aos="fade-left">
-                    <img src="{{ asset('images/schedule.jpeg') }}" alt="Ronak Gami conducting inspection audit">
-                    <button class="pool-slide-arrow pool-slide-prev" type="button" aria-label="Previous">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <button class="pool-slide-arrow pool-slide-next" type="button" aria-label="Next">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
+                {{-- Right Photo --}}
+                <div class="pool-photo-box">
+                    <img src="{{ asset('images/pool-barrier-inspection.jpg') }}" alt="Certified inspector conducting pool barrier compliance inspection">
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         5. WHY CHOOSE US (LIGHT GREEN BOX)
+         5. WHY CHOOSE US (MINT GREEN SECTION)
     ====================================================== --}}
-    <section class="pool-section">
+    <section class="pool-section" style="padding-top: 10px;">
         <div class="pool-container">
+            <div class="pool-choose-section">
 
-            <div class="pool-choose">
-
-                <div class="pool-heading" data-aos="fade-up">
-                    <span class="small-title">WHY CHOOSE US</span>
+                <div class="pool-heading-center">
+                    <span class="pool-badge">WHY CHOOSE US</span>
                     <h2>WHY CHOOSE US FOR YOUR POOL BARRIER INSPECTION?</h2>
                 </div>
 
                 <div class="pool-choose-grid">
 
-                    <div class="pool-choose-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="pool-choose-icon">
+                    <div class="pool-choose-card">
+                        <div class="pool-choose-icon-wrap">
                             <i class="bi bi-shield-check"></i>
                         </div>
-                        <h4>LICENSED INSPECTORS</h4>
-                        <p>Your inspection is conducted by an appropriately licensed and experienced VBA registered building inspector.</p>
+                        <h4>Licensed and Experienced Inspectors</h4>
+                        <p>Our team consists of qualified, licensed inspectors with years of experience in pool barrier compliance across Melbourne.</p>
                     </div>
 
-                    <div class="pool-choose-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="pool-choose-icon">
-                            <i class="bi bi-search"></i>
+                    <div class="pool-choose-card">
+                        <div class="pool-choose-icon-wrap">
+                            <i class="bi bi-clock-history"></i>
                         </div>
-                        <h4>FAST & THOROUGH SERVICE</h4>
-                        <p>We provide a detailed visual inspection of accessible pool barrier components and surrounding areas.</p>
+                        <h4>Fast and Efficient Service</h4>
+                        <p>We know that time is crucial, especially if you're applying for a compliance certificate or selling your property. We offer prompt inspections and same-day or next-day reporting for your convenience.</p>
                     </div>
 
-                    <div class="pool-choose-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="pool-choose-icon">
-                            <i class="bi bi-file-earmark-check"></i>
+                    <div class="pool-choose-card">
+                        <div class="pool-choose-icon-wrap">
+                            <i class="bi bi-people-fill"></i>
                         </div>
-                        <h4>CLEAR REPORTING</h4>
-                        <p>Findings are presented clearly with photographic guidance so property owners understand identified concerns.</p>
+                        <h4>Customer-Focused</h4>
+                        <p>Our service doesn’t end with the inspection. We work with you to ensure your pool barrier meets safety standards, offering practical solutions to fix non-compliances.</p>
                     </div>
 
-                    <div class="pool-choose-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="pool-choose-icon">
-                            <i class="bi bi-patch-check"></i>
+                    <div class="pool-choose-card">
+                        <div class="pool-choose-icon-wrap">
+                            <i class="bi bi-tag-fill"></i>
                         </div>
-                        <h4>SAFETY FOCUSED</h4>
-                        <p>Our inspection focuses on observable conditions that protect your family and satisfy Victorian pool regulations.</p>
+                        <h4>Affordable Pricing</h4>
+                        <p>Our inspection services are competitively priced without compromising on quality. We also provide discounts for follow-up inspections, ensuring compliance is cost-effective.</p>
                     </div>
 
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         6. POOL BARRIER PRICING (3 CARDS)
+         6. CHOOSE PACKAGE / ENSURE SAFETY AND COMPLIANCE (PRICING)
     ====================================================== --}}
-    <section class="pool-section pool-pricing">
+    <section class="pool-section">
         <div class="pool-container">
 
-            <div class="pool-heading" data-aos="fade-up">
-                <span class="small-title">PRICING PLANS</span>
-                <h2>POOL BARRIER INSPECTION PRICING</h2>
+            <div class="pool-heading-center">
+                <span class="pool-badge">CHOOSE PACKAGE</span>
+                <h2>ENSURE SAFETY AND COMPLIANCE</h2>
             </div>
 
             <div class="pool-price-grid">
 
-                {{-- CARD 1: 1 POOL CHECK --}}
-                <div class="pool-price-card hover-lift" data-aos="fade-up" data-aos-delay="100">
+                {{-- CARD 1: WITHIN 40KM --}}
+                <div class="pool-price-card">
                     <div>
                         <div class="pool-price-icon">
-                            <i class="bi bi-water"></i>
+                            <i class="bi bi-geo-alt"></i>
                         </div>
-                        <h3>1 POOL CHECK</h3>
+                        <h3>Within 40Km</h3>
 
-                        <div class="pool-price">
-                            $225*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="pool-price-amount">$225</div>
+                        <div class="pool-price-suffix">+GST/ Starting</div>
 
-                        <ul class="pool-price-list">
-                            <li>Comprehensive visual inspection</li>
-                            <li>Pool barrier & gate latching check</li>
-                            <li>Non-climbable zone evaluation</li>
-                            <li>Detailed report & consultation</li>
-                            <li>24-hour report delivery</li>
+                        <ul class="pool-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Form 23 Certificate</li>
+                            <li><i class="bi bi-check-square-fill"></i> Consultation</li>
                         </ul>
                     </div>
 
@@ -1339,25 +1223,21 @@
                     </a>
                 </div>
 
-                {{-- CARD 2: 2 POOLS / SPA & POOL --}}
-                <div class="pool-price-card hover-lift" data-aos="fade-up" data-aos-delay="200">
+                {{-- CARD 2: 40KM+ --}}
+                <div class="pool-price-card">
                     <div>
                         <div class="pool-price-icon">
-                            <i class="bi bi-droplet-half"></i>
+                            <i class="bi bi-compass"></i>
                         </div>
-                        <h3>2 POOLS / SPA</h3>
+                        <h3>40km+</h3>
 
-                        <div class="pool-price">
-                            $275*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="pool-price-amount">$275</div>
+                        <div class="pool-price-suffix">+GST/ Starting</div>
 
-                        <ul class="pool-price-list">
-                            <li>Inspection for pool & separate spa</li>
-                            <li>Multi-barrier gate audit</li>
-                            <li>Complete NCZ & boundary assessment</li>
-                            <li>Comprehensive digital report</li>
-                            <li>24-hour report delivery</li>
+                        <ul class="pool-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Form 23 Certificate</li>
+                            <li><i class="bi bi-check-square-fill"></i> Consultation</li>
                         </ul>
                     </div>
 
@@ -1366,25 +1246,21 @@
                     </a>
                 </div>
 
-                {{-- CARD 3: RE-INSPECTION --}}
-                <div class="pool-price-card hover-lift" data-aos="fade-up" data-aos-delay="300">
+                {{-- CARD 3: REINSPECTION --}}
+                <div class="pool-price-card">
                     <div>
                         <div class="pool-price-icon">
-                            <i class="bi bi-clipboard-check"></i>
+                            <i class="bi bi-arrow-repeat"></i>
                         </div>
-                        <h3>RE-INSPECTION</h3>
+                        <h3>Reinspection</h3>
 
-                        <div class="pool-price">
-                            $150*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="pool-price-amount">$150</div>
+                        <div class="pool-price-suffix">+GST/ Starting</div>
 
-                        <ul class="pool-price-list">
-                            <li>Re-inspection of rectified items</li>
-                            <li>Gate & barrier verification</li>
-                            <li>Updated compliance findings</li>
-                            <li>Fast-track certificate advice</li>
-                            <li>Priority debrief with inspector</li>
+                        <ul class="pool-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Re-inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Form 23 Certificate</li>
+                            <li><i class="bi bi-check-square-fill"></i> Consultation</li>
                         </ul>
                     </div>
 
@@ -1400,65 +1276,102 @@
 
 
     {{-- =====================================================
-         7. CTA BANNER (SCHEDULE YOUR INSPECTION TODAY)
+         7. SCHEDULE CTA
     ====================================================== --}}
     <section class="pool-cta">
         <div class="pool-container">
-
-            <div class="pool-cta-content" data-aos="fade-right">
+            <div class="pool-cta-inner">
                 <h2>SCHEDULE YOUR INSPECTION TODAY</h2>
 
                 <p>
-                    A professional pool barrier inspection can help identify observable safety and compliance concerns. Our inspection provides clear findings and professional reporting to help you protect your loved ones and satisfy compliance.
+                    A pre-purchase building and pest inspection is a small investment that can save you from significant expenses and stress in the future. Our professional inspections provide you with the information needed to make an informed, confident decision about your property purchase. Don’t take risks with your investment—book your inspection today.
                 </p>
 
-                <a href="#quote-form" class="pool-btn btn-glow">
-                    SCHEDULE YOUR INSPECTION NOW
+                <a href="#quote-form" class="pool-btn-green">
+                    Schedule your inspection now
                 </a>
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         8. CLIENT REVIEWS & FEEDBACK
+         8. CLIENT FEEDBACK & REVIEWS
     ====================================================== --}}
     <section class="pool-section pool-reviews">
         <div class="pool-container">
 
-            <div class="pool-heading" data-aos="fade-up">
-                <span class="small-title">Client Feedback & Reviews</span>
-                <h2>WHAT OUR CLIENTS SAY</h2>
+            <div class="pool-heading-center">
+                <span class="pool-badge">TESTIMONIAL</span>
+                <h2>CLIENT FEEDBACK & REVIEWS</h2>
             </div>
 
             <div class="pool-review-grid">
 
-                <div class="pool-review-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                    <div class="pool-review-quote">“</div>
+                <div class="pool-review-card">
+                    <div class="pool-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Very professional and thorough. The pool barrier inspection was completed carefully and the findings were explained clearly."
+                        Very professional and approachable. The property inspection was done thoroughly, and even minor defects were identified. Really appreciate the attention to detail and commitment to the job. Highly recommended for any building inspection.
                     </p>
-                    <div class="pool-stars">★★★★★</div>
-                    <h4>Sushil Trivedi</h4>
+                    <div class="pool-review-stars">★★★★★</div>
+                    <h4>Swathi Tarini</h4>
                 </div>
 
-                <div class="pool-review-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div class="pool-review-quote">“</div>
+                <div class="pool-review-card">
+                    <div class="pool-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Thank you for a very detailed inspection and clear reporting. Everything was explained in a simple way."
+                        Took generous time to answer all my questions regarding the property's condition and report. Very kind, humble, and helpful. Highly recommended for anyone needing a building and pest inspection
                     </p>
-                    <div class="pool-stars">★★★★★</div>
-                    <h4>Laxmi</h4>
+                    <div class="pool-review-stars">★★★★★</div>
+                    <h4>Luxmy</h4>
                 </div>
 
-                <div class="pool-review-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-                    <div class="pool-review-quote">“</div>
+                <div class="pool-review-card">
+                    <div class="pool-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Excellent service and very easy to arrange. We received useful information about the pool barrier and areas that needed attention."
+                        Provided an excellent inspection for the property I'm purchasing. All findings were explained clearly, and the report was prepared on the same day. Warm, professional, and efficient. Highly recommended to friends and family.
                     </p>
-                    <div class="pool-stars">★★★★★</div>
-                    <h4>Shailesh Patel</h4>
+                    <div class="pool-review-stars">★★★★★</div>
+                    <h4>Shaleen De Silva</h4>
+                </div>
+
+                <div class="pool-review-card">
+                    <div class="pool-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Extremely helpful and responsive. The building and pest inspection was completed quickly, and the report was delivered exactly as requested. Smooth and professional experience overall— great service!
+                    </p>
+                    <div class="pool-review-stars">★★★★★</div>
+                    <h4>Niresh Wijesiri</h4>
+                </div>
+
+                <div class="pool-review-card">
+                    <div class="pool-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Very thorough and professional during my pre-purchase building and pest inspection. Strongly recommended.
+                    </p>
+                    <div class="pool-review-stars">★★★★★</div>
+                    <h4>Max</h4>
+                </div>
+
+                <div class="pool-review-card">
+                    <div class="pool-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Amazing experience. Quick replies, prompt actions, and a positive attitude. Would definitely recommend 👏👏👏
+                    </p>
+                    <div class="pool-review-stars">★★★★★</div>
+                    <h4>Heena Bhavsar</h4>
                 </div>
 
             </div>
@@ -1470,87 +1383,87 @@
     {{-- =====================================================
          9. FREQUENTLY ASKED QUESTIONS (FAQ)
     ====================================================== --}}
-    <section class="pool-section pool-faq">
+    <section class="pool-section pool-faq" style="background: #ffffff; padding-top: 10px;">
         <div class="pool-container">
 
-            <div class="pool-heading" data-aos="fade-up">
-                <span class="small-title">Quick Answers</span>
+            <div class="pool-heading-center">
+                <span class="pool-badge">COMMON QUESTIONS</span>
                 <h2>MOST POPULAR QUESTIONS</h2>
             </div>
 
             <div class="pool-faq-grid">
 
-                {{-- LEFT COLUMN --}}
+                {{-- COLUMN 1 --}}
                 <div class="pool-faq-col">
 
                     {{-- FAQ 1 (Active by default) --}}
-                    <div class="pool-faq-item active" data-aos="fade-up" data-aos-delay="100">
-                        <button class="pool-faq-question" type="button">
-                            <span>What is a pool barrier inspection?</span>
+                    <div class="pool-faq-item active">
+                        <button class="pool-faq-question" type="button" onclick="togglePoolFaq(this)">
+                            <span>1. What is a pool barrier inspection?</span>
                             <i class="bi bi-chevron-down pool-faq-icon"></i>
                         </button>
                         <div class="pool-faq-answer">
-                            A pool barrier inspection is a professional visual assessment of accessible pool fencing, gates, latches, barriers and relevant access conditions for observable safety and compliance concerns.
+                            A pool barrier inspection is a thorough check of your pool’s safety barriers to ensure they comply with the Victorian Building Authority (VBA) regulations. The inspection focuses on identifying potential risks, including gaps in fencing, faulty gates, and other safety concerns.
                         </div>
                     </div>
 
                     {{-- FAQ 2 --}}
-                    <div class="pool-faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <button class="pool-faq-question" type="button">
-                            <span>How long does the inspection take?</span>
+                    <div class="pool-faq-item">
+                        <button class="pool-faq-question" type="button" onclick="togglePoolFaq(this)">
+                            <span>2. Why do I need a pool barrier inspection?</span>
                             <i class="bi bi-chevron-down pool-faq-icon"></i>
                         </button>
                         <div class="pool-faq-answer">
-                            Inspection time varies depending on the property, pool barrier arrangement and the number of areas requiring assessment. We provide estimated timeframes during booking.
+                            In Victoria, it is legally required that all pool and spa barriers meet specific safety standards to prevent unsupervised access by children. Regular inspections help ensure your pool is safe and compliant, avoiding fines or legal consequences.
                         </div>
                     </div>
 
                     {{-- FAQ 3 --}}
-                    <div class="pool-faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <button class="pool-faq-question" type="button">
-                            <span>What happens if an issue is found?</span>
+                    <div class="pool-faq-item">
+                        <button class="pool-faq-question" type="button" onclick="togglePoolFaq(this)">
+                            <span>3. How much does a pool barrier inspection cost?</span>
                             <i class="bi bi-chevron-down pool-faq-icon"></i>
                         </button>
                         <div class="pool-faq-answer">
-                            Observable issues are documented in the inspection findings. Depending on the issue, straightforward maintenance or specialist repair advice is provided to help you achieve compliance.
+                            The cost of a pool barrier inspection depends on the size of your pool and the complexity of the barrier. Our services start at $225, and we offer follow-up inspections at discounted rates if needed.
                         </div>
                     </div>
 
                 </div>
 
-                {{-- RIGHT COLUMN --}}
+                {{-- COLUMN 2 --}}
                 <div class="pool-faq-col">
 
                     {{-- FAQ 4 (Active by default) --}}
-                    <div class="pool-faq-item active" data-aos="fade-up" data-aos-delay="150">
-                        <button class="pool-faq-question" type="button">
-                            <span>Why do I need a pool barrier inspection?</span>
+                    <div class="pool-faq-item active">
+                        <button class="pool-faq-question" type="button" onclick="togglePoolFaq(this)">
+                            <span>4. What happens if my pool barrier doesn’t pass the inspection?</span>
                             <i class="bi bi-chevron-down pool-faq-icon"></i>
                         </button>
                         <div class="pool-faq-answer">
-                            A pool barrier is an essential safety feature mandated by Victorian law. An inspection identifies observable conditions that may require repair, preventing penalties and safeguarding lives.
+                            If your pool barrier does not pass, we will provide you with a detailed report outlining the non-compliances and recommendations to fix them. After you’ve made the necessary changes, we can conduct a follow-up inspection to ensure the barrier is compliant.
                         </div>
                     </div>
 
                     {{-- FAQ 5 --}}
-                    <div class="pool-faq-item" data-aos="fade-up" data-aos-delay="250">
-                        <button class="pool-faq-question" type="button">
-                            <span>How can I prepare for the inspection?</span>
+                    <div class="pool-faq-item">
+                        <button class="pool-faq-question" type="button" onclick="togglePoolFaq(this)">
+                            <span>5. How long does the inspection take, and when will I receive the report?</span>
                             <i class="bi bi-chevron-down pool-faq-icon"></i>
                         </button>
                         <div class="pool-faq-answer">
-                            Ensure the inspector has safe access to all pool barriers, gates, and boundary perimeters. Clear away climbable items, outdoor furniture, and garden tools within 900mm of the barrier.
+                            The inspection typically takes 1 to 1.5 hours, depending on the size of the pool and its surroundings. You will receive a detailed report within 24 hours, or sooner if requested.
                         </div>
                     </div>
 
                     {{-- FAQ 6 --}}
-                    <div class="pool-faq-item" data-aos="fade-up" data-aos-delay="350">
-                        <button class="pool-faq-question" type="button">
-                            <span>Can you provide a re-inspection?</span>
+                    <div class="pool-faq-item">
+                        <button class="pool-faq-question" type="button" onclick="togglePoolFaq(this)">
+                            <span>6. How often should I get a pool barrier inspection?</span>
                             <i class="bi bi-chevron-down pool-faq-icon"></i>
                         </button>
                         <div class="pool-faq-answer">
-                            Yes. A re-inspection can be arranged after identified issues have been rectified, allowing the inspector to verify compliance and issue the appropriate certification.
+                            You should get a pool barrier inspection whenever you install a new pool or spa, make changes to the fencing, or as required by law every four years. Regular inspections ensure your pool stays compliant with evolving regulations.
                         </div>
                     </div>
 
@@ -1564,22 +1477,21 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const faqButtons = document.querySelectorAll('.pool-faq-question');
-    faqButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const item = this.parentElement;
-            const isActive = item.classList.contains('active');
-            
-            // Toggle clicked
-            if (isActive) {
-                item.classList.remove('active');
-            } else {
-                item.classList.add('active');
-            }
-        });
-    });
-});
+// FAQ Accordion Toggle
+function togglePoolFaq(btn) {
+    const item = btn.closest('.pool-faq-item');
+    const col = item.closest('.pool-faq-col');
+    const allInCol = col.querySelectorAll('.pool-faq-item');
+    const wasActive = item.classList.contains('active');
+
+    // Close other items in the same column
+    allInCol.forEach(el => el.classList.remove('active'));
+
+    // Toggle clicked item
+    if (!wasActive) {
+        item.classList.add('active');
+    }
+}
 </script>
 
 @endsection

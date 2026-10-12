@@ -21,7 +21,7 @@
     --pp-border: #e5e5e5;
     --pp-orange: #ffb400;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--pp-text);
     overflow: hidden;
 }
@@ -434,56 +434,41 @@
 }
 
 .pp-important-card {
-    padding: 18px;
+    padding: 20px 22px;
 
-    border: 1px solid #e8e8e8;
+    border: 1px solid #e2e8f0;
 
     background: #fff;
 
-    border-radius: 4px;
+    border-radius: 6px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,.04);
 }
 
-.pp-important-card h4 {
-    margin: 0 0 8px;
-
-    color: var(--pp-navy);
-
-    font-size: 15px;
-    font-weight: 900;
-
-    text-transform: uppercase;
+.pp-important-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
 }
 
-.pp-important-card p {
+.pp-check-icon {
+    font-size: 20px;
+    color: var(--pp-green);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.pp-important-inner p {
     margin: 0;
-
-    color: #666;
-
-    font-size: 14px;
+    color: #4a5568;
+    font-size: 14.5px;
     line-height: 1.65;
 }
 
-.pp-important-card p::before {
-    content: "✓";
-
-    display: inline-flex;
-
-    width: 18px;
-    height: 18px;
-
-    margin-right: 6px;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #e8f6df;
-
-    color: var(--pp-green);
-
-    font-weight: 900;
-    font-size: 11px;
+.pp-important-inner p strong,
+.pp-important-inner p b {
+    color: #1a202c;
+    font-weight: 700;
 }
 
 
@@ -568,15 +553,11 @@
 ========================================================= */
 
 .pp-standout {
-    padding: 45px 35px;
+    padding: 50px 35px;
 
-    background: linear-gradient(
-        135deg,
-        #d8efc9,
-        #eef9e9
-    );
+    background: #eef7ed;
 
-    border-radius: 15px;
+    border-radius: 18px;
 }
 
 .pp-standout-grid {
@@ -584,11 +565,15 @@
 
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 25px;
+    gap: 20px;
 }
 
 .pp-standout-item {
     text-align: center;
+    background: #ffffff;
+    padding: 26px 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.04);
 }
 
 .pp-standout-icon {
@@ -672,7 +657,7 @@
 }
 
 .pp-price-card h3 {
-    margin: 0 0 6px;
+    margin: 0 0 8px;
 
     color: var(--pp-navy);
 
@@ -682,36 +667,31 @@
     text-transform: uppercase;
 }
 
-.pp-price-card .price-sub {
-    color: #777;
-
+.pp-price-card .price-from {
     font-size: 13px;
-
-    margin-bottom: 8px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 2px;
 }
 
 .pp-price {
     color: var(--pp-green);
 
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 900;
 
-    margin-bottom: 14px;
+    margin-bottom: 2px;
+    line-height: 1.1;
 }
 
-.price-from {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--pp-green);
-    vertical-align: middle;
-    margin-right: 4px;
-}
-
-.pp-price small {
+.pp-price-card .price-sub {
     color: #777;
 
-    font-size: 11px;
-    font-weight: 400;
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 16px;
 }
 
 .pp-price-list {
@@ -835,7 +815,8 @@
 ========================================================= */
 
 .pp-cta {
-    min-height: 380px;
+    min-height: 540px;
+    padding: 105px 0;
 
     display: flex;
     align-items: center;
@@ -844,37 +825,47 @@
         linear-gradient(
             90deg,
             rgba(4,43,75,.96) 0%,
-            rgba(4,43,75,.88) 55%,
-            rgba(4,43,75,.35) 100%
+            rgba(4,43,75,.88) 50%,
+            rgba(4,43,75,.30) 100%
         ),
         url('{{ asset('images/pre purchase service.jpeg') }}')
         center right / cover no-repeat;
 }
 
 .pp-cta-content {
-    max-width: 620px;
+    max-width: 820px;
 
-    color: #fff;
+    color: #ffffff;
 }
 
 .pp-cta-content h2 {
-    margin: 0 0 14px;
+    margin: 0 0 20px;
 
-    font-size: 34px;
-    line-height: 1.18;
+    color: #ffffff !important;
+
+    font-size: clamp(32px, 4.2vw, 48px);
+    line-height: 1.2;
 
     font-weight: 900;
 
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .pp-cta-content p {
-    margin: 0 0 22px;
+    margin: 0 0 32px;
 
-    color: rgba(255,255,255,.90);
+    color: rgba(255, 255, 255, 0.96) !important;
 
-    font-size: 15.5px;
-    line-height: 1.7;
+    font-size: 17.5px;
+    line-height: 1.85;
+}
+
+.pp-cta-btn {
+    padding: 16px 38px !important;
+    font-size: 15.5px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.6px;
 }
 
 
@@ -954,7 +945,14 @@
 
     grid-template-columns: 1fr 1fr;
 
-    gap: 8px 16px;
+    gap: 16px;
+    align-items: start;
+}
+
+.pp-faq-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .pp-faq-item {
@@ -964,6 +962,11 @@
 
     border-radius: 4px;
     overflow: hidden;
+    transition: border-color .2s ease;
+}
+
+.pp-faq-item.active {
+    border-color: var(--pp-green);
 }
 
 .pp-faq-question {
@@ -987,6 +990,7 @@
     font-weight: 800;
 
     cursor: pointer;
+    transition: background .2s ease, color .2s ease;
 }
 
 .pp-faq-question:hover {
@@ -996,12 +1000,13 @@
 .pp-faq-answer {
     display: none;
 
-    padding: 0 16px 14px;
+    padding: 14px 16px;
 
-    color: #666;
+    color: #555;
 
     font-size: 14px;
     line-height: 1.65;
+    background: #fff;
 }
 
 .pp-faq-item.active .pp-faq-answer {
@@ -1009,47 +1014,16 @@
 }
 
 .pp-faq-item.active .pp-faq-question {
-    color: var(--pp-green);
-}
-
-
-/* =========================================================
-   FINAL CTA
-========================================================= */
-
-.pp-final-cta {
-    padding: 45px 20px;
-
-    text-align: center;
-
     background: var(--pp-green);
-
     color: #fff;
 }
 
-.pp-final-cta h2 {
-    margin: 0 0 10px;
-
-    font-size: 30px;
-    font-weight: 900;
-
-    text-transform: uppercase;
+.pp-faq-item.active .pp-faq-question span {
+    color: #fff;
 }
 
-.pp-final-cta p {
-    margin: 0 auto 20px;
 
-    max-width: 650px;
 
-    font-size: 15.5px;
-    line-height: 1.65;
-}
-
-.pp-final-btn {
-    background: #fff;
-
-    color: var(--pp-green) !important;
-}
 
 
 
@@ -1152,11 +1126,18 @@
     }
 
     .pp-cta {
-        min-height: 420px;
+        min-height: 440px;
+        padding: 60px 0;
     }
 
     .pp-cta-content h2 {
-        font-size: 29px;
+        font-size: 32px;
+        color: #ffffff !important;
+    }
+
+    .pp-cta-content p {
+        font-size: 15.5px;
+        color: #ffffff !important;
     }
 
 
@@ -1191,7 +1172,7 @@
 <div class="pp-page">
 
     {{-- =====================================================
-         HERO
+         1. HERO
     ====================================================== --}}
 
     <section class="pp-hero">
@@ -1201,24 +1182,22 @@
             <div class="pp-hero-content" data-aos="fade-right" data-aos-duration="850">
 
                 <span class="pp-hero-tag">
-                    Premium Building & Pest Inspections
+                    Premium Building &amp; Pest Inspections
                 </span>
 
                 <h1>
-                    Expert Pre-Purchase Building And Pest Inspections In Melbourne
+                    EXPERT PRE-PURCHASE BUILDING AND PEST INSPECTIONS IN MELBOURNE
                 </h1>
 
                 <p>
-                    Comprehensive building and pest inspections to help you
-                    understand the condition of a property before you buy.
+                    Comprehensive, Same-Day Inspections for Your Peace of Mind
                 </p>
 
                 <a
-                    href="tel:0466001551"
+                    href="#quote-form"
                     class="pp-btn btn-glow"
                 >
-                    <i class="bi bi-telephone-fill me-2"></i>
-                    0466 001 551
+                    Contact Us
                 </a>
 
             </div>
@@ -1229,7 +1208,7 @@
             <div id="quote-form" class="pp-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
 
                 <div class="pp-hero-form-title">
-                    Book Your Inspection
+                    GET QUICK QUOTE
                 </div>
 
                 <form
@@ -1244,14 +1223,14 @@
                         <input
                             type="text"
                             name="name"
-                            placeholder="Full Name"
+                            placeholder="Name"
                             required
                         >
 
                         <input
-                            type="tel"
-                            name="phone"
-                            placeholder="Phone"
+                            type="email"
+                            name="email"
+                            placeholder="Email"
                             required
                         >
 
@@ -1261,16 +1240,17 @@
                     <div class="pp-form-row">
 
                         <input
-                            type="email"
-                            name="email"
-                            placeholder="Email"
+                            type="tel"
+                            name="phone"
+                            placeholder="Phone"
                             required
                         >
 
                         <input
                             type="text"
-                            name="suburb"
-                            placeholder="Suburb"
+                            name="property_address"
+                            placeholder="Address"
+                            required
                         >
 
                     </div>
@@ -1281,34 +1261,55 @@
                         required
                     >
 
-                        <option value="">
-                            Pre-Purchase Building and Pest Inspection
+                        <option value="Pre-purchase Building and Pest Inspection">
+                            Pre-purchase Building and Pest Inspection
                         </option>
 
-                        <option value="Pre-Purchase Building and Pest Inspection">
-                            Pre-Purchase Building and Pest Inspection
+                        <option value="Building Stage by Stage Inspection">
+                            Building Stage by Stage Inspection
                         </option>
 
-                        <option value="Building Inspection">
-                            Building Inspection
+                        <option value="New Build Handover Inspection">
+                            New Build Handover Inspection
                         </option>
 
-                        <option value="Pest Inspection">
-                            Pest Inspection
+                        <option value="Rising Damp Inspection">
+                            Rising Damp Inspection
+                        </option>
+
+                        <option value="Pool Barrier Inspection">
+                            Pool Barrier Inspection
+                        </option>
+
+                        <option value="Apartment Building Inspection">
+                            Apartment Building Inspection
+                        </option>
+
+                        <option value="Dilapidation Report">
+                            Dilapidation Report
+                        </option>
+
+                        <option value="vendor Inspection">
+                            vendor Inspection
+                        </option>
+
+                        <option value="Builders Warranty Inspection">
+                            Builders Warranty Inspection
                         </option>
 
                     </select>
 
 
                     <input
-                        type="text"
-                        name="property_address"
-                        placeholder="Property Address"
+                        type="date"
+                        name="inspection_date"
+                        placeholder="Inspection Date"
                     >
 
 
                     <textarea
                         name="message"
+                        rows="3"
                         placeholder="Message"
                     ></textarea>
 
@@ -1330,7 +1331,7 @@
 
 
     {{-- =====================================================
-         WELCOME
+         2. WELCOME TO PREMIUM BUILDING & PEST INSPECTIONS
     ====================================================== --}}
 
     <section class="pp-section pp-welcome">
@@ -1342,22 +1343,20 @@
                 <div class="pp-welcome-content" data-aos="fade-right" data-aos-duration="800">
 
                     <h2>
-                        Welcome To Premium Building & Pest Inspections
+                        WELCOME TO PREMIUM BUILDING &amp; PEST INSPECTIONS
                     </h2>
 
                     <p>
-                        Buying a property is one of the biggest investments
-                        you can make. A professional inspection can help
-                        identify visible building defects, pest activity,
-                        moisture concerns and other property issues.
+                        Looking to purchase a property in Melbourne or surrounding suburbs? Before you commit, it is essential to understand the true condition of the property with a professional pre-purchase building and pest inspection.
                     </p>
 
                     <p>
-                        Our experienced inspection team provides detailed
-                        building and pest inspections throughout Melbourne,
-                        helping property buyers make informed decisions.
+                        Premium Building &amp; Pest Inspections provides detailed, independent inspection reports that help property buyers identify hidden defects, moisture issues, termite activity, and workmanship concerns before finalising a purchase.
                     </p>
 
+                    <p>
+                        We service Clyde North, Melbourne, and surrounding suburbs, delivering fast and detailed inspection reports to support confident property decisions. <strong>We Offer :</strong>
+                    </p>
 
                     <div class="pp-feature-mini">
 
@@ -1368,13 +1367,11 @@
                         <div>
 
                             <h4>
-                                Pre-Purchase Building Inspection
+                                PRE-PURCHASE BUILDING INSPECTION
                             </h4>
 
                             <p>
-                                We conduct a detailed inspection of accessible
-                                areas of the property and identify visible
-                                defects and potential concerns.
+                                A comprehensive visual inspection of your property's interior and exterior to identify visible defects, maintenance issues, and safety concerns, covering walls, ceilings, floors, roofing, doors, windows, drainage, external areas, and overall workmanship.
                             </p>
 
                         </div>
@@ -1391,13 +1388,11 @@
                         <div>
 
                             <h4>
-                                Pre-Purchase Pest Inspection
+                                PRE-PURCHASE PEST INSPECTION
                             </h4>
 
                             <p>
-                                We look for visible evidence of termites,
-                                timber pests and conditions that may contribute
-                                to pest activity.
+                                A specialised inspection to identify active termites, timber pests, past termite damage, timber deterioration, moisture issues, and conditions that may increase the risk of future pest infestations.
                             </p>
 
                         </div>
@@ -1414,13 +1409,11 @@
                         <div>
 
                             <h4>
-                                Professional Inspection Report
+                                BUILDING AND TERMITE INSPECTIONS
                             </h4>
 
                             <p>
-                                Receive clear documentation of relevant
-                                inspection observations and areas requiring
-                                attention.
+                                A comprehensive inspection that assesses the property's overall condition, identifies termite activity and pest risks, uncovers visible defects affecting safety or value, and highlights maintenance requirements—providing buyers with a complete property assessment before purchase.
                             </p>
 
                         </div>
@@ -1431,26 +1424,29 @@
                     <a
                         href="#quote-form"
                         class="pp-btn btn-glow"
+                        style="margin-top: 18px;"
                     >
-                        Schedule Your Inspection
+                        Schedule your inspection now
                     </a>
 
                 </div>
 
 
+                {{-- INSPECTOR CARD --}}
+
                 <div class="pp-inspector-card hover-lift" data-aos="fade-left" data-aos-duration="800">
 
                     <div class="pp-inspector-title">
-                        VBA LICENSED
+                        YOUR INSPECTOR
                     </div>
 
                     <img
                         src="{{ asset('images/ronak gami.jpeg') }}"
-                        alt="Ronak Gami | VBA Building Inspector"
+                        alt="Ronak Gami | VBA Licensed Inspector"
                     >
 
                     <div class="pp-inspector-name">
-                        Ronak Gami | VBA Building Inspector Licence No. IN-PS 74654
+                        Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200
                     </div>
 
                     <a
@@ -1470,7 +1466,7 @@
 
 
     {{-- =====================================================
-         WHY IMPORTANT
+         3. WHY PRE-PURCHASE INSPECTIONS ARE IMPORTANT
     ====================================================== --}}
 
     <section class="pp-section pp-important">
@@ -1479,12 +1475,8 @@
 
             <div class="pp-heading" data-aos="fade-up">
 
-                <span class="small-title">
-                    Protect Your Investment
-                </span>
-
                 <h2>
-                    Why Pre-Purchase Building And Pest Inspections Are Important
+                    WHY PRE-PURCHASE BUILDING AND PEST INSPECTIONS ARE IMPORTANT
                 </h2>
 
             </div>
@@ -1494,108 +1486,109 @@
 
                 <div class="pp-important-card hover-lift" data-aos="fade-up" data-aos-delay="100">
 
-                    <h4>
-                        Identify Hidden Defects
-                    </h4>
+                    <div class="pp-important-inner">
 
-                    <p>
-                        Identify visible concerns that may not be obvious
-                        during a normal property inspection.
-                    </p>
+                        <i class="bi bi-check-circle-fill pp-check-icon"></i>
+
+                        <p>
+                            <strong>Protect Your Investment:</strong> A property may appear well maintained but still contain hidden defects. A professional inspection helps identify issues before purchase, allowing you to make informed financial decisions.
+                        </p>
+
+                    </div>
 
                 </div>
 
 
                 <div class="pp-important-card hover-lift" data-aos="fade-up" data-aos-delay="200">
 
-                    <h4>
-                        Protect Your Investment
-                    </h4>
+                    <div class="pp-important-inner">
 
-                    <p>
-                        Understand relevant property concerns before making
-                        a major purchasing commitment.
-                    </p>
+                        <i class="bi bi-check-circle-fill pp-check-icon"></i>
+
+                        <p>
+                            <strong>Peace of Mind:</strong> Knowing the true condition of the property before signing any contracts ensures peace of mind. You’ll feel confident about your purchase, knowing there won’t be any unpleasant surprises after you’ve moved in.
+                        </p>
+
+                    </div>
 
                 </div>
 
 
                 <div class="pp-important-card hover-lift" data-aos="fade-up" data-aos-delay="300">
 
-                    <h4>
-                        Understand Property Condition
-                    </h4>
+                    <div class="pp-important-inner">
 
-                    <p>
-                        Gain a clearer understanding of the accessible
-                        condition of the property.
-                    </p>
+                        <i class="bi bi-check-circle-fill pp-check-icon"></i>
+
+                        <p>
+                            <strong>Uncover Hidden Problems:</strong> Many issues, such as termite infestations or structural defects, may not be visible during a casual property viewing. Our trained inspectors use specialized tools and extensive experience to detect these hidden problems before they escalate.
+                        </p>
+
+                    </div>
 
                 </div>
 
 
                 <div class="pp-important-card hover-lift" data-aos="fade-up" data-aos-delay="400">
 
-                    <h4>
-                        Make An Informed Decision
-                    </h4>
+                    <div class="pp-important-inner">
 
-                    <p>
-                        Use the inspection findings as part of your broader
-                        property purchasing decision.
-                    </p>
+                        <i class="bi bi-check-circle-fill pp-check-icon"></i>
+
+                        <p>
+                            <strong>Avoid Future Costs:</strong> Identifying potential problems early on means you can address them before they become more significant and costly. For example, untreated termite damage can weaken a building’s structure over time, leading to major repairs down the road.
+                        </p>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            {{-- COMMON ISSUES --}}
+            {{-- =====================================================
+                 4. COMMON ISSUES WE FIND
+            ====================================================== --}}
 
             <div class="pp-issues">
 
                 <div data-aos="fade-right">
 
                     <h3>
-                        Common Issues We Find In Pre-Purchase Inspections
+                        COMMON ISSUES WE FIND IN PRE-PURCHASE INSPECTIONS
                     </h3>
 
                     <p>
-                        Our inspections can identify a range of visible
-                        building and pest-related concerns, including:
+                        Through our extensive experience in conducting pre-purchase building and pest inspections, we frequently encounter:
                     </p>
 
                     <ul>
 
                         <li>
-                            Structural defects, movement and cracking
+                            <strong>Structural Defects:</strong> Foundation cracks, subsidence, and water damage that weaken the overall integrity of the property.
                         </li>
 
                         <li>
-                            Roof and drainage concerns
+                            <strong>Pest Infestations:</strong> Termite damage and other wood-destroying pests that can severely affect the structural soundness of a property.
                         </li>
 
                         <li>
-                            Moisture and water damage
+                            <strong>Roofing Problems:</strong> Leaks, broken tiles, or improperly installed roofing that can lead to long-term water damage and other issues.
                         </li>
 
                         <li>
-                            Pest and termite activity
+                            <strong>Moisture Issues:</strong> Poor drainage or plumbing problems that can cause dampness and mold, leading to health risks and structural decay.
                         </li>
 
                         <li>
-                            Deteriorated building materials
-                        </li>
-
-                        <li>
-                            Poor workmanship and maintenance issues
-                        </li>
-
-                        <li>
-                            Conditions that may contribute to future defects
+                            <strong>Electrical Hazards:</strong> Old or faulty wiring that poses a fire risk, along with non-compliant electrical systems.
                         </li>
 
                     </ul>
+
+                    <p style="margin-top: 14px;">
+                        By identifying these problems before purchasing, you avoid expensive repairs and potential dangers in the future.
+                    </p>
 
                 </div>
 
@@ -1603,8 +1596,8 @@
                 <div class="pp-issues-image img-zoom-hover" data-aos="fade-left">
 
                     <img
-                        src="{{ asset('images/g15.jpeg') }}"
-                        alt="Pre-Purchase Property Inspection - Areas Checked"
+                        src="{{ asset('images/g3.jpg') }}"
+                        alt="Pre-Purchase Property Inspection - Common Issues"
                     >
 
                 </div>
@@ -1617,7 +1610,7 @@
 
 
     {{-- =====================================================
-         WHY OUR SERVICE STANDS OUT
+         5. WHY OUR SERVICE STANDS OUT
     ====================================================== --}}
 
     <section class="pp-section">
@@ -1633,7 +1626,7 @@
                     </span>
 
                     <h2>
-                        Why Our Pre-Purchase Building And Pest Inspection Service Stands Out
+                        WHY OUR PRE-PURCHASE BUILDING AND PEST INSPECTION SERVICE STANDS OUT
                     </h2>
 
                 </div>
@@ -1644,15 +1637,15 @@
                     <div class="pp-standout-item hover-lift" data-aos="fade-up" data-aos-delay="100">
 
                         <div class="pp-standout-icon">
-                            <i class="bi bi-clipboard2-check"></i>
+                            <i class="bi bi-clipboard-check"></i>
                         </div>
 
                         <h4>
-                            Comprehensive Reports
+                            Licensed and Experienced Inspectors
                         </h4>
 
                         <p>
-                            Detailed, easy-to-read reports covering every accessible area of the property.
+                            With years of experience, our certified inspectors are VBA licensed experts.
                         </p>
 
                     </div>
@@ -1661,15 +1654,15 @@
                     <div class="pp-standout-item hover-lift" data-aos="fade-up" data-aos-delay="200">
 
                         <div class="pp-standout-icon">
-                            <i class="bi bi-lightning-charge"></i>
+                            <i class="bi bi-cpu"></i>
                         </div>
 
                         <h4>
-                            Fast Turnaround
+                            Advanced Technology
                         </h4>
 
                         <p>
-                            Prompt delivery of thorough inspection reports to meet your tight deadlines.
+                            Utilizing the latest tools for precise assessments and reporting.
                         </p>
 
                     </div>
@@ -1678,15 +1671,15 @@
                     <div class="pp-standout-item hover-lift" data-aos="fade-up" data-aos-delay="300">
 
                         <div class="pp-standout-icon">
-                            <i class="bi bi-person-check"></i>
+                            <i class="bi bi-file-earmark-text"></i>
                         </div>
 
                         <h4>
-                            Expert Advice
+                            Detailed Reports
                         </h4>
 
                         <p>
-                            VBA licensed inspector guidance to discuss findings and answer questions.
+                            Receive a comprehensive building and pest inspection report within 24 hours.
                         </p>
 
                     </div>
@@ -1703,7 +1696,7 @@
                         </h4>
 
                         <p>
-                            Clear, upfront pricing with no hidden fees and complete transparency.
+                            Our building and pest inspection cost is competitive and transparent, ensuring you get value for your money.
                         </p>
 
                     </div>
@@ -1718,7 +1711,7 @@
 
 
     {{-- =====================================================
-         PRICING
+         6. CHOOSE PACKAGE / PRICING
     ====================================================== --}}
 
     <section class="pp-section pp-pricing">
@@ -1728,11 +1721,11 @@
             <div class="pp-heading" data-aos="fade-up">
 
                 <span class="small-title">
-                    Our Pricing
+                    Choose Package
                 </span>
 
                 <h2>
-                    Building And Pest Inspection Pricing
+                    DEFENDING YOUR SPACE,FULL INSPECTION AT A TIME
                 </h2>
 
             </div>
@@ -1741,6 +1734,8 @@
             <div class="pp-price-grid">
 
 
+                {{-- PACKAGE 1 --}}
+
                 <div class="pp-price-card hover-lift" data-aos="fade-up" data-aos-delay="100">
 
                     <div class="pp-price-icon">
@@ -1748,11 +1743,19 @@
                     </div>
 
                     <h3>
-                        2 Bedroom
+                        2 bed room
                     </h3>
 
+                    <div class="price-from">
+                        From
+                    </div>
+
                     <div class="pp-price">
-                        <span class="price-from">FROM</span>$420*
+                        $400
+                    </div>
+
+                    <div class="price-sub">
+                        +GST
                     </div>
 
                     <ul class="pp-price-list">
@@ -1766,7 +1769,7 @@
                         </li>
 
                         <li>
-                            Thermal Imaging
+                            Report &amp; Consultation
                         </li>
 
                     </ul>
@@ -1775,11 +1778,13 @@
                         href="#quote-form"
                         class="pp-price-btn btn-glow"
                     >
-                        Get A Quote
+                        Get Started
                     </a>
 
                 </div>
 
+
+                {{-- PACKAGE 2 --}}
 
                 <div class="pp-price-card hover-lift" data-aos="fade-up" data-aos-delay="200">
 
@@ -1788,11 +1793,19 @@
                     </div>
 
                     <h3>
-                        3 Bedroom
+                        3 bed room
                     </h3>
 
+                    <div class="price-from">
+                        From
+                    </div>
+
                     <div class="pp-price">
-                        <span class="price-from">FROM</span>$450*
+                        $450
+                    </div>
+
+                    <div class="price-sub">
+                        +GST
                     </div>
 
                     <ul class="pp-price-list">
@@ -1806,7 +1819,7 @@
                         </li>
 
                         <li>
-                            Thermal Imaging
+                            Report &amp; Consultation
                         </li>
 
                     </ul>
@@ -1815,11 +1828,13 @@
                         href="#quote-form"
                         class="pp-price-btn btn-glow"
                     >
-                        Get A Quote
+                        Get Started
                     </a>
 
                 </div>
 
+
+                {{-- PACKAGE 3 --}}
 
                 <div class="pp-price-card hover-lift" data-aos="fade-up" data-aos-delay="300">
 
@@ -1828,11 +1843,19 @@
                     </div>
 
                     <h3>
-                        4 Bedroom
+                        4 bed room
                     </h3>
 
+                    <div class="price-from">
+                        From
+                    </div>
+
                     <div class="pp-price">
-                        <span class="price-from">FROM</span>$525*
+                        $525
+                    </div>
+
+                    <div class="price-sub">
+                        +GST
                     </div>
 
                     <ul class="pp-price-list">
@@ -1846,7 +1869,7 @@
                         </li>
 
                         <li>
-                            Thermal Imaging
+                            Report &amp; Consultation
                         </li>
 
                     </ul>
@@ -1855,7 +1878,7 @@
                         href="#quote-form"
                         class="pp-price-btn btn-glow"
                     >
-                        Get A Quote
+                        Get Started
                     </a>
 
                 </div>
@@ -1869,7 +1892,7 @@
 
 
     {{-- =====================================================
-         MODERN TOOLS
+         7. WE UTILIZE THE MOST MODERN TOOLS
     ====================================================== --}}
 
     <section class="pp-section pp-tools">
@@ -1879,7 +1902,7 @@
             <div class="pp-heading" data-aos="fade-up">
 
                 <h2>
-                    We Utilize The Most Modern Tools
+                    WE UTILIZE THE MOST MODERN TOOLS
                 </h2>
 
             </div>
@@ -1888,29 +1911,31 @@
             <div class="pp-tools-grid">
 
 
+                {{-- TOOL 1 --}}
+
                 <div class="pp-tool-card hover-lift" data-aos="fade-up" data-aos-delay="100">
 
                     <div class="pp-tool-image img-zoom-hover">
 
                         <img
                             src="{{ asset('images/pre2.jpg') }}"
-                            alt="Infrared Thermal Camera"
+                            alt="Infrared Thermography - FLIR E5 Camera"
                         >
 
                     </div>
 
                     <h4>
-                        Infrared Thermal Camera
+                        Infrared Thermography
                     </h4>
 
                     <p>
-                        Thermal imaging can assist with identifying temperature
-                        variations that may indicate areas requiring further
-                        investigation.
+                        Utilizes an FLIR E5 infrared camera in an effort to detect potential moisture intrusion, electrical issues, plumbing leaks, and defective areas of the home that may be causing energy loss.
                     </p>
 
                 </div>
 
+
+                {{-- TOOL 2 --}}
 
                 <div class="pp-tool-card hover-lift" data-aos="fade-up" data-aos-delay="200">
 
@@ -1928,12 +1953,13 @@
                     </h4>
 
                     <p>
-                        Moisture detection equipment can assist in assessing
-                        areas where moisture concerns may be present.
+                        Used to obtain an exact measurement of moisture content in scanned components.
                     </p>
 
                 </div>
 
+
+                {{-- TOOL 3 --}}
 
                 <div class="pp-tool-card hover-lift" data-aos="fade-up" data-aos-delay="300">
 
@@ -1941,19 +1967,17 @@
 
                         <img
                             src="{{ asset('images/pre4.jpg') }}"
-                            alt="ZIPLEVEL Precision Altimeter"
+                            alt="Foundation Level - Zip Level"
                         >
 
                     </div>
 
                     <h4>
-                        ZIPLEVEL
+                        Foundation Level
                     </h4>
 
                     <p>
-                        High-precision altimeter used to measure floor levels and
-                        detect any foundation movement, settlement, or uneven
-                        surfaces throughout the property.
+                        A zip level is used to ensure that a home’s foundation hasn’t become sunken or sloped over time.
                     </p>
 
                 </div>
@@ -1967,7 +1991,7 @@
 
 
     {{-- =====================================================
-         CTA
+         8. SCHEDULE YOUR INSPECTION TODAY (CTA)
     ====================================================== --}}
 
     <section class="pp-cta" data-aos="zoom-in">
@@ -1977,21 +2001,18 @@
             <div class="pp-cta-content">
 
                 <h2>
-                    Schedule Your Inspection Today
+                    SCHEDULE YOUR INSPECTION TODAY
                 </h2>
 
                 <p>
-                    Before purchasing a property, make sure you understand
-                    what you are buying. Our professional building and pest
-                    inspections help identify visible concerns and provide
-                    clear documentation of the inspection findings.
+                    A pre-purchase building and pest inspection is a small investment that can save you from significant expenses and stress in the future. Our professional inspections provide you with the information needed to make an informed, confident decision about your property purchase. Don’t take risks with your investment—book your inspection today.
                 </p>
 
                 <a
                     href="#quote-form"
-                    class="pp-btn btn-glow"
+                    class="pp-btn pp-cta-btn btn-glow"
                 >
-                    Schedule Your Inspection Now
+                    Schedule your inspection now
                 </a>
 
             </div>
@@ -2002,7 +2023,7 @@
 
 
     {{-- =====================================================
-         REVIEWS
+         9. CLIENT FEEDBACK & REVIEWS
     ====================================================== --}}
 
     <section class="pp-section pp-reviews">
@@ -2012,11 +2033,11 @@
             <div class="pp-heading" data-aos="fade-up">
 
                 <span class="small-title">
-                    Testimonials
+                    Testimonial
                 </span>
 
                 <h2>
-                    Client Feedback & Reviews
+                    CLIENT FEEDBACK &amp; REVIEWS
                 </h2>
 
             </div>
@@ -2025,6 +2046,8 @@
             <div class="pp-review-grid">
 
 
+                {{-- REVIEW 1 --}}
+
                 <div class="pp-review-card hover-lift" data-aos="fade-up" data-aos-delay="100">
 
                     <div class="pp-review-quote">
@@ -2032,9 +2055,7 @@
                     </div>
 
                     <p>
-                        Professional and thorough service. The inspection
-                        report helped us understand the property condition
-                        before making our decision.
+                        Very professional and approachable. The property inspection was done thoroughly, and even minor defects were identified. Really appreciate the attention to detail and commitment to the job. Highly recommended for any building inspection.
                     </p>
 
                     <div class="pp-stars">
@@ -2042,11 +2063,13 @@
                     </div>
 
                     <h4>
-                        Shireen De Silva
+                        Swathi Tarini
                     </h4>
 
                 </div>
 
+
+                {{-- REVIEW 2 (Max - visible in screenshot) --}}
 
                 <div class="pp-review-card hover-lift" data-aos="fade-up" data-aos-delay="200">
 
@@ -2055,30 +2078,7 @@
                     </div>
 
                     <p>
-                        Extremely helpful and knowledgeable. The inspection
-                        was detailed and everything was explained clearly.
-                    </p>
-
-                    <div class="pp-stars">
-                        ★★★★★
-                    </div>
-
-                    <h4>
-                        Nimesh Wagani
-                    </h4>
-
-                </div>
-
-
-                <div class="pp-review-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-
-                    <div class="pp-review-quote">
-                        “
-                    </div>
-
-                    <p>
-                        Very thorough inspection and great communication from
-                        start to finish. Highly recommended service.
+                        Very thorough and professional during my pre-purchase building and pest inspection. Strongly recommended.
                     </p>
 
                     <div class="pp-stars">
@@ -2092,6 +2092,98 @@
                 </div>
 
 
+                {{-- REVIEW 3 (Heena Bhavsar - visible in screenshot) --}}
+
+                <div class="pp-review-card hover-lift" data-aos="fade-up" data-aos-delay="300">
+
+                    <div class="pp-review-quote">
+                        “
+                    </div>
+
+                    <p>
+                        Amazing experience. Quick replies, prompt actions, and a positive attitude. Would definitely recommend 👏👏👏
+                    </p>
+
+                    <div class="pp-stars">
+                        ★★★★★
+                    </div>
+
+                    <h4>
+                        Heena Bhavsar
+                    </h4>
+
+                </div>
+
+
+                {{-- REVIEW 4 --}}
+
+                <div class="pp-review-card hover-lift" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="pp-review-quote">
+                        “
+                    </div>
+
+                    <p>
+                        Took generous time to answer all my questions regarding the property's condition and report. Very kind, humble, and helpful. Highly recommended for anyone needing a building and pest inspection
+                    </p>
+
+                    <div class="pp-stars">
+                        ★★★★★
+                    </div>
+
+                    <h4>
+                        Luxmy
+                    </h4>
+
+                </div>
+
+
+                {{-- REVIEW 5 --}}
+
+                <div class="pp-review-card hover-lift" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="pp-review-quote">
+                        “
+                    </div>
+
+                    <p>
+                        Provided an excellent inspection for the property I'm purchasing. All findings were explained clearly, and the report was prepared on the same day. Warm, professional, and efficient. Highly recommended to friends and family.
+                    </p>
+
+                    <div class="pp-stars">
+                        ★★★★★
+                    </div>
+
+                    <h4>
+                        Shaleen De Silva
+                    </h4>
+
+                </div>
+
+
+                {{-- REVIEW 6 --}}
+
+                <div class="pp-review-card hover-lift" data-aos="fade-up" data-aos-delay="300">
+
+                    <div class="pp-review-quote">
+                        “
+                    </div>
+
+                    <p>
+                        Extremely helpful and responsive. The building and pest inspection was completed quickly, and the report was delivered exactly as requested. Smooth and professional experience overall— great service!
+                    </p>
+
+                    <div class="pp-stars">
+                        ★★★★★
+                    </div>
+
+                    <h4>
+                        Niresh Wijesiri
+                    </h4>
+
+                </div>
+
+
             </div>
 
         </div>
@@ -2100,7 +2192,7 @@
 
 
     {{-- =====================================================
-         FAQ
+         10. MOST POPULAR QUESTIONS (FAQ)
     ====================================================== --}}
 
     <section class="pp-section pp-faq">
@@ -2114,7 +2206,7 @@
                 </span>
 
                 <h2>
-                    Most Popular Questions
+                    MOST POPULAR QUESTIONS
                 </h2>
 
             </div>
@@ -2123,114 +2215,127 @@
             <div class="pp-faq-grid">
 
 
-                <div class="pp-faq-item active" data-aos="fade-up" data-aos-delay="100">
+                {{-- COLUMN 1 --}}
 
-                    <button
-                        class="pp-faq-question"
-                        type="button"
-                    >
-                        What is a pre-purchase building and pest inspection?
-                        <span>⌃</span>
-                    </button>
+                <div class="pp-faq-col">
 
-                    <div class="pp-faq-answer">
-                        A pre-purchase building and pest inspection assesses
-                        accessible areas of a property for visible building
-                        defects, pest activity and other relevant concerns
-                        before purchase.
+                    {{-- Q1 (Active by default) --}}
+
+                    <div class="pp-faq-item active" data-aos="fade-up" data-aos-delay="100">
+
+                        <button
+                            class="pp-faq-question"
+                            type="button"
+                        >
+                            1. What is a pre-purchase building and pest inspection?
+                            <span>⌃</span>
+                        </button>
+
+                        <div class="pp-faq-answer">
+                            A pre-purchase building and pest inspection is a comprehensive assessment of a property’s structure and pest activity, conducted before you finalize a purchase. The inspection helps uncover any hidden issues, such as structural defects, termite infestations, or safety hazards, so you can make an informed decision.
+                        </div>
+
+                    </div>
+
+
+                    {{-- Q2 --}}
+
+                    <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="150">
+
+                        <button
+                            class="pp-faq-question"
+                            type="button"
+                        >
+                            2.Why is a pre-purchase building and pest inspection important?
+                            <span>⌄</span>
+                        </button>
+
+                        <div class="pp-faq-answer">
+                            This inspection is essential because it protects you from purchasing a property with hidden structural or pest issues that could lead to costly repairs later. It provides peace of mind, knowing the true condition of the property before committing to the purchase.
+                        </div>
+
+                    </div>
+
+
+                    {{-- Q3 --}}
+
+                    <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="200">
+
+                        <button
+                            class="pp-faq-question"
+                            type="button"
+                        >
+                            3. How much does a pre-purchase building and pest inspection cost?
+                            <span>⌄</span>
+                        </button>
+
+                        <div class="pp-faq-answer">
+                            The cost of a pre-purchase inspection depends on the size and location of the property, but our rates are competitive and start at $400. We also offer package deals for combined building and pest inspections to provide extra value.
+                        </div>
+
                     </div>
 
                 </div>
 
 
-                <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="150">
+                {{-- COLUMN 2 --}}
 
-                    <button
-                        class="pp-faq-question"
-                        type="button"
-                    >
-                        Why should I get an inspection before buying?
-                        <span>⌄</span>
-                    </button>
+                <div class="pp-faq-col">
 
-                    <div class="pp-faq-answer">
-                        An inspection can help you understand the visible
-                        condition of a property and identify concerns that
-                        may not be obvious during a normal inspection.
+                    {{-- Q4 (Active by default) --}}
+
+                    <div class="pp-faq-item active" data-aos="fade-up" data-aos-delay="250">
+
+                        <button
+                            class="pp-faq-question"
+                            type="button"
+                        >
+                            4. What areas do you inspect during a building inspection?
+                            <span>⌃</span>
+                        </button>
+
+                        <div class="pp-faq-answer">
+                            The cost of a new home building inspection varies depending on the size of the property and any additional services you may require. We offer competitive pricing and will provide you with a clear estimate before scheduling the inspection.
+                        </div>
+
                     </div>
 
-                </div>
 
+                    {{-- Q5 --}}
 
-                <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="300">
 
-                    <button
-                        class="pp-faq-question"
-                        type="button"
-                    >
-                        How long does a pre-purchase inspection take?
-                        <span>⌄</span>
-                    </button>
+                        <button
+                            class="pp-faq-question"
+                            type="button"
+                        >
+                            5. How long does the inspection take, and when will I receive the report?
+                            <span>⌄</span>
+                        </button>
 
-                    <div class="pp-faq-answer">
-                        Inspection duration depends on the property's size,
-                        construction, accessibility and condition.
+                        <div class="pp-faq-answer">
+                            A typical inspection takes 1 to 2 hours, depending on the size of the property. You will receive a detailed inspection report within 24 hours of the inspection, and we offer same-day reports for urgent cases.
+                        </div>
+
                     </div>
 
-                </div>
 
+                    {{-- Q6 --}}
 
-                <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="250">
+                    <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="350">
 
-                    <button
-                        class="pp-faq-question"
-                        type="button"
-                    >
-                        Do you inspect for termites?
-                        <span>⌄</span>
-                    </button>
+                        <button
+                            class="pp-faq-question"
+                            type="button"
+                        >
+                            6. How can I schedule a new home building inspection?
+                            <span>⌄</span>
+                        </button>
 
-                    <div class="pp-faq-answer">
-                        The pest component of the inspection looks for
-                        accessible evidence of termites and other timber pests
-                        and conditions that may contribute to pest activity.
-                    </div>
+                        <div class="pp-faq-answer">
+                            You can schedule a new home building inspection by contacting us directly through our website or by phone. We’ll work with you to find a convenient time for the inspection and answer any additional questions you may have.
+                        </div>
 
-                </div>
-
-
-                <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="300">
-
-                    <button
-                        class="pp-faq-question"
-                        type="button"
-                    >
-                        Do I receive an inspection report?
-                        <span>⌄</span>
-                    </button>
-
-                    <div class="pp-faq-answer">
-                        Yes. Relevant observations from the inspection are
-                        documented in the professional inspection report.
-                    </div>
-
-                </div>
-
-
-                <div class="pp-faq-item" data-aos="fade-up" data-aos-delay="350">
-
-                    <button
-                        class="pp-faq-question"
-                        type="button"
-                    >
-                        Can you inspect an older property?
-                        <span>⌄</span>
-                    </button>
-
-                    <div class="pp-faq-answer">
-                        Yes. The inspection can assess accessible areas of
-                        older properties and identify visible defects and
-                        deterioration.
                     </div>
 
                 </div>
@@ -2241,33 +2346,6 @@
         </div>
 
     </section>
-
-
-    {{-- =====================================================
-         FINAL CTA
-    ====================================================== --}}
-
-    <section class="pp-final-cta" data-aos="zoom-in">
-
-        <h2>
-            Inspect Before You Invest
-        </h2>
-
-        <p>
-            Protect your property investment with a professional
-            pre-purchase building and pest inspection.
-        </p>
-
-        <a
-            href="#quote-form"
-            class="pp-btn pp-final-btn btn-glow"
-        >
-            Book Inspection Today
-        </a>
-
-    </section>
-
-
 
 
     {{-- =====================================================
@@ -2291,7 +2369,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     /* =====================================================
-       FAQ
+       FAQ ACCORDION (Column-based independent toggle)
     ===================================================== */
 
     const faqItems =
@@ -2302,39 +2380,32 @@ document.addEventListener('DOMContentLoaded', function () {
         const question =
             item.querySelector('.pp-faq-question');
 
+        if (!question) return;
+
         question.addEventListener('click', function () {
 
             const wasActive =
                 item.classList.contains('active');
 
-            faqItems.forEach(function (faq) {
+            const col =
+                item.closest('.pp-faq-col') || item.parentElement;
 
-                faq.classList.remove('active');
-
-                const icon =
-                    faq.querySelector(
-                        '.pp-faq-question span'
-                    );
-
-                if (icon) {
-                    icon.textContent = '⌄';
-                }
-
-            });
+            if (col) {
+                col.querySelectorAll('.pp-faq-item').forEach(function (faq) {
+                    faq.classList.remove('active');
+                    const icon = faq.querySelector('.pp-faq-question span');
+                    if (icon) {
+                        icon.textContent = '⌄';
+                    }
+                });
+            }
 
             if (!wasActive) {
-
                 item.classList.add('active');
-
-                const icon =
-                    item.querySelector(
-                        '.pp-faq-question span'
-                    );
-
+                const icon = item.querySelector('.pp-faq-question span');
                 if (icon) {
                     icon.textContent = '⌃';
                 }
-
             }
 
         });
@@ -2349,32 +2420,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const backTop =
         document.getElementById('ppBackTop');
 
-    function toggleBackTop() {
+    if (backTop) {
 
-        if (window.scrollY > 400) {
-            backTop.style.display = 'block';
-        } else {
-            backTop.style.display = 'none';
+        function toggleBackTop() {
+            if (window.scrollY > 400) {
+                backTop.style.display = 'block';
+            } else {
+                backTop.style.display = 'none';
+            }
         }
 
-    }
+        window.addEventListener('scroll', toggleBackTop);
 
-    window.addEventListener(
-        'scroll',
-        toggleBackTop
-    );
-
-    backTop.addEventListener(
-        'click',
-        function () {
-
+        backTop.addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
+        });
 
-        }
-    );
+    }
 
 });
 

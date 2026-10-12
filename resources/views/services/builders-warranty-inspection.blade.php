@@ -24,7 +24,7 @@
     --d-border: #e2e8f0;
     --d-orange: #ffb400;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--d-text);
     overflow-x: hidden;
     position: relative;
@@ -717,39 +717,48 @@
    7. CTA BANNER (ENSURE YOUR HOME IS SECURE)
 ========================================================= */
 .d-cta {
-    min-height: 400px;
+    min-height: 540px;
     display: flex;
     align-items: center;
     background:
         linear-gradient(
             90deg,
             rgba(4, 43, 75, 0.96) 0%,
-            rgba(4, 43, 75, 0.88) 55%,
-            rgba(4, 43, 75, 0.40) 100%
+            rgba(4, 43, 75, 0.88) 50%,
+            rgba(4, 43, 75, 0.30) 100%
         ),
-        url("{{ asset('images/g7.jpeg') }}") center right / cover no-repeat;
+        url("{{ asset('images/schedule.jpeg') }}") center right / cover no-repeat;
+    padding: 105px 0;
 }
 
 .d-cta-content {
-    max-width: 680px;
+    max-width: 820px;
     color: #fff;
-    padding: 60px 0;
+    padding: 0;
 }
 
 .d-cta-content h2 {
-    margin: 0 0 18px;
-    font-size: clamp(28px, 3.8vw, 40px);
+    margin: 0 0 20px;
+    font-size: clamp(32px, 4.2vw, 48px);
     line-height: 1.2;
     font-weight: 900;
     text-transform: uppercase;
     color: #fff;
+    letter-spacing: 0.5px;
 }
 
 .d-cta-content p {
-    margin: 0 0 28px;
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 18px;
-    line-height: 1.8;
+    margin: 0 0 32px;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 17.5px;
+    line-height: 1.85;
+}
+
+.d-cta-content .d-btn {
+    padding: 16px 38px;
+    font-size: 15.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
 }
 
 /* =========================================================

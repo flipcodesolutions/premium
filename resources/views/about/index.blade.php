@@ -96,7 +96,8 @@
 ========================================================= */
 
 .about-hero {
-    min-height: 270px;
+    min-height: 420px;
+    padding: 55px 0;
 
     display: flex;
     align-items: center;
@@ -104,55 +105,61 @@
 
     position: relative;
 
-    background:
+    background-color: #052c4d;
+    background-image:
         linear-gradient(
-            rgba(5, 45, 78, .80),
-            rgba(5, 45, 78, .80)
+            rgba(5, 45, 78, .72),
+            rgba(5, 45, 78, .78)
         ),
-        url("{{ asset('images/about banner.jpg') }}")
-        center center / cover no-repeat;
+        url("{{ asset('images/about banner.jpg') }}");
+    background-position: center 15%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .about-hero-content {
     width: 100%;
-    max-width: 720px;
+    max-width: 760px;
 
     margin: auto;
 
-    padding: 38px 30px;
+    padding: 34px 30px;
 
     text-align: center;
 
-    background: rgba(4, 38, 67, .76);
-    border-radius: 6px;
+    background: rgba(4, 38, 67, .82);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .32);
+    backdrop-filter: blur(4px);
 
     color: #fff;
 }
 
 .about-hero-content h1 {
-    margin: 0 0 14px;
+    margin: 0 0 12px;
 
     color: #fff;
 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
 
-    font-size: 38px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: 800;
 
-    line-height: 1.1;
+    line-height: 1.15;
 
     text-transform: uppercase;
-    letter-spacing: .5px;
+    letter-spacing: .8px;
 }
 
 .about-hero-content p {
-    max-width: 620px;
+    max-width: 680px;
 
     margin: auto;
 
     color: rgba(255,255,255,.95);
 
-    font-size: 14px;
+    font-size: 14.5px;
     line-height: 1.7;
 }
 
@@ -286,45 +293,49 @@
     position: relative;
 
     width: 100%;
-    max-width: 440px;
+    max-width: 480px;
 
     margin: 0 auto;
-    border-radius: 8px 8px 0 0;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow:
-        0 10px 28px rgba(0,0,0,.12);
+        0 14px 34px rgba(8, 40, 70, .14);
+    border: 1px solid #e2e8f0;
 }
 
 .inspector-image {
     width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    height: 490px;
 
     display: block;
 
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center 12%;
+    transition: transform .35s ease;
+}
+
+.inspector-image-box:hover .inspector-image {
+    transform: scale(1.02);
 }
 
 .inspector-label {
-    background: #050505;
+    background: #0b1f3a;
 
     color: #fff;
 
     text-align: center;
 
-    padding: 12px 10px;
+    padding: 13px 10px;
 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
 
-    font-size: 13px;
+    font-size: 13.5px;
 
-    font-weight: 700;
+    font-weight: 800;
 
     text-transform: uppercase;
 
-    letter-spacing: .5px;
-    border-radius: 0 0 8px 8px;
+    letter-spacing: .8px;
 }
 
 .inspector-content {
@@ -338,7 +349,7 @@
 .inspector-content h2 {
     color: var(--about-navy);
 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 34px;
 
@@ -397,7 +408,7 @@
 .value-content h2 {
     color: #fff;
 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 32px;
 
@@ -461,7 +472,7 @@
 .value-card h3 {
     color: var(--about-navy);
 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 18px;
 
@@ -511,33 +522,25 @@
     border-right: 0;
 }
 
-.about-stat strong {
+.about-stat strong,
+.about-stat strong span {
     display: block;
-
-    color: var(--about-green);
-
-    font-size: 36px;
-
-    font-weight: 900;
-
-    line-height: 1;
+    color: var(--about-green) !important;
+    font-size: 46px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.5px;
 }
 
-.about-stat span {
+.about-stat > span:not([data-counter]) {
     display: block;
-
-    color: var(--about-navy);
-
-    font-family: 'Oswald', sans-serif;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
+    color: var(--about-navy) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
     text-transform: uppercase;
-
     margin-top: 8px;
-    letter-spacing: .5px;
+    letter-spacing: .8px;
 }
 
 
@@ -546,7 +549,7 @@
 ========================================================= */
 
 .schedule-about {
-    min-height: 480px;
+    min-height: 560px;
 
     display: flex;
 
@@ -557,16 +560,18 @@
     background:
         linear-gradient(
             90deg,
-            rgba(5,44,77,.92),
-            rgba(5,44,77,.65)
+            rgba(5,44,77,.94) 0%,
+            rgba(5,44,77,.82) 48%,
+            rgba(5,44,77,.35) 100%
         ),
         url("{{ asset('images/schedule.jpeg') }}")
-        center center / cover no-repeat;
-    padding: 60px 0;
+        center right / cover no-repeat;
+    padding: 100px 0 120px;
+    margin-bottom: 60px;
 }
 
 .schedule-about-content {
-    max-width: 650px;
+    max-width: 780px;
 
     color: #fff;
 }
@@ -580,13 +585,13 @@
 .schedule-about-content h2 {
     color: #fff;
 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Inter', sans-serif;
 
-    font-size: 40px;
+    font-size: clamp(34px, 4.2vw, 50px);
 
-    line-height: 1.05;
+    line-height: 1.15;
 
-    font-weight: 700;
+    font-weight: 800;
 
     text-transform: uppercase;
 
@@ -594,13 +599,13 @@
 }
 
 .schedule-about-content p {
-    color: rgba(255,255,255,.94);
+    color: rgba(255,255,255,.95);
 
-    font-size: 14.5px;
+    font-size: 16.5px;
 
-    line-height: 1.7;
+    line-height: 1.8;
 
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .schedule-buttons {
@@ -654,12 +659,17 @@
 
 @media (min-width: 1200px) {
 
+    .about-hero {
+        min-height: 430px;
+        padding: 60px 0;
+    }
+
     .who-image-wrap {
         max-width: 440px;
     }
 
     .inspector-image-box {
-        max-width: 440px;
+        max-width: 480px;
     }
 
 }
@@ -694,8 +704,12 @@
     }
 
     .inspector-image-box {
-        max-width: 420px;
+        max-width: 440px;
         margin: 0 auto;
+    }
+
+    .inspector-image {
+        height: 440px;
     }
 
     .value-content {
@@ -703,7 +717,9 @@
     }
 
     .about-hero {
-        min-height: 240px;
+        min-height: 380px;
+        padding: 45px 0;
+        background-position: center 15%;
     }
 
 }
@@ -723,21 +739,24 @@
     /* HERO */
 
     .about-hero {
-        min-height: 220px;
+        min-height: 340px;
+        padding: 35px 0;
+        background-position: center 15%;
     }
 
     .about-hero-content {
         margin: 0 15px;
 
-        padding: 28px 20px;
+        padding: 30px 20px;
     }
 
     .about-hero-content h1 {
-        font-size: 30px;
+        font-size: 32px;
     }
 
     .about-hero-content p {
-        font-size: 13px;
+        font-size: 14.5px;
+        line-height: 1.65;
     }
 
 
@@ -772,7 +791,11 @@
     /* INSPECTOR */
 
     .inspector-image-box {
-        max-width: 360px;
+        max-width: 380px;
+    }
+
+    .inspector-image {
+        height: 400px;
     }
 
     .inspector-content h2 {
@@ -815,6 +838,7 @@
     .schedule-about {
         min-height: 400px;
         padding: 45px 0;
+        margin-bottom: 45px;
     }
 
     .schedule-about-content h2 {
@@ -837,12 +861,17 @@
 
     /* HERO */
 
+    .about-hero {
+        min-height: 310px;
+        padding: 25px 0;
+    }
+
     .about-hero-content {
         padding: 24px 16px;
     }
 
     .about-hero-content h1 {
-        font-size: 26px;
+        font-size: 28px;
     }
 
 
@@ -864,6 +893,10 @@
 
     .inspector-image-box {
         max-width: 100%;
+    }
+
+    .inspector-image {
+        height: 380px;
     }
 
 
@@ -1037,16 +1070,6 @@
                         </ul>
 
 
-                        <a
-                            href="{{ route('contact') }}"
-                            class="about-green-btn btn-glow"
-                        >
-
-                            Contact Us
-
-                            <i class="bi bi-arrow-right"></i>
-
-                        </a>
 
                     </div>
 

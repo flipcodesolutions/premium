@@ -35,7 +35,7 @@
     overflow: hidden;
     background: #fff;
     color: var(--pbi-text);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .pbi-container {
@@ -64,12 +64,12 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 10px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .pbi-title h2 {
     color: var(--pbi-navy);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 34px;
     line-height: 1.15;
     font-weight: 900;
@@ -101,7 +101,7 @@
     border: 0;
     border-radius: 3px;
     text-decoration: none !important;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-weight: 800;
     line-height: 1;
@@ -168,7 +168,7 @@
     max-width: 960px;
     margin: 0 auto 18px;
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: clamp(34px, 4.4vw, 54px);
     line-height: 1.08;
     font-weight: 900;
@@ -291,7 +291,7 @@
     color: #fff;
     padding: 12px;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 900;
     text-transform: uppercase;
@@ -336,86 +336,106 @@
         #1caa9a 50%,
         #138fe6 100%
     );
-    color: #fff;
-    padding: 60px 0;
+    color: #ffffff;
+    padding: 70px 0;
 }
 
 .pbi-values-grid {
     display: grid;
-    grid-template-columns: 1.2fr .9fr .9fr;
-    gap: 24px;
+    grid-template-columns: 1.15fr 0.9fr 0.9fr;
+    gap: 28px;
     align-items: stretch;
 }
 
 .pbi-values-intro {
-    padding: 20px 15px;
-}
-
-.pbi-values-intro .small-title {
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #fff;
-}
-
-.pbi-values-intro h2 {
-    margin: 12px 0 14px;
-    color: #fff;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
-    line-height: 1.15;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.pbi-values-intro p {
-    max-width: 420px;
-    margin: 0;
-    color: rgba(255,255,255,.95);
-    font-size: 14.5px;
-    line-height: 1.75;
-}
-
-.pbi-value-card {
-    padding: 34px 24px;
-    background: #fff;
-    color: #222;
-    text-align: center;
-    border-radius: 3px;
-    box-shadow: 0 4px 18px rgba(0,0,0,.10);
+    padding: 10px 15px 10px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.pbi-value-icon {
+.pbi-values-intro .small-title {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.pbi-values-intro h2 {
+    margin: 0 0 16px;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(26px, 2.8vw, 34px);
+    line-height: 1.2;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pbi-values-intro p {
+    max-width: 440px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.pbi-values-divider {
+    width: 65px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.45);
+    margin-top: 25px;
+    border-radius: 2px;
+}
+
+.pbi-value-card {
+    padding: 42px 28px;
+    background: #ffffff;
+    color: #222222;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pbi-value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+}
+
+.pbi-value-icon {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 16px;
-    background: var(--pbi-green);
-    color: #fff;
-    border-radius: 4px;
-    font-size: 20px;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 20px;
+    background: #42a900;
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 28px;
 }
 
 .pbi-value-card h3 {
-    margin: 0 0 10px;
-    color: var(--pbi-navy);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 800;
+    margin: 0 0 12px;
+    color: #073763;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: .4px;
+    letter-spacing: 0.5px;
 }
 
 .pbi-value-card p {
     margin: 0;
-    color: #666;
-    font-size: 13.5px;
+    color: #333333;
+    font-size: 14px;
     line-height: 1.65;
 }
 
@@ -424,7 +444,7 @@
 ========================================================= */
 
 .pbi-stats {
-    padding: 36px 0;
+    padding: 42px 0;
     background: #fff;
     border-bottom: 1px solid #edf1f4;
 }
@@ -432,36 +452,43 @@
 .pbi-stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    max-width: 960px;
+    max-width: 1020px;
     margin: auto;
 }
 
 .pbi-stat {
     text-align: center;
     border-right: 1px solid #e0e6ec;
-    padding: 6px 15px;
+    padding: 8px 18px;
 }
 
 .pbi-stat:last-child {
     border-right: none;
 }
 
-.pbi-stat strong {
+.pbi-stat strong,
+.pbi-stat strong span,
+.pbi-stat-number,
+.pbi-stat-number span {
     display: block;
-    margin-bottom: 4px;
-    color: var(--pbi-green);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 38px;
-    font-weight: 900;
-    line-height: 1;
+    margin-bottom: 6px;
+    color: var(--pbi-green, #43a900) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 46px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.5px;
 }
 
-.pbi-stat span {
-    color: #666;
-    font-size: 12px;
-    font-weight: 800;
+.pbi-stat-label,
+.pbi-stat > span:not([data-counter]) {
+    display: block;
+    color: #0B3158 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14.5px !important;
+    font-weight: 800 !important;
     text-transform: uppercase;
-    letter-spacing: .6px;
+    letter-spacing: 1.2px;
 }
 
 /* =========================================================
@@ -524,7 +551,7 @@
 .pbi-service-content h3 {
     margin: 0 0 12px;
     color: var(--pbi-navy);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 16.5px;
     font-weight: 800;
     line-height: 1.35;
@@ -604,7 +631,7 @@
 .pbi-feature-item h4 {
     margin: 16px 0 8px;
     color: var(--pbi-navy);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 800;
     text-transform: uppercase;
@@ -624,49 +651,53 @@
 
 .pbi-cta {
     position: relative;
-    min-height: 420px;
+    min-height: 560px;
     display: flex;
     align-items: center;
     color: #fff;
     background:
         linear-gradient(
             90deg,
-            rgba(3,44,78,.96) 0%,
-            rgba(3,44,78,.85) 45%,
-            rgba(3,44,78,.45) 100%
+            rgba(3, 44, 78, 0.96) 0%,
+            rgba(3, 44, 78, 0.85) 45%,
+            rgba(3, 44, 78, 0.30) 100%
         ),
         url('{{ asset('images/schedule.jpeg') }}') center right / cover no-repeat;
-    padding: 65px 0;
+    padding: 110px 0;
 }
 
 .pbi-cta-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 840px;
 }
 
 .pbi-cta h2 {
-    margin: 0 0 16px;
+    margin: 0 0 20px;
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 44px;
-    line-height: 1.1;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(34px, 4.4vw, 54px);
+    line-height: 1.15;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: -0.5px;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
 }
 
 .pbi-cta p {
-    max-width: 720px;
-    margin: 0 0 24px;
-    color: rgba(255,255,255,.95);
-    font-size: 16px;
-    line-height: 1.8;
+    max-width: 740px;
+    margin: 0 0 32px;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 17.5px;
+    line-height: 1.85;
 }
 
 .pbi-phone-btn {
-    font-size: 14px;
-    padding: 14px 34px;
+    font-size: 16px;
+    padding: 16px 38px;
     font-weight: 800;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
 }
 
 /* =========================================================
@@ -704,28 +735,43 @@
 .pbi-form-box select,
 .pbi-form-box textarea {
     width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #d5dee5;
-    border-radius: 2px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13.5px;
-    color: #222;
-    background: #fff;
-    transition: border-color .2s ease;
+    padding: 13px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000;
+    background: #edf2f7;
+    transition: all .2s ease;
+}
+
+.pbi-form-box input::placeholder,
+.pbi-form-box textarea::placeholder {
+    color: #000000;
+    opacity: 0.65;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .pbi-form-box input:focus,
 .pbi-form-box select:focus,
 .pbi-form-box textarea:focus {
+    background: #ffffff;
     border-color: var(--pbi-green) !important;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(67,169,0,.12);
+    box-shadow: 0 0 0 3px rgba(67,169,0,.15);
 }
 
 .pbi-form-box select {
     margin-bottom: 14px;
-    height: 48px;
-    color: #444;
+    height: 50px;
+    color: #000000;
+}
+
+.pbi-form-box select option {
+    color: #000000;
+    font-size: 15px;
 }
 
 .pbi-form-box textarea {
@@ -737,7 +783,7 @@
 .pbi-form-box .pbi-btn {
     width: 100%;
     height: 50px;
-    font-size: 14px;
+    font-size: 15.5px;
     font-weight: 800;
     text-transform: uppercase;
 }
@@ -802,7 +848,7 @@
 .pbi-price-card h3 {
     margin: 0;
     color: var(--pbi-navy);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 800;
     text-transform: uppercase;
@@ -812,7 +858,7 @@
 .pbi-price {
     margin: 14px 0 12px;
     color: var(--pbi-green);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 36px;
     font-weight: 900;
     line-height: 1;
@@ -922,6 +968,10 @@
 
     .pbi-values-intro p {
         margin: auto;
+    }
+
+    .pbi-values-divider {
+        margin: 20px auto 0;
     }
 
     .pbi-services-grid {
@@ -1128,9 +1178,9 @@
                     RONAK GAMI | VBA LICENCE IN-PS 74654 | DOMESTIC BUILDER DB-L 100200
                 </div>
 
-                <a href="tel:0444001551" class="pbi-btn btn-glow pulse-glow">
+                <a href="tel:0466001551" class="pbi-btn btn-glow pulse-glow">
                     <i class="fas fa-phone"></i>
-                    0444 001 551
+                    0466 001 551
                 </a>
             </div>
 
@@ -1151,34 +1201,35 @@
                     Our Value
                 </div>
                 <h2>
-                    Our Commitment To Excellence
+                    Our Commitment to Excellence
                 </h2>
                 <p>
-                    At Premium Building & Pest Inspections, we deliver professional inspection services with attention to detail, practical advice and reliable reporting.
+                    At Premium Building &amp; Pest Inspections, we believe in providing the highest level of service to our clients. Our vision and mission reflect our dedication to quality, integrity, and customer satisfaction. Here's what drives us
                 </p>
+                <div class="pbi-values-divider"></div>
             </div>
 
             <div class="pbi-value-card hover-lift" data-aos="fade-up" data-aos-delay="100">
                 <div class="pbi-value-icon">
-                    <i class="fas fa-search"></i>
+                    <i class="far fa-eye"></i>
                 </div>
                 <h3>
-                    Clear Inspections
+                    Our Vision
                 </h3>
                 <p>
-                    Detailed property assessments designed to identify visible defects, potential risks and important issues.
+                    To be the leading provider of top-quality building inspections, ensuring safer and more secure homes through advanced technology and expert service.
                 </p>
             </div>
 
             <div class="pbi-value-card hover-lift" data-aos="fade-up" data-aos-delay="200">
                 <div class="pbi-value-icon">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="far fa-thumbs-up"></i>
                 </div>
                 <h3>
-                    Your Protection
+                    Our Mission
                 </h3>
                 <p>
-                    Helping property buyers and owners make informed decisions with professional inspection information.
+                    To deliver precise and comprehensive building inspections, empowering clients with the information they need to protect and enhance their property investments.
                 </p>
             </div>
 
@@ -1195,23 +1246,23 @@
         <div class="pbi-stats-grid">
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="50">
-                <strong><span data-counter="200" data-suffix="+">200+</span></strong>
-                <span>Inspections</span>
+                <strong class="pbi-stat-number"><span data-counter="200" data-suffix="+">200+</span></strong>
+                <span class="pbi-stat-label">Inspections</span>
             </div>
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="150">
-                <strong><span data-counter="2">2</span></strong>
-                <span>Licences</span>
+                <strong class="pbi-stat-number"><span data-counter="2">2</span></strong>
+                <span class="pbi-stat-label">Licences</span>
             </div>
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="250">
-                <strong><span data-counter="4.9" data-suffix="★">4.9★</span></strong>
-                <span>Rating</span>
+                <strong class="pbi-stat-number"><span data-counter="4.9" data-suffix="★">4.9★</span></strong>
+                <span class="pbi-stat-label">Rating</span>
             </div>
 
             <div class="pbi-stat hover-lift" data-aos="zoom-in" data-aos-delay="350">
-                <strong><span data-counter="12" data-suffix="+">12+</span></strong>
-                <span>Services</span>
+                <strong class="pbi-stat-number"><span data-counter="12" data-suffix="+">12+</span></strong>
+                <span class="pbi-stat-label">Services</span>
             </div>
 
         </div>

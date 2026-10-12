@@ -7,32 +7,28 @@
 <style>
 /* =========================================================
    DILAPIDATION INSPECTION PAGE STYLES
-   Designed 1:1 to match reference layout
-   With increased font sizes as requested
+   1:1 Pixel-Perfect Match with Reference Screenshot & Live Site
 ========================================================= */
 
-.d-page {
+:root {
     --d-navy: #073763;
     --d-navy-dark: #052646;
     --d-green: #42a900;
     --d-green-dark: #358c00;
-    --d-light-green: #eaf6e6;
-    --d-choose-bg: #d8edd5;
-    --d-cyan: #1b9eea;
-    --d-text: #2d3748;
-    --d-muted: #4a5568;
+    --d-light-green: #eef7ed;
+    --d-text: #333333;
+    --d-muted: #555555;
     --d-border: #e2e8f0;
-    --d-orange: #ffb400;
+}
 
-    font-family: Arial, Helvetica, sans-serif;
+.d-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--d-text);
     overflow-x: hidden;
     position: relative;
-    font-size: 16px;
-    line-height: 1.7;
+    background: #ffffff;
 }
 
-/* Container */
 .d-container {
     width: 92%;
     max-width: 1180px;
@@ -43,92 +39,64 @@
     padding: 70px 0;
 }
 
-/* Headings with increased font sizes */
-.d-heading {
+/* Headings */
+.d-badge {
+    display: inline-block;
+    color: var(--d-green);
+    font-size: 13.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+}
+
+.d-heading-center {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.d-heading .small-title {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--d-green);
-    font-size: 15px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-}
-
-.d-heading h2 {
+.d-heading-center h2 {
     margin: 0;
     color: var(--d-navy);
-    font-size: clamp(26px, 3.4vw, 34px);
+    font-size: clamp(24px, 3.2vw, 34px);
     line-height: 1.25;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.d-heading p {
-    max-width: 760px;
-    margin: 14px auto 0;
+.d-heading-center p {
+    max-width: 720px;
+    margin: 12px auto 0;
     color: var(--d-muted);
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 15px;
+    line-height: 1.7;
 }
 
 /* Buttons */
-.d-btn {
+.d-btn-green {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 14px 28px;
+    gap: 8px;
+    padding: 13px 28px;
     background: var(--d-green);
-    color: #fff !important;
+    color: #ffffff !important;
     border: 0;
     border-radius: 4px;
-    font-size: 15.5px;
+    font-size: 14.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-decoration: none;
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 
-.d-btn:hover {
+.d-btn-green:hover {
     background: var(--d-green-dark);
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(66, 169, 0, 0.35);
-}
-
-/* Floating Right Tab */
-.d-floating-tab {
-    position: fixed;
-    right: 0;
-    top: 48%;
-    transform: translateY(-50%);
-    background: var(--d-green);
-    color: #fff !important;
-    padding: 14px 11px;
-    font-size: 13.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border-radius: 6px 0 0 6px;
-    z-index: 999;
-    box-shadow: -3px 4px 16px rgba(0, 0, 0, 0.25);
-    text-decoration: none;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform-origin: center;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.25s ease;
-}
-
-.d-floating-tab:hover {
-    background: var(--d-green-dark);
-    padding-right: 15px;
 }
 
 /* =========================================================
@@ -139,13 +107,13 @@
     background:
         linear-gradient(
             90deg,
-            rgba(7, 43, 76, 0.95) 0%,
-            rgba(7, 43, 76, 0.88) 52%,
+            rgba(7, 43, 76, 0.94) 0%,
+            rgba(7, 43, 76, 0.88) 50%,
             rgba(7, 43, 76, 0.65) 100%
         ),
-        url("{{ asset('images/dilapidation.jpg') }}") center center / cover no-repeat;
+        url("{{ asset('images/dilapidation-hero.jpg') }}") center center / cover no-repeat;
     color: #fff;
-    padding: 25px 0;
+    padding: 30px 0;
 }
 
 .d-hero-inner {
@@ -153,12 +121,22 @@
     grid-template-columns: 1.15fr 0.85fr;
     gap: 45px;
     align-items: center;
-    padding: 60px 0 70px;
+    padding: 50px 0 60px;
+}
+
+.d-hero-content .d-hero-badge {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
 }
 
 .d-hero-content h1 {
-    font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.18;
+    font-size: clamp(26px, 3.5vw, 40px);
+    line-height: 1.2;
     font-weight: 900;
     color: #ffffff;
     margin: 0 0 16px;
@@ -166,40 +144,31 @@
     letter-spacing: 0.5px;
 }
 
-.d-hero-tag {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 14.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-    opacity: 0.95;
-}
-
-.d-hero-content p {
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 16.5px;
-    line-height: 1.75;
+.d-hero-content .d-hero-sub {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 17px;
+    line-height: 1.6;
     margin: 0 0 26px;
-    max-width: 600px;
-}
-
-.d-hero-license {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 13.5px;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* Hero Form */
 .d-hero-form {
     background: #ffffff;
     border-radius: 8px;
-    padding: 28px 26px;
+    padding: 26px 24px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
     color: var(--d-text);
+}
+
+.d-hero-form h3 {
+    margin: 0 0 16px;
+    color: var(--d-navy);
+    font-size: 19px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
 }
 
 .d-form-row {
@@ -213,45 +182,47 @@
 .d-hero-form select,
 .d-hero-form textarea {
     width: 100%;
-    padding: 12px 14px;
+    padding: 11px 14px;
     border: 1px solid #d2d6dc;
     border-radius: 4px;
-    font-size: 14.5px;
-    color: #2d3748;
+    font-size: 13.5px;
+    color: #333;
     outline: none;
     transition: border-color 0.2s ease;
     background: #fff;
-    margin-bottom: 12px;
+    box-sizing: border-box;
 }
 
 .d-hero-form input:focus,
 .d-hero-form select:focus,
 .d-hero-form textarea:focus {
     border-color: var(--d-green);
+    box-shadow: 0 0 0 3px rgba(66, 169, 0, 0.15);
 }
 
 .d-hero-form textarea {
     resize: vertical;
     min-height: 75px;
+    margin-top: 12px;
 }
 
-.d-hero-form .d-submit {
+.d-hero-form .d-submit-btn {
     width: 100%;
-    padding: 14px;
+    padding: 13px;
     background: var(--d-green);
     color: #fff;
     border: 0;
     border-radius: 4px;
-    font-size: 15.5px;
+    font-size: 15px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: background 0.2s ease;
-    margin-top: 4px;
+    margin-top: 14px;
 }
 
-.d-hero-form .d-submit:hover {
+.d-hero-form .d-submit-btn:hover {
     background: var(--d-green-dark);
 }
 
@@ -262,388 +233,354 @@
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 50px;
-    align-items: center;
-}
-
-.d-welcome-content .small-title {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--d-green);
-    font-size: 14.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    align-items: start;
 }
 
 .d-welcome-content h2 {
     color: var(--d-navy);
-    font-size: clamp(26px, 3.3vw, 34px);
-    line-height: 1.25;
+    font-size: clamp(24px, 3vw, 32px);
     font-weight: 900;
-    margin: 0 0 18px;
     text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 16px;
 }
 
-.d-welcome-content > p {
+.d-welcome-content p {
     color: var(--d-muted);
-    font-size: 16px;
-    line-height: 1.75;
-    margin: 0 0 18px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin: 0 0 14px;
 }
 
-.d-feature-mini {
+.d-feature-list {
+    margin: 22px 0 28px;
     display: flex;
+    flex-direction: column;
     gap: 16px;
-    margin-bottom: 16px;
-    align-items: flex-start;
 }
 
-.d-feature-mini-icon {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+.d-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.d-feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    background: #eef6fc;
+    color: #1b9eea;
     border-radius: 50%;
-    background: #e8f4fc;
-    color: var(--d-cyan);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
-    margin-top: 2px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(27, 158, 234, 0.15);
+    margin-top: 3px;
 }
 
-.d-feature-mini h4 {
+.d-feature-item h4 {
     margin: 0 0 4px;
     color: var(--d-navy);
-    font-size: 15.5px;
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
 
-.d-feature-mini p {
+.d-feature-item p {
     margin: 0;
     color: var(--d-muted);
-    font-size: 14.5px;
-    line-height: 1.6;
+    font-size: 13.5px;
+    line-height: 1.55;
 }
 
 /* Inspector Card */
 .d-inspector-card {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e5e9f0;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
 }
 
-.d-inspector-title {
-    background: #111111;
+.d-inspector-header {
+    background: #000000;
     color: #ffffff;
-    font-size: 14.5px;
+    padding: 10px 14px;
+    font-size: 13.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 11px 16px;
 }
 
 .d-inspector-card img {
     width: 100%;
-    height: 350px;
+    height: 360px;
     object-fit: cover;
     object-position: center top;
     display: block;
 }
 
-.d-inspector-name {
-    padding: 15px 12px 10px;
-    font-size: 15px;
-    font-weight: 800;
+.d-inspector-body {
+    padding: 18px 20px;
+}
+
+.d-inspector-body h4 {
+    margin: 0 0 14px;
     color: var(--d-navy);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.5;
     text-transform: uppercase;
 }
 
-.d-inspector-btn {
+.d-inspector-call {
     display: block;
+    width: 100%;
+    padding: 12px;
     background: var(--d-green);
     color: #ffffff !important;
     text-decoration: none;
-    padding: 12px;
-    font-size: 15.5px;
+    border-radius: 4px;
+    font-size: 15px;
     font-weight: 800;
     letter-spacing: 0.5px;
     transition: background 0.2s ease;
 }
 
-.d-inspector-btn:hover {
+.d-inspector-call:hover {
     background: var(--d-green-dark);
 }
 
 /* =========================================================
-   3. WHY DILAPIDATION INSPECTIONS MATTER (2x2 GRID)
+   3. WHY DILAPIDATION INSPECTIONS ARE IMPORTANT
 ========================================================= */
-.d-matters {
-    background: #fbfcfc;
+.d-important-section {
+    background: #ffffff;
 }
 
 .d-matters-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    max-width: 1040px;
-    margin: 0 auto;
 }
 
 .d-matters-card {
-    background: #ffffff;
-    border: 1px solid #e5e9ec;
-    border-radius: 6px;
-    padding: 20px 22px;
     display: flex;
     align-items: flex-start;
-    gap: 16px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease;
 }
 
 .d-matters-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+    border-color: #cbd5e1;
 }
 
-.d-check-icon {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    border-radius: 50%;
+.d-matters-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
     background: var(--d-green);
     color: #ffffff;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 900;
-    margin-top: 3px;
+    margin-top: 2px;
 }
 
-.d-matters-card-content h4 {
-    margin: 0 0 6px;
-    color: var(--d-navy);
-    font-size: 16px;
-    font-weight: 800;
-}
-
-.d-matters-card-content p {
+.d-matters-card p {
     margin: 0;
     color: var(--d-muted);
-    font-size: 14.5px;
-    line-height: 1.65;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+.d-matters-card strong {
+    color: var(--d-navy);
+    font-weight: 700;
 }
 
 /* =========================================================
-   4. COMPREHENSIVE DILAPIDATION INSPECTIONS (SCOPE & g13.jpeg)
+   4. COMMON ISSUES FOUND DURING DILAPIDATION INSPECTIONS
 ========================================================= */
-.d-scope-grid {
+.d-issues-grid {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 45px;
     align-items: center;
 }
 
-.d-scope-content h3 {
-    font-size: clamp(22px, 2.6vw, 28px);
-    line-height: 1.25;
+.d-issues-content h2 {
+    color: var(--d-navy);
+    font-size: clamp(22px, 2.8vw, 30px);
     font-weight: 900;
-    color: var(--d-navy);
-    margin: 0 0 14px;
     text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 14px;
 }
 
-.d-scope-content > p {
-    color: var(--d-muted);
-    font-size: 15.5px;
-    line-height: 1.75;
-    margin-bottom: 22px;
-}
-
-.d-scope-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.d-scope-item {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 18px;
-    align-items: flex-start;
-}
-
-.d-scope-badge {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    border-radius: 50%;
-    background: var(--d-green);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-}
-
-.d-scope-info strong {
-    display: block;
-    color: var(--d-navy);
-    font-size: 15.5px;
-    font-weight: 800;
-    margin-bottom: 3px;
-}
-
-.d-scope-info span {
-    display: block;
+.d-issues-content > p {
     color: var(--d-muted);
     font-size: 14.5px;
     line-height: 1.6;
+    margin: 0 0 18px;
 }
 
-.d-scope-image-wrapper {
+.d-issues-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.d-issues-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.d-issues-item .bullet-icon {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    background: var(--d-green);
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.d-issues-item p {
+    margin: 0;
+    color: var(--d-muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+
+.d-issues-item strong {
+    color: var(--d-navy);
+    font-weight: 700;
+}
+
+.d-photo-box {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     height: 420px;
+    background: #000;
 }
 
-.d-scope-image-wrapper img {
+.d-photo-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
     display: block;
 }
 
-/* Slider Arrows on Image */
-.d-slide-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
-    border: 0;
-    background: rgba(255, 255, 255, 0.85);
-    color: #333;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-}
-
-.d-slide-arrow:hover {
-    background: #fff;
-    color: var(--d-green);
-}
-
-.d-slide-prev {
-    left: 12px;
-}
-
-.d-slide-next {
-    right: 12px;
-}
-
 /* =========================================================
-   5. WHY CHOOSE US (LIGHT GREEN BOX)
+   5. WHY CHOOSE US (MINT GREEN CONTAINER)
 ========================================================= */
-.d-choose {
-    padding: 55px 38px;
-    background: var(--d-choose-bg);
+.d-choose-section {
+    background: var(--d-light-green);
     border-radius: 18px;
+    padding: 60px 40px;
 }
 
 .d-choose-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
+    gap: 20px;
 }
 
-.d-choose-item {
-    text-align: center;
+.d-choose-card {
     background: #ffffff;
-    padding: 28px 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
 }
 
-.d-choose-item:hover {
+.d-choose-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-.d-choose-icon {
-    width: 52px;
-    height: 52px;
+.d-choose-icon-wrap {
+    width: 46px;
+    height: 46px;
     margin: 0 auto 16px;
+    background: var(--d-green);
+    color: #ffffff;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--d-green);
-    color: #fff;
-    border-radius: 6px;
-    font-size: 24px;
+    font-size: 22px;
 }
 
-.d-choose-item h4 {
+.d-choose-card h4 {
     margin: 0 0 10px;
     color: var(--d-navy);
-    font-size: 15.5px;
-    font-weight: 900;
+    font-size: 14px;
+    font-weight: 800;
     text-transform: uppercase;
+    line-height: 1.35;
 }
 
-.d-choose-item p {
+.d-choose-card p {
     margin: 0;
-    color: #4a5568;
-    font-size: 14px;
-    line-height: 1.65;
+    color: #555555;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 /* =========================================================
    6. PRICING PACKAGES (3 CARDS)
 ========================================================= */
-.d-pricing {
-    background: #fff;
-}
-
 .d-price-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-    max-width: 1060px;
+    gap: 25px;
+    max-width: 1020px;
     margin: 0 auto;
 }
 
 .d-price-card {
-    background: #fff;
-    border: 1px solid #e4e4e4;
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
     border-top: 3px solid var(--d-green);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     padding: 30px 22px;
-    border-radius: 4px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.d-price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
 }
 
 .d-price-icon {
-    font-size: 34px;
+    font-size: 32px;
     color: var(--d-navy);
     margin-bottom: 12px;
 }
@@ -652,24 +589,26 @@
     margin: 0 0 10px;
     color: var(--d-navy);
     font-size: 17px;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-weight: 800;
+    text-transform: capitalize;
 }
 
-.d-price {
+.d-price-amount {
     color: var(--d-green);
     font-size: 36px;
     font-weight: 900;
-    margin-bottom: 16px;
+    line-height: 1;
+    margin-bottom: 4px;
 }
 
-.d-price small {
-    color: #666;
+.d-price-suffix {
+    color: #666666;
     font-size: 13px;
     font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.d-price-list {
+.d-price-features {
     list-style: none;
     padding: 0;
     margin: 0 0 24px;
@@ -677,36 +616,34 @@
     flex-grow: 1;
 }
 
-.d-price-list li {
+.d-price-features li {
     padding: 9px 0;
-    border-bottom: 1px solid #eee;
-    color: #4a5568;
-    font-size: 14.5px;
+    border-bottom: 1px solid #f0f2f5;
+    color: #444444;
+    font-size: 13.5px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    gap: 8px;
 }
 
-.d-price-list li::before {
-    content: "✓";
+.d-price-features li i {
     color: var(--d-green);
-    margin-right: 10px;
-    font-weight: 900;
     font-size: 15px;
 }
 
 .d-price-btn {
     display: block;
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     background: var(--d-green);
-    color: #fff !important;
+    color: #ffffff !important;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-radius: 3px;
-    transition: all 0.25s ease;
+    border-radius: 4px;
+    transition: background 0.2s ease;
 }
 
 .d-price-btn:hover {
@@ -714,178 +651,196 @@
 }
 
 /* =========================================================
-   7. CTA BANNER (SCHEDULE YOUR INSPECTION TODAY)
+   7. SCHEDULE CTA (ENLARGED)
 ========================================================= */
 .d-cta {
-    min-height: 390px;
+    position: relative;
+    min-height: 540px;
     display: flex;
     align-items: center;
     background:
         linear-gradient(
             90deg,
             rgba(4, 43, 75, 0.96) 0%,
-            rgba(4, 43, 75, 0.88) 55%,
-            rgba(4, 43, 75, 0.40) 100%
+            rgba(4, 43, 75, 0.88) 50%,
+            rgba(4, 43, 75, 0.30) 100%
         ),
-        url("{{ asset('images/schedule.jpeg') }}") center right / cover no-repeat;
+        url("{{ asset('images/dilapidation-cta.jpeg') }}") center right / cover no-repeat;
+    color: #ffffff;
+    padding: 105px 0;
 }
 
 .d-cta-content {
-    max-width: 660px;
+    max-width: 820px;
     color: #fff;
-    padding: 55px 0;
+    padding: 0;
 }
 
 .d-cta-content h2 {
-    margin: 0 0 16px;
-    font-size: clamp(26px, 3.5vw, 36px);
+    margin: 0 0 20px;
+    font-size: clamp(30px, 4vw, 46px);
     line-height: 1.2;
     font-weight: 900;
     text-transform: uppercase;
     color: #fff;
+    letter-spacing: 0.5px;
 }
 
 .d-cta-content p {
-    margin: 0 0 24px;
-    color: rgba(255, 255, 255, 0.92);
-    font-size: 16.5px;
-    line-height: 1.75;
+    margin: 0 0 32px;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 17.5px;
+    line-height: 1.85;
+}
+
+.d-cta-content .d-btn-green {
+    padding: 16px 38px;
+    font-size: 15.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
 }
 
 /* =========================================================
-   8. REVIEWS SECTION
+   8. CLIENT FEEDBACK & REVIEWS
 ========================================================= */
-.d-reviews {
-    background: #fff;
-}
-
 .d-review-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 24px;
 }
 
 .d-review-card {
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 8px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease;
     text-align: center;
-    padding: 28px 22px;
-    border-bottom: 3px solid #eee;
-    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
-    background: #fff;
 }
 
-.d-review-quote {
-    color: var(--d-cyan);
-    font-size: 40px;
-    line-height: 1;
-    margin-bottom: 8px;
+.d-review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.d-review-icon {
+    font-size: 26px;
+    color: #1b9eea;
+    margin-bottom: 12px;
 }
 
 .d-review-card p {
-    min-height: 75px;
-    color: #4a5568;
-    font-size: 15px;
-    line-height: 1.7;
+    color: var(--d-muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+    margin: 0 0 16px;
+    flex-grow: 1;
 }
 
-.d-stars {
-    color: var(--d-orange);
-    letter-spacing: 3px;
-    font-size: 17px;
-    margin: 14px 0 16px;
+.d-review-stars {
+    color: #ffb400;
+    font-size: 15px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
 }
 
 .d-review-card h4 {
     margin: 0;
     color: var(--d-navy);
-    font-size: 15.5px;
+    font-size: 15px;
     font-weight: 800;
 }
 
 /* =========================================================
-   9. FAQ ACCORDION SECTION
+   9. FAQS SECTION (ACCORDION)
 ========================================================= */
-.d-faq {
-    background: #fff;
-    padding-bottom: 75px;
-}
-
 .d-faq-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px 22px;
+    gap: 20px;
+    align-items: start;
+}
+
+.d-faq-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .d-faq-item {
-    border: 1px solid #e4e4e4;
-    background: #fff;
-    border-radius: 4px;
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
+    border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 10px;
+    transition: all 0.2s ease;
 }
 
 .d-faq-question {
     width: 100%;
-    padding: 16px 18px;
+    padding: 16px 20px;
+    background: #f8fafc;
     border: 0;
-    background: #fff;
-    color: var(--d-navy);
+    text-align: left;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: left;
-    font-size: 15.5px;
+    gap: 12px;
+    color: var(--d-navy);
+    font-size: 14.5px;
     font-weight: 800;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.d-faq-question:hover {
-    background: #f7f9fa;
-}
-
-.d-faq-answer {
-    display: none;
-    padding: 0 18px 16px;
-    color: #4a5568;
-    font-size: 15px;
-    line-height: 1.7;
-}
-
-/* Active FAQ Item: Green background on header */
-.d-faq-item.active .d-faq-question {
-    background: var(--d-green);
-    color: #fff;
-}
-
-.d-faq-item.active .d-faq-answer {
-    display: block;
-    background: #fff;
-    padding-top: 16px;
-}
-
-.d-faq-item.active .d-faq-icon {
-    transform: rotate(180deg);
-    color: #fff;
+.d-faq-question span {
+    flex-grow: 1;
+    line-height: 1.4;
 }
 
 .d-faq-icon {
-    transition: transform 0.25s ease;
+    font-size: 14px;
+    color: var(--d-green);
+    transition: transform 0.3s ease;
 }
 
-/* =========================================================
-   RESPONSIVE MEDIA QUERIES
-========================================================= */
+.d-faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: var(--d-muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+    background: #ffffff;
+}
+
+/* Active State (Q1 & Q4 by default) */
+.d-faq-item.active .d-faq-question {
+    background: var(--d-green);
+    color: #ffffff;
+}
+
+.d-faq-item.active .d-faq-icon {
+    color: #ffffff;
+    transform: rotate(180deg);
+}
+
+.d-faq-item.active .d-faq-answer {
+    padding: 16px 20px 20px;
+    max-height: 300px;
+}
+
+/* Responsive */
 @media (max-width: 991px) {
     .d-hero-inner,
     .d-welcome-grid,
-    .d-scope-grid {
+    .d-issues-grid {
         grid-template-columns: 1fr;
-        gap: 38px;
-    }
-
-    .d-hero-inner {
-        padding: 50px 0;
+        gap: 35px;
     }
 
     .d-choose-grid {
@@ -894,47 +849,35 @@
 
     .d-price-grid {
         grid-template-columns: 1fr;
-        max-width: 480px;
+        max-width: 450px;
+    }
+
+    .d-review-grid {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 767px) {
     .d-section {
-        padding: 45px 0;
-    }
-
-    .d-hero-inner {
-        padding: 40px 0;
+        padding: 50px 0;
     }
 
     .d-form-row,
     .d-matters-grid,
-    .d-review-grid,
     .d-faq-grid {
         grid-template-columns: 1fr;
     }
 
-    .d-choose {
-        padding: 32px 20px;
+    .d-choose-section {
+        padding: 35px 20px;
     }
 
-    .d-choose-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 16px 12px;
-    }
-
-    .d-scope-image-wrapper {
-        height: 320px;
-    }
-
-    .d-floating-tab {
-        display: none;
-    }
-}
-
-@media (max-width: 500px) {
     .d-choose-grid {
         grid-template-columns: 1fr;
+    }
+
+    .d-photo-box {
+        height: 320px;
     }
 }
 </style>
@@ -942,41 +885,32 @@
 <div class="d-page">
 
     {{-- =====================================================
-         1. HERO SECTION
+         1. HERO SECTION & QUICK QUOTE FORM
     ====================================================== --}}
     <section class="d-hero">
         <div class="d-container">
             <div class="d-hero-inner">
 
-                <div class="d-hero-content" data-aos="fade-right" data-aos-duration="850">
-                    <span class="d-hero-tag">
-                        PREMIUM BUILDING & PEST INSPECTIONS
-                    </span>
-
-                    <h1>
-                        DILAPIDATION<br>INSPECTION -<br>COMPREHENSIVE<br>REPORTS
-                    </h1>
-
-                    <p>
-                        A professional dilapidation inspection documents the existing condition of a property before nearby construction, excavation, demolition or development works to protect you against dispute liabilities.
-                    </p>
+                {{-- Left Content --}}
+                <div class="d-hero-content">
+                    <span class="d-hero-badge">PREMIUM BUILDING & PEST INSPECTIONS</span>
+                    <h1>DILAPIDATION INSPECTION - COMPREHENSIVE REPORTS</h1>
+                    <p class="d-hero-sub">Protect Your Property with Professional Dilapidation Inspections in Melbourne</p>
 
                     <div>
-                        <a href="tel:0466001551" class="d-btn btn-glow">
-                            <i class="bi bi-telephone-fill me-2"></i>
+                        <a href="tel:0466001551" class="d-btn-green">
+                            <i class="bi bi-telephone-fill"></i>
                             0466 001 551
                         </a>
                     </div>
-
-                    <div class="d-license">
-                        VBA Building Inspector Licence No. IN-PS 74654 &nbsp;|&nbsp; Domestic Builder Licence No. DB-L 100200
-                    </div>
                 </div>
 
-                {{-- HERO FORM --}}
-                <div id="quote-form" class="d-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                {{-- Right Form --}}
+                <div id="quote-form" class="d-hero-form">
+                    <h3>GET QUICK QUOTE</h3>
+
                     @if(session('success'))
-                        <div class="alert alert-success py-2 mb-2" style="font-size: 14px;">
+                        <div class="alert alert-success py-2 mb-3" style="font-size: 13.5px;">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -986,30 +920,35 @@
 
                         <div class="d-form-row">
                             <input type="text" name="name" placeholder="Name *" value="{{ old('name') }}" required>
-                            <input type="tel" name="phone" placeholder="Phone *" value="{{ old('phone') }}" required>
+                            <input type="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
                         </div>
 
                         <div class="d-form-row">
-                            <input type="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
+                            <input type="tel" name="phone" placeholder="Phone *" value="{{ old('phone') }}" required>
                             <input type="text" name="property_address" placeholder="Property Address" value="{{ old('property_address') }}">
                         </div>
 
                         <select name="service_type" required>
-                            <option value="dilapidation-report" selected>Dilapidation Inspection</option>
-                            <option value="pre-purchase-building-and-pest-inspection">Pre-Purchase Building & Pest Inspection</option>
-                            <option value="building-stage-by-stage-inspection">Building Stage By Stage Inspection</option>
-                            <option value="new-build-handover-inspection">New Build Handover Inspection</option>
+                            <option value="dilapidation-report" selected>Dilapidation Report</option>
+                            <option value="pre-purchase-building-and-pest-inspection">Pre-Purchase Building and Pest Inspection</option>
+                            <option value="building-stage-by-stage-inspection">Building Stage by Stage Inspection</option>
                             <option value="apartment-building-inspection">Apartment Building Inspection</option>
                             <option value="rising-damp-inspection">Rising Damp Inspection</option>
                             <option value="pool-barrier-inspection">Pool Barrier Inspection</option>
+                            <option value="new-build-handover-inspection">New Build Handover Inspection</option>
                             <option value="vendor-inspection">Vendor Inspection</option>
                             <option value="builders-warranty-inspection">Builders Warranty Inspection</option>
                         </select>
 
-                        <textarea name="message" placeholder="Message / Details (e.g. Demolition next door, commercial build, roadworks)">{{ old('message') }}</textarea>
+                        <div class="d-form-row" style="margin-top: 12px; margin-bottom: 0;">
+                            <input type="date" name="preferred_date" placeholder="Inspection Date">
+                            <input type="text" name="notes" placeholder="Notes (e.g. Nearby construction)">
+                        </div>
 
-                        <button type="submit" class="d-submit">
-                            GET MY QUOTE
+                        <textarea name="message" placeholder="Message / Details (e.g. Pre-construction condition, Neighboring works)">{{ old('message') }}</textarea>
+
+                        <button type="submit" class="d-submit-btn">
+                            Get My Quote
                         </button>
                     </form>
                 </div>
@@ -1024,139 +963,134 @@
     ====================================================== --}}
     <section class="d-section d-welcome">
         <div class="d-container">
-
             <div class="d-welcome-grid">
 
-                <div class="d-welcome-content" data-aos="fade-right">
-                    <span class="small-title">Expert Dilapidation Inspections</span>
-                    <h2>
-                        WELCOME TO PREMIUM BUILDING & PEST INSPECTIONS
-                    </h2>
+                {{-- Left Content --}}
+                <div class="d-welcome-content">
+                    <span class="d-badge">WELCOME TO PREMIUM BUILDING & PEST INSPECTIONS</span>
+                    <h2>Welcome to Premium Building & Pest Inspections</h2>
 
                     <p>
-                        A dilapidation inspection provides a detailed record of the existing condition of a property before construction, excavation, demolition or other nearby works begin.
+                        A Dilapidation Inspection is an essential service for property owners, builders, and developers before commencing any nearby construction or renovation. Our expert team in Melbourne provides comprehensive dilapidation reports that document the existing condition of a property, helping to protect against any false claims of damage during or after nearby works.
                     </p>
 
                     <p>
-                        Our inspection documents visible defects and conditions that exist at the time of inspection, creating a useful reference point for property owners and relevant parties.
+                        Our comprehensive dilapidation reports provide valuable documentation that can assist with risk management, project planning, and dispute prevention.
                     </p>
 
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
+                    <p style="font-weight: 700; color: var(--d-navy); margin-bottom: 12px;">We Offer:</p>
+
+                    <div class="d-feature-list">
+                        <div class="d-feature-item">
+                            <div class="d-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>COMPREHENSIVE VISUAL INSPECTION</h4>
+                                <p>Our inspectors conduct a detailed assessment of accessible internal and external building elements, including walls, ceilings, floors, driveways, pathways, fences, retaining walls, and surrounding structures.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4>COMPREHENSIVE VISUAL INSPECTION</h4>
-                            <p>Detailed visual inspection of accessible areas and existing visible conditions across the property.</p>
+
+                        <div class="d-feature-item">
+                            <div class="d-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>DETAILED PHOTOGRAPHIC EVIDENCE</h4>
+                                <p>High-quality photographs are taken throughout the inspection to document the existing condition of building components, visible defects, and areas that may be affected by future construction activities.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-feature-item">
+                            <div class="d-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>CLEAR DOCUMENTATION</h4>
+                                <p>A comprehensive report is prepared outlining the property's condition, including visible cracking, movement, deterioration, and other notable observations at the time of inspection.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-feature-item">
+                            <div class="d-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>VENTILATION AND HVAC SYSTEMS</h4>
+                                <p>We inspect the heating, ventilation, and air conditioning systems (HVAC) to ensure efficient operation and compliance with energy standards.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>DETAILED PHOTOGRAPHIC EVIDENCE</h4>
-                            <p>High-resolution dated photographs document existing cracks, gaps, finishes, and surfaces.</p>
-                        </div>
-                    </div>
-
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>CLEAR PROPERTY CONDITION RECORD</h4>
-                            <p>Structured reporting provides an indisputable baseline to compare pre- and post-works conditions.</p>
-                        </div>
-                    </div>
-
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>PROFESSIONAL REPORTING</h4>
-                            <p>Clear, legally robust documentation prepared to protect property owners, builders and developers.</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="{{ route('about') }}" class="d-btn btn-glow">
-                            ABOUT US MORE <i class="bi bi-arrow-right ms-2"></i>
+                    <div>
+                        <a href="#quote-form" class="d-btn-green">
+                            Schedule Inspection Now
                         </a>
                     </div>
                 </div>
 
-                {{-- INSPECTOR CARD --}}
-                <div class="d-welcome-card-col" data-aos="fade-left">
-                    <div class="d-inspector-card hover-lift">
-                        <div class="d-inspector-title">
-                            VBA REGISTERED
+                {{-- Right Inspector Card --}}
+                <div class="d-welcome-card-col">
+                    <div class="d-inspector-card">
+                        <div class="d-inspector-header">
+                            YOUR INSPECTOR
                         </div>
 
                         <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
 
-                        <div class="d-inspector-name">
-                            VBA REGISTERED BUILDING INSPECTOR
+                        <div class="d-inspector-body">
+                            <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
+                            <a href="tel:0466001551" class="d-inspector-call">
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                0466 001 551
+                            </a>
                         </div>
-
-                        <a href="tel:0466001551" class="d-inspector-btn">
-                            <i class="bi bi-telephone-fill me-2"></i>
-                            0466 001 551
-                        </a>
                     </div>
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         3. WHY DILAPIDATION INSPECTIONS MATTER (2x2 GRID)
+         3. WHY DILAPIDATION INSPECTIONS ARE IMPORTANT
     ====================================================== --}}
-    <section class="d-section d-matters">
+    <section class="d-section d-important-section" style="padding-top: 10px;">
         <div class="d-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">Important Information</span>
-                <h2>WHY DILAPIDATION INSPECTIONS ARE IMPORTANT</h2>
+            <div class="d-heading-center">
+                <h2>WHY DILAPIDATION INSPECTIONS ARE IMPORTANT?</h2>
             </div>
 
             <div class="d-matters-grid">
 
-                <div class="d-matters-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Legal Documentation</h4>
-                        <p>A detailed property condition record provides crucial legal documentation of visible conditions before nearby construction or development activity commences.</p>
-                    </div>
+                <div class="d-matters-card">
+                    <div class="d-matters-icon">✓</div>
+                    <p>
+                        <strong>Legal Protection:</strong> A dilapidation report acts as a legal document to resolve any disputes if claims of damage arise after construction. It safeguards you from unwarranted liability and ensures clear evidence of the property’s original condition.
+                    </p>
                 </div>
 
-                <div class="d-matters-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Establish Existing Conditions</h4>
-                        <p>The inspection establishes an objective photographic and written baseline of cracks and defects present prior to any vibration or excavation.</p>
-                    </div>
+                <div class="d-matters-card">
+                    <div class="d-matters-icon">✓</div>
+                    <p>
+                        <strong>Risk Assessment:</strong> By conducting a thorough inspection, potential risks or weak points in the structure can be identified, giving you a better understanding of any areas that may need reinforcement before construction begins nearby.
+                    </p>
                 </div>
 
-                <div class="d-matters-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Comprehensive Planning</h4>
-                        <p>A documented condition report assists all parties in understanding the existing state of surrounding properties before heavy site machinery arrives.</p>
-                    </div>
+                <div class="d-matters-card">
+                    <div class="d-matters-icon">✓</div>
+                    <p>
+                        <strong>Support Project Planning:</strong> Identifying existing defects and vulnerable areas allows stakeholders to better understand potential risks associated with nearby construction activities.
+                    </p>
                 </div>
 
-                <div class="d-matters-card hover-lift" data-aos="fade-up" data-aos-delay="400">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Construction Monitoring</h4>
-                        <p>A pre-work condition record acts as an agreed benchmark during construction, preventing unjustified dispute claims between neighbours and builders.</p>
-                    </div>
+                <div class="d-matters-card">
+                    <div class="d-matters-icon">✓</div>
+                    <p>
+                        <strong>Compliance with Local Regulations:</strong> In Melbourne, conducting a Dilapidation Inspection aligns with guidelines from the VBA and local councils, especially in high-risk construction zones.
+                    </p>
                 </div>
 
             </div>
@@ -1166,171 +1100,136 @@
 
 
     {{-- =====================================================
-         4. COMPREHENSIVE DILAPIDATION INSPECTIONS (SCOPE & g13.jpeg)
+         4. COMMON ISSUES FOUND DURING DILAPIDATION INSPECTIONS
     ====================================================== --}}
-    <section class="d-section d-scope">
+    <section class="d-section d-issues">
         <div class="d-container">
+            <div class="d-issues-grid">
 
-            <div class="d-scope-grid">
+                {{-- Left Content --}}
+                <div class="d-issues-content">
+                    <h2>COMMON ISSUES FOUND DURING DILAPIDATION INSPECTIONS</h2>
 
-                <div class="d-scope-content" data-aos="fade-right">
-                    <span class="d-heading" style="text-align: left; margin-bottom: 0;">
-                        <span class="small-title">OUR INSPECTION SCOPE</span>
-                    </span>
+                    <p>During Dilapidation Inspections, we often identify several pre-existing issues that can be exacerbated by nearby construction work:</p>
 
-                    <h3>COMPREHENSIVE DILAPIDATION INSPECTIONS</h3>
-
-                    <p>
-                        During a dilapidation inspection, we document existing visible conditions across the entire property before nearby works commence:
-                    </p>
-
-                    <ul class="d-scope-list">
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">1</div>
-                            <div class="d-scope-info">
-                                <strong>Internal Walls, Ceilings & Cornices</strong>
-                                <span>Existing cracks in plasterboard, cornices, ceilings, settlement lines, and evidence of previous wall patching.</span>
-                            </div>
+                    <ul class="d-issues-list">
+                        <li class="d-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Cracks in Walls and Ceilings:</strong> Small hairline cracks or larger structural cracks can worsen during construction due to vibrations or ground movement.</p>
                         </li>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">2</div>
-                            <div class="d-scope-info">
-                                <strong>External Masonry & Brickwork</strong>
-                                <span>Detailed audit of exterior brick joints, mortar condition, foundation perimeter cracks, and rendered surfaces.</span>
-                            </div>
+                        <li class="d-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Settlement Issues:</strong> Signs of ground movement, such as uneven floors or doors not closing properly, may indicate existing settlement problems.</p>
                         </li>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">3</div>
-                            <div class="d-scope-info">
-                                <strong>Doors, Windows & Building Junctions</strong>
-                                <span>Checking operation, latching clearances, diagonal settlement cracking, and junction alignments.</span>
-                            </div>
+                        <li class="d-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Water Damage or Dampness:</strong> Water leaks, damp patches, or drainage issues that are already present can become more severe if not addressed prior to construction.</p>
                         </li>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">4</div>
-                            <div class="d-scope-info">
-                                <strong>Driveways, Paving & Retaining Walls</strong>
-                                <span>Documenting concrete cracks, slab displacements, pavers, retaining wall tilt, and boundary integrity.</span>
-                            </div>
+                        <li class="d-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Fencing and Boundary Issues:</strong> Fences, retaining walls, or external structures may be vulnerable to movement or damage during excavation or heavy machinery use.</p>
                         </li>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">5</div>
-                            <div class="d-scope-info">
-                                <strong>Boundary Fences & Accessible Roof Areas</strong>
-                                <span>Surveying dividing timber/metal fences, outbuildings, rooflines, gutters, and site drainage.</span>
-                            </div>
+                        <li class="d-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Roof and Guttering Issues:</strong> Pre-existing leaks or poor drainage in roof areas can be impacted by construction dust, debris, or vibrations.</p>
                         </li>
                     </ul>
                 </div>
 
-                {{-- IMAGE g13.jpeg FROM public/images/g13.jpeg AS IN SCREENSHOT --}}
-                <div class="d-scope-image-wrapper hover-lift" data-aos="fade-left">
-                    <img src="{{ asset('images/g13.jpeg') }}" alt="Ronak Gami conducting ceiling dilapidation survey">
-                    <button class="d-slide-arrow d-slide-prev" type="button" aria-label="Previous">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <button class="d-slide-arrow d-slide-next" type="button" aria-label="Next">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
+                {{-- Right Photo --}}
+                <div class="d-photo-box">
+                    <img src="{{ asset('images/dilapidation-inspection.jpg') }}" alt="Ronak Gami inspecting timber wall framing">
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         5. WHY CHOOSE US (LIGHT GREEN BOX)
+         5. WHY CHOOSE US (MINT GREEN SECTION)
     ====================================================== --}}
-    <section class="d-section">
+    <section class="d-section" style="padding-top: 10px;">
         <div class="d-container">
+            <div class="d-choose-section">
 
-            <div class="d-choose">
-
-                <div class="d-heading" data-aos="fade-up">
-                    <span class="small-title">WHY CHOOSE US</span>
-                    <h2>WHY CHOOSE US FOR YOUR DILAPIDATION INSPECTION?</h2>
+                <div class="d-heading-center">
+                    <span class="d-badge">WHY CHOOSE US</span>
+                    <h2>WHY CHOOSE US FOR YOUR DILAPIDATION BUILDING INSPECTION?</h2>
                 </div>
 
                 <div class="d-choose-grid">
 
-                    <div class="d-choose-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="d-choose-icon">
+                    <div class="d-choose-card">
+                        <div class="d-choose-icon-wrap">
                             <i class="bi bi-shield-check"></i>
                         </div>
-                        <h4>LICENSED INSPECTORS</h4>
-                        <p>Your inspection is completed by a licensed and experienced VBA registered building inspector.</p>
+                        <h4>Expert Inspectors with Local Knowledge</h4>
+                        <p>Our team is fully licensed and accredited, with in-depth knowledge of the VBA standards and Melbourne building regulations. We ensure that every inspection meets the highest standards of accuracy.</p>
                     </div>
 
-                    <div class="d-choose-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="d-choose-icon">
-                            <i class="bi bi-search"></i>
+                    <div class="d-choose-card">
+                        <div class="d-choose-icon-wrap">
+                            <i class="bi bi-patch-check"></i>
                         </div>
-                        <h4>THOROUGH INSPECTION</h4>
-                        <p>Accessible areas are reviewed meticulously with high-resolution photo evidence of existing conditions.</p>
+                        <h4>Unbiased and Independent</h4>
+                        <p>We provide impartial inspections with no vested interest in the outcome, ensuring you receive a fair and accurate report.</p>
                     </div>
 
-                    <div class="d-choose-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="d-choose-icon">
-                            <i class="bi bi-file-earmark-check"></i>
+                    <div class="d-choose-card">
+                        <div class="d-choose-icon-wrap">
+                            <i class="bi bi-clock-history"></i>
                         </div>
-                        <h4>DETAILED REPORTS</h4>
-                        <p>Clear written and photographic reporting delivered within 24 hours to establish an objective baseline.</p>
+                        <h4>Fast Turnaround Times</h4>
+                        <p>We understand the urgency of dilapidation inspections, particularly when construction schedules are involved. We offer fast booking options and ensure timely delivery of your report.</p>
                     </div>
 
-                    <div class="d-choose-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="d-choose-icon">
-                            <i class="bi bi-people"></i>
+                    <div class="d-choose-card">
+                        <div class="d-choose-icon-wrap">
+                            <i class="bi bi-tag-fill"></i>
                         </div>
-                        <h4>CLIENT FOCUSED</h4>
-                        <p>We explain inspection findings and provide practical guidance to protect your property rights.</p>
+                        <h4>Competitive Pricing</h4>
+                        <p>We offer transparent and competitive pricing for all our dilapidation inspection services, ensuring you receive the best value without any hidden fees.</p>
                     </div>
 
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         6. DILAPIDATION PRICING (3 CARDS)
+         6. CHOOSE PACKAGE / ENSURE SAFETY AND COMPLIANCE (PRICING)
     ====================================================== --}}
-    <section class="d-section d-pricing">
+    <section class="d-section">
         <div class="d-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">PRICING PLANS</span>
-                <h2>DILAPIDATION INSPECTION PRICING</h2>
+            <div class="d-heading-center">
+                <span class="d-badge">CHOOSE PACKAGE</span>
+                <h2>ENSURE SAFETY AND COMPLIANCE</h2>
             </div>
 
             <div class="d-price-grid">
 
                 {{-- CARD 1: 2 BEDROOM --}}
-                <div class="d-price-card hover-lift" data-aos="fade-up" data-aos-delay="100">
+                <div class="d-price-card">
                     <div>
                         <div class="d-price-icon">
                             <i class="bi bi-house-door"></i>
                         </div>
-                        <h3>2 BEDROOM</h3>
+                        <h3>2 bed room</h3>
 
-                        <div class="d-price">
-                            $400*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="d-price-amount">$400</div>
+                        <div class="d-price-suffix">+GST /Starting</div>
 
-                        <ul class="d-price-list">
-                            <li>Comprehensive visual inspection</li>
-                            <li>Full internal & external crack audit</li>
-                            <li>High-resolution photo documentation</li>
-                            <li>Report & consultation included</li>
-                            <li>Delivered within 24 hours</li>
+                        <ul class="d-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
 
@@ -1340,24 +1239,19 @@
                 </div>
 
                 {{-- CARD 2: 3 BEDROOM --}}
-                <div class="d-price-card hover-lift" data-aos="fade-up" data-aos-delay="200">
+                <div class="d-price-card">
                     <div>
                         <div class="d-price-icon">
-                            <i class="bi bi-house-fill"></i>
+                            <i class="bi bi-house-door"></i>
                         </div>
-                        <h3>3 BEDROOM</h3>
+                        <h3>3 bed room</h3>
 
-                        <div class="d-price">
-                            $450*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="d-price-amount">$450</div>
+                        <div class="d-price-suffix">+GST /Starting</div>
 
-                        <ul class="d-price-list">
-                            <li>Full 3-bedroom property inspection</li>
-                            <li>Driveways, fences & retaining walls</li>
-                            <li>Comprehensive photo evidence log</li>
-                            <li>Signed pre-construction baseline</li>
-                            <li>Delivered within 24 hours</li>
+                        <ul class="d-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
 
@@ -1366,25 +1260,20 @@
                     </a>
                 </div>
 
-                {{-- CARD 3: 4+ BEDROOM --}}
-                <div class="d-price-card hover-lift" data-aos="fade-up" data-aos-delay="300">
+                {{-- CARD 3: 4 BEDROOM --}}
+                <div class="d-price-card">
                     <div>
                         <div class="d-price-icon">
                             <i class="bi bi-building"></i>
                         </div>
-                        <h3>4+ BEDROOM</h3>
+                        <h3>4 bed room</h3>
 
-                        <div class="d-price">
-                            $525*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="d-price-amount">$525</div>
+                        <div class="d-price-suffix">+GST /Starting</div>
 
-                        <ul class="d-price-list">
-                            <li>Large home & multi-level dilapidation audit</li>
-                            <li>Extensive perimeter & boundary survey</li>
-                            <li>Complete detailed photo archive</li>
-                            <li>Priority debrief with inspector</li>
-                            <li>Delivered within 24 hours</li>
+                        <ul class="d-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
 
@@ -1400,65 +1289,102 @@
 
 
     {{-- =====================================================
-         7. CTA BANNER (PROTECT YOUR PROPERTY)
+         7. SCHEDULE CTA (ENLARGED)
     ====================================================== --}}
     <section class="d-cta">
         <div class="d-container">
-
-            <div class="d-cta-content" data-aos="fade-right">
+            <div class="d-cta-content">
                 <h2>ENSURE YOUR PROPERTY IS PROTECTED WITH A PROFESSIONAL INSPECTION</h2>
 
                 <p>
-                    Don't leave your property vulnerable during nearby construction projects. Our dilapidation inspection service provides a comprehensive record of your property's existing condition before work begins.
+                    Don’t leave your property vulnerable to disputes or damage during nearby construction projects. Our Dilapidation Inspection service in Melbourne offers detailed documentation and expert assessments that protect your interests and provide legal peace of mind. Book your inspection today to safeguard your property.
                 </p>
 
-                <a href="#quote-form" class="d-btn btn-glow">
-                    SCHEDULE YOUR INSPECTION NOW
+                <a href="#quote-form" class="d-btn-green">
+                    Schedule your inspection now
                 </a>
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         8. CLIENT REVIEWS & FEEDBACK
+         8. CLIENT FEEDBACK & REVIEWS
     ====================================================== --}}
     <section class="d-section d-reviews">
         <div class="d-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">Testimonials</span>
-                <h2>WHAT OUR CLIENTS SAY</h2>
+            <div class="d-heading-center">
+                <span class="d-badge">TESTIMONIAL</span>
+                <h2>CLIENT FEEDBACK & REVIEWS</h2>
             </div>
 
             <div class="d-review-grid">
 
-                <div class="d-review-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                    <div class="d-review-quote">“</div>
+                <div class="d-review-card">
+                    <div class="d-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "The inspection was very thorough and the report gave us a useful record of the property's condition before nearby works started."
+                        Very professional and approachable. The property inspection was done thoroughly, and even minor defects were identified. Really appreciate the attention to detail and commitment to the job. Highly recommended for any building inspection.
                     </p>
-                    <div class="d-stars">★★★★★</div>
-                    <h4>Laxmy</h4>
+                    <div class="d-review-stars">★★★★★</div>
+                    <h4>Swathi Tarini</h4>
                 </div>
 
-                <div class="d-review-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div class="d-review-quote">“</div>
+                <div class="d-review-card">
+                    <div class="d-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Excellent service and professional reporting. The photographs and explanations made everything very easy to understand."
+                        Took generous time to answer all my questions regarding the property's condition and report. Very kind, humble, and helpful. Highly recommended for anyone needing a building and pest inspection
                     </p>
-                    <div class="d-stars">★★★★★</div>
-                    <h4>Shailesh Dev Shah</h4>
+                    <div class="d-review-stars">★★★★★</div>
+                    <h4>Luxmy</h4>
                 </div>
 
-                <div class="d-review-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-                    <div class="d-review-quote">“</div>
+                <div class="d-review-card">
+                    <div class="d-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Very professional inspection service. The report clearly documented the existing condition of our property before construction."
+                        Provided an excellent inspection for the property I'm purchasing. All findings were explained clearly, and the report was prepared on the same day. Warm, professional, and efficient. Highly recommended to friends and family.
                     </p>
-                    <div class="d-stars">★★★★★</div>
-                    <h4>Nitesh Waghani</h4>
+                    <div class="d-review-stars">★★★★★</div>
+                    <h4>Shaleen De Silva</h4>
+                </div>
+
+                <div class="d-review-card">
+                    <div class="d-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Extremely helpful and responsive. The building and pest inspection was completed quickly, and the report was delivered exactly as requested. Smooth and professional experience overall— great service!
+                    </p>
+                    <div class="d-review-stars">★★★★★</div>
+                    <h4>Niresh Wijesiri</h4>
+                </div>
+
+                <div class="d-review-card">
+                    <div class="d-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Very thorough and professional during my pre-purchase building and pest inspection. Strongly recommended.
+                    </p>
+                    <div class="d-review-stars">★★★★★</div>
+                    <h4>Max</h4>
+                </div>
+
+                <div class="d-review-card">
+                    <div class="d-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Amazing experience. Quick replies, prompt actions, and a positive attitude. Would definitely recommend 👏👏👏
+                    </p>
+                    <div class="d-review-stars">★★★★★</div>
+                    <h4>Heena Bhavsar</h4>
                 </div>
 
             </div>
@@ -1470,87 +1396,87 @@
     {{-- =====================================================
          9. FREQUENTLY ASKED QUESTIONS (FAQ)
     ====================================================== --}}
-    <section class="d-section d-faq">
+    <section class="d-section d-faq" style="background: #ffffff; padding-top: 10px;">
         <div class="d-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">Quick Answers</span>
+            <div class="d-heading-center">
+                <span class="d-badge">COMMON QUESTIONS</span>
                 <h2>MOST POPULAR QUESTIONS</h2>
             </div>
 
             <div class="d-faq-grid">
 
-                {{-- LEFT COLUMN --}}
+                {{-- COLUMN 1 --}}
                 <div class="d-faq-col">
 
                     {{-- FAQ 1 (Active by default) --}}
-                    <div class="d-faq-item active" data-aos="fade-up" data-aos-delay="100">
-                        <button class="d-faq-question" type="button">
-                            <span>What is a dilapidation inspection?</span>
+                    <div class="d-faq-item active">
+                        <button class="d-faq-question" type="button" onclick="toggleDFaq(this)">
+                            <span>1. What is a Dilapidation Inspection?</span>
                             <i class="bi bi-chevron-down d-faq-icon"></i>
                         </button>
                         <div class="d-faq-answer">
-                            A dilapidation inspection documents the visible existing condition of a property before nearby construction, excavation, demolition or development works commence.
+                            A dilapidation inspection documents the current condition of a property before nearby construction or renovation work begins. It provides a detailed report that can be used to protect against claims of damage.
                         </div>
                     </div>
 
                     {{-- FAQ 2 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <button class="d-faq-question" type="button">
-                            <span>What does the inspection include?</span>
+                    <div class="d-faq-item">
+                        <button class="d-faq-question" type="button" onclick="toggleDFaq(this)">
+                            <span>2. Why do I need a dilapidation inspection?</span>
                             <i class="bi bi-chevron-down d-faq-icon"></i>
                         </button>
                         <div class="d-faq-answer">
-                            The inspection generally focuses on accessible areas and visible conditions such as cracks, surface damage, wall finishes, driveways, retaining walls, and perimeter fences.
+                            If you own property near a construction site, a dilapidation inspection helps protect you from false claims of damage by providing proof of the property's condition before works start.
                         </div>
                     </div>
 
                     {{-- FAQ 3 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <button class="d-faq-question" type="button">
-                            <span>What happens after the inspection?</span>
+                    <div class="d-faq-item">
+                        <button class="d-faq-question" type="button" onclick="toggleDFaq(this)">
+                            <span>3. How long does a dilapidation inspection take?</span>
                             <i class="bi bi-chevron-down d-faq-icon"></i>
                         </button>
                         <div class="d-faq-answer">
-                            The observed conditions are documented and presented in a professional report with relevant high-resolution photographs and descriptions delivered within 24 hours.
+                            Typically, the inspection takes between 1 to 2 hours depending on the size of the property. We deliver a detailed report within 24 to 48 hours after the inspection.
                         </div>
                     </div>
 
                 </div>
 
-                {{-- RIGHT COLUMN --}}
+                {{-- COLUMN 2 --}}
                 <div class="d-faq-col">
 
                     {{-- FAQ 4 (Active by default) --}}
-                    <div class="d-faq-item active" data-aos="fade-up" data-aos-delay="150">
-                        <button class="d-faq-question" type="button">
-                            <span>Why do I need a dilapidation report?</span>
+                    <div class="d-faq-item active">
+                        <button class="d-faq-question" type="button" onclick="toggleDFaq(this)">
+                            <span>4. What does the dilapidation report include?</span>
                             <i class="bi bi-chevron-down d-faq-icon"></i>
                         </button>
                         <div class="d-faq-answer">
-                            A report creates an indisputable documented record of visible conditions before work begins and can be retained as an objective reference during and after the relevant works.
+                            The report includes a written summary of the property’s condition, high-resolution photos, annotations highlighting defects or areas of concern, and recommendations for any vulnerable areas.
                         </div>
                     </div>
 
                     {{-- FAQ 5 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="250">
-                        <button class="d-faq-question" type="button">
-                            <span>How long does a dilapidation inspection take?</span>
+                    <div class="d-faq-item">
+                        <button class="d-faq-question" type="button" onclick="toggleDFaq(this)">
+                            <span>5. Is a dilapidation report legally binding?</span>
                             <i class="bi bi-chevron-down d-faq-icon"></i>
                         </button>
                         <div class="d-faq-answer">
-                            Inspection time depends on the size of the property, access conditions and the extent of areas requiring documentation. We provide estimated timeframes during booking.
+                            Yes, a dilapidation report can serve as a legal document in case of any disputes over property damage, providing clear evidence of the pre-construction condition of the property.
                         </div>
                     </div>
 
                     {{-- FAQ 6 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="350">
-                        <button class="d-faq-question" type="button">
-                            <span>Are dilapidation inspections only for construction sites?</span>
+                    <div class="d-faq-item">
+                        <button class="d-faq-question" type="button" onclick="toggleDFaq(this)">
+                            <span>6. What areas do you inspect?</span>
                             <i class="bi bi-chevron-down d-faq-icon"></i>
                         </button>
                         <div class="d-faq-answer">
-                            Dilapidation reports are commonly used whenever nearby construction, excavation, demolition, basement digging, or public infrastructure works may impact surrounding properties.
+                            We inspect all accessible areas of the property, including internal rooms, external walls, fences, driveways, retaining walls, and roofing.
                         </div>
                     </div>
 
@@ -1564,22 +1490,21 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const faqButtons = document.querySelectorAll('.d-faq-question');
-    faqButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const item = this.parentElement;
-            const isActive = item.classList.contains('active');
-            
-            // Toggle clicked
-            if (isActive) {
-                item.classList.remove('active');
-            } else {
-                item.classList.add('active');
-            }
-        });
-    });
-});
+// FAQ Accordion Toggle
+function toggleDFaq(btn) {
+    const item = btn.closest('.d-faq-item');
+    const col = item.closest('.d-faq-col');
+    const allInCol = col.querySelectorAll('.d-faq-item');
+    const wasActive = item.classList.contains('active');
+
+    // Close other items in the same column
+    allInCol.forEach(el => el.classList.remove('active'));
+
+    // Toggle clicked item
+    if (!wasActive) {
+        item.classList.add('active');
+    }
+}
 </script>
 
 @endsection

@@ -7,32 +7,28 @@
 <style>
 /* =========================================================
    RISING DAMP INSPECTION PAGE STYLES
-   Designed 1:1 to match reference layout
-   With increased font sizes as requested
+   1:1 Pixel-Perfect Match with Reference Screenshot & Live Site
 ========================================================= */
 
-.rd-page {
+:root {
     --rd-navy: #073763;
     --rd-navy-dark: #052646;
     --rd-green: #42a900;
     --rd-green-dark: #358c00;
-    --rd-light-green: #eaf6e6;
-    --rd-choose-bg: #d8edd5;
-    --rd-cyan: #1b9eea;
-    --rd-text: #2d3748;
-    --rd-muted: #4a5568;
+    --rd-light-green: #eef7ed;
+    --rd-text: #333333;
+    --rd-muted: #555555;
     --rd-border: #e2e8f0;
-    --rd-orange: #ffb400;
+}
 
-    font-family: Arial, Helvetica, sans-serif;
+.rd-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--rd-text);
     overflow-x: hidden;
     position: relative;
-    font-size: 16px;
-    line-height: 1.7;
+    background: #ffffff;
 }
 
-/* Container */
 .rd-container {
     width: 92%;
     max-width: 1180px;
@@ -43,92 +39,64 @@
     padding: 70px 0;
 }
 
-/* Headings with increased font sizes */
-.rd-heading {
+/* Headings */
+.rd-badge {
+    display: inline-block;
+    color: var(--rd-green);
+    font-size: 13.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+}
+
+.rd-heading-center {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.rd-heading .small-title {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--rd-green);
-    font-size: 15px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-}
-
-.rd-heading h2 {
+.rd-heading-center h2 {
     margin: 0;
     color: var(--rd-navy);
-    font-size: clamp(26px, 3.4vw, 34px);
+    font-size: clamp(24px, 3.2vw, 34px);
     line-height: 1.25;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.rd-heading p {
-    max-width: 760px;
-    margin: 14px auto 0;
+.rd-heading-center p {
+    max-width: 720px;
+    margin: 12px auto 0;
     color: var(--rd-muted);
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 15px;
+    line-height: 1.7;
 }
 
 /* Buttons */
-.rd-btn {
+.rd-btn-green {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 14px 28px;
+    gap: 8px;
+    padding: 13px 28px;
     background: var(--rd-green);
-    color: #fff !important;
+    color: #ffffff !important;
     border: 0;
     border-radius: 4px;
-    font-size: 15.5px;
+    font-size: 14.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-decoration: none;
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 
-.rd-btn:hover {
+.rd-btn-green:hover {
     background: var(--rd-green-dark);
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(66, 169, 0, 0.35);
-}
-
-/* Floating Right Tab */
-.rd-floating-tab {
-    position: fixed;
-    right: 0;
-    top: 48%;
-    transform: translateY(-50%);
-    background: var(--rd-green);
-    color: #fff !important;
-    padding: 14px 11px;
-    font-size: 13.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border-radius: 6px 0 0 6px;
-    z-index: 999;
-    box-shadow: -3px 4px 16px rgba(0, 0, 0, 0.25);
-    text-decoration: none;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform-origin: center;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.25s ease;
-}
-
-.rd-floating-tab:hover {
-    background: var(--rd-green-dark);
-    padding-right: 15px;
 }
 
 /* =========================================================
@@ -139,13 +107,13 @@
     background:
         linear-gradient(
             90deg,
-            rgba(7, 43, 76, 0.95) 0%,
-            rgba(7, 43, 76, 0.88) 52%,
+            rgba(7, 43, 76, 0.94) 0%,
+            rgba(7, 43, 76, 0.88) 50%,
             rgba(7, 43, 76, 0.65) 100%
         ),
-        url("{{ asset('images/rising-damp.jpg') }}") center center / cover no-repeat;
+        url("{{ asset('images/pre purchase service.jpeg') }}") center center / cover no-repeat;
     color: #fff;
-    padding: 25px 0;
+    padding: 30px 0;
 }
 
 .rd-hero-inner {
@@ -153,11 +121,21 @@
     grid-template-columns: 1.15fr 0.85fr;
     gap: 45px;
     align-items: center;
-    padding: 60px 0 70px;
+    padding: 50px 0 60px;
+}
+
+.rd-hero-content .rd-hero-badge {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
 }
 
 .rd-hero-content h1 {
-    font-size: clamp(30px, 4.2vw, 44px);
+    font-size: clamp(28px, 3.8vw, 44px);
     line-height: 1.18;
     font-weight: 900;
     color: #ffffff;
@@ -166,40 +144,31 @@
     letter-spacing: 0.5px;
 }
 
-.rd-hero-tag {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 14.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-    opacity: 0.95;
-}
-
-.rd-hero-content p {
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 16.5px;
-    line-height: 1.75;
+.rd-hero-content .rd-hero-sub {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 17px;
+    line-height: 1.6;
     margin: 0 0 26px;
-    max-width: 600px;
-}
-
-.rd-hero-license {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 13.5px;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* Hero Form */
 .rd-hero-form {
     background: #ffffff;
     border-radius: 8px;
-    padding: 28px 26px;
+    padding: 26px 24px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
     color: var(--rd-text);
+}
+
+.rd-hero-form h3 {
+    margin: 0 0 16px;
+    color: var(--rd-navy);
+    font-size: 19px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
 }
 
 .rd-form-row {
@@ -213,45 +182,47 @@
 .rd-hero-form select,
 .rd-hero-form textarea {
     width: 100%;
-    padding: 12px 14px;
+    padding: 11px 14px;
     border: 1px solid #d2d6dc;
     border-radius: 4px;
-    font-size: 14.5px;
-    color: #2d3748;
+    font-size: 13.5px;
+    color: #333;
     outline: none;
     transition: border-color 0.2s ease;
     background: #fff;
-    margin-bottom: 12px;
+    box-sizing: border-box;
 }
 
 .rd-hero-form input:focus,
 .rd-hero-form select:focus,
 .rd-hero-form textarea:focus {
     border-color: var(--rd-green);
+    box-shadow: 0 0 0 3px rgba(66, 169, 0, 0.15);
 }
 
 .rd-hero-form textarea {
     resize: vertical;
     min-height: 75px;
+    margin-top: 12px;
 }
 
-.rd-hero-form .rd-submit {
+.rd-hero-form .rd-submit-btn {
     width: 100%;
-    padding: 14px;
+    padding: 13px;
     background: var(--rd-green);
     color: #fff;
     border: 0;
     border-radius: 4px;
-    font-size: 15.5px;
+    font-size: 15px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: background 0.2s ease;
-    margin-top: 4px;
+    margin-top: 14px;
 }
 
-.rd-hero-form .rd-submit:hover {
+.rd-hero-form .rd-submit-btn:hover {
     background: var(--rd-green-dark);
 }
 
@@ -262,388 +233,354 @@
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 50px;
-    align-items: center;
-}
-
-.rd-welcome-content .small-title {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--rd-green);
-    font-size: 14.5px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    align-items: start;
 }
 
 .rd-welcome-content h2 {
     color: var(--rd-navy);
-    font-size: clamp(26px, 3.3vw, 34px);
-    line-height: 1.25;
+    font-size: clamp(24px, 3vw, 32px);
     font-weight: 900;
-    margin: 0 0 18px;
     text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 16px;
 }
 
-.rd-welcome-content > p {
+.rd-welcome-content p {
     color: var(--rd-muted);
-    font-size: 16px;
-    line-height: 1.75;
-    margin: 0 0 18px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin: 0 0 14px;
 }
 
-.rd-feature-mini {
+.rd-feature-list {
+    margin: 22px 0 28px;
     display: flex;
+    flex-direction: column;
     gap: 16px;
-    margin-bottom: 16px;
-    align-items: flex-start;
 }
 
-.rd-feature-mini-icon {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+.rd-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.rd-feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    background: #eef6fc;
+    color: #1b9eea;
     border-radius: 50%;
-    background: #e8f4fc;
-    color: var(--rd-cyan);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
-    margin-top: 2px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(27, 158, 234, 0.15);
+    margin-top: 3px;
 }
 
-.rd-feature-mini h4 {
+.rd-feature-item h4 {
     margin: 0 0 4px;
     color: var(--rd-navy);
-    font-size: 15.5px;
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
 
-.rd-feature-mini p {
+.rd-feature-item p {
     margin: 0;
     color: var(--rd-muted);
-    font-size: 14.5px;
-    line-height: 1.6;
+    font-size: 13.5px;
+    line-height: 1.55;
 }
 
 /* Inspector Card */
 .rd-inspector-card {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e5e9f0;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
 }
 
-.rd-inspector-title {
-    background: #111111;
+.rd-inspector-header {
+    background: #000000;
     color: #ffffff;
-    font-size: 14.5px;
+    padding: 10px 14px;
+    font-size: 13.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 11px 16px;
 }
 
 .rd-inspector-card img {
     width: 100%;
-    height: 350px;
+    height: 360px;
     object-fit: cover;
     object-position: center top;
     display: block;
 }
 
-.rd-inspector-name {
-    padding: 15px 12px 10px;
-    font-size: 15px;
-    font-weight: 800;
+.rd-inspector-body {
+    padding: 18px 20px;
+}
+
+.rd-inspector-body h4 {
+    margin: 0 0 14px;
     color: var(--rd-navy);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.5;
     text-transform: uppercase;
 }
 
-.rd-inspector-btn {
+.rd-inspector-call {
     display: block;
+    width: 100%;
+    padding: 12px;
     background: var(--rd-green);
     color: #ffffff !important;
     text-decoration: none;
-    padding: 12px;
-    font-size: 15.5px;
+    border-radius: 4px;
+    font-size: 15px;
     font-weight: 800;
     letter-spacing: 0.5px;
     transition: background 0.2s ease;
 }
 
-.rd-inspector-btn:hover {
+.rd-inspector-call:hover {
     background: var(--rd-green-dark);
 }
 
 /* =========================================================
-   3. WHY RISING DAMP INSPECTIONS MATTER (2x2 GRID)
+   3. WHY RISING DAMP INSPECTIONS ARE IMPORTANT
 ========================================================= */
-.rd-matters {
-    background: #fbfcfc;
+.rd-important-section {
+    background: #ffffff;
 }
 
 .rd-matters-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    max-width: 1040px;
-    margin: 0 auto;
 }
 
 .rd-matters-card {
-    background: #ffffff;
-    border: 1px solid #e5e9ec;
-    border-radius: 6px;
-    padding: 20px 22px;
     display: flex;
     align-items: flex-start;
-    gap: 16px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease;
 }
 
 .rd-matters-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+    border-color: #cbd5e1;
 }
 
-.rd-check-icon {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    border-radius: 50%;
+.rd-matters-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
     background: var(--rd-green);
     color: #ffffff;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 900;
-    margin-top: 3px;
+    margin-top: 2px;
 }
 
-.rd-matters-card-content h4 {
-    margin: 0 0 6px;
-    color: var(--rd-navy);
-    font-size: 16px;
-    font-weight: 800;
-}
-
-.rd-matters-card-content p {
+.rd-matters-card p {
     margin: 0;
     color: var(--rd-muted);
-    font-size: 14.5px;
-    line-height: 1.65;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+.rd-matters-card strong {
+    color: var(--rd-navy);
+    font-weight: 700;
 }
 
 /* =========================================================
-   4. RISING DAMP INSPECTION PROCESS (SCOPE & r1.jpg)
+   4. COMMON RISING DAMP ISSUES WE FIND
 ========================================================= */
-.rd-scope-grid {
+.rd-issues-grid {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 45px;
     align-items: center;
 }
 
-.rd-scope-content h3 {
-    font-size: clamp(22px, 2.6vw, 28px);
-    line-height: 1.25;
+.rd-issues-content h2 {
+    color: var(--rd-navy);
+    font-size: clamp(22px, 2.8vw, 30px);
     font-weight: 900;
-    color: var(--rd-navy);
-    margin: 0 0 14px;
     text-transform: uppercase;
+    line-height: 1.25;
+    margin: 0 0 14px;
 }
 
-.rd-scope-content > p {
-    color: var(--rd-muted);
-    font-size: 15.5px;
-    line-height: 1.75;
-    margin-bottom: 22px;
-}
-
-.rd-scope-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.rd-scope-item {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 18px;
-    align-items: flex-start;
-}
-
-.rd-scope-badge {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    border-radius: 50%;
-    background: var(--rd-green);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-}
-
-.rd-scope-info strong {
-    display: block;
-    color: var(--rd-navy);
-    font-size: 15.5px;
-    font-weight: 800;
-    margin-bottom: 3px;
-}
-
-.rd-scope-info span {
-    display: block;
+.rd-issues-content > p {
     color: var(--rd-muted);
     font-size: 14.5px;
     line-height: 1.6;
+    margin: 0 0 18px;
 }
 
-.rd-scope-image-wrapper {
+.rd-issues-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.rd-issues-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.rd-issues-item .bullet-icon {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    background: var(--rd-green);
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.rd-issues-item p {
+    margin: 0;
+    color: var(--rd-muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+
+.rd-issues-item strong {
+    color: var(--rd-navy);
+    font-weight: 700;
+}
+
+.rd-photo-box {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     height: 420px;
+    background: #000;
 }
 
-.rd-scope-image-wrapper img {
+.rd-photo-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
     display: block;
 }
 
-/* Slider Arrows on Image */
-.rd-slide-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
-    border: 0;
-    background: rgba(255, 255, 255, 0.85);
-    color: #333;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-}
-
-.rd-slide-arrow:hover {
-    background: #fff;
-    color: var(--rd-green);
-}
-
-.rd-slide-prev {
-    left: 12px;
-}
-
-.rd-slide-next {
-    right: 12px;
-}
-
 /* =========================================================
-   5. WHY CHOOSE US (LIGHT GREEN BOX)
+   5. WHY CHOOSE US (MINT GREEN CONTAINER)
 ========================================================= */
-.rd-choose {
-    padding: 55px 38px;
-    background: var(--rd-choose-bg);
+.rd-choose-section {
+    background: var(--rd-light-green);
     border-radius: 18px;
+    padding: 60px 40px;
 }
 
 .rd-choose-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
+    gap: 20px;
 }
 
-.rd-choose-item {
-    text-align: center;
+.rd-choose-card {
     background: #ffffff;
-    padding: 28px 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
 }
 
-.rd-choose-item:hover {
+.rd-choose-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-.rd-choose-icon {
-    width: 52px;
-    height: 52px;
+.rd-choose-icon-wrap {
+    width: 46px;
+    height: 46px;
     margin: 0 auto 16px;
+    background: var(--rd-green);
+    color: #ffffff;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--rd-green);
-    color: #fff;
-    border-radius: 6px;
-    font-size: 24px;
+    font-size: 22px;
 }
 
-.rd-choose-item h4 {
+.rd-choose-card h4 {
     margin: 0 0 10px;
     color: var(--rd-navy);
-    font-size: 15.5px;
-    font-weight: 900;
+    font-size: 14px;
+    font-weight: 800;
     text-transform: uppercase;
+    line-height: 1.35;
 }
 
-.rd-choose-item p {
+.rd-choose-card p {
     margin: 0;
-    color: #4a5568;
-    font-size: 14px;
-    line-height: 1.65;
+    color: #555555;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 /* =========================================================
    6. PRICING PACKAGES (3 CARDS)
 ========================================================= */
-.rd-pricing {
-    background: #fff;
-}
-
 .rd-price-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-    max-width: 1060px;
+    gap: 25px;
+    max-width: 1020px;
     margin: 0 auto;
 }
 
 .rd-price-card {
-    background: #fff;
-    border: 1px solid #e4e4e4;
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
     border-top: 3px solid var(--rd-green);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     padding: 30px 22px;
-    border-radius: 4px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rd-price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
 }
 
 .rd-price-icon {
-    font-size: 34px;
+    font-size: 32px;
     color: var(--rd-navy);
     margin-bottom: 12px;
 }
@@ -652,24 +589,26 @@
     margin: 0 0 10px;
     color: var(--rd-navy);
     font-size: 17px;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-weight: 800;
+    text-transform: capitalize;
 }
 
-.rd-price {
+.rd-price-amount {
     color: var(--rd-green);
     font-size: 36px;
     font-weight: 900;
-    margin-bottom: 16px;
+    line-height: 1;
+    margin-bottom: 4px;
 }
 
-.rd-price small {
-    color: #666;
+.rd-price-suffix {
+    color: #666666;
     font-size: 13px;
     font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.rd-price-list {
+.rd-price-features {
     list-style: none;
     padding: 0;
     margin: 0 0 24px;
@@ -677,36 +616,34 @@
     flex-grow: 1;
 }
 
-.rd-price-list li {
+.rd-price-features li {
     padding: 9px 0;
-    border-bottom: 1px solid #eee;
-    color: #4a5568;
-    font-size: 14.5px;
+    border-bottom: 1px solid #f0f2f5;
+    color: #444444;
+    font-size: 13.5px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    gap: 8px;
 }
 
-.rd-price-list li::before {
-    content: "✓";
+.rd-price-features li i {
     color: var(--rd-green);
-    margin-right: 10px;
-    font-weight: 900;
     font-size: 15px;
 }
 
 .rd-price-btn {
     display: block;
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     background: var(--rd-green);
-    color: #fff !important;
+    color: #ffffff !important;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-radius: 3px;
-    transition: all 0.25s ease;
+    border-radius: 4px;
+    transition: background 0.2s ease;
 }
 
 .rd-price-btn:hover {
@@ -714,178 +651,194 @@
 }
 
 /* =========================================================
-   7. CTA BANNER (SCHEDULE YOUR INSPECTION TODAY)
+   7. SCHEDULE CTA (DARK TIMBER BACKGROUND)
 ========================================================= */
 .rd-cta {
-    min-height: 390px;
+    position: relative;
+    min-height: 540px;
     display: flex;
     align-items: center;
     background:
         linear-gradient(
             90deg,
-            rgba(4, 43, 75, 0.96) 0%,
-            rgba(4, 43, 75, 0.88) 55%,
-            rgba(4, 43, 75, 0.40) 100%
+            rgba(7, 43, 76, 0.96) 0%,
+            rgba(7, 43, 76, 0.88) 50%,
+            rgba(7, 43, 76, 0.30) 100%
         ),
         url("{{ asset('images/schedule.jpeg') }}") center right / cover no-repeat;
+    color: #ffffff;
+    padding: 105px 0;
 }
 
-.rd-cta-content {
-    max-width: 660px;
-    color: #fff;
-    padding: 55px 0;
+.rd-cta-inner {
+    max-width: 820px;
 }
 
-.rd-cta-content h2 {
-    margin: 0 0 16px;
-    font-size: clamp(26px, 3.5vw, 36px);
-    line-height: 1.2;
+.rd-cta h2 {
+    color: #ffffff;
+    font-size: clamp(30px, 4vw, 46px);
     font-weight: 900;
     text-transform: uppercase;
-    color: #fff;
+    line-height: 1.2;
+    margin: 0 0 20px;
+    letter-spacing: 0.5px;
 }
 
-.rd-cta-content p {
-    margin: 0 0 24px;
-    color: rgba(255, 255, 255, 0.92);
-    font-size: 16.5px;
-    line-height: 1.75;
+.rd-cta p {
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 17.5px;
+    line-height: 1.85;
+    margin: 0 0 32px;
+}
+
+.rd-cta .rd-btn-green {
+    padding: 16px 38px;
+    font-size: 15.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
 }
 
 /* =========================================================
-   8. REVIEWS SECTION
+   8. CLIENT FEEDBACK & REVIEWS
 ========================================================= */
-.rd-reviews {
-    background: #fff;
-}
-
 .rd-review-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 24px;
 }
 
 .rd-review-card {
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 8px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease;
     text-align: center;
-    padding: 28px 22px;
-    border-bottom: 3px solid #eee;
-    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
-    background: #fff;
 }
 
-.rd-review-quote {
-    color: var(--rd-cyan);
-    font-size: 40px;
-    line-height: 1;
-    margin-bottom: 8px;
+.rd-review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.rd-review-icon {
+    font-size: 26px;
+    color: #1b9eea;
+    margin-bottom: 12px;
 }
 
 .rd-review-card p {
-    min-height: 75px;
-    color: #4a5568;
-    font-size: 15px;
-    line-height: 1.7;
+    color: var(--rd-muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+    margin: 0 0 16px;
+    flex-grow: 1;
 }
 
-.rd-stars {
-    color: var(--rd-orange);
-    letter-spacing: 3px;
-    font-size: 17px;
-    margin: 14px 0 16px;
+.rd-review-stars {
+    color: #ffb400;
+    font-size: 15px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
 }
 
 .rd-review-card h4 {
     margin: 0;
     color: var(--rd-navy);
-    font-size: 15.5px;
+    font-size: 15px;
     font-weight: 800;
 }
 
 /* =========================================================
-   9. FAQ ACCORDION SECTION
+   9. FAQS SECTION (ACCORDION)
 ========================================================= */
-.rd-faq {
-    background: #fff;
-    padding-bottom: 75px;
-}
-
 .rd-faq-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px 22px;
+    gap: 20px;
+    align-items: start;
+}
+
+.rd-faq-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .rd-faq-item {
-    border: 1px solid #e4e4e4;
-    background: #fff;
-    border-radius: 4px;
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
+    border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 10px;
+    transition: all 0.2s ease;
 }
 
 .rd-faq-question {
     width: 100%;
-    padding: 16px 18px;
+    padding: 16px 20px;
+    background: #f8fafc;
     border: 0;
-    background: #fff;
-    color: var(--rd-navy);
+    text-align: left;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: left;
-    font-size: 15.5px;
+    gap: 12px;
+    color: var(--rd-navy);
+    font-size: 14.5px;
     font-weight: 800;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.rd-faq-question:hover {
-    background: #f7f9fa;
-}
-
-.rd-faq-answer {
-    display: none;
-    padding: 0 18px 16px;
-    color: #4a5568;
-    font-size: 15px;
-    line-height: 1.7;
-}
-
-/* Active FAQ Item: Green background on header */
-.rd-faq-item.active .rd-faq-question {
-    background: var(--rd-green);
-    color: #fff;
-}
-
-.rd-faq-item.active .rd-faq-answer {
-    display: block;
-    background: #fff;
-    padding-top: 16px;
-}
-
-.rd-faq-item.active .rd-faq-icon {
-    transform: rotate(180deg);
-    color: #fff;
+.rd-faq-question span {
+    flex-grow: 1;
+    line-height: 1.4;
 }
 
 .rd-faq-icon {
-    transition: transform 0.25s ease;
+    font-size: 14px;
+    color: var(--rd-green);
+    transition: transform 0.3s ease;
 }
 
-/* =========================================================
-   RESPONSIVE MEDIA QUERIES
-========================================================= */
+.rd-faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: var(--rd-muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+    background: #ffffff;
+}
+
+/* Active State (Q1 & Q4 by default) */
+.rd-faq-item.active .rd-faq-question {
+    background: var(--rd-green);
+    color: #ffffff;
+}
+
+.rd-faq-item.active .rd-faq-icon {
+    color: #ffffff;
+    transform: rotate(180deg);
+}
+
+.rd-faq-item.active .rd-faq-answer {
+    padding: 16px 20px 20px;
+    max-height: 300px;
+}
+
+/* Responsive */
 @media (max-width: 991px) {
     .rd-hero-inner,
     .rd-welcome-grid,
-    .rd-scope-grid {
+    .rd-issues-grid {
         grid-template-columns: 1fr;
-        gap: 38px;
-    }
-
-    .rd-hero-inner {
-        padding: 50px 0;
+        gap: 35px;
     }
 
     .rd-choose-grid {
@@ -894,47 +847,35 @@
 
     .rd-price-grid {
         grid-template-columns: 1fr;
-        max-width: 480px;
+        max-width: 450px;
+    }
+
+    .rd-review-grid {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 767px) {
     .rd-section {
-        padding: 45px 0;
-    }
-
-    .rd-hero-inner {
-        padding: 40px 0;
+        padding: 50px 0;
     }
 
     .rd-form-row,
     .rd-matters-grid,
-    .rd-review-grid,
     .rd-faq-grid {
         grid-template-columns: 1fr;
     }
 
-    .rd-choose {
-        padding: 32px 20px;
+    .rd-choose-section {
+        padding: 35px 20px;
     }
 
-    .rd-choose-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 16px 12px;
-    }
-
-    .rd-scope-image-wrapper {
-        height: 320px;
-    }
-
-    .rd-floating-tab {
-        display: none;
-    }
-}
-
-@media (max-width: 500px) {
     .rd-choose-grid {
         grid-template-columns: 1fr;
+    }
+
+    .rd-photo-box {
+        height: 320px;
     }
 }
 </style>
@@ -942,41 +883,32 @@
 <div class="rd-page">
 
     {{-- =====================================================
-         1. HERO SECTION
+         1. HERO SECTION & QUICK QUOTE FORM
     ====================================================== --}}
     <section class="rd-hero">
         <div class="rd-container">
             <div class="rd-hero-inner">
 
-                <div class="rd-hero-content" data-aos="fade-right" data-aos-duration="850">
-                    <span class="rd-hero-tag">
-                        PREMIUM BUILDING & PEST INSPECTIONS
-                    </span>
-
-                    <h1>
-                        PROFESSIONAL RISING<br>DAMP INSPECTION<br>SERVICES IN MELBOURNE
-                    </h1>
-
-                    <p>
-                        Identify moisture problems early with a professional rising damp inspection. We assess visible signs of dampness, moisture-related damage, staining and other observable building concerns before they cause costly structural decay.
-                    </p>
+                {{-- Left Content --}}
+                <div class="rd-hero-content">
+                    <span class="rd-hero-badge">PREMIUM BUILDING & PEST INSPECTIONS</span>
+                    <h1>PROFESSIONAL RISING DAMP INSPECTION SERVICES IN MELBOURNE</h1>
+                    <p class="rd-hero-sub">Comprehensive and Fast Rising Damp Inspection for a Healthy Property</p>
 
                     <div>
-                        <a href="tel:0466001551" class="rd-btn btn-glow">
-                            <i class="bi bi-telephone-fill me-2"></i>
+                        <a href="tel:0466001551" class="rd-btn-green">
+                            <i class="bi bi-telephone-fill"></i>
                             0466 001 551
                         </a>
                     </div>
-
-                    <div class="rd-hero-license">
-                        VBA Building Inspector Licence No. IN-PS 74654 &nbsp;|&nbsp; Domestic Builder Licence No. DB-L 100200
-                    </div>
                 </div>
 
-                {{-- HERO FORM --}}
-                <div id="quote-form" class="rd-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
+                {{-- Right Form --}}
+                <div id="quote-form" class="rd-hero-form">
+                    <h3>GET QUICK QUOTE</h3>
+
                     @if(session('success'))
-                        <div class="alert alert-success py-2 mb-2" style="font-size: 14px;">
+                        <div class="alert alert-success py-2 mb-3" style="font-size: 13.5px;">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -986,30 +918,35 @@
 
                         <div class="rd-form-row">
                             <input type="text" name="name" placeholder="Name *" value="{{ old('name') }}" required>
-                            <input type="tel" name="phone" placeholder="Phone *" value="{{ old('phone') }}" required>
+                            <input type="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
                         </div>
 
                         <div class="rd-form-row">
-                            <input type="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
+                            <input type="tel" name="phone" placeholder="Phone *" value="{{ old('phone') }}" required>
                             <input type="text" name="property_address" placeholder="Property Address" value="{{ old('property_address') }}">
                         </div>
 
                         <select name="service_type" required>
                             <option value="rising-damp-inspection" selected>Rising Damp Inspection</option>
-                            <option value="pre-purchase-building-and-pest-inspection">Pre-Purchase Building & Pest Inspection</option>
-                            <option value="building-stage-by-stage-inspection">Building Stage By Stage Inspection</option>
-                            <option value="new-build-handover-inspection">New Build Handover Inspection</option>
+                            <option value="pre-purchase-building-and-pest-inspection">Pre-Purchase Building and Pest Inspection</option>
+                            <option value="building-stage-by-stage-inspection">Building Stage by Stage Inspection</option>
                             <option value="apartment-building-inspection">Apartment Building Inspection</option>
+                            <option value="new-build-handover-inspection">New Build Handover Inspection</option>
                             <option value="pool-barrier-inspection">Pool Barrier Inspection</option>
                             <option value="dilapidation-report">Dilapidation Report</option>
                             <option value="vendor-inspection">Vendor Inspection</option>
                             <option value="builders-warranty-inspection">Builders Warranty Inspection</option>
                         </select>
 
-                        <textarea name="message" placeholder="Message / Details (e.g. Lower wall stains, peeling paint, room location)">{{ old('message') }}</textarea>
+                        <div class="rd-form-row" style="margin-top: 12px; margin-bottom: 0;">
+                            <input type="date" name="preferred_date" placeholder="Inspection Date">
+                            <input type="text" name="notes" placeholder="Notes (e.g. Subfloor, Walls)">
+                        </div>
 
-                        <button type="submit" class="rd-submit">
-                            GET MY QUOTE
+                        <textarea name="message" placeholder="Message / Details (e.g. Signs of dampness, peeling paint)">{{ old('message') }}</textarea>
+
+                        <button type="submit" class="rd-submit-btn">
+                            Get My Quote
                         </button>
                     </form>
                 </div>
@@ -1024,139 +961,120 @@
     ====================================================== --}}
     <section class="rd-section rd-welcome">
         <div class="rd-container">
-
             <div class="rd-welcome-grid">
 
-                <div class="rd-welcome-content" data-aos="fade-right">
-                    <span class="small-title">Expert Rising Damp Inspections</span>
-                    <h2>
-                        WELCOME TO PREMIUM RISING DAMP INSPECTION
-                    </h2>
+                {{-- Left Content --}}
+                <div class="rd-welcome-content">
+                    <span class="rd-badge">WELCOME TO PREMIUM RISING DAMP INSPECTION</span>
+                    <h2>Welcome to Premium Rising Damp Inspection</h2>
 
                     <p>
-                        Is your home showing signs of moisture, dampness or deterioration near the lower sections of walls? Rising damp can contribute to visible damage and may require professional assessment.
+                        Is your home showing signs of moisture or dampness? Rising damp can compromise the structural integrity of your property. At Premium Building & Pest Inspections, we offer professional Rising Damp Inspections across Melbourne, ensuring compliance with Victorian Building Authority (VBA) guidelines. Our experts use the latest tools to detect moisture problems before they cause significant damage. Get same-day inspections and a detailed report to help safeguard your property.
                     </p>
 
-                    <p>
-                        Our rising damp inspections focus on identifying visible signs and indicators associated with moisture movement, dampness and related building conditions.
-                    </p>
+                    <p style="font-weight: 700; color: var(--rd-navy); margin-bottom: 12px;">We Offer:</p>
 
-                    <div class="rd-feature-mini">
-                        <div class="rd-feature-mini-icon">
-                            <i class="bi bi-search"></i>
+                    <div class="rd-feature-list">
+                        <div class="rd-feature-item">
+                            <div class="rd-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>RISING DAMP INSPECTION</h4>
+                                <p>Identify and assess moisture levels in walls, floors, and subfloor areas. We provide actionable solutions to prevent structural damage.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4>ASSESSMENT OF RISING DAMP</h4>
-                            <p>Assessment of visible rising damp indicators and moisture-related building conditions.</p>
+
+                        <div class="rd-feature-item">
+                            <div class="rd-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>DAMP PROOFING SOLUTIONS</h4>
+                                <p>After our inspection, we offer expert recommendations on damp-proofing treatments that comply with VBA standards.</p>
+                            </div>
+                        </div>
+
+                        <div class="rd-feature-item">
+                            <div class="rd-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>MOISTURE MEASUREMENT &amp; DETECTION</h4>
+                                <p>Using advanced moisture meters and thermal imaging, we measure moisture levels and pinpoint areas of concern..</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="rd-feature-mini">
-                        <div class="rd-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>IDENTIFICATION OF SYMPTOMS</h4>
-                            <p>Identification of damp staining, deterioration, peeling finishes, and salt efflorescence.</p>
-                        </div>
-                    </div>
-
-                    <div class="rd-feature-mini">
-                        <div class="rd-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>MOISTURE MEASUREMENT & DETECTION</h4>
-                            <p>Non-invasive electronic moisture meter observations and professional damp reporting.</p>
-                        </div>
-                    </div>
-
-                    <div class="rd-feature-mini">
-                        <div class="rd-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>MAINTENANCE & NEXT STEPS</h4>
-                            <p>Clear findings so property owners understand if further specialist advice is required.</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="{{ route('about') }}" class="rd-btn btn-glow">
-                            ABOUT US MORE <i class="bi bi-arrow-right ms-2"></i>
+                    <div>
+                        <a href="#quote-form" class="rd-btn-green">
+                            Schedule Inspection Now
                         </a>
                     </div>
                 </div>
 
-                {{-- INSPECTOR CARD --}}
-                <div class="rd-welcome-card-col" data-aos="fade-left">
-                    <div class="rd-inspector-card hover-lift">
-                        <div class="rd-inspector-title">
-                            VBA REGISTERED
+                {{-- Right Inspector Card --}}
+                <div class="rd-welcome-card-col">
+                    <div class="rd-inspector-card">
+                        <div class="rd-inspector-header">
+                            YOUR INSPECTOR
                         </div>
 
                         <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
 
-                        <div class="rd-inspector-name">
-                            VBA REGISTERED BUILDING INSPECTOR
+                        <div class="rd-inspector-body">
+                            <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
+                            <a href="tel:0466001551" class="rd-inspector-call">
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                0466 001 551
+                            </a>
                         </div>
-
-                        <a href="tel:0466001551" class="rd-inspector-btn">
-                            <i class="bi bi-telephone-fill me-2"></i>
-                            0466 001 551
-                        </a>
                     </div>
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         3. WHY RISING DAMP INSPECTIONS MATTER (2x2 GRID)
+         3. WHY RISING DAMP INSPECTIONS ARE IMPORTANT
     ====================================================== --}}
-    <section class="rd-section rd-matters">
+    <section class="rd-section rd-important-section" style="padding-top: 10px;">
         <div class="rd-container">
 
-            <div class="rd-heading" data-aos="fade-up">
-                <span class="small-title">Important Information</span>
+            <div class="rd-heading-center">
                 <h2>WHY RISING DAMP INSPECTIONS ARE IMPORTANT</h2>
             </div>
 
             <div class="rd-matters-grid">
 
-                <div class="rd-matters-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                    <div class="rd-check-icon">✓</div>
-                    <div class="rd-matters-card-content">
-                        <h4>Protect Structural Integrity</h4>
-                        <p>Rising damp and persistent moisture can contribute to deterioration of building materials, mortar decay, and structural foundation weakness if left unresolved.</p>
-                    </div>
+                <div class="rd-matters-card">
+                    <div class="rd-matters-icon">✓</div>
+                    <p>
+                        <strong>Protect Structural Integrity:</strong> Rising damp can damage the foundation and walls of your property, weakening the overall structure if left untreated.
+                    </p>
                 </div>
 
-                <div class="rd-matters-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div class="rd-check-icon">✓</div>
-                    <div class="rd-matters-card-content">
-                        <h4>Ensure Healthy Living Conditions</h4>
-                        <p>Damp conditions can contribute to mould growth, airborne allergens, musty odours, and deterioration of internal finishes that should be investigated promptly.</p>
-                    </div>
+                <div class="rd-matters-card">
+                    <div class="rd-matters-icon">✓</div>
+                    <p>
+                        <strong>Ensure Healthy Living Conditions:</strong> Mold and mildew caused by rising damp reduce indoor air quality and pose health risks, particularly for those with allergies or respiratory problems.
+                    </p>
                 </div>
 
-                <div class="rd-matters-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-                    <div class="rd-check-icon">✓</div>
-                    <div class="rd-matters-card-content">
-                        <h4>Prevent Expensive Repairs</h4>
-                        <p>Identifying moisture-related concerns early can help property owners understand potential maintenance needs before extensive replastering is necessary.</p>
-                    </div>
+                <div class="rd-matters-card">
+                    <div class="rd-matters-icon">✓</div>
+                    <p>
+                        <strong>Prevent Expensive Repairs:</strong> Early detection of damp issues helps you avoid costly repairs related to wood rot, mold, and structural deterioration.
+                    </p>
                 </div>
 
-                <div class="rd-matters-card hover-lift" data-aos="fade-up" data-aos-delay="400">
-                    <div class="rd-check-icon">✓</div>
-                    <div class="rd-matters-card-content">
-                        <h4>Maintain Property Value</h4>
-                        <p>Understanding and addressing moisture problems can assist owners in preserving long-term property market value and buyer confidence.</p>
-                    </div>
+                <div class="rd-matters-card">
+                    <div class="rd-matters-icon">✓</div>
+                    <p>
+                        <strong>Maintain Property Value:</strong> Addressing rising damp early prevents property devaluation and ensures compliance with Victorian Building Authority guidelines.
+                    </p>
                 </div>
 
             </div>
@@ -1166,171 +1084,141 @@
 
 
     {{-- =====================================================
-         4. OUR RISING DAMP INSPECTION PROCESS (SCOPE & r1.jpg)
+         4. COMMON RISING DAMP ISSUES WE FIND
     ====================================================== --}}
-    <section class="rd-section rd-scope">
+    <section class="rd-section rd-issues">
         <div class="rd-container">
+            <div class="rd-issues-grid">
 
-            <div class="rd-scope-grid">
+                {{-- Left Content --}}
+                <div class="rd-issues-content">
+                    <h2>COMMON RISING DAMP ISSUES WE FIND</h2>
 
-                <div class="rd-scope-content" data-aos="fade-right">
-                    <span class="rd-heading" style="text-align: left; margin-bottom: 0;">
-                        <span class="small-title">OUR INSPECTION SCOPE</span>
-                    </span>
+                    <p>Through our experience, we often encounter the following problems during Rising Damp inspections:</p>
 
-                    <h3>OUR RISING DAMP INSPECTION PROCESS</h3>
-
-                    <p>
-                        Through our inspections, we assess visible signs that may indicate moisture movement or damp-related deterioration across all accessible areas:
-                    </p>
-
-                    <ul class="rd-scope-list">
-                        <li class="rd-scope-item">
-                            <div class="rd-scope-badge">1</div>
-                            <div class="rd-scope-info">
-                                <strong>Visible Moisture & Tide Mark Assessment</strong>
-                                <span>Tide marks or visible moisture staining on lower walls, skirtings, timber footings, and internal plaster.</span>
-                            </div>
+                    <ul class="rd-issues-list">
+                        <li class="rd-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Tide Marks on Walls:</strong> Visible water stains up to one meter above ground level due to moisture traveling through walls.</p>
                         </li>
 
-                        <li class="rd-scope-item">
-                            <div class="rd-scope-badge">2</div>
-                            <div class="rd-scope-info">
-                                <strong>Peeling Paint & Plaster Deterioration</strong>
-                                <span>Assessment of bubbling, flaking paint, crumbled plaster, and white powder salt efflorescence deposits.</span>
-                            </div>
+                        <li class="rd-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Peeling Paint and Wallpaper:</strong> Moisture causes bubbling paint and lifting wallpaper, especially near affected wall bases.</p>
                         </li>
 
-                        <li class="rd-scope-item">
-                            <div class="rd-scope-badge">3</div>
-                            <div class="rd-scope-info">
-                                <strong>Electronic Moisture Meter Scanning</strong>
-                                <span>Non-invasive moisture testing across damp profiles to gauge elevated moisture concentrations within wall substrates.</span>
-                            </div>
+                        <li class="rd-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Cracked or Crumbling Plaster:</strong> Exposure to damp weakens plaster, leading to cracks or crumbling that compromises the wall’s structure.</p>
                         </li>
 
-                        <li class="rd-scope-item">
-                            <div class="rd-scope-badge">4</div>
-                            <div class="rd-scope-info">
-                                <strong>Subfloor & Ventilation Examination</strong>
-                                <span>Inspection of subfloor airflow vents, soil clearance, damp-proof course (DPC) bridging, and site drainage.</span>
-                            </div>
+                        <li class="rd-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Salt Efflorescence:</strong> White, powdery salt deposits form as moisture evaporates, leaving behind crystallized salts on the walls.</p>
                         </li>
 
-                        <li class="rd-scope-item">
-                            <div class="rd-scope-badge">5</div>
-                            <div class="rd-scope-info">
-                                <strong>Mould, Odour & Structural Risks</strong>
-                                <span>Evaluation of musty smells, mould growth, rot in adjacent structural timbers, and detailed photographic reporting.</span>
-                            </div>
+                        <li class="rd-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Rotting Timber:</strong> Rising damp causes wood rot in skirting boards and floorboards, leading to damage and the need for replacement.</p>
+                        </li>
+
+                        <li class="rd-issues-item">
+                            <span class="bullet-icon"></span>
+                            <p><strong>Mold and Musty Smells:</strong> Damp conditions encourage mold growth and result in musty odors, especially in poorly ventilated areas.</p>
                         </li>
                     </ul>
                 </div>
 
-                {{-- IMAGE r1.jpg FROM public/images/r1.jpg --}}
-                <div class="rd-scope-image-wrapper hover-lift" data-aos="fade-left">
-                    <img src="{{ asset('images/r1.jpg') }}" alt="Rising damp wall crack and moisture inspection">
-                    <button class="rd-slide-arrow rd-slide-prev" type="button" aria-label="Previous">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <button class="rd-slide-arrow rd-slide-next" type="button" aria-label="Next">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
+                {{-- Right Photo --}}
+                <div class="rd-photo-box">
+                    <img src="{{ asset('images/rising-damp-stain.jpg') }}" alt="Rough concrete wall showing rising damp stains">
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         5. WHY CHOOSE US (LIGHT GREEN BOX)
+         5. WHY CHOOSE US (MINT GREEN SECTION)
     ====================================================== --}}
-    <section class="rd-section">
+    <section class="rd-section" style="padding-top: 10px;">
         <div class="rd-container">
+            <div class="rd-choose-section">
 
-            <div class="rd-choose">
-
-                <div class="rd-heading" data-aos="fade-up">
-                    <span class="small-title">WHY CHOOSE US</span>
+                <div class="rd-heading-center">
+                    <span class="rd-badge">WHY CHOOSE US</span>
                     <h2>WHY CHOOSE US FOR YOUR RISING DAMP INSPECTION?</h2>
                 </div>
 
                 <div class="rd-choose-grid">
 
-                    <div class="rd-choose-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="rd-choose-icon">
+                    <div class="rd-choose-card">
+                        <div class="rd-choose-icon-wrap">
                             <i class="bi bi-shield-check"></i>
                         </div>
-                        <h4>LICENSED INSPECTOR</h4>
-                        <p>Your inspection is conducted by an appropriately licensed and experienced VBA building inspector.</p>
+                        <h4>Licensed and Experienced Inspectors</h4>
+                        <p>All our inspectors are VBA-certified, experienced, and familiar with Melbourne’s unique environmental conditions.</p>
                     </div>
 
-                    <div class="rd-choose-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="rd-choose-icon">
+                    <div class="rd-choose-card">
+                        <div class="rd-choose-icon-wrap">
                             <i class="bi bi-search"></i>
                         </div>
-                        <h4>THOROUGH INSPECTION</h4>
-                        <p>We take a detailed approach when assessing visible moisture and damp-related building conditions.</p>
+                        <h4>Thorough Assessment</h4>
+                        <p>Our inspections cover all affected areas, including walls, flooring, and sub-floor spaces, to identify the source of rising damp.</p>
                     </div>
 
-                    <div class="rd-choose-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="rd-choose-icon">
-                            <i class="bi bi-file-earmark-check"></i>
+                    <div class="rd-choose-card">
+                        <div class="rd-choose-icon-wrap">
+                            <i class="bi bi-tools"></i>
                         </div>
-                        <h4>CLEAR REPORTS</h4>
-                        <p>Inspection findings are documented in a clear, professional photographic report delivered in 24 hours.</p>
+                        <h4>Latest Technology</h4>
+                        <p>We use advanced moisture meters and thermal imaging tools to ensure accurate assessments.</p>
                     </div>
 
-                    <div class="rd-choose-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="rd-choose-icon">
-                            <i class="bi bi-clock-history"></i>
+                    <div class="rd-choose-card">
+                        <div class="rd-choose-icon-wrap">
+                            <i class="bi bi-tag-fill"></i>
                         </div>
-                        <h4>FAST SERVICE</h4>
-                        <p>We provide a prompt, convenient inspection service designed around your property schedule.</p>
+                        <h4>Affordable Pricing</h4>
+                        <p>We offer competitive pricing for our rising damp inspections without compromising on quality.</p>
                     </div>
 
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         6. RISING DAMP PRICING (3 CARDS)
+         6. CHOOSE PACKAGE / ENSURE SAFETY AND COMPLIANCE (PRICING)
     ====================================================== --}}
-    <section class="rd-section rd-pricing">
+    <section class="rd-section">
         <div class="rd-container">
 
-            <div class="rd-heading" data-aos="fade-up">
-                <span class="small-title">PRICING PLANS</span>
-                <h2>RISING DAMP INSPECTION PRICING</h2>
+            <div class="rd-heading-center">
+                <span class="rd-badge">CHOOSE PACKAGE</span>
+                <h2>ENSURE SAFETY AND COMPLIANCE</h2>
             </div>
 
             <div class="rd-price-grid">
 
                 {{-- CARD 1: 2 BEDROOM --}}
-                <div class="rd-price-card hover-lift" data-aos="fade-up" data-aos-delay="100">
+                <div class="rd-price-card">
                     <div>
                         <div class="rd-price-icon">
                             <i class="bi bi-house-door"></i>
                         </div>
-                        <h3>2 BEDROOM</h3>
+                        <h3>2 bed room</h3>
 
-                        <div class="rd-price">
-                            $400*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="rd-price-amount">$400</div>
+                        <div class="rd-price-suffix">+GST/ Starting</div>
 
-                        <ul class="rd-price-list">
-                            <li>Comprehensive visual inspection</li>
-                            <li>Lower wall moisture meter scanning</li>
-                            <li>Damp profile & staining check</li>
-                            <li>Report & consultation included</li>
-                            <li>Delivered within 24 hours</li>
+                        <ul class="rd-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
 
@@ -1340,24 +1228,19 @@
                 </div>
 
                 {{-- CARD 2: 3 BEDROOM --}}
-                <div class="rd-price-card hover-lift" data-aos="fade-up" data-aos-delay="200">
+                <div class="rd-price-card">
                     <div>
                         <div class="rd-price-icon">
-                            <i class="bi bi-house-fill"></i>
+                            <i class="bi bi-house-door"></i>
                         </div>
-                        <h3>3 BEDROOM</h3>
+                        <h3>3 bed room</h3>
 
-                        <div class="rd-price">
-                            $450*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="rd-price-amount">$450</div>
+                        <div class="rd-price-suffix">+GST/ Starting</div>
 
-                        <ul class="rd-price-list">
-                            <li>Full 3-bedroom property inspection</li>
-                            <li>Subfloor ventilation & DPC check</li>
-                            <li>Thermal & moisture detection scanning</li>
-                            <li>Detailed photographic damp report</li>
-                            <li>Delivered within 24 hours</li>
+                        <ul class="rd-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
 
@@ -1366,25 +1249,20 @@
                     </a>
                 </div>
 
-                {{-- CARD 3: 4+ BEDROOM --}}
-                <div class="rd-price-card hover-lift" data-aos="fade-up" data-aos-delay="300">
+                {{-- CARD 3: 4 BEDROOM --}}
+                <div class="rd-price-card">
                     <div>
                         <div class="rd-price-icon">
                             <i class="bi bi-building"></i>
                         </div>
-                        <h3>4+ BEDROOM</h3>
+                        <h3>4 bed room</h3>
 
-                        <div class="rd-price">
-                            $525*
-                            <small>+ GST</small>
-                        </div>
+                        <div class="rd-price-amount">$525</div>
+                        <div class="rd-price-suffix">+GST/ Starting</div>
 
-                        <ul class="rd-price-list">
-                            <li>Multi-room & large home damp audit</li>
-                            <li>Full perimeter & subfloor evaluation</li>
-                            <li>Detailed observations across all levels</li>
-                            <li>Priority defect report delivery</li>
-                            <li>Phone debrief with licensed inspector</li>
+                        <ul class="rd-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
 
@@ -1400,65 +1278,102 @@
 
 
     {{-- =====================================================
-         7. CTA BANNER (SCHEDULE YOUR INSPECTION TODAY)
+         7. SCHEDULE CTA
     ====================================================== --}}
     <section class="rd-cta">
         <div class="rd-container">
-
-            <div class="rd-cta-content" data-aos="fade-right">
+            <div class="rd-cta-inner">
                 <h2>SCHEDULE YOUR INSPECTION TODAY</h2>
 
                 <p>
-                    A professional rising damp inspection can help identify moisture-related concerns before they become more extensive. Our inspection provides clear observations and professional reporting to help you protect the condition of your property.
+                    A pre-purchase building and pest inspection is a small investment that can save you from significant expenses and stress in the future. Our professional inspections provide you with the information needed to make an informed, confident decision about your property purchase. Don’t take risks with your investment—book your inspection today.
                 </p>
 
-                <a href="#quote-form" class="rd-btn btn-glow">
-                    SCHEDULE YOUR INSPECTION NOW
+                <a href="#quote-form" class="rd-btn-green">
+                    Schedule your inspection now
                 </a>
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         8. CLIENT REVIEWS & FEEDBACK
+         8. CLIENT FEEDBACK & REVIEWS
     ====================================================== --}}
     <section class="rd-section rd-reviews">
         <div class="rd-container">
 
-            <div class="rd-heading" data-aos="fade-up">
-                <span class="small-title">Client Feedback & Reviews</span>
-                <h2>WHAT OUR CLIENTS SAY</h2>
+            <div class="rd-heading-center">
+                <span class="rd-badge">TESTIMONIAL</span>
+                <h2>CLIENT FEEDBACK & REVIEWS</h2>
             </div>
 
             <div class="rd-review-grid">
 
-                <div class="rd-review-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                    <div class="rd-review-quote">“</div>
+                <div class="rd-review-card">
+                    <div class="rd-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "The inspection was very thorough and the report clearly explained the moisture concerns we had noticed in our property."
+                        Very professional and approachable. The property inspection was done thoroughly, and even minor defects were identified. Really appreciate the attention to detail and commitment to the job. Highly recommended for any building inspection.
                     </p>
-                    <div class="rd-stars">★★★★★</div>
-                    <h4>Neela Wajiani</h4>
+                    <div class="rd-review-stars">★★★★★</div>
+                    <h4>Swathi Tarini</h4>
                 </div>
 
-                <div class="rd-review-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div class="rd-review-quote">“</div>
+                <div class="rd-review-card">
+                    <div class="rd-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Very professional service and excellent communication. We received useful information about the damp areas and possible next steps."
+                        Took generous time to answer all my questions regarding the property's condition and report. Very kind, humble, and helpful. Highly recommended for anyone needing a building and pest inspection
                     </p>
-                    <div class="rd-stars">★★★★★</div>
+                    <div class="rd-review-stars">★★★★★</div>
+                    <h4>Luxmy</h4>
+                </div>
+
+                <div class="rd-review-card">
+                    <div class="rd-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Provided an excellent inspection for the property I'm purchasing. All findings were explained clearly, and the report was prepared on the same day. Warm, professional, and efficient. Highly recommended to friends and family.
+                    </p>
+                    <div class="rd-review-stars">★★★★★</div>
+                    <h4>Shaleen De Silva</h4>
+                </div>
+
+                <div class="rd-review-card">
+                    <div class="rd-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Extremely helpful and responsive. The building and pest inspection was completed quickly, and the report was delivered exactly as requested. Smooth and professional experience overall— great service!
+                    </p>
+                    <div class="rd-review-stars">★★★★★</div>
+                    <h4>Niresh Wijesiri</h4>
+                </div>
+
+                <div class="rd-review-card">
+                    <div class="rd-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Very thorough and professional during my pre-purchase building and pest inspection. Strongly recommended.
+                    </p>
+                    <div class="rd-review-stars">★★★★★</div>
                     <h4>Max</h4>
                 </div>
 
-                <div class="rd-review-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-                    <div class="rd-review-quote">“</div>
+                <div class="rd-review-card">
+                    <div class="rd-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Arranging the inspection was simple and the findings were explained clearly. Very happy with the service."
+                        Amazing experience. Quick replies, prompt actions, and a positive attitude. Would definitely recommend 👏👏👏
                     </p>
-                    <div class="rd-stars">★★★★★</div>
-                    <h4>Neena Dhivar</h4>
+                    <div class="rd-review-stars">★★★★★</div>
+                    <h4>Heena Bhavsar</h4>
                 </div>
 
             </div>
@@ -1470,87 +1385,87 @@
     {{-- =====================================================
          9. FREQUENTLY ASKED QUESTIONS (FAQ)
     ====================================================== --}}
-    <section class="rd-section rd-faq">
+    <section class="rd-section rd-faq" style="background: #ffffff; padding-top: 10px;">
         <div class="rd-container">
 
-            <div class="rd-heading" data-aos="fade-up">
-                <span class="small-title">Quick Answers</span>
+            <div class="rd-heading-center">
+                <span class="rd-badge">COMMON QUESTIONS</span>
                 <h2>MOST POPULAR QUESTIONS</h2>
             </div>
 
             <div class="rd-faq-grid">
 
-                {{-- LEFT COLUMN --}}
+                {{-- COLUMN 1 --}}
                 <div class="rd-faq-col">
 
                     {{-- FAQ 1 (Active by default) --}}
-                    <div class="rd-faq-item active" data-aos="fade-up" data-aos-delay="100">
-                        <button class="rd-faq-question" type="button">
-                            <span>What is rising damp?</span>
+                    <div class="rd-faq-item active">
+                        <button class="rd-faq-question" type="button" onclick="toggleRdFaq(this)">
+                            <span>1. What causes rising damp?</span>
                             <i class="bi bi-chevron-down rd-faq-icon"></i>
                         </button>
                         <div class="rd-faq-answer">
-                            Rising damp refers to moisture movement from the ground into porous building materials like brickwork and mortar. A professional inspection can help identify visible indicators and moisture-related conditions that require remediation.
+                            Rising damp occurs when moisture from the ground travels up through porous building materials, such as bricks and mortar, due to capillary action. It is often caused by the absence or failure of a damp-proof course.
                         </div>
                     </div>
 
                     {{-- FAQ 2 --}}
-                    <div class="rd-faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <button class="rd-faq-question" type="button">
-                            <span>How is rising damp inspected?</span>
+                    <div class="rd-faq-item">
+                        <button class="rd-faq-question" type="button" onclick="toggleRdFaq(this)">
+                            <span>2. How do I know if I have rising damp?</span>
                             <i class="bi bi-chevron-down rd-faq-icon"></i>
                         </button>
                         <div class="rd-faq-answer">
-                            The inspection generally involves visual assessment of accessible areas and, where appropriate, moisture measurements, damp profile examination, and inspection of visible building conditions.
+                            Signs of rising damp include damp patches or tide marks on walls, peeling paint, crumbling plaster, and a musty odor. If you notice any of these, it’s best to get a professional inspection.
                         </div>
                     </div>
 
                     {{-- FAQ 3 --}}
-                    <div class="rd-faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <button class="rd-faq-question" type="button">
-                            <span>Will I receive a report after the inspection?</span>
+                    <div class="rd-faq-item">
+                        <button class="rd-faq-question" type="button" onclick="toggleRdFaq(this)">
+                            <span>3. How can rising damp affect my property?</span>
                             <i class="bi bi-chevron-down rd-faq-icon"></i>
                         </button>
                         <div class="rd-faq-answer">
-                            Yes. Inspection findings, moisture measurements, and relevant photo observations are documented in a comprehensive professional inspection report delivered within 24 hours.
+                            Rising damp can lead to structural damage, cause wood rot, and promote the growth of mold and mildew, posing health risks and reducing property value.
                         </div>
                     </div>
 
                 </div>
 
-                {{-- RIGHT COLUMN --}}
+                {{-- COLUMN 2 --}}
                 <div class="rd-faq-col">
 
                     {{-- FAQ 4 (Active by default) --}}
-                    <div class="rd-faq-item active" data-aos="fade-up" data-aos-delay="150">
-                        <button class="rd-faq-question" type="button">
-                            <span>How do I know if my property has rising damp?</span>
+                    <div class="rd-faq-item active">
+                        <button class="rd-faq-question" type="button" onclick="toggleRdFaq(this)">
+                            <span>4. How long does the inspection take?</span>
                             <i class="bi bi-chevron-down rd-faq-icon"></i>
                         </button>
                         <div class="rd-faq-answer">
-                            Common visible indicators include damp staining, tide marks along lower walls, peeling paint, blistered plaster, efflorescence salt deposits, and musty damp odours.
+                            The inspection typically takes 1-2 hours, depending on the size of the property and the extent of the damp issues.
                         </div>
                     </div>
 
                     {{-- FAQ 5 --}}
-                    <div class="rd-faq-item" data-aos="fade-up" data-aos-delay="250">
-                        <button class="rd-faq-question" type="button">
-                            <span>Can rising damp cause mould?</span>
+                    <div class="rd-faq-item">
+                        <button class="rd-faq-question" type="button" onclick="toggleRdFaq(this)">
+                            <span>5. What can be done to fix rising damp?</span>
                             <i class="bi bi-chevron-down rd-faq-icon"></i>
                         </button>
                         <div class="rd-faq-answer">
-                            Persistent damp conditions can contribute to mould growth and deterioration of internal finishes. The underlying moisture source should be investigated promptly to safeguard health.
+                            Solutions include installing a damp-proof course, improving ventilation, and applying waterproofing treatments to affected areas.
                         </div>
                     </div>
 
                     {{-- FAQ 6 --}}
-                    <div class="rd-faq-item" data-aos="fade-up" data-aos-delay="350">
-                        <button class="rd-faq-question" type="button">
-                            <span>Can you identify the exact source of moisture?</span>
+                    <div class="rd-faq-item">
+                        <button class="rd-faq-question" type="button" onclick="toggleRdFaq(this)">
+                            <span>6. What is included in the rising damp inspection report?</span>
                             <i class="bi bi-chevron-down rd-faq-icon"></i>
                         </button>
                         <div class="rd-faq-answer">
-                            An inspection identifies observable signs and indicators of moisture movement, such as breached damp-proof courses or subfloor ventilation issues, providing clear guidance on necessary next steps.
+                            Our report includes moisture readings, photos of affected areas, and a detailed description of the findings along with recommendations for treatment.
                         </div>
                     </div>
 
@@ -1564,22 +1479,21 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const faqButtons = document.querySelectorAll('.rd-faq-question');
-    faqButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const item = this.parentElement;
-            const isActive = item.classList.contains('active');
-            
-            // Toggle clicked
-            if (isActive) {
-                item.classList.remove('active');
-            } else {
-                item.classList.add('active');
-            }
-        });
-    });
-});
+// FAQ Accordion Toggle
+function toggleRdFaq(btn) {
+    const item = btn.closest('.rd-faq-item');
+    const col = item.closest('.rd-faq-col');
+    const allInCol = col.querySelectorAll('.rd-faq-item');
+    const wasActive = item.classList.contains('active');
+
+    // Close other items in the same column
+    allInCol.forEach(el => el.classList.remove('active'));
+
+    // Toggle clicked item
+    if (!wasActive) {
+        item.classList.add('active');
+    }
+}
 </script>
 
 @endsection

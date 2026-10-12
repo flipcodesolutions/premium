@@ -99,7 +99,7 @@
 .services-hero-content h1 {
     color: #ffffff;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 38px;
     font-weight: 900;
@@ -434,7 +434,7 @@
 ========================================================= */
 
 .services-schedule {
-    min-height: 380px;
+    min-height: 520px;
 
     display: flex;
 
@@ -442,23 +442,27 @@
 
     position: relative;
 
+    padding: 100px 0 120px;
+
+    margin-bottom: 60px;
+
     background:
         linear-gradient(
             90deg,
-            rgba(4,45,78,.93) 0%,
-            rgba(4,45,78,.76) 45%,
-            rgba(4,45,78,.38) 100%
+            rgba(4,45,78,.94) 0%,
+            rgba(4,45,78,.80) 48%,
+            rgba(4,45,78,.35) 100%
         ),
         url("{{ asset('images/schedule.jpeg') }}")
-        center center / cover no-repeat;
+        center right / cover no-repeat;
 }
 
 .services-schedule-content {
-    max-width: 650px;
+    max-width: 780px;
 
     color: #ffffff;
 
-    padding: 45px 0;
+    padding: 0;
 }
 
 .services-schedule-content .services-small-title {
@@ -707,12 +711,28 @@
     }
 
     .services-schedule {
-        min-height: 430px;
-    }
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(4,45,78,.96) 0%,
+            rgba(4,45,78,.88) 50%,
+            rgba(4,45,78,.30) 100%
+        ),
+        url("{{ asset('images/schedule.jpeg') }}")
+        center right / cover no-repeat;
+    padding: 105px 0;
+    margin-bottom: 45px;
+}
 
-    .services-schedule-content {
-        padding: 50px 0;
-    }
+.services-schedule-content {
+    max-width: 820px;
+    color: #ffffff;
+    padding: 0;
+}
 
     .services-schedule-content h2 {
         font-size: 29px;
@@ -748,6 +768,12 @@
 
     .environment-item p {
         max-width: 240px;
+    }
+
+    .services-schedule {
+        min-height: 420px;
+        padding: 60px 0 75px;
+        margin-bottom: 35px;
     }
 
     .services-schedule-content h2 {
@@ -791,7 +817,7 @@
                     We offer a range of expert services to ensure your
                     property is thoroughly evaluated and safe. Our certified
                     inspectors use advanced technology to provide
-                    comprehensive assessments, detailed reports and
+                    comprehensive assessments, detailed reports, and
                     actionable recommendations.
                 </p>
 
@@ -812,7 +838,7 @@
         <div class="services-container" data-aos="fade-up">
 
             <div class="services-small-title">
-                What We Offer
+                What we offer
             </div>
 
             <h2 class="services-main-heading">
@@ -906,7 +932,7 @@
                             Ensure your property is built to the highest
                             standards at every stage of construction. Our
                             stage-by-stage inspections help identify issues
-                            early, avoid costly defects and keep your build
+                            early, avoid costly defects, and keep your build
                             on track.
                         </p>
 
@@ -950,7 +976,7 @@
                             Before you accept your new home, make sure
                             everything is built to standard. Our handover
                             inspections give you peace of mind by ensuring
-                            your property meets building codes and quality
+                            your property meets all building codes and quality
                             expectations.
                         </p>
 
@@ -994,7 +1020,7 @@
                             Protect your property from rising damp and
                             hidden moisture damage. Our expert inspections
                             help you detect issues early, avoid costly
-                            repairs and maintain a safe living space.
+                            repairs, and maintain a safe living space.
                         </p>
 
                         <a
@@ -1036,7 +1062,7 @@
                         <p class="service-card-description">
                             Ensure your pool complies with Victoria's
                             stringent safety regulations. Our certified
-                            pool barrier inspections help you avoid fines
+                            pool barrier inspections will help you avoid fines
                             and keep your property safe for everyone.
                         </p>
 
@@ -1209,9 +1235,9 @@
                         <p class="service-card-description">
                             Ensure your new home meets all standards and
                             regulations with our comprehensive inspections.
-                            Our experts provide detailed reports on structural
-                            integrity and safety of your newly constructed
-                            home.
+                            Our experts provide detailed reports on the
+                            structural integrity and safety of your newly
+                            constructed home.
                         </p>
 
                         <a
@@ -1298,7 +1324,7 @@
                         </h3>
 
                         <p>
-                            Utilising the latest tools for precise
+                            Utilizing the latest tools for precise
                             assessments.
                         </p>
 
@@ -1392,14 +1418,6 @@
                     >
                         <i class="bi bi-telephone-fill"></i>
                         0466 001 551
-                    </a>
-
-                    <a
-                        href="{{ route('booking.create') }}"
-                        class="schedule-book-btn btn-glow"
-                    >
-                        Book Inspection
-                        <i class="bi bi-arrow-right"></i>
                     </a>
 
                 </div>

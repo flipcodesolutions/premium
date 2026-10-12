@@ -908,7 +908,7 @@
 .related-section,
 .blog-detail-final-cta {
 
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 
 }
 
@@ -1026,7 +1026,7 @@
 
     color: #ffffff;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: clamp(34px, 5vw, 60px);
 
@@ -1172,7 +1172,7 @@
 
     color: var(--article-navy);
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 29px;
 
@@ -1191,7 +1191,7 @@
 
     color: var(--article-blue);
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 22px;
 
@@ -1450,7 +1450,7 @@
 
     color: var(--article-navy);
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 20px;
 
@@ -1573,7 +1573,7 @@
 
     color: #ffffff;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 18px;
 
@@ -1726,7 +1726,7 @@
 
     color: var(--article-navy);
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 17px;
 
@@ -1816,7 +1816,7 @@
 
     margin: 4px 0 0;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 12px;
 
@@ -2031,7 +2031,7 @@
 
     color: #ffffff;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 19px;
 
@@ -2148,7 +2148,7 @@
 
     color: var(--article-navy);
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 35px;
 
@@ -2261,7 +2261,7 @@
 
     margin: 9px 0 10px;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 18px;
 
@@ -2383,7 +2383,7 @@
 
     color: #ffffff;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: clamp(25px, 3vw, 37px);
 

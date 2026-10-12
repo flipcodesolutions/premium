@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -37,7 +37,7 @@
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background:
                 linear-gradient(
                     135deg,
@@ -121,7 +121,7 @@
 
         .brand-content h1 {
             color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: clamp(34px, 3.8vw, 50px);
             line-height: 1.08;
             font-weight: 900;
@@ -218,7 +218,7 @@
 
         .login-header h2 {
             color: var(--navy);
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 27px;
             font-weight: 800;
             margin: 6px 0 8px;

@@ -99,7 +99,7 @@
                 <div class="contact-form-wrapper hover-lift">
                     <h2 class="quick-quote-heading">GET QUICK QUOTE</h2>
 
-                    <form action="{{ route('quote.store') }}" method="POST">
+                    <form action="{{ route('quote.store') }}" method="POST" id="quickQuoteForm" novalidate>
                         @csrf
 
                         <div class="row g-3">
@@ -107,36 +107,52 @@
                             <div class="col-md-6">
                                 <input type="text"
                                        name="name"
-                                       class="form-control quote-input"
+                                       id="quote_name"
+                                       class="form-control quote-input @error('name') is-invalid @enderror"
                                        placeholder="Name"
                                        value="{{ old('name') }}"
                                        required>
+                                <div class="quote-field-error" id="error_name" style="{{ $errors->has('name') ? 'display: flex;' : 'display: none;' }}">
+                                    <i class="bi bi-info-circle"></i>
+                                    <span>{{ $errors->first('name') ?? 'The field is required.' }}</span>
+                                </div>
                             </div>
 
                             {{-- Phone --}}
                             <div class="col-md-6">
                                 <input type="tel"
                                        name="phone"
-                                       class="form-control quote-input"
+                                       id="quote_phone"
+                                       class="form-control quote-input @error('phone') is-invalid @enderror"
                                        placeholder="Phone"
                                        value="{{ old('phone') }}"
                                        required>
+                                <div class="quote-field-error" id="error_phone" style="{{ $errors->has('phone') ? 'display: flex;' : 'display: none;' }}">
+                                    <i class="bi bi-info-circle"></i>
+                                    <span>{{ $errors->first('phone') ?? 'The field accepts only numbers and phone characters (#, -, *, etc).' }}</span>
+                                </div>
                             </div>
 
                             {{-- Email --}}
                             <div class="col-md-6">
                                 <input type="email"
                                        name="email"
-                                       class="form-control quote-input"
+                                       id="quote_email"
+                                       class="form-control quote-input @error('email') is-invalid @enderror"
                                        placeholder="Email"
                                        value="{{ old('email') }}"
                                        required>
+                                <div class="quote-field-error" id="error_email" style="{{ $errors->has('email') ? 'display: flex;' : 'display: none;' }}">
+                                    <i class="bi bi-info-circle"></i>
+                                    <span>{{ $errors->first('email') ?? 'Please enter a valid email address.' }}</span>
+                                </div>
                             </div>
 
                             {{-- Address --}}
                             <div class="col-md-6">
                                 <input type="text"
                                        name="property_address"
+                                       id="quote_address"
                                        class="form-control quote-input"
                                        placeholder="Address"
                                        value="{{ old('property_address') }}">
@@ -182,6 +198,18 @@
                                 <button type="submit" class="btn btn-quick-quote btn-glow">
                                     Get My Quote
                                 </button>
+
+                                {{-- Submission error message matching screenshot --}}
+                                <div class="quote-submission-error" id="form_submission_error" style="{{ $errors->any() ? 'display: flex;' : 'display: none;' }}">
+                                    <i class="bi bi-info-circle"></i>
+                                    <span>Your submission failed because of an error.</span>
+                                </div>
+
+                                {{-- Success message --}}
+                                <div class="quote-submission-success" id="form_submission_success" style="{{ session('success') ? 'display: flex;' : 'display: none;' }}">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span id="form_success_text">{{ session('success') ?? '' }}</span>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -230,11 +258,11 @@
     :root {
         --c-green: #43a900;
         --c-green-hover: #378e00;
-        --c-navy: #072448;
-        --c-navy-dark: #051c38;
-        --c-text: #4a5568;
+        --c-navy: #000000;
+        --c-navy-dark: #000000;
+        --c-text: #000000;
         --c-input-bg: #edf2f7;
-        --c-input-border: #e2e8f0;
+        --c-input-border: #cbd5e1;
     }
 
     /* ---------------------------------------------------------
@@ -267,7 +295,7 @@
     }
 
     .contact-hero-card h1 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         color: #ffffff;
         font-size: 38px;
         font-weight: 900;
@@ -296,16 +324,12 @@
     .contact-info-col {
         position: relative;
         padding-bottom: 30px;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' opacity='0.35'%3E%3Cpath fill='none' stroke='%2388c66e' stroke-width='1.2' d='M0,350 Q150,300 300,380 T600,320 M0,380 Q150,330 300,410 T600,350 M0,410 Q150,360 300,440 T600,380 M0,440 Q150,390 300,470 T600,410 M0,470 Q150,420 300,500 T600,440 M0,500 Q150,450 300,530 T600,470 M0,530 Q150,480 300,560 T600,500 M0,560 Q150,510 300,590 T600,530' /%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: bottom left;
-        background-size: 380px;
     }
 
     .contact-green-label {
         display: inline-block;
         color: var(--c-green);
-        font-size: 13.5px;
+        font-size: 14px;
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.8px;
@@ -313,11 +337,12 @@
     }
 
     .contact-tagline {
-        color: var(--c-navy);
-        font-size: 14px;
+        color: #000000;
+        font-size: 15.5px;
+        font-weight: 500;
         line-height: 1.6;
         margin-bottom: 34px;
-        max-width: 420px;
+        max-width: 440px;
     }
 
     .contact-details-list {
@@ -333,31 +358,33 @@
     }
 
     .contact-detail-icon {
-        width: 44px;
-        min-width: 44px;
-        height: 44px;
+        width: 48px;
+        min-width: 48px;
+        height: 48px;
         background: var(--c-green);
         color: #ffffff;
         border-radius: 6px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 19px;
+        font-size: 20px;
     }
 
     .contact-detail-content h4 {
-        color: var(--c-navy);
-        font-size: 13px;
-        font-weight: 900;
+        color: #062a4d;
+        font-family: 'Inter', sans-serif;
+        font-size: 15.5px;
+        font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.4px;
-        margin: 0 0 3px;
+        letter-spacing: 0.3px;
+        margin: 0 0 4px;
     }
 
     .contact-detail-content p,
     .contact-detail-content a {
-        color: var(--c-text);
-        font-size: 13.5px;
+        color: #111827;
+        font-size: 15px;
+        font-weight: 500;
         line-height: 1.5;
         margin: 0;
         text-decoration: none;
@@ -369,56 +396,71 @@
 
     /* FORM */
     .quick-quote-heading {
-        color: var(--c-navy);
-        font-family: 'Montserrat', sans-serif;
-        font-size: 27px;
+        color: #000000;
+        font-family: 'Inter', sans-serif;
+        font-size: 30px;
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.3px;
-        margin: 0 0 20px;
+        margin: 0 0 22px;
     }
 
     .quote-input {
         background-color: var(--c-input-bg);
         border: 1px solid var(--c-input-border);
         border-radius: 4px;
-        color: #1a202c;
-        font-size: 13.5px;
-        height: 46px;
-        padding: 10px 14px;
+        color: #000000;
+        font-size: 15px;
+        font-weight: 600;
+        height: 50px;
+        padding: 12px 16px;
         box-shadow: none;
         transition: all 0.2s ease;
     }
 
     .quote-input::placeholder {
-        color: #8c9ba5;
+        color: #000000;
+        opacity: 0.65;
+        font-size: 15px;
+        font-weight: 500;
     }
 
     .quote-input:focus {
         background-color: #ffffff;
         border-color: var(--c-green);
+        color: #000000;
         box-shadow: 0 0 0 3px rgba(67, 169, 0, 0.15);
     }
 
     .quote-textarea {
         height: auto;
-        min-height: 100px;
+        min-height: 110px;
         resize: vertical;
+        color: #000000;
+        font-size: 15px;
+        font-weight: 600;
     }
 
     .quote-select {
-        color: #4a5568;
+        color: #000000;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .quote-select option {
+        color: #000000;
+        font-size: 15px;
     }
 
     .btn-quick-quote {
         background: var(--c-green);
         border: 1px solid var(--c-green);
         color: #ffffff;
-        font-size: 14px;
+        font-size: 15.5px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        height: 46px;
+        height: 50px;
         width: 100%;
         border-radius: 4px;
         transition: background 0.2s ease;
@@ -428,6 +470,60 @@
         background: var(--c-green-hover);
         border-color: var(--c-green-hover);
         color: #ffffff;
+    }
+
+    /* Validation Errors & Messages */
+    .quote-field-error {
+        color: #d9534f;
+        font-size: 13.5px;
+        font-weight: 500;
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        line-height: 1.4;
+    }
+
+    .quote-field-error i {
+        font-size: 14px;
+        color: #d9534f;
+        flex-shrink: 0;
+    }
+
+    .quote-submission-error {
+        color: #d9534f;
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        line-height: 1.4;
+    }
+
+    .quote-submission-error i {
+        font-size: 15px;
+        color: #d9534f;
+        flex-shrink: 0;
+    }
+
+    .quote-submission-success {
+        color: #42a900;
+        background: rgba(66, 169, 0, 0.08);
+        border: 1px solid rgba(66, 169, 0, 0.3);
+        border-radius: 4px;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        line-height: 1.4;
+    }
+
+    .quote-input.is-invalid {
+        border-color: #d9534f !important;
     }
 
     /* ---------------------------------------------------------
@@ -460,7 +556,7 @@
 
     .reach-out-heading {
         color: #ffffff;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: clamp(24px, 3.2vw, 34px);
         font-weight: 900;
         line-height: 1.25;
@@ -525,7 +621,7 @@
 
     .quick-call-phone {
         color: var(--c-navy);
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 24px;
         font-weight: 900;
         text-decoration: none;
@@ -608,3 +704,190 @@
 </style>
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('quickQuoteForm');
+    if (!form) return;
+
+    const nameInput = document.getElementById('quote_name');
+    const phoneInput = document.getElementById('quote_phone');
+    const emailInput = document.getElementById('quote_email');
+
+    const nameError = document.getElementById('error_name');
+    const phoneError = document.getElementById('error_phone');
+    const emailError = document.getElementById('error_email');
+
+    const submitError = document.getElementById('form_submission_error');
+    const submitSuccess = document.getElementById('form_submission_success');
+    const successText = document.getElementById('form_success_text');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    function showError(input, errorEl, message) {
+        if (!input || !errorEl) return;
+        input.classList.add('is-invalid');
+        const span = errorEl.querySelector('span');
+        if (span) span.textContent = message;
+        errorEl.style.display = 'flex';
+    }
+
+    function clearError(input, errorEl) {
+        if (!input || !errorEl) return;
+        input.classList.remove('is-invalid');
+        errorEl.style.display = 'none';
+    }
+
+    function validateName() {
+        const val = nameInput.value.trim();
+        if (!val) {
+            showError(nameInput, nameError, 'The field is required.');
+            return false;
+        }
+        clearError(nameInput, nameError);
+        return true;
+    }
+
+    function validatePhone() {
+        const val = phoneInput.value.trim();
+        if (!val) {
+            showError(phoneInput, phoneError, 'The field is required.');
+            return false;
+        }
+        // Accepts only numbers and phone characters (#, -, *, etc)
+        const phoneCharsRegex = /^[0-9\s\+\-\(\)\#\*]{6,25}$/;
+        if (!phoneCharsRegex.test(val)) {
+            showError(phoneInput, phoneError, 'The field accepts only numbers and phone characters (#, -, *, etc).');
+            return false;
+        }
+        clearError(phoneInput, phoneError);
+        return true;
+    }
+
+    function validateEmail() {
+        const val = emailInput.value.trim();
+        if (!val) {
+            showError(emailInput, emailError, 'The field is required.');
+            return false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(val)) {
+            showError(emailInput, emailError, 'Please enter a valid email address.');
+            return false;
+        }
+        clearError(emailInput, emailError);
+        return true;
+    }
+
+    // Real-time phone check: if user enters letters or invalid phone characters, show error immediately
+    phoneInput.addEventListener('input', function () {
+        const val = phoneInput.value.trim();
+        if (val && !/^[\d\s\+\-\(\)\#\*]+$/.test(val)) {
+            showError(phoneInput, phoneError, 'The field accepts only numbers and phone characters (#, -, *, etc).');
+        } else if (phoneInput.classList.contains('is-invalid')) {
+            validatePhone();
+        }
+    });
+
+    phoneInput.addEventListener('blur', function () {
+        if (phoneInput.value.trim() !== '') {
+            validatePhone();
+        }
+    });
+
+    nameInput.addEventListener('input', function () {
+        if (nameInput.classList.contains('is-invalid')) {
+            validateName();
+        }
+    });
+
+    nameInput.addEventListener('blur', function () {
+        if (nameInput.value.trim() !== '') {
+            validateName();
+        }
+    });
+
+    emailInput.addEventListener('input', function () {
+        if (emailInput.classList.contains('is-invalid')) {
+            validateEmail();
+        }
+    });
+
+    emailInput.addEventListener('blur', function () {
+        if (emailInput.value.trim() !== '') {
+            validateEmail();
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const isNameValid = validateName();
+        const isPhoneValid = validatePhone();
+        const isEmailValid = validateEmail();
+
+        if (!isNameValid || !isPhoneValid || !isEmailValid) {
+            if (submitError) submitError.style.display = 'flex';
+            if (submitSuccess) submitSuccess.style.display = 'none';
+
+            // Focus first invalid element
+            if (!isNameValid) nameInput.focus();
+            else if (!isPhoneValid) phoneInput.focus();
+            else if (!isEmailValid) emailInput.focus();
+            return;
+        }
+
+        if (submitError) submitError.style.display = 'none';
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Get My Quote';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending...';
+        }
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        })
+        .then(async (response) => {
+            const data = await response.json();
+            if (!response.ok) {
+                if (submitError) submitError.style.display = 'flex';
+                if (data.errors) {
+                    if (data.errors.name) showError(nameInput, nameError, data.errors.name[0]);
+                    if (data.errors.phone) showError(phoneInput, phoneError, data.errors.phone[0]);
+                    if (data.errors.email) showError(emailInput, emailError, data.errors.email[0]);
+                }
+            } else {
+                form.reset();
+                clearError(nameInput, nameError);
+                clearError(phoneInput, phoneError);
+                clearError(emailInput, emailError);
+                if (submitError) submitError.style.display = 'none';
+                if (submitSuccess) {
+                    if (successText) {
+                        successText.textContent = data.message || 'Thank you! Your inspection request has been submitted successfully.';
+                    }
+                    submitSuccess.style.display = 'flex';
+                }
+            }
+        })
+        .catch((err) => {
+            console.error('Submission error:', err);
+            if (submitError) submitError.style.display = 'flex';
+        })
+        .finally(() => {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+    });
+});
+</script>
+@endpush

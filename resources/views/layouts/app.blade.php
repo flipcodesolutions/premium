@@ -54,7 +54,7 @@
           href="https://fonts.gstatic.com"
           crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
           rel="stylesheet">
 
 
@@ -304,11 +304,19 @@
         }
 
 
+        /* Global typography default to Inter */
+        body,
+        h1, h2, h3, h4, h5, h6,
+        input, button, select, textarea,
+        p, a, label, li, td, th {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
         body {
 
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-            font-size: 14px;
+            font-size: 14.5px;
 
             line-height: 1.7;
 
@@ -336,7 +344,7 @@
         h5,
         h6 {
 
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
             color: var(--primary-color);
 
@@ -354,7 +362,7 @@
 
         .heading-condensed {
 
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Inter', sans-serif;
 
             font-weight: 700;
 
@@ -408,7 +416,7 @@
         textarea,
         select {
 
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
 
             max-width: 100%;
 

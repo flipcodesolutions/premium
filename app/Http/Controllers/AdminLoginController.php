@@ -25,6 +25,7 @@ class AdminLoginController extends Controller
     /**
      * Handle Admin Registration
      */
+    
     public function register(Request $request)
     {
         $validated = $request->validate([

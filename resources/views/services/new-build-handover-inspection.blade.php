@@ -7,1010 +7,958 @@
 <style>
 /* =========================================================
    NEW BUILD HANDOVER INSPECTION PAGE STYLES
-   Designed 1:1 to match reference layout
-   With increased / larger font sizes as requested
+   1:1 Pixel-Perfect Match with Reference Screenshot & Live Site
 ========================================================= */
 
-.d-page {
-    --d-navy: #073763;
-    --d-navy-dark: #052646;
-    --d-green: #42a900;
-    --d-green-dark: #358c00;
-    --d-light-green: #eaf6e6;
-    --d-choose-bg: #d8edd5;
-    --d-cyan: #1b9eea;
-    --d-text: #2d3748;
-    --d-muted: #4a5568;
-    --d-border: #e2e8f0;
-    --d-orange: #ffb400;
-
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--d-text);
-    overflow-x: hidden;
-    position: relative;
-    font-size: 17.5px;
-    line-height: 1.8;
+:root {
+    --nb-navy: #073763;
+    --nb-navy-dark: #052646;
+    --nb-green: #42a900;
+    --nb-green-dark: #358c00;
+    --nb-light-green: #eef7ed;
+    --nb-text: #333333;
+    --nb-muted: #555555;
+    --nb-border: #e2e8f0;
 }
 
-/* Container */
-.d-container {
+.nb-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--nb-text);
+    overflow-x: hidden;
+    position: relative;
+    background: #ffffff;
+}
+
+.nb-container {
     width: 92%;
     max-width: 1180px;
     margin: 0 auto;
 }
 
-.d-section {
-    padding: 75px 0;
+.nb-section {
+    padding: 70px 0;
 }
 
-/* Headings with larger font sizes */
-.d-heading {
-    text-align: center;
-    margin-bottom: 42px;
-}
-
-.d-heading .small-title {
-    display: block;
-    margin-bottom: 12px;
-    color: var(--d-green);
-    font-size: 17px;
+/* Headings */
+.nb-badge {
+    display: inline-block;
+    color: var(--nb-green);
+    font-size: 13.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.2px;
+    margin-bottom: 8px;
 }
 
-.d-heading h2 {
+.nb-heading-center {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.nb-heading-center h2 {
     margin: 0;
-    color: var(--d-navy);
-    font-size: clamp(28px, 3.8vw, 38px);
+    color: var(--nb-navy);
+    font-size: clamp(24px, 3.2vw, 34px);
     line-height: 1.25;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.d-heading p {
-    max-width: 820px;
-    margin: 16px auto 0;
-    color: var(--d-muted);
-    font-size: 18px;
-    line-height: 1.8;
+.nb-heading-center p {
+    max-width: 720px;
+    margin: 12px auto 0;
+    color: var(--nb-muted);
+    font-size: 15px;
+    line-height: 1.7;
 }
 
-/* Buttons with larger text & touch target */
-.d-btn {
+/* Buttons */
+.nb-btn-green {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 16px 32px;
-    background: var(--d-green);
-    color: #fff !important;
+    gap: 8px;
+    padding: 13px 28px;
+    background: var(--nb-green);
+    color: #ffffff !important;
     border: 0;
     border-radius: 4px;
-    font-size: 17px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    text-decoration: none;
-    transition: all 0.25s ease;
-}
-
-.d-btn:hover {
-    background: var(--d-green-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(66, 169, 0, 0.35);
-}
-
-/* Floating Right Tab */
-.d-floating-tab {
-    position: fixed;
-    right: 0;
-    top: 48%;
-    transform: translateY(-50%);
-    background: var(--d-green);
-    color: #fff !important;
-    padding: 16px 12px;
     font-size: 14.5px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border-radius: 6px 0 0 6px;
-    z-index: 999;
-    box-shadow: -3px 4px 16px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.5px;
     text-decoration: none;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform-origin: center;
-    display: flex;
-    align-items: center;
-    gap: 8px;
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 
-.d-floating-tab:hover {
-    background: var(--d-green-dark);
-    padding-right: 16px;
+.nb-btn-green:hover {
+    background: var(--nb-green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(66, 169, 0, 0.35);
 }
 
 /* =========================================================
    1. HERO SECTION
 ========================================================= */
-.d-hero {
+.nb-hero {
     position: relative;
     background:
         linear-gradient(
             90deg,
-            rgba(7, 43, 76, 0.95) 0%,
-            rgba(7, 43, 76, 0.88) 52%,
+            rgba(7, 43, 76, 0.94) 0%,
+            rgba(7, 43, 76, 0.88) 50%,
             rgba(7, 43, 76, 0.65) 100%
         ),
-        url("{{ asset('images/schedule.jpeg') }}") center center / cover no-repeat;
+        url("{{ asset('images/dilapidation-hero.jpg') }}") center center / cover no-repeat;
     color: #fff;
     padding: 30px 0;
 }
 
-.d-hero-inner {
+.nb-hero-inner {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: 45px;
     align-items: center;
-    padding: 65px 0 75px;
+    padding: 50px 0 60px;
 }
 
-.d-hero-content h1 {
-    font-size: clamp(32px, 4.4vw, 46px);
-    line-height: 1.18;
+.nb-hero-content .nb-hero-badge {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.nb-hero-content h1 {
+    font-size: clamp(26px, 3.5vw, 40px);
+    line-height: 1.2;
     font-weight: 900;
     color: #ffffff;
-    margin: 0 0 18px;
+    margin: 0 0 16px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-.d-hero-tag {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 18px;
-    opacity: 0.95;
-}
-
-.d-hero-content p {
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 18px;
-    line-height: 1.8;
-    margin: 0 0 28px;
-    max-width: 640px;
-}
-
-.d-hero-license {
-    display: inline-block;
-    margin-top: 18px;
-    font-size: 14.5px;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
+.nb-hero-content .nb-hero-sub {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0 0 26px;
+    font-weight: 500;
 }
 
 /* Hero Form */
-.d-hero-form {
+.nb-hero-form {
     background: #ffffff;
     border-radius: 8px;
-    padding: 30px 28px;
+    padding: 26px 24px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
-    color: var(--d-text);
+    color: var(--nb-text);
 }
 
-.d-form-row {
+.nb-hero-form h3 {
+    margin: 0 0 16px;
+    color: var(--nb-navy);
+    font-size: 19px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.nb-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-bottom: 12px;
 }
 
-.d-hero-form input,
-.d-hero-form select,
-.d-hero-form textarea {
+.nb-hero-form input,
+.nb-hero-form select,
+.nb-hero-form textarea {
     width: 100%;
-    padding: 13px 15px;
+    padding: 11px 14px;
     border: 1px solid #d2d6dc;
     border-radius: 4px;
-    font-size: 15.5px;
-    color: #2d3748;
+    font-size: 13.5px;
+    color: #333;
     outline: none;
     transition: border-color 0.2s ease;
     background: #fff;
-    margin-bottom: 12px;
+    box-sizing: border-box;
 }
 
-.d-hero-form input:focus,
-.d-hero-form select:focus,
-.d-hero-form textarea:focus {
-    border-color: var(--d-green);
+.nb-hero-form input:focus,
+.nb-hero-form select:focus,
+.nb-hero-form textarea:focus {
+    border-color: var(--nb-green);
+    box-shadow: 0 0 0 3px rgba(66, 169, 0, 0.15);
 }
 
-.d-hero-form textarea {
-    resize: vertical;
-    min-height: 80px;
+.nb-hero-form textarea {
+    height: 75px;
+    resize: none;
+    margin-bottom: 14px;
 }
 
-.d-hero-form .d-submit {
+.nb-submit-btn {
     width: 100%;
-    padding: 16px;
-    background: var(--d-green);
+    padding: 13px;
+    background: var(--nb-green);
     color: #fff;
-    border: 0;
+    border: none;
     border-radius: 4px;
-    font-size: 17px;
-    font-weight: 900;
+    font-size: 15px;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.8px;
     cursor: pointer;
-    transition: background 0.2s ease;
-    margin-top: 4px;
+    transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.d-hero-form .d-submit:hover {
-    background: var(--d-green-dark);
+.nb-submit-btn:hover {
+    background: var(--nb-green-dark);
 }
 
 /* =========================================================
    2. WELCOME SECTION + INSPECTOR CARD
 ========================================================= */
-.d-welcome-grid {
+.nb-welcome-grid {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.d-welcome-content .small-title {
-    display: block;
-    margin-bottom: 12px;
-    color: var(--d-green);
-    font-size: 16px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.d-welcome-content h2 {
-    color: var(--d-navy);
-    font-size: clamp(28px, 3.6vw, 38px);
-    line-height: 1.25;
-    font-weight: 900;
-    margin: 0 0 20px;
-    text-transform: uppercase;
-}
-
-.d-welcome-content > p {
-    color: var(--d-muted);
-    font-size: 17.5px;
-    line-height: 1.8;
-    margin: 0 0 20px;
-}
-
-.d-feature-mini {
-    display: flex;
-    gap: 18px;
-    margin-bottom: 18px;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 45px;
     align-items: flex-start;
 }
 
-.d-feature-mini-icon {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+.nb-welcome-content h2 {
+    color: var(--nb-navy);
+    font-size: clamp(24px, 2.8vw, 32px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+}
+
+.nb-welcome-content p {
+    color: var(--nb-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0 0 16px;
+}
+
+.nb-feature-list {
+    margin: 22px 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.nb-feature-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.nb-feature-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: #e8f4fc;
-    color: var(--d-cyan);
+    background: rgba(27, 158, 234, 0.12);
+    color: #1b9eea;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 19px;
+    font-size: 16px;
     margin-top: 2px;
 }
 
-.d-feature-mini h4 {
-    margin: 0 0 6px;
-    color: var(--d-navy);
-    font-size: 17.5px;
+.nb-feature-item h4 {
+    margin: 0 0 4px;
+    color: var(--nb-navy);
+    font-size: 15px;
     font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
-.d-feature-mini p {
+.nb-feature-item p {
     margin: 0;
-    color: var(--d-muted);
-    font-size: 16px;
-    line-height: 1.7;
+    color: var(--nb-muted);
+    font-size: 14px;
+    line-height: 1.6;
 }
 
 /* Inspector Card */
-.d-inspector-card {
+.nb-inspector-card {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    border: 1px solid #dce2e8;
+    border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 90px;
 }
 
-.d-inspector-title {
-    background: #111111;
+.nb-inspector-header {
+    background: #000000;
     color: #ffffff;
-    font-size: 16px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
     padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.d-inspector-card img {
+.nb-inspector-card img {
     width: 100%;
-    height: 360px;
+    height: 340px;
     object-fit: cover;
     object-position: center top;
     display: block;
 }
 
-.d-inspector-name {
-    padding: 16px 14px 12px;
-    font-size: 16.5px;
-    font-weight: 800;
-    color: var(--d-navy);
-    text-transform: uppercase;
+.nb-inspector-body {
+    padding: 18px 20px 22px;
+    text-align: center;
+    background: #ffffff;
 }
 
-.d-inspector-btn {
-    display: block;
-    background: var(--d-green);
+.nb-inspector-body h4 {
+    margin: 0 0 14px;
+    color: var(--nb-navy);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.5;
+}
+
+.nb-inspector-call {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    background: var(--nb-green);
     color: #ffffff !important;
     text-decoration: none;
-    padding: 14px;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 900;
-    letter-spacing: 0.6px;
+    border-radius: 4px;
     transition: background 0.2s ease;
 }
 
-.d-inspector-btn:hover {
-    background: var(--d-green-dark);
+.nb-inspector-call:hover {
+    background: var(--nb-green-dark);
 }
 
 /* =========================================================
-   3. WHY HANDOVER INSPECTIONS MATTER (2x2 GRID)
+   3. WHY IMPORTANT (2x2 GRID)
 ========================================================= */
-.d-matters {
-    background: #fbfcfc;
-}
-
-.d-matters-grid {
+.nb-why-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    max-width: 1060px;
-    margin: 0 auto;
+    gap: 22px;
+    margin-top: 15px;
 }
 
-.d-matters-card {
+.nb-why-card {
     background: #ffffff;
-    border: 1px solid #e5e9ec;
+    border: 1px solid #e1e7ed;
     border-radius: 6px;
-    padding: 22px 24px;
+    padding: 24px 22px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nb-why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.nb-why-icon {
+    flex-shrink: 0;
+    font-size: 20px;
+    color: var(--nb-green);
+    margin-top: 2px;
+}
+
+.nb-why-text strong {
+    color: var(--nb-navy);
+    font-size: 15px;
+    font-weight: 800;
+    display: inline;
+}
+
+.nb-why-text span {
+    color: var(--nb-muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+/* =========================================================
+   4. COMMON DEFECTS / ISSUES (LIST + RIGHT CAROUSEL)
+========================================================= */
+.nb-issues-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.nb-issues-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.nb-issue-item {
     display: flex;
     align-items: flex-start;
-    gap: 18px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    gap: 12px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--nb-muted);
 }
 
-.d-matters-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+.nb-issue-item i {
+    color: var(--nb-green);
+    font-size: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
 }
 
-.d-check-icon {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
+.nb-issue-item strong {
+    color: var(--nb-navy);
+    font-weight: 800;
+}
+
+/* Carousel */
+.nb-carousel-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.nb-carousel-slide {
+    display: none;
+    width: 100%;
+    height: 420px;
+}
+
+.nb-carousel-slide.active {
+    display: block;
+}
+
+.nb-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.nb-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: var(--d-green);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 2;
+}
+
+.nb-carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.nb-carousel-prev {
+    left: 12px;
+}
+
+.nb-carousel-next {
+    right: 12px;
+}
+
+/* =========================================================
+   5. WHY CHOOSE US (MINT CONTAINER + 4 WHITE CARDS)
+========================================================= */
+.nb-choose-box {
+    background: var(--nb-light-green);
+    border-radius: 18px;
+    padding: 55px 40px;
+    margin: 20px 0;
+}
+
+.nb-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.nb-choose-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 30px 22px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nb-choose-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.09);
+}
+
+.nb-choose-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--nb-green);
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    font-weight: 900;
-    margin-top: 3px;
+    font-size: 24px;
+    margin-bottom: 18px;
 }
 
-.d-matters-card-content h4 {
-    margin: 0 0 8px;
-    color: var(--d-navy);
-    font-size: 18px;
-    font-weight: 800;
-}
-
-.d-matters-card-content p {
-    margin: 0;
-    color: var(--d-muted);
-    font-size: 16px;
-    line-height: 1.7;
-}
-
-/* =========================================================
-   4. COMPREHENSIVE HANDOVER INSPECTION PROCESS (SCOPE & g6.jpeg)
-========================================================= */
-.d-scope-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 45px;
-    align-items: center;
-}
-
-.d-scope-content h3 {
-    font-size: clamp(24px, 3vw, 32px);
-    line-height: 1.25;
-    font-weight: 900;
-    color: var(--d-navy);
-    margin: 0 0 16px;
-    text-transform: uppercase;
-}
-
-.d-scope-content > p {
-    color: var(--d-muted);
-    font-size: 17.5px;
-    line-height: 1.8;
-    margin-bottom: 24px;
-}
-
-.d-scope-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.d-scope-item {
-    display: flex;
-    gap: 18px;
-    margin-bottom: 20px;
-    align-items: flex-start;
-}
-
-.d-scope-badge {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
-    border-radius: 50%;
-    background: var(--d-green);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 900;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-}
-
-.d-scope-info strong {
-    display: block;
-    color: var(--d-navy);
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.d-scope-info span {
-    display: block;
-    color: var(--d-muted);
-    font-size: 16px;
-    line-height: 1.7;
-}
-
-.d-scope-image-wrapper {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    height: 440px;
-}
-
-.d-scope-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    display: block;
-}
-
-/* Slider Arrows on Image */
-.d-slide-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border: 0;
-    background: rgba(255, 255, 255, 0.88);
-    color: #333;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 19px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-}
-
-.d-slide-arrow:hover {
-    background: #fff;
-    color: var(--d-green);
-}
-
-.d-slide-prev {
-    left: 14px;
-}
-
-.d-slide-next {
-    right: 14px;
-}
-
-/* =========================================================
-   5. WHY CHOOSE US (LIGHT GREEN BOX)
-========================================================= */
-.d-choose {
-    padding: 60px 40px;
-    background: var(--d-choose-bg);
-    border-radius: 18px;
-}
-
-.d-choose-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-}
-
-.d-choose-item {
-    text-align: center;
-    background: #ffffff;
-    padding: 30px 22px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-}
-
-.d-choose-item:hover {
-    transform: translateY(-4px);
-}
-
-.d-choose-icon {
-    width: 58px;
-    height: 58px;
-    margin: 0 auto 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--d-green);
-    color: #fff;
-    border-radius: 6px;
-    font-size: 26px;
-}
-
-.d-choose-item h4 {
+.nb-choose-card h4 {
     margin: 0 0 10px;
-    color: var(--d-navy);
-    font-size: 17.5px;
-    font-weight: 900;
-    text-transform: uppercase;
+    color: var(--nb-navy);
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.35;
 }
 
-.d-choose-item p {
+.nb-choose-card p {
     margin: 0;
-    color: #4a5568;
-    font-size: 15.5px;
-    line-height: 1.7;
+    color: var(--nb-muted);
+    font-size: 13.5px;
+    line-height: 1.6;
 }
 
 /* =========================================================
    6. PRICING PACKAGES (3 CARDS)
 ========================================================= */
-.d-pricing {
-    background: #fff;
-}
-
-.d-price-grid {
+.nb-price-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    max-width: 1080px;
+    gap: 25px;
+    max-width: 1020px;
     margin: 0 auto;
 }
 
-.d-price-card {
-    background: #fff;
-    border: 1px solid #e4e4e4;
-    border-top: 3px solid var(--d-green);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+.nb-price-card {
+    background: #ffffff;
+    border: 1px solid #e4e7eb;
+    border-top: 3px solid var(--nb-green);
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    padding: 30px 22px;
     text-align: center;
-    padding: 34px 24px;
-    border-radius: 4px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.d-price-icon {
-    font-size: 38px;
-    color: var(--d-navy);
-    margin-bottom: 14px;
+.nb-price-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
 }
 
-.d-price-card h3 {
-    margin: 0 0 12px;
-    color: var(--d-navy);
-    font-size: 19px;
+.nb-price-icon {
+    font-size: 32px;
+    color: var(--nb-navy);
+    margin-bottom: 12px;
+}
+
+.nb-price-card h3 {
+    margin: 0 0 10px;
+    color: var(--nb-navy);
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.nb-price-amount {
+    color: var(--nb-green);
+    font-size: 36px;
     font-weight: 900;
-    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 4px;
 }
 
-.d-price {
-    color: var(--d-green);
-    font-size: 40px;
-    font-weight: 900;
-    margin-bottom: 18px;
+.nb-price-suffix {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.d-price small {
-    color: #666;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.d-price-list {
+.nb-price-features {
     list-style: none;
     padding: 0;
-    margin: 0 0 26px;
+    margin: 0 0 24px;
     text-align: left;
     flex-grow: 1;
 }
 
-.d-price-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    color: #4a5568;
-    font-size: 16px;
+.nb-price-features li {
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f2f5;
+    color: #444444;
+    font-size: 13.5px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    gap: 8px;
 }
 
-.d-price-list li::before {
-    content: "✓";
-    color: var(--d-green);
-    margin-right: 12px;
-    font-weight: 900;
-    font-size: 16px;
+.nb-price-features li i {
+    color: var(--nb-green);
+    font-size: 15px;
 }
 
-.d-price-btn {
+.nb-price-btn {
     display: block;
     width: 100%;
-    padding: 15px;
-    background: var(--d-green);
-    color: #fff !important;
+    padding: 12px;
+    background: var(--nb-green);
+    color: #ffffff !important;
     text-decoration: none;
-    font-size: 16.5px;
-    font-weight: 900;
+    font-size: 14px;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
-    border-radius: 3px;
-    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
 }
 
-.d-price-btn:hover {
-    background: var(--d-green-dark);
+.nb-price-btn:hover {
+    background: var(--nb-green-dark);
 }
 
 /* =========================================================
-   7. CTA BANNER (ENSURE YOUR NEW HOME IS PERFECT)
+   7. SCHEDULE CTA (ENLARGED)
 ========================================================= */
-.d-cta {
-    min-height: 400px;
+.nb-cta {
+    position: relative;
+    min-height: 540px;
     display: flex;
     align-items: center;
     background:
         linear-gradient(
             90deg,
             rgba(4, 43, 75, 0.96) 0%,
-            rgba(4, 43, 75, 0.88) 55%,
-            rgba(4, 43, 75, 0.40) 100%
+            rgba(4, 43, 75, 0.88) 50%,
+            rgba(4, 43, 75, 0.30) 100%
         ),
-        url("{{ asset('images/g7.jpeg') }}") center right / cover no-repeat;
+        url("{{ asset('images/dilapidation-cta.jpeg') }}") center right / cover no-repeat;
+    color: #ffffff;
+    padding: 105px 0;
 }
 
-.d-cta-content {
-    max-width: 680px;
+.nb-cta-content {
+    max-width: 820px;
     color: #fff;
-    padding: 60px 0;
+    padding: 0;
 }
 
-.d-cta-content h2 {
-    margin: 0 0 18px;
-    font-size: clamp(28px, 3.8vw, 40px);
-    line-height: 1.2;
+.nb-cta-content h2 {
+    margin: 0 0 20px;
+    font-size: clamp(26px, 3.4vw, 38px);
     font-weight: 900;
+    line-height: 1.25;
+    color: #ffffff;
     text-transform: uppercase;
-    color: #fff;
+    letter-spacing: 0.5px;
 }
 
-.d-cta-content p {
-    margin: 0 0 28px;
-    color: rgba(255, 255, 255, 0.94);
-    font-size: 18px;
-    line-height: 1.8;
+.nb-cta-content p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 0 0 30px;
 }
 
 /* =========================================================
-   8. REVIEWS SECTION
+   8. CLIENT FEEDBACK & REVIEWS
 ========================================================= */
-.d-reviews {
-    background: #fff;
+.nb-reviews {
+    background: #ffffff;
 }
 
-.d-review-grid {
+.nb-review-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 25px;
 }
 
-.d-review-card {
-    text-align: center;
-    padding: 32px 24px;
-    border-bottom: 3px solid #eee;
-    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
-    background: #fff;
-}
-
-.d-review-quote {
-    color: var(--d-cyan);
-    font-size: 44px;
-    line-height: 1;
-    margin-bottom: 10px;
-}
-
-.d-review-card p {
-    min-height: 80px;
-    color: #4a5568;
-    font-size: 16.5px;
-    line-height: 1.75;
-}
-
-.d-stars {
-    color: var(--d-orange);
-    letter-spacing: 3px;
-    font-size: 19px;
-    margin: 16px 0 18px;
-}
-
-.d-review-card h4 {
-    margin: 0;
-    color: var(--d-navy);
-    font-size: 17px;
-    font-weight: 800;
-}
-
-/* =========================================================
-   9. FAQ ACCORDION SECTION
-========================================================= */
-.d-faq {
-    background: #fff;
-    padding-bottom: 80px;
-}
-
-.d-faq-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 24px;
-}
-
-.d-faq-item {
-    border: 1px solid #e4e4e4;
-    background: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 12px;
-}
-
-.d-faq-question {
-    width: 100%;
-    padding: 18px 22px;
-    border: 0;
-    background: #fff;
-    color: var(--d-navy);
+.nb-review-card {
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 6px;
+    padding: 30px 24px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    font-size: 17px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.d-faq-question:hover {
-    background: #f7f9fa;
-}
-
-.d-faq-answer {
-    display: none;
-    padding: 0 22px 20px;
-    color: #4a5568;
-    font-size: 16.5px;
-    line-height: 1.8;
-}
-
-/* Active FAQ Item: Green background on header */
-.d-faq-item.active .d-faq-question {
-    background: var(--d-green);
-    color: #fff;
-}
-
-.d-faq-item.active .d-faq-answer {
-    display: block;
-    background: #fff;
-    padding-top: 18px;
-}
-
-.d-faq-item.active .d-faq-icon {
-    transform: rotate(180deg);
-    color: #fff;
-}
-
-.d-faq-icon {
-    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    position: relative;
     transition: transform 0.25s ease;
 }
 
+.nb-review-card:hover {
+    transform: translateY(-3px);
+}
+
+.nb-review-icon {
+    font-size: 32px;
+    color: #1b9eea;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.nb-review-card p {
+    color: var(--nb-muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 18px;
+    flex-grow: 1;
+}
+
+.nb-review-stars {
+    color: #ffb400;
+    font-size: 16px;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.nb-review-card h4 {
+    margin: 0;
+    color: var(--nb-navy);
+    font-size: 15px;
+    font-weight: 800;
+}
+
 /* =========================================================
-   RESPONSIVE MEDIA QUERIES
+   9. FAQS (ACCORDION)
 ========================================================= */
+.nb-faqs {
+    background: #fbfcfd;
+}
+
+.nb-faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.nb-faq-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.nb-faq-item {
+    background: #f4f6f8;
+    border: 1px solid #e5eaef;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.25s ease;
+}
+
+.nb-faq-item.active {
+    background: #ffffff;
+    border-color: var(--nb-green);
+    box-shadow: 0 4px 14px rgba(66, 169, 0, 0.12);
+}
+
+.nb-faq-question {
+    width: 100%;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--nb-navy);
+    gap: 12px;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nb-faq-item.active .nb-faq-question {
+    background: var(--nb-green);
+    color: #ffffff;
+}
+
+.nb-faq-icon {
+    font-size: 14px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.nb-faq-item.active .nb-faq-icon {
+    transform: rotate(180deg);
+    color: #ffffff;
+}
+
+.nb-faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    color: var(--nb-muted);
+    font-size: 14px;
+    line-height: 1.7;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.nb-faq-item.active .nb-faq-answer {
+    padding: 16px 20px 20px;
+    max-height: 500px;
+}
+
+/* Responsive */
 @media (max-width: 991px) {
-    .d-hero-inner,
-    .d-welcome-grid,
-    .d-scope-grid {
+    .nb-hero-inner,
+    .nb-welcome-grid,
+    .nb-issues-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 35px;
     }
 
-    .d-hero-inner {
-        padding: 50px 0;
-    }
-
-    .d-choose-grid {
+    .nb-choose-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .d-price-grid {
+    .nb-price-grid {
         grid-template-columns: 1fr;
-        max-width: 480px;
+        max-width: 420px;
+    }
+
+    .nb-review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nb-faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nb-inspector-card {
+        position: static;
+        max-width: 420px;
+        margin: 0 auto;
     }
 }
 
 @media (max-width: 767px) {
-    .d-section {
+    .nb-section {
         padding: 50px 0;
     }
 
-    .d-hero-inner {
-        padding: 40px 0;
-    }
-
-    .d-form-row,
-    .d-matters-grid,
-    .d-review-grid,
-    .d-faq-grid {
+    .nb-why-grid {
         grid-template-columns: 1fr;
     }
 
-    .d-choose {
-        padding: 35px 22px;
+    .nb-choose-grid {
+        grid-template-columns: 1fr;
     }
 
-    .d-choose-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 16px 12px;
+    .nb-choose-box {
+        padding: 35px 20px;
     }
 
-    .d-scope-image-wrapper {
-        height: 320px;
+    .nb-cta {
+        min-height: 440px;
+        padding: 70px 0;
     }
 
-    .d-floating-tab {
-        display: none;
-    }
-}
-
-@media (max-width: 500px) {
-    .d-choose-grid {
+    .nb-form-row {
         grid-template-columns: 1fr;
     }
 }
 </style>
 
-<div class="d-page">
+<div class="nb-page">
 
     {{-- =====================================================
          1. HERO SECTION
     ====================================================== --}}
-    <section class="d-hero">
-        <div class="d-container">
-            <div class="d-hero-inner">
+    <section class="nb-hero">
+        <div class="nb-container">
+            <div class="nb-hero-inner">
 
-                <div class="d-hero-content" data-aos="fade-right" data-aos-duration="850">
-                    <span class="d-hero-tag">
-                        TOP-RATED, CERTIFIED & INSURED INSPECTORS
-                    </span>
-
-                    <h1>
-                        NEW BUILD HANDOVER<br>INSPECTION IN<br>MELBOURNE
-                    </h1>
-
-                    <p>
-                        A professional handover inspection helps identify visible defects, incomplete works and finishing issues before you accept your newly built property and release final payment.
+                {{-- Left Text --}}
+                <div class="nb-hero-content">
+                    <span class="nb-hero-badge">NEW BUILD HANDOVER INSPECTION IN MELBOURNE</span>
+                    <h1>NEW BUILD HANDOVER INSPECTION IN MELBOURNE</h1>
+                    <p class="nb-hero-sub">
+                        Get Peace of Mind with Professional New Build Handover Inspections in Melbourne
                     </p>
-
-                    <div>
-                        <a href="tel:0466001551" class="d-btn btn-glow">
-                            <i class="bi bi-telephone-fill me-2"></i>
-                            0466 001 551
-                        </a>
-                    </div>
-
-                    <div class="d-hero-license">
-                        VBA Building Inspector Licence No. IN-PS 74654 &nbsp;|&nbsp; Domestic Builder Licence No. DB-L 100200
-                    </div>
+                    <a href="tel:0466001551" class="nb-btn-green">
+                        <i class="bi bi-telephone-fill"></i>
+                        0466 001 551
+                    </a>
                 </div>
 
-                {{-- HERO FORM --}}
-                <div id="quote-form" class="d-hero-form hover-lift" data-aos="fade-left" data-aos-duration="850">
-                    @if(session('success'))
-                        <div class="alert alert-success py-2 mb-2" style="font-size: 15px;">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
+                {{-- Right Quick Quote Form --}}
+                <div class="nb-hero-form" id="quote-form">
+                    <h3>GET QUICK QUOTE</h3>
                     <form action="{{ route('quote.store') }}" method="POST">
                         @csrf
-
-                        <div class="d-form-row">
-                            <input type="text" name="name" placeholder="Name *" value="{{ old('name') }}" required>
-                            <input type="tel" name="phone" placeholder="Phone *" value="{{ old('phone') }}" required>
+                        <div class="nb-form-row">
+                            <input type="text" name="name" placeholder="Your Name *" required>
+                            <input type="tel" name="phone" placeholder="Phone Number *" required>
                         </div>
-
-                        <div class="d-form-row">
-                            <input type="email" name="email" placeholder="Email *" value="{{ old('email') }}" required>
-                            <input type="text" name="property_address" placeholder="Property Address" value="{{ old('property_address') }}">
+                        <div class="nb-form-row">
+                            <input type="email" name="email" placeholder="Email Address *" required>
+                            <input type="text" name="suburb" placeholder="Property Suburb *" required>
                         </div>
-
-                        <select name="service_type" required>
-                            <option value="new-build-handover-inspection" selected>New Build Handover Inspection</option>
-                            <option value="building-stage-by-stage-inspection">Building Stage By Stage Inspection</option>
-                            <option value="pre-purchase-building-and-pest-inspection">Pre-Purchase Building & Pest Inspection</option>
-                            <option value="dilapidation-report">Dilapidation Inspection</option>
-                            <option value="apartment-building-inspection">Apartment Building Inspection</option>
-                            <option value="rising-damp-inspection">Rising Damp Inspection</option>
-                            <option value="pool-barrier-inspection">Pool Barrier Inspection</option>
-                            <option value="vendor-inspection">Vendor Inspection</option>
-                            <option value="builders-warranty-inspection">Builders Warranty Inspection</option>
-                        </select>
-
-                        <textarea name="message" placeholder="Message / Details (e.g. 4-bedroom double storey in Tarneit, handover next week)">{{ old('message') }}</textarea>
-
-                        <button type="submit" class="d-submit">
-                            GET MY QUOTE
+                        <div style="margin-bottom: 12px;">
+                            <select name="service" required>
+                                <option value="">Select Service *</option>
+                                <option value="pre-purchase">Pre-purchase Building and Pest Inspection</option>
+                                <option value="stage-by-stage">Building Stage by Stage Inspection</option>
+                                <option value="new-build-handover" selected>New Build Handover Inspection</option>
+                                <option value="rising-damp">Rising Damp Inspection</option>
+                                <option value="pool-barrier">Pool Barrier Inspection</option>
+                                <option value="apartment">Apartment Building Inspection</option>
+                                <option value="vendor">Vendor Inspection</option>
+                                <option value="dilapidation-report">Dilapidation Report</option>
+                                <option value="builders-warranty">Builders Warranty Inspection</option>
+                            </select>
+                        </div>
+                        <div>
+                            <textarea name="message" placeholder="Your Message / Inspection Details"></textarea>
+                        </div>
+                        <button type="submit" class="nb-submit-btn">
+                            Get My Quote
                         </button>
                     </form>
                 </div>
@@ -1023,148 +971,125 @@
     {{-- =====================================================
          2. WELCOME SECTION + INSPECTOR CARD
     ====================================================== --}}
-    <section class="d-section d-welcome">
-        <div class="d-container">
+    <section class="nb-section nb-welcome">
+        <div class="nb-container">
+            <div class="nb-welcome-grid">
 
-            <div class="d-welcome-grid">
-
-                <div class="d-welcome-content" data-aos="fade-right">
-                    <span class="small-title">Expert Handover Inspections</span>
-                    <h2>
-                        WELCOME TO PREMIUM NEW BUILD & PEST INSPECTIONS
-                    </h2>
+                {{-- Left Content --}}
+                <div class="nb-welcome-content">
+                    <span class="nb-badge">WELCOME TO PREMIUM BUILDING & PEST INSPECTIONS</span>
+                    <h2>Welcome to Premium Building & Pest Inspections</h2>
 
                     <p>
-                        A newly constructed property may look perfect at first glance, but small defects and incomplete works can sometimes be overlooked during an emotional walkthrough.
+                        Purchasing a newly built home is a major investment, and the handover stage is your final opportunity to identify defects, incomplete work, and workmanship issues before taking ownership. Our New Build Handover Inspection service provides an independent assessment of your property’s condition, helping ensure the home has been completed to an acceptable standard. We carefully inspect visible building elements, finishes, fixtures, and installations to identify issues that may require attention before settlement or handover.
                     </p>
 
-                    <p>
-                        Our New Build Handover Inspection (Practical Completion Inspection - PCI) provides an exhaustive visual and diagnostic assessment of accessible areas, helping identify visible workmanship issues, defects and items that require builder rectification before handover.
-                    </p>
+                    <p style="font-weight: 700; color: var(--nb-navy); margin-bottom: 12px;">We Offer:</p>
 
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
+                    <div class="nb-feature-list">
+                        <div class="nb-feature-item">
+                            <div class="nb-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>COMPREHENSIVE PROPERTY INSPECTION</h4>
+                                <p>Our inspection covers accessible internal and external areas of the property, assessing workmanship, finishes, fittings, fixtures, and visible defects that may impact the quality or functionality of the home.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4>Comprehensive Defect Detection</h4>
-                            <p>Identifying cracks, poor workmanship, misalignment, paint defects and cosmetic blemishes across every room.</p>
+
+                        <div class="nb-feature-item">
+                            <div class="nb-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>STRUCTURAL INTEGRITY CHECK</h4>
+                                <p>We inspect visible structural elements, including walls, ceilings, floors, roofing components, and other accessible building features for signs of cracking, movement, damage, or incomplete work.</p>
+                            </div>
+                        </div>
+
+                        <div class="nb-feature-item">
+                            <div class="nb-feature-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <div>
+                                <h4>SAFETY AND COMPLIANCE</h4>
+                                <p>The inspection identifies visible safety concerns, building defects, and workmanship issues that may require rectification before the property is handed over.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>Victorian Standards Compliance</h4>
-                            <p>Ensuring all construction and finishing works adhere to the VBA Guide to Standards and Tolerances.</p>
-                        </div>
-                    </div>
-
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>Detailed Photographic Report</h4>
-                            <p>Fast digital report delivered with high-definition photos and clear explanations for your builder to rectify.</p>
-                        </div>
-                    </div>
-
-                    <div class="d-feature-mini">
-                        <div class="d-feature-mini-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <div>
-                            <h4>Independent Peace of Mind</h4>
-                            <p>We work 100% for you—giving you the expert backing and leverage needed before final settlement.</p>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 28px;">
-                        <a href="#quote-form" class="d-btn btn-glow">
-                            GET A QUOTE <i class="bi bi-arrow-right ms-2"></i>
+                    <div>
+                        <a href="#quote-form" class="nb-btn-green">
+                            Schedule Inspection Now
                         </a>
                     </div>
                 </div>
 
-                {{-- INSPECTOR CARD --}}
-                <div class="d-inspector-card hover-lift" data-aos="fade-left">
-                    <div class="d-inspector-title">
-                        VBA REGISTERED
+                {{-- Right Inspector Card --}}
+                <div class="nb-welcome-card-col">
+                    <div class="nb-inspector-card">
+                        <div class="nb-inspector-header">
+                            YOUR INSPECTOR
+                        </div>
+
+                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
+
+                        <div class="nb-inspector-body">
+                            <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
+                            <a href="tel:0466001551" class="nb-inspector-call">
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                0466 001 551
+                            </a>
+                        </div>
                     </div>
-
-                    <img
-                        src="{{ asset('images/ronak gami.jpeg') }}"
-                        alt="Ronak Gami - VBA Registered Building Inspector"
-                    >
-
-                    <div class="d-inspector-name">
-                        RONAK GAMI - VBA REGISTERED INSPECTOR & DOMESTIC BUILDER
-                    </div>
-
-                    <a href="tel:0466001551" class="d-inspector-btn">
-                        <i class="bi bi-telephone-fill me-2"></i>
-                        CALL 0466 001 551
-                    </a>
                 </div>
 
             </div>
-
         </div>
     </section>
 
 
     {{-- =====================================================
-         3. WHY HANDOVER INSPECTIONS MATTER (2x2 GRID)
+         3. WHY IMPORTANT (2x2 GRID)
     ====================================================== --}}
-    <section class="d-section d-matters">
-        <div class="d-container">
+    <section class="nb-section" style="background: #fafbfc; border-top: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+        <div class="nb-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">Protect Your Investment</span>
+            <div class="nb-heading-center">
                 <h2>WHY A NEW BUILD HANDOVER INSPECTION IS IMPORTANT</h2>
-                <p>
-                    Before you sign off on practical completion and make your final drawdown payment, an independent handover inspection protects your rights.
-                </p>
             </div>
 
-            <div class="d-matters-grid">
+            <div class="nb-why-grid">
 
-                {{-- CARD 1 --}}
-                <div class="d-matters-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Identifying Defects Before Settlement</h4>
-                        <p>Catch incomplete works, poor tradesmanship, and cosmetic defects while the builder is legally bound to fix them.</p>
+                <div class="nb-why-card">
+                    <i class="bi bi-check-circle-fill nb-why-icon"></i>
+                    <div class="nb-why-text">
+                        <strong>Uncover Hidden Defects:</strong>
+                        <span> Even new builds can have defects or incomplete work that may not be immediately obvious. Our inspections identify these issues before they become costly repairs.</span>
                     </div>
                 </div>
 
-                {{-- CARD 2 --}}
-                <div class="d-matters-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Ensuring Builder Accountability</h4>
-                        <p>Our thorough VBA-referenced reports leave no room for builder disputes or delays in rectification.</p>
+                <div class="nb-why-card">
+                    <i class="bi bi-check-circle-fill nb-why-icon"></i>
+                    <div class="nb-why-text">
+                        <strong>Leverage for Rectification:</strong>
+                        <span> The inspection report provides a documented record of any issues that need rectification. This allows you to request the builder to fix problems before final payment or possession.</span>
                     </div>
                 </div>
 
-                {{-- CARD 3 --}}
-                <div class="d-matters-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Avoiding Costly Future Repairs</h4>
-                        <p>Prevent defects from deteriorating into expensive long-term maintenance issues after builder warranty periods.</p>
+                <div class="nb-why-card">
+                    <i class="bi bi-check-circle-fill nb-why-icon"></i>
+                    <div class="nb-why-text">
+                        <strong>Ensure Compliance:</strong>
+                        <span> Melbourne's building standards are strict. We ensure your new home complies with all relevant building codes and regulations, avoiding future legal complications.</span>
                     </div>
                 </div>
 
-                {{-- CARD 4 --}}
-                <div class="d-matters-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="d-check-icon">✓</div>
-                    <div class="d-matters-card-content">
-                        <h4>Total Peace of Mind</h4>
-                        <p>Move into your brand-new home with absolute confidence knowing every area was checked by a registered inspector.</p>
+                <div class="nb-why-card">
+                    <i class="bi bi-check-circle-fill nb-why-icon"></i>
+                    <div class="nb-why-text">
+                        <strong>Peace of Mind:</strong>
+                        <span> Moving into a new home is exciting, but it can also be stressful if you’re unsure about the quality of the build. Our inspection ensures everything has been done to the highest standard, giving you peace of mind.</span>
                     </div>
                 </div>
 
@@ -1175,86 +1100,77 @@
 
 
     {{-- =====================================================
-         4. COMPREHENSIVE HANDOVER INSPECTION PROCESS (SCOPE & g6.jpeg)
+         4. COMMON ISSUES FOUND (LIST + RIGHT CAROUSEL)
     ====================================================== --}}
-    <section class="d-section d-scope">
-        <div class="d-container">
+    <section class="nb-section">
+        <div class="nb-container">
 
-            <div class="d-scope-grid">
+            <div class="nb-heading-center" style="text-align: left; margin-bottom: 25px;">
+                <h2>COMMON ISSUES WE FIND IN NEW BUILD HANDOVER INSPECTIONS</h2>
+                <p style="margin: 8px 0 0; text-align: left;">During our inspections, we commonly find the following defects in new builds:</p>
+            </div>
 
-                {{-- LEFT: SCOPE LIST --}}
-                <div class="d-scope-content" data-aos="fade-right">
-                    <span class="small-title" style="color: var(--d-green); font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px;">
-                        THOROUGH SCOPE
-                    </span>
-                    <h3>OUR NEW BUILD HANDOVER INSPECTION PROCESS</h3>
-                    <p>
-                        During the handover inspection, our registered building inspector thoroughly checks accessible internal and external areas:
-                    </p>
+            <div class="nb-issues-grid">
 
-                    <ul class="d-scope-list">
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">1</div>
-                            <div class="d-scope-info">
-                                <strong>Internal Walls, Plasterwork & Paint</strong>
-                                <span>Inspecting plaster joints, cornice alignment, paint coverage, blemishes, and hairline cracking.</span>
-                            </div>
-                        </li>
+                {{-- Left Issue Points --}}
+                <div class="nb-issues-list">
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">2</div>
-                            <div class="d-scope-info">
-                                <strong>Doors, Windows & Glazing</strong>
-                                <span>Ensuring correct clearances, draft seals, smooth sliding operation, locks, and scratch-free glass.</span>
-                            </div>
-                        </li>
+                    <div class="nb-issue-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div>
+                            <strong>Surface Imperfections:</strong> Scratches, dents, or paint drips on walls and surfaces are common issues that builders may overlook in the final stages of construction.
+                        </div>
+                    </div>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">3</div>
-                            <div class="d-scope-info">
-                                <strong>Wet Areas, Waterproofing & Tiling</strong>
-                                <span>Inspecting bathrooms, ensuites, laundry tiling, grout lines, falls to wastes, and silicone sealing.</span>
-                            </div>
-                        </li>
+                    <div class="nb-issue-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div>
+                            <strong>Plumbing Issues:</strong> Leaks, poorly installed fittings, or low water pressure are common problems that can lead to long-term damage if not addressed early.
+                        </div>
+                    </div>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">4</div>
-                            <div class="d-scope-info">
-                                <strong>Cabinetry, Joinery & Benchtops</strong>
-                                <span>Verifying drawer alignments, cabinet levelness, benchtop joins, laminate edging, and soft-close mechanisms.</span>
-                            </div>
-                        </li>
+                    <div class="nb-issue-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div>
+                            <strong>Electrical Deficiencies:</strong> We often find problems with light fixtures, faulty wiring, or inadequate socket placement.
+                        </div>
+                    </div>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">5</div>
-                            <div class="d-scope-info">
-                                <strong>Plumbing Fixtures & Visible Drainage</strong>
-                                <span>Testing taps, toilets, traps, vanities, and exterior downpipes for leaks and proper fall.</span>
-                            </div>
-                        </li>
+                    <div class="nb-issue-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div>
+                            <strong>Poorly Fitted Doors and Windows:</strong> Ill-fitting doors and windows can cause drafts, moisture issues, or security concerns.
+                        </div>
+                    </div>
 
-                        <li class="d-scope-item">
-                            <div class="d-scope-badge">6</div>
-                            <div class="d-scope-info">
-                                <strong>Roof Space, Insulation & Facade</strong>
-                                <span>Checking accessible roof timbers, insulation coverage, sarking, brickwork perpends, and flashings.</span>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="nb-issue-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div>
+                            <strong>Uneven Flooring:</strong> Uneven or improperly installed flooring can cause both cosmetic and safety concerns over time.
+                        </div>
+                    </div>
+
+                    <div class="nb-issue-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div>
+                            <strong>Incomplete or Missing Fixtures:</strong> Missing light switches, unfinished cabinetry, or uninstalled appliances are frequent oversights that need attention before handover.
+                        </div>
+                    </div>
+
                 </div>
 
-                {{-- RIGHT: IMAGE WITH ARROWS (g6.jpeg) --}}
-                <div class="d-scope-image-wrapper" data-aos="fade-left">
-                    <button class="d-slide-arrow d-slide-prev" type="button" aria-label="Previous">
+                {{-- Right Image Carousel --}}
+                <div class="nb-carousel-container" id="handoverCarousel">
+                    <div class="nb-carousel-slide active">
+                        <img src="{{ asset('images/handover-inspection-1.jpeg') }}" alt="New Build Handover Inspection - Ceiling Thermal Imaging">
+                    </div>
+                    <div class="nb-carousel-slide">
+                        <img src="{{ asset('images/handover-inspection-2.jpeg') }}" alt="New Build Handover Inspection - Room Inspection">
+                    </div>
+                    <button class="nb-carousel-btn nb-carousel-prev" type="button" onclick="moveNbSlide(-1)">
                         <i class="bi bi-chevron-left"></i>
                     </button>
-
-                    <img
-                        src="{{ asset('images/g6.jpeg') }}"
-                        alt="Ronak Gami inspecting waterproofing membrane during handover inspection"
-                    >
-
-                    <button class="d-slide-arrow d-slide-next" type="button" aria-label="Next">
+                    <button class="nb-carousel-btn nb-carousel-next" type="button" onclick="moveNbSlide(1)">
                         <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
@@ -1266,53 +1182,50 @@
 
 
     {{-- =====================================================
-         5. WHY CHOOSE US (LIGHT GREEN CONTAINER)
+         5. WHY CHOOSE US (MINT GREEN CONTAINER)
     ====================================================== --}}
-    <section class="d-section" style="padding-top: 20px; padding-bottom: 20px;">
-        <div class="d-container">
+    <section class="nb-section" style="padding-top: 0;">
+        <div class="nb-container">
 
-            <div class="d-choose" data-aos="zoom-in">
+            <div class="nb-choose-box">
 
-                <div class="d-heading" style="margin-bottom: 38px;">
-                    <span class="small-title">WHY CHOOSE US</span>
+                <div class="nb-heading-center">
+                    <span class="nb-badge">WHY CHOOSE US</span>
                     <h2>WHY CHOOSE US FOR YOUR NEW BUILD HANDOVER INSPECTION?</h2>
-                    <p>
-                        We offer independent, licensed, and comprehensive inspection services throughout Melbourne.
-                    </p>
                 </div>
 
-                <div class="d-choose-grid">
+                <div class="nb-choose-grid">
 
-                    <div class="d-choose-item hover-lift">
-                        <div class="d-choose-icon">
-                            <i class="bi bi-patch-check-fill"></i>
+                    <div class="nb-choose-card">
+                        <div class="nb-choose-icon">
+                            <i class="bi bi-award-fill"></i>
                         </div>
-                        <h4>VBA REGISTERED & INSURED</h4>
-                        <p>Fully licensed Victorian Building Inspector (IN-PS 74654) and Domestic Builder (DB-L 100200).</p>
+                        <h4>Licensed and Experienced Inspectors</h4>
+                        <p>Our team consists of fully qualified inspectors. With years of experience in Melbourne’s construction industry, we know exactly what to look for.</p>
                     </div>
 
-                    <div class="d-choose-item hover-lift">
-                        <div class="d-choose-icon">
-                            <i class="bi bi-speedometer2"></i>
+                    <div class="nb-choose-card">
+                        <div class="nb-choose-icon">
+                            <i class="bi bi-file-earmark-text-fill"></i>
                         </div>
-                        <h4>SAME-DAY DETAILED REPORTS</h4>
-                        <p>Comprehensive digital defect report with photographic proof delivered within 24 hours.</p>
+                        <h4>Comprehensive and Easy-to-Understand Reports</h4>
+                        <p>Our detailed yet straightforward reports give you all the information you need to address any issues with your builder, ensuring a smooth handover process.</p>
                     </div>
 
-                    <div class="d-choose-item hover-lift">
-                        <div class="d-choose-icon">
-                            <i class="bi bi-camera-fill"></i>
+                    <div class="nb-choose-card">
+                        <div class="nb-choose-icon">
+                            <i class="bi bi-headset"></i>
                         </div>
-                        <h4>ADVANCED DIAGNOSTIC TOOLS</h4>
-                        <p>Moisture meters and thermal imaging cameras used to detect concealed moisture and missing insulation.</p>
+                        <h4>Customer Support</h4>
+                        <p>Beyond just the inspection, we offer ongoing support to answer any questions you may have and ensure your builder resolves any issues before you move in.</p>
                     </div>
 
-                    <div class="d-choose-item hover-lift">
-                        <div class="d-choose-icon">
-                            <i class="bi bi-shield-check"></i>
+                    <div class="nb-choose-card">
+                        <div class="nb-choose-icon">
+                            <i class="bi bi-tag-fill"></i>
                         </div>
-                        <h4>100% INDEPENDENT & UNBIASED</h4>
-                        <p>We have no affiliations with builders or developers; we advocate strictly for your best interests.</p>
+                        <h4>Affordable Pricing</h4>
+                        <p>We offer competitive rates for new build inspections, ensuring that you get excellent value without compromising on quality.</p>
                     </div>
 
                 </div>
@@ -1324,87 +1237,81 @@
 
 
     {{-- =====================================================
-         6. PRICING PACKAGES (3 CARDS)
+         6. CHOOSE PACKAGE / ENSURE SAFETY AND COMPLIANCE (PRICING)
     ====================================================== --}}
-    <section class="d-section d-pricing">
-        <div class="d-container">
+    <section class="nb-section">
+        <div class="nb-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">OUR PRICING</span>
-                <h2>TRANSPARENT & COMPETITIVE HANDOVER INSPECTION PACKAGES</h2>
-                <p>
-                    Fixed-price handover inspection packages tailored to your property size with no hidden fees.
-                </p>
+            <div class="nb-heading-center">
+                <span class="nb-badge">CHOOSE PACKAGE</span>
+                <h2>ENSURE SAFETY AND COMPLIANCE</h2>
             </div>
 
-            <div class="d-price-grid">
+            <div class="nb-price-grid">
 
-                {{-- CARD 1: 3 BEDROOM --}}
-                <div class="d-price-card hover-lift" data-aos="fade-up" data-aos-delay="100">
+                {{-- CARD 1: 2 BEDROOM --}}
+                <div class="nb-price-card">
                     <div>
-                        <div class="d-price-icon">
-                            <i class="bi bi-door-closed"></i>
-                        </div>
-                        <h3>3 BEDROOM</h3>
-                        <div class="d-price">
-                            $500* <small>+ GST</small>
-                        </div>
-                        <ul class="d-price-list">
-                            <li>Full internal & external visual inspection</li>
-                            <li>Detailed digital report with photos within 24h</li>
-                            <li>Thermal imaging & moisture testing included</li>
-                            <li>VBA Standards & Tolerances defect cross-reference</li>
-                            <li>Direct phone consultation with Ronak Gami</li>
-                        </ul>
-                    </div>
-                    <a href="#quote-form" class="d-price-btn">
-                        BOOK NOW
-                    </a>
-                </div>
-
-                {{-- CARD 2: 4 BEDROOM --}}
-                <div class="d-price-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div>
-                        <div class="d-price-icon">
+                        <div class="nb-price-icon">
                             <i class="bi bi-house-door"></i>
                         </div>
-                        <h3>4 BEDROOM</h3>
-                        <div class="d-price">
-                            $550* <small>+ GST</small>
-                        </div>
-                        <ul class="d-price-list">
-                            <li>Full internal & external visual inspection</li>
-                            <li>Detailed digital report with photos within 24h</li>
-                            <li>Thermal imaging & moisture testing included</li>
-                            <li>VBA Standards & Tolerances defect cross-reference</li>
-                            <li>Direct phone consultation with Ronak Gami</li>
+                        <h3>2 bed room</h3>
+
+                        <div class="nb-price-amount">$500</div>
+                        <div class="nb-price-suffix">+GST /Starting</div>
+
+                        <ul class="nb-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
-                    <a href="#quote-form" class="d-price-btn">
-                        BOOK NOW
+
+                    <a href="#quote-form" class="nb-price-btn">
+                        GET STARTED
                     </a>
                 </div>
 
-                {{-- CARD 3: 5+ BEDROOM --}}
-                <div class="d-price-card hover-lift" data-aos="fade-up" data-aos-delay="300">
+                {{-- CARD 2: 3 BEDROOM --}}
+                <div class="nb-price-card">
                     <div>
-                        <div class="d-price-icon">
-                            <i class="bi bi-building"></i>
+                        <div class="nb-price-icon">
+                            <i class="bi bi-house-door"></i>
                         </div>
-                        <h3>5+ BEDROOM</h3>
-                        <div class="d-price">
-                            $600* <small>+ GST</small>
-                        </div>
-                        <ul class="d-price-list">
-                            <li>Full internal & external visual inspection</li>
-                            <li>Detailed digital report with photos within 24h</li>
-                            <li>Thermal imaging & moisture testing included</li>
-                            <li>VBA Standards & Tolerances defect cross-reference</li>
-                            <li>Direct phone consultation with Ronak Gami</li>
+                        <h3>3 bed room</h3>
+
+                        <div class="nb-price-amount">$550</div>
+                        <div class="nb-price-suffix">+GST /Starting</div>
+
+                        <ul class="nb-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
                         </ul>
                     </div>
-                    <a href="#quote-form" class="d-price-btn">
-                        BOOK NOW
+
+                    <a href="#quote-form" class="nb-price-btn">
+                        GET STARTED
+                    </a>
+                </div>
+
+                {{-- CARD 3: 4 BEDROOM --}}
+                <div class="nb-price-card">
+                    <div>
+                        <div class="nb-price-icon">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h3>4 bed room</h3>
+
+                        <div class="nb-price-amount">$600</div>
+                        <div class="nb-price-suffix">+GST /Starting</div>
+
+                        <ul class="nb-price-features">
+                            <li><i class="bi bi-check-square-fill"></i> Comprehensive Inspection</li>
+                            <li><i class="bi bi-check-square-fill"></i> Report &amp; Consultation</li>
+                        </ul>
+                    </div>
+
+                    <a href="#quote-form" class="nb-price-btn">
+                        GET STARTED
                     </a>
                 </div>
 
@@ -1415,17 +1322,19 @@
 
 
     {{-- =====================================================
-         7. CTA BANNER (ENSURE YOUR NEW HOME IS PERFECT)
+         7. SCHEDULE CTA (ENLARGED)
     ====================================================== --}}
-    <section class="d-cta">
-        <div class="d-container">
-            <div class="d-cta-content" data-aos="fade-right">
+    <section class="nb-cta">
+        <div class="nb-container">
+            <div class="nb-cta-content">
                 <h2>ENSURE YOUR NEW HOME IS PERFECT</h2>
+
                 <p>
-                    Don't accept handover or release the final progress payment until you are 100% confident your builder has delivered the quality you paid for. Schedule your independent handover inspection today.
+                    Buying a new home is a major investment, and our New Build Handover Inspection ensures you’re getting exactly what you’ve paid for. Avoid future problems and unexpected costs by letting our experts provide you with a detailed and professional inspection. Book your inspection today and move into your new home with peace of mind.
                 </p>
-                <a href="#quote-form" class="d-btn btn-glow">
-                    GET A QUOTE NOW <i class="bi bi-arrow-right ms-2"></i>
+
+                <a href="#quote-form" class="nb-btn-green">
+                    Schedule your inspection now
                 </a>
             </div>
         </div>
@@ -1433,44 +1342,82 @@
 
 
     {{-- =====================================================
-         8. CLIENT TESTIMONIALS / REVIEWS
+         8. CLIENT FEEDBACK & REVIEWS
     ====================================================== --}}
-    <section class="d-section d-reviews">
-        <div class="d-container">
+    <section class="nb-section nb-reviews">
+        <div class="nb-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">REVIEWS</span>
-                <h2>CLIENT TESTIMONIALS</h2>
-                <p>What our clients say about our new build handover inspections across Melbourne.</p>
+            <div class="nb-heading-center">
+                <span class="nb-badge">TESTIMONIAL</span>
+                <h2>CLIENT FEEDBACK & REVIEWS</h2>
             </div>
 
-            <div class="d-review-grid">
+            <div class="nb-review-grid">
 
-                <div class="d-review-card hover-lift" data-aos="fade-up" data-aos-delay="100">
-                    <div class="d-review-quote">“</div>
+                <div class="nb-review-card">
+                    <div class="nb-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Ronak inspected our 4-bedroom home in Tarneit right before handover. He found over 40 defects that we would have missed, including unsealed shower screens and missing wall insulation. Truly invaluable service!"
+                        Very professional and approachable. The property inspection was done thoroughly, and even minor defects were identified. Really appreciate the attention to detail and commitment to the job. Highly recommended for any building inspection.
                     </p>
-                    <div class="d-stars">★★★★★</div>
-                    <h4>David & Sarah M. (Tarneit)</h4>
+                    <div class="nb-review-stars">★★★★★</div>
+                    <h4>Swathi Tarini</h4>
                 </div>
 
-                <div class="d-review-card hover-lift" data-aos="fade-up" data-aos-delay="200">
-                    <div class="d-review-quote">“</div>
+                <div class="nb-review-card">
+                    <div class="nb-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Exceptional service! The handover report was delivered on the same day with crisp photos and clear explanations referenced to VBA tolerances. It gave us the confidence to hold our builder accountable before the final drawdown."
+                        Took generous time to answer all my questions regarding the property's condition and report. Very kind, humble, and helpful. Highly recommended for anyone needing a building and pest inspection
                     </p>
-                    <div class="d-stars">★★★★★</div>
-                    <h4>Harpreet Singh (Point Cook)</h4>
+                    <div class="nb-review-stars">★★★★★</div>
+                    <h4>Luxmy</h4>
                 </div>
 
-                <div class="d-review-card hover-lift" data-aos="fade-up" data-aos-delay="300">
-                    <div class="d-review-quote">“</div>
+                <div class="nb-review-card">
+                    <div class="nb-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
                     <p>
-                        "Ronak is polite, extremely thorough and very knowledgeable. He spent 3 hours going through every nook and corner of our new property. Highly recommend Premium Building Inspections to all new home buyers!"
+                        Provided an excellent inspection for the property I'm purchasing. All findings were explained clearly, and the report was prepared on the same day. Warm, professional, and efficient. Highly recommended to friends and family.
                     </p>
-                    <div class="d-stars">★★★★★</div>
-                    <h4>Michael Chen (Craigieburn)</h4>
+                    <div class="nb-review-stars">★★★★★</div>
+                    <h4>Shaleen De Silva</h4>
+                </div>
+
+                <div class="nb-review-card">
+                    <div class="nb-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Extremely helpful and responsive. The building and pest inspection was completed quickly, and the report was delivered exactly as requested. Smooth and professional experience overall— great service!
+                    </p>
+                    <div class="nb-review-stars">★★★★★</div>
+                    <h4>Niresh Wijesiri</h4>
+                </div>
+
+                <div class="nb-review-card">
+                    <div class="nb-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Very thorough and professional during my pre-purchase building and pest inspection. Strongly recommended.
+                    </p>
+                    <div class="nb-review-stars">★★★★★</div>
+                    <h4>Max</h4>
+                </div>
+
+                <div class="nb-review-card">
+                    <div class="nb-review-icon">
+                        <i class="bi bi-chat-quote"></i>
+                    </div>
+                    <p>
+                        Amazing experience. Quick replies, prompt actions, and a positive attitude. Would definitely recommend 👏👏👏
+                    </p>
+                    <div class="nb-review-stars">★★★★★</div>
+                    <h4>Heena Bhavsar</h4>
                 </div>
 
             </div>
@@ -1480,89 +1427,89 @@
 
 
     {{-- =====================================================
-         9. FREQUENTLY ASKED QUESTIONS (FAQ)
+         9. FAQS (MOST POPULAR QUESTIONS)
     ====================================================== --}}
-    <section class="d-section d-faq">
-        <div class="d-container">
+    <section class="nb-section nb-faqs">
+        <div class="nb-container">
 
-            <div class="d-heading" data-aos="fade-up">
-                <span class="small-title">Quick Answers</span>
-                <h2>FREQUENTLY ASKED QUESTIONS</h2>
+            <div class="nb-heading-center">
+                <span class="nb-badge">COMMON QUESTIONS</span>
+                <h2>MOST POPULAR QUESTIONS</h2>
             </div>
 
-            <div class="d-faq-grid">
+            <div class="nb-faq-grid">
 
-                {{-- LEFT COLUMN --}}
-                <div class="d-faq-col">
+                {{-- Left Column (Questions 1 - 3) --}}
+                <div class="nb-faq-col">
 
                     {{-- FAQ 1 (Active by default) --}}
-                    <div class="d-faq-item active" data-aos="fade-up" data-aos-delay="100">
-                        <button class="d-faq-question" type="button">
-                            <span>What is a New Build Handover Inspection (PCI)?</span>
-                            <i class="bi bi-chevron-down d-faq-icon"></i>
+                    <div class="nb-faq-item active">
+                        <button class="nb-faq-question" type="button" onclick="toggleNbFaq(this)">
+                            <span>1. What is a New Build Handover Inspection?</span>
+                            <i class="bi bi-chevron-down nb-faq-icon"></i>
                         </button>
-                        <div class="d-faq-answer">
-                            A New Build Handover Inspection, also known as a Practical Completion Inspection (PCI), is an independent visual inspection conducted when the builder claims the home is finished. It identifies defects, incomplete trades, substandard finishes, and non-compliant items before final payment is made.
+                        <div class="nb-faq-answer">
+                            A New Build Handover Inspection is a thorough review of your newly built property, designed to identify any defects or unfinished work before you take possession. This ensures your builder addresses all issues before final handover.
                         </div>
                     </div>
 
                     {{-- FAQ 2 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <button class="d-faq-question" type="button">
-                            <span>When is the best time to schedule the inspection?</span>
-                            <i class="bi bi-chevron-down d-faq-icon"></i>
+                    <div class="nb-faq-item">
+                        <button class="nb-faq-question" type="button" onclick="toggleNbFaq(this)">
+                            <span>2. Why do I need a handover inspection?</span>
+                            <i class="bi bi-chevron-down nb-faq-icon"></i>
                         </button>
-                        <div class="d-faq-answer">
-                            The ideal time is when the builder has issued the Notice of Practical Completion and invited you for your final walkthrough, usually 1 to 2 weeks prior to handover and before making the final progress payment.
+                        <div class="nb-faq-answer">
+                            Even new homes can have hidden defects. An independent inspection helps uncover these issues, ensuring your builder rectifies them before you move in. This can save you time, stress, and money in the long run.
                         </div>
                     </div>
 
                     {{-- FAQ 3 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <button class="d-faq-question" type="button">
-                            <span>What happens if the builder refuses to fix defects?</span>
-                            <i class="bi bi-chevron-down d-faq-icon"></i>
+                    <div class="nb-faq-item">
+                        <button class="nb-faq-question" type="button" onclick="toggleNbFaq(this)">
+                            <span>3. How much does a new build handover inspection cost?</span>
+                            <i class="bi bi-chevron-down nb-faq-icon"></i>
                         </button>
-                        <div class="d-faq-answer">
-                            Our reports cite specific clauses from the Victorian Building Authority (VBA) Guide to Standards and Tolerances and National Construction Code. Because defects are documented with photographic evidence and standards references, builders are legally obligated to rectify non-compliant works.
+                        <div class="nb-faq-answer">
+                            The cost of a new build handover inspection depends on the size and complexity of the property. Our rates start at $500, and we offer transparent pricing with no hidden fees.
                         </div>
                     </div>
 
                 </div>
 
-                {{-- RIGHT COLUMN --}}
-                <div class="d-faq-col">
+                {{-- Right Column (Questions 4 - 6) --}}
+                <div class="nb-faq-col">
 
                     {{-- FAQ 4 (Active by default) --}}
-                    <div class="d-faq-item active" data-aos="fade-up" data-aos-delay="150">
-                        <button class="d-faq-question" type="button">
-                            <span>Which building standards do you inspect against?</span>
-                            <i class="bi bi-chevron-down d-faq-icon"></i>
+                    <div class="nb-faq-item active">
+                        <button class="nb-faq-question" type="button" onclick="toggleNbFaq(this)">
+                            <span>4. How long does the inspection take, and when will I receive the report?</span>
+                            <i class="bi bi-chevron-down nb-faq-icon"></i>
                         </button>
-                        <div class="d-faq-answer">
-                            All inspections are conducted strictly in accordance with Australian Standards (AS 4349.0 / AS 4349.1), the National Construction Code (NCC), and the Victorian Building Authority (VBA) Guide to Standards and Tolerances.
+                        <div class="nb-faq-answer">
+                            Most inspections take between 2 to 3 hours, depending on the size of the property. You will receive a detailed report within 24 hours of the inspection.
                         </div>
                     </div>
 
                     {{-- FAQ 5 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="250">
-                        <button class="d-faq-question" type="button">
-                            <span>How fast will I receive the handover report?</span>
-                            <i class="bi bi-chevron-down d-faq-icon"></i>
+                    <div class="nb-faq-item">
+                        <button class="nb-faq-question" type="button" onclick="toggleNbFaq(this)">
+                            <span>5. What happens if defects are found during the inspection?</span>
+                            <i class="bi bi-chevron-down nb-faq-icon"></i>
                         </button>
-                        <div class="d-faq-answer">
-                            We understand time is critical before handover. Your comprehensive digital report with clear photos and categorized defect descriptions is delivered within 24 hours of inspection completion.
+                        <div class="nb-faq-answer">
+                            If defects are found, we’ll list them clearly in the report. You can then present this to your builder, who should fix these issues before the final handover. We offer follow-up inspections to confirm the corrections have been made.
                         </div>
                     </div>
 
                     {{-- FAQ 6 --}}
-                    <div class="d-faq-item" data-aos="fade-up" data-aos-delay="350">
-                        <button class="d-faq-question" type="button">
-                            <span>Can I be present at the property during the inspection?</span>
-                            <i class="bi bi-chevron-down d-faq-icon"></i>
+                    <div class="nb-faq-item">
+                        <button class="nb-faq-question" type="button" onclick="toggleNbFaq(this)">
+                            <span>6. What areas do you inspect in a new build handover inspection?</span>
+                            <i class="bi bi-chevron-down nb-faq-icon"></i>
                         </button>
-                        <div class="d-faq-answer">
-                            Yes, you are welcome to attend the final part of the inspection where Ronak can walk you through the key findings, answer questions, and explain items that need to be addressed with your site supervisor.
+                        <div class="nb-faq-answer">
+                            We inspect all key areas of your home, including structural integrity, plumbing, electrical systems, doors and windows, flooring, finishes, and fixtures. Our goal is to ensure everything is built and installed correctly.
                         </div>
                     </div>
 
@@ -1576,22 +1523,45 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const faqButtons = document.querySelectorAll('.d-faq-question');
-    faqButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const item = this.parentElement;
-            const isActive = item.classList.contains('active');
-            
-            // Toggle clicked
-            if (isActive) {
-                item.classList.remove('active');
-            } else {
-                item.classList.add('active');
-            }
-        });
+// Carousel Logic
+let currentNbSlide = 0;
+const nbSlides = document.querySelectorAll('.nb-carousel-slide');
+
+function showNbSlide(index) {
+    if (nbSlides.length === 0) return;
+    if (index >= nbSlides.length) currentNbSlide = 0;
+    else if (index < 0) currentNbSlide = nbSlides.length - 1;
+    else currentNbSlide = index;
+
+    nbSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentNbSlide);
     });
-});
+}
+
+function moveNbSlide(step) {
+    showNbSlide(currentNbSlide + step);
+}
+
+// Auto advance every 5s
+setInterval(() => {
+    moveNbSlide(1);
+}, 5000);
+
+// FAQ Accordion Toggle
+function toggleNbFaq(btn) {
+    const item = btn.closest('.nb-faq-item');
+    const col = item.closest('.nb-faq-col');
+    const allInCol = col.querySelectorAll('.nb-faq-item');
+    const wasActive = item.classList.contains('active');
+
+    // Close other items in the same column
+    allInCol.forEach(el => el.classList.remove('active'));
+
+    // Toggle clicked item
+    if (!wasActive) {
+        item.classList.add('active');
+    }
+}
 </script>
 
 @endsection

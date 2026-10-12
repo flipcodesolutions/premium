@@ -438,23 +438,6 @@
 
 
 
-                <!-- =================================================
-                     BOOK INSPECTION
-                ================================================== -->
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ request()->routeIs('booking.*') ? 'active' : '' }}"
-                        href="{{ route('booking.create') }}"
-                        style="color: var(--premium-green); font-weight: 600;"
-                    >
-                        <i class="bi bi-calendar-check me-1"></i> Book Now
-                    </a>
-
-                </li>
-
-
 
                 <!-- =================================================
                      GET AN ESTIMATE
@@ -463,7 +446,7 @@
                 <li class="nav-item estimate-item">
 
                     <a
-                        class="nav-link estimate-btn btn-glow"
+                        class="estimate-btn btn-glow"
                         href="{{ route('contact') }}"
                     >
                         Get an Estimate
@@ -488,16 +471,10 @@
 
 <a
     href="{{ route('contact') }}"
-    class="floating-quote animate-float"
-    aria-label="Get Free Quote"
+    class="floating-quote"
+    aria-label="Get Your Free Quote Now"
 >
-
-    <span>
-        Get Free Quote
-    </span>
-
-    <i class="bi bi-arrow-right"></i>
-
+    <span>Get Your Free Quote Now</span>
 </a>
 
 
@@ -540,7 +517,7 @@
 
     color: #fff;
 
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 13px;
 
@@ -759,7 +736,7 @@
 
     color: var(--premium-navy);
 
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 13.5px;
 
@@ -793,7 +770,7 @@
    NAV UNDERLINE ANIMATION
 ========================================================= */
 
-.premium-navbar .nav-link::after {
+.premium-navbar .nav-link:not(.estimate-btn)::after {
 
     content: "";
 
@@ -813,8 +790,8 @@
 
 }
 
-.premium-navbar .nav-link:hover::after,
-.premium-navbar .nav-link.active::after {
+.premium-navbar .nav-link:not(.estimate-btn):hover::after,
+.premium-navbar .nav-link:not(.estimate-btn).active::after {
 
     left: 12px;
 
@@ -959,7 +936,7 @@
 
     color: var(--premium-navy);
 
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 13.5px;
 
@@ -1028,6 +1005,8 @@
 
 .premium-navbar .estimate-btn {
 
+    display: inline-block;
+
     background: var(--premium-green);
 
     color: #fff !important;
@@ -1037,6 +1016,16 @@
     border-radius: 2px;
 
     font-weight: 800;
+
+    font-size: 13.5px;
+
+    font-family: 'Inter', sans-serif;
+
+    line-height: normal;
+
+    text-decoration: none !important;
+
+    white-space: nowrap;
 
     margin-top: 0;
 
@@ -1091,9 +1080,42 @@
 }
 
 
-.premium-navbar .estimate-btn.active::after {
+.premium-navbar .estimate-btn::after,
+.premium-navbar .estimate-btn:hover::after,
+.premium-navbar .estimate-btn:focus::after,
+.premium-navbar .estimate-btn:active::after,
+.premium-navbar .estimate-btn.active::after,
+.premium-navbar .nav-link.estimate-btn::after,
+.premium-navbar .nav-link.estimate-btn:hover::after,
+.premium-navbar .nav-link.estimate-btn:focus::after,
+.premium-navbar .nav-link.estimate-btn:active::after,
+.premium-navbar .nav-link.estimate-btn.active::after {
 
-    display: none;
+    display: none !important;
+
+    content: none !important;
+
+    width: 0 !important;
+
+    height: 0 !important;
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+}
+
+.premium-navbar .estimate-btn,
+.premium-navbar .estimate-btn:hover,
+.premium-navbar .estimate-btn:focus,
+.premium-navbar .estimate-btn:active,
+.premium-navbar .estimate-btn:visited {
+
+    text-decoration: none !important;
+
+    outline: none !important;
+
+    color: #fff !important;
 
 }
 
@@ -1136,82 +1158,42 @@
 ========================================================= */
 
 .floating-quote {
-
     position: fixed;
-
     right: 0;
-
-    top: 40%;
-
-    z-index: 999;
-
-    width: 58px;
-
-    min-height: 240px;
-
-    padding: 24px 0;
-
-    border-radius: 10px 0 0 10px;
-
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    width: 52px;
+    padding: 26px 0;
+    border-radius: 4px 0 0 4px;
     background: var(--premium-green);
-
     color: #fff;
-
     text-decoration: none;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    flex-direction: column;
-
-    gap: 14px;
-
-    box-shadow: 0 5px 22px rgba(0, 0, 0, .25);
-
-    transition: .25s ease;
-
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .22);
+    transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    cursor: pointer;
 }
-
 
 .floating-quote span {
-
-    font-family: 'Poppins', sans-serif;
-
-    font-size: 14px;
-
-    font-weight: 800;
-
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     writing-mode: vertical-rl;
-
-    transform: rotate(180deg);
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
+    text-orientation: mixed;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    white-space: nowrap;
+    line-height: 1;
 }
-
-
-.floating-quote i {
-
-    font-size: 19px;
-
-}
-
 
 .floating-quote:hover {
-
-    width: 66px;
-
     background: var(--premium-green-dark);
-
     color: #fff;
-
-    box-shadow: 0 8px 26px rgba(0, 0, 0, .32);
-
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .32);
+    transform: translateY(-50%) translateX(-2px);
 }
 
 
@@ -1516,30 +1498,16 @@
 
 
     /* FLOATING BUTTON */
-
     .floating-quote {
-
-        width: 48px;
-
-        min-height: 190px;
-
+        width: 44px;
         padding: 18px 0;
-
+        border-radius: 4px 0 0 4px;
     }
-
 
     .floating-quote span {
-
-        font-size: 12px;
-
+        font-size: 13px;
+        letter-spacing: 0.2px;
     }
-
-    .floating-quote i {
-
-        font-size: 16px;
-
-    }
-
 }
 
 </style>

@@ -62,6 +62,8 @@ Route::get(
     [ServiceController::class, 'index']
 )->name('services.index');
 
+Route::redirect('/our-services', '/services', 301);
+
 
 // =========================================================
 // SERVICE DETAIL PAGES
@@ -163,6 +165,8 @@ Route::get(
     }
 )->name('services.dilapidation');
 
+Route::permanentRedirect('/our-services/dilapidation-inspection', '/services/dilapidation-inspection');
+
 
 // ---------------------------------------------------------
 // 07. NEW BUILD HANDOVER INSPECTION
@@ -179,6 +183,8 @@ Route::get(
     }
 )->name('services.new-build-handover');
 
+Route::permanentRedirect('/our-services/new-build-handover-inspection', '/services/new-build-handover-inspection');
+
 
 // ---------------------------------------------------------
 // 08. VENDOR INSPECTION
@@ -194,6 +200,9 @@ Route::get(
 
     }
 )->name('services.vendor');
+
+Route::permanentRedirect('/our-services/vendor-inspection', '/services/vendor-inspection');
+Route::permanentRedirect('/our-services/vendor-inspections', '/services/vendor-inspection');
 
 
 // ---------------------------------------------------------
@@ -308,6 +317,18 @@ Route::post(
 
 
 // =========================================================
+// PRIVACY POLICY
+// =========================================================
+
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy.index');
+})->name('privacy-policy');
+
+Route::permanentRedirect('/privacy', '/privacy-policy');
+Route::permanentRedirect('/privacy-and-policy', '/privacy-policy');
+
+
+// =========================================================
 // QUOTE / GET AN ESTIMATE
 // =========================================================
 //
@@ -357,6 +378,11 @@ Route::post(
     '/quote',
     [QuoteController::class, 'store']
 )->name('quote.store');
+
+Route::post(
+    '/quote/submit',
+    [QuoteController::class, 'store']
+)->name('quote.submit');
 
 
 // =========================================================

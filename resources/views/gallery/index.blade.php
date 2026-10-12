@@ -27,32 +27,17 @@
 
         <div class="gallery-grid">
 
-            {{-- 1. LOCAL IMAGES FROM public/images/g* --}}
-            @if(!empty($localImages) && count($localImages) > 0)
-                @foreach($localImages as $img)
+            @if(!empty($galleryItems) && count($galleryItems) > 0)
+                @foreach($galleryItems as $item)
                     <div class="gallery-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ ($loop->index % 3 + 1) * 70 }}">
-                        <div class="gallery-img-wrapper" onclick="openGalleryModal('{{ asset('images/' . $img) }}')">
-                            <img src="{{ asset('images/' . $img) }}"
-                                 alt="Premium Building & Pest Inspection Photo {{ $loop->iteration }}"
-                                 loading="lazy">
-                            <div class="gallery-hover-overlay">
-                                <span class="gallery-zoom-icon">
-                                    <i class="bi bi-arrows-fullscreen"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-
-            {{-- 2. DATABASE GALLERY IMAGES (ONLY IF VALID IMAGE EXISTS ON DISK) --}}
-            @if(!empty($galleries) && $galleries->count() > 0)
-                @foreach($galleries as $gallery)
-                    @if(!empty($gallery->image) && file_exists(public_path('storage/' . $gallery->image)))
-                        <div class="gallery-card" data-aos="fade-up" data-aos-duration="600">
-                            <div class="gallery-img-wrapper" onclick="openGalleryModal('{{ asset('storage/' . $gallery->image) }}')">
-                                <img src="{{ asset('storage/' . $gallery->image) }}"
-                                     alt="{{ $gallery->title ?? 'Building Inspection Photo' }}"
+                        <a href="{{ $item['image'] }}"
+                           data-fancybox="gallery"
+                           data-caption="<div class='gallery-lb-caption'><div class='gallery-lb-title'>{{ htmlspecialchars($item['title'], ENT_QUOTES) }}</div><div class='gallery-lb-desc'>{{ htmlspecialchars($item['description'], ENT_QUOTES) }}</div></div>"
+                           class="gallery-link-wrap"
+                           title="{{ $item['title'] }}">
+                            <div class="gallery-img-wrapper">
+                                <img src="{{ $item['image'] }}"
+                                     alt="{{ $item['title'] }}"
                                      loading="lazy">
                                 <div class="gallery-hover-overlay">
                                     <span class="gallery-zoom-icon">
@@ -60,8 +45,29 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                    @endif
+                        </a>
+                    </div>
+                @endforeach
+            @elseif(!empty($localImages) && count($localImages) > 0)
+                {{-- Fallback --}}
+                @foreach($localImages as $img)
+                    <div class="gallery-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ ($loop->index % 3 + 1) * 70 }}">
+                        <a href="{{ asset('images/' . $img) }}"
+                           data-fancybox="gallery"
+                           data-caption="<div class='gallery-lb-caption'><div class='gallery-lb-title'>Building Inspection in Melbourne</div><div class='gallery-lb-desc'>Comprehensive property inspections by certified building inspectors in Melbourne.</div></div>"
+                           class="gallery-link-wrap">
+                            <div class="gallery-img-wrapper">
+                                <img src="{{ asset('images/' . $img) }}"
+                                     alt="Premium Building & Pest Inspection Photo {{ $loop->iteration }}"
+                                     loading="lazy">
+                                <div class="gallery-hover-overlay">
+                                    <span class="gallery-zoom-icon">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 @endforeach
             @endif
 
@@ -72,23 +78,11 @@
 
 
 {{-- =========================================================
-     IMAGE LIGHTBOX MODAL
+     PAGE CSS & FANCYBOX STYLING
 ========================================================= --}}
-<div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-transparent border-0">
-            <div class="modal-body p-0 position-relative text-center">
-                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                <img id="galleryModalImg" src="" alt="Inspection Photo Large View" class="img-fluid rounded shadow-lg" style="max-height: 85vh; object-fit: contain;">
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Fancybox 5 Stylesheet -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
-
-{{-- =========================================================
-     PAGE CSS
-========================================================= --}}
 <style>
     /* ---------------------------------------------------------
        HERO SECTION
@@ -120,7 +114,7 @@
     }
 
     .gallery-hero-card h1 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         color: #ffffff;
         font-size: 38px;
         font-weight: 900;
@@ -166,13 +160,21 @@
         box-shadow: 0 16px 36px rgba(4, 38, 67, 0.18);
     }
 
+    .gallery-link-wrap {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
     .gallery-img-wrapper {
         position: relative;
         width: 100%;
         height: 340px;
         overflow: hidden;
         background: #f0f4f8;
-        cursor: pointer;
     }
 
     .gallery-img-wrapper img {
@@ -224,6 +226,101 @@
     }
 
     /* ---------------------------------------------------------
+       FANCYBOX LIGHTBOX CUSTOM STYLING (MATCHING EXACT LIVE SITE)
+    --------------------------------------------------------- */
+    .fancybox__backdrop {
+        background: rgba(14, 20, 28, 0.94) !important;
+        backdrop-filter: blur(4px);
+    }
+
+    /* Toolbar Header (Counter on left, Controls on right) */
+    .fancybox__toolbar {
+        padding: 12px 18px;
+        color: #ffffff;
+        background: transparent !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .fancybox__infobar {
+        font-family: 'Inter', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        padding-left: 6px;
+    }
+
+    .fancybox__toolbar .f-button {
+        color: #ffffff !important;
+        width: 44px;
+        height: 44px;
+        font-size: 19px;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .fancybox__toolbar .f-button:hover {
+        color: #8ed42b !important;
+        transform: scale(1.1);
+    }
+
+    /* Next / Prev Navigation Chevrons */
+    .fancybox__nav .f-button {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        color: #ffffff !important;
+        background: rgba(4, 33, 60, 0.5) !important;
+        backdrop-filter: blur(2px);
+        transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .fancybox__nav .f-button:hover {
+        background: rgba(67, 169, 0, 0.9) !important;
+        transform: scale(1.08);
+    }
+
+    /* Centered Image Caption */
+    .fancybox__caption {
+        padding: 14px 20px 24px !important;
+        text-align: center !important;
+        background: transparent !important;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .gallery-lb-caption {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 820px;
+        margin: 0 auto;
+    }
+
+    .gallery-lb-title {
+        font-family: 'Inter', sans-serif;
+        color: #ffffff;
+        font-size: 18.5px;
+        font-weight: 800;
+        line-height: 1.35;
+        margin-bottom: 5px;
+        letter-spacing: 0.3px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+    }
+
+    .gallery-lb-desc {
+        font-family: 'Inter', sans-serif;
+        color: rgba(255, 255, 255, 0.94);
+        font-size: 14.5px;
+        font-weight: 400;
+        line-height: 1.55;
+        margin: 0;
+        max-width: 760px;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+    }
+
+    /* ---------------------------------------------------------
        RESPONSIVE
     --------------------------------------------------------- */
     @media (max-width: 991px) {
@@ -238,6 +335,14 @@
 
         .gallery-img-wrapper {
             height: 310px;
+        }
+
+        .gallery-lb-title {
+            font-size: 17px;
+        }
+
+        .gallery-lb-desc {
+            font-size: 13.5px;
         }
     }
 
@@ -271,25 +376,67 @@
         .gallery-img-wrapper {
             height: 290px;
         }
+
+        .gallery-lb-title {
+            font-size: 16px;
+        }
+
+        .gallery-lb-desc {
+            font-size: 13px;
+        }
     }
 </style>
 
-
-{{-- =========================================================
-     PAGE SCRIPT (MODAL TRIGGER)
-========================================================= --}}
-<script>
-    function openGalleryModal(src) {
-        const modalImg = document.getElementById('galleryModalImg');
-        if (modalImg) {
-            modalImg.src = src;
-            const modalEl = document.getElementById('galleryModal');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
-                modal.show();
-            }
-        }
-    }
-</script>
-
 @endsection
+
+@push('scripts')
+<!-- Fancybox 5 UMD Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof Fancybox !== 'undefined') {
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            Toolbar: {
+                display: {
+                    left: ["infobar"],
+                    middle: [],
+                    right: ["fullscreen", "iterateZoom", "share", "close"],
+                },
+                items: {
+                    share: {
+                        tpl: '<button class="f-button" title="Share" data-fancybox-share><i class="bi bi-share"></i></button>',
+                        click: (fancybox) => {
+                            const slide = fancybox.getSlide();
+                            const titleEl = slide.caption ? document.createElement('div') : null;
+                            if (titleEl) titleEl.innerHTML = slide.caption;
+                            const shareText = titleEl ? titleEl.textContent : document.title;
+
+                            if (navigator.share) {
+                                navigator.share({
+                                    title: shareText,
+                                    url: slide.src
+                                }).catch(() => {});
+                            } else if (navigator.clipboard) {
+                                navigator.clipboard.writeText(slide.src);
+                                alert('Image link copied to clipboard!');
+                            }
+                        }
+                    }
+                }
+            },
+            Images: {
+                zoom: true,
+            },
+            Thumbs: false,
+            animated: true,
+            dragToClose: true,
+            showClass: "f-fadeIn",
+            hideClass: "f-fadeOut",
+            caption: function (fancybox, slide) {
+                return slide.caption || "";
+            }
+        });
+    }
+});
+</script>
+@endpush
