@@ -200,13 +200,13 @@
     }
 
     .blog-item-title a {
-        color: #072448;
+        color: #05213F;
         text-decoration: none;
         transition: color 0.2s ease;
     }
 
     .blog-item-title a:hover {
-        color: #43a900;
+        color: #499B08;
     }
 
     .blog-item-date {
@@ -229,7 +229,7 @@
     }
 
     .blog-read-more-link {
-        color: #072448;
+        color: #05213F;
         font-size: 12.5px;
         font-weight: 800;
         text-decoration: underline;
@@ -239,7 +239,7 @@
     }
 
     .blog-read-more-link:hover {
-        color: #43a900;
+        color: #499B08;
     }
 
     /* ---------------------------------------------------------
@@ -255,7 +255,7 @@
     }
 
     .pagination-arrow {
-        color: #072448;
+        color: #05213F;
         font-size: 13.5px;
         font-weight: 700;
         text-decoration: none;
@@ -263,7 +263,7 @@
     }
 
     .pagination-arrow:not(.disabled):hover {
-        color: #43a900;
+        color: #499B08;
     }
 
     .pagination-arrow.disabled {
@@ -272,7 +272,7 @@
     }
 
     .pagination-page {
-        color: #072448;
+        color: #05213F;
         font-size: 13.5px;
         font-weight: 700;
         text-decoration: none;
@@ -281,7 +281,7 @@
     }
 
     .pagination-page:hover {
-        color: #43a900;
+        color: #499B08;
     }
 
     .pagination-page.active {

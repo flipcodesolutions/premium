@@ -440,6 +440,24 @@
 
 
                 <!-- =================================================
+                     BLOG
+                ================================================== -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}"
+                        href="{{ route('blog.index') }}"
+                    >
+                        Blog
+                    </a>
+
+                </li>
+
+
+
+
+                <!-- =================================================
                      GET AN ESTIMATE
                 ================================================== -->
 
@@ -491,17 +509,17 @@
 
 :root {
 
-    --premium-navy: #0B1F3A;
+    --premium-navy: #063464;
 
-    --premium-blue: #123F67;
+    --premium-blue: #05213F;
 
-    --premium-green: #48A900;
+    --premium-green: #499B08;
 
-    --premium-green-dark: #398600;
+    --premium-green-dark: #387c06;
 
     --premium-orange: #FF6B00;
 
-    --premium-light: #F7F9FB;
+    --premium-light: #EEF3FA;
 
 }
 
@@ -1077,7 +1095,7 @@
 
     transform: translateY(-2px);
 
-    box-shadow: 0 6px 18px rgba(67, 169, 0, 0.35);
+    box-shadow: 0 6px 18px rgba(73, 155, 8, 0.35);
 
 }
 
@@ -1140,7 +1158,7 @@
 
 .premium-navbar .navbar-toggler:focus {
 
-    box-shadow: 0 0 0 2px rgba(72, 169, 0, .12);
+    box-shadow: 0 0 0 2px rgba(73, 155, 8, .15);
 
 }
 

@@ -510,12 +510,12 @@
     }
 
     .agreement-scroll-box::-webkit-scrollbar-thumb {
-        background: #43a900;
+        background: #499B08;
         border-radius: 4px;
     }
 
     .agreement-scroll-box::-webkit-scrollbar-thumb:hover {
-        background: #368800;
+        background: #387c06;
     }
 
     /* TEXT CONTENT INSIDE SCROLL BOX */
@@ -526,7 +526,7 @@
     }
 
     .agreement-box-heading {
-        color: #0b1f3a;
+        color: #05213F;
         font-family: 'Inter', sans-serif;
         font-size: 18px;
         font-weight: 800;
@@ -609,15 +609,15 @@
 
     .agreement-input:focus {
         background-color: #ffffff !important;
-        border-color: #43a900 !important;
-        box-shadow: 0 0 0 3px rgba(67, 169, 0, 0.15) !important;
+        border-color: #499B08 !important;
+        box-shadow: 0 0 0 3px rgba(73, 155, 8, 0.15) !important;
         outline: none !important;
     }
 
     .agreement-submit-btn {
         width: 100%;
         height: 52px;
-        background-color: #43a900;
+        background-color: #499B08;
         color: #ffffff;
         font-family: 'Inter', sans-serif;
         font-weight: 700;
@@ -633,13 +633,13 @@
     }
 
     .agreement-submit-btn:hover {
-        background-color: #388e00;
+        background-color: #387c06;
         color: #ffffff;
     }
 
     .agreement-alert {
         border-radius: 4px;
-        border-left: 5px solid #43a900;
+        border-left: 5px solid #499B08;
         background-color: #f0fdf4;
     }
 

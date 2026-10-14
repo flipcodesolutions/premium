@@ -439,7 +439,7 @@
 ========================================================= */
 
 .footer-cta-section {
-    background: #123F67;
+    background: #05213F;
     padding: 60px 0;
 }
 
@@ -451,7 +451,7 @@
 }
 
 .footer-cta-label {
-    color: #FF6B00;
+    color: #499B08;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -479,13 +479,13 @@
     align-items: center;
     gap: 10px;
 
-    background: #FF6B00;
+    background: #499B08;
     color: #fff;
 
     padding: 15px 28px;
 
     border-radius: 4px;
-    border: 2px solid #FF6B00;
+    border: 2px solid #499B08;
 
     font-family: 'Inter', sans-serif;
     font-size: 14px;
@@ -497,7 +497,7 @@
 
 .footer-cta-button:hover {
     background: #fff;
-    color: #0B1F3A;
+    color: #05213F;
     border-color: #fff;
 }
 
@@ -507,7 +507,7 @@
 ========================================================= */
 
 .premium-footer {
-    background: #0B1F3A;
+    background: #063464;
     color: #fff;
     padding-top: 65px;
 }
@@ -536,7 +536,7 @@
     width: 42px;
     height: 3px;
 
-    background: #43A900;
+    background: #499B08;
 }
 
 
@@ -589,7 +589,7 @@
 ========================================================= */
 
 .footer-inspector {
-    border-left: 3px solid #43A900;
+    border-left: 3px solid #499B08;
     padding-left: 13px;
     margin: 20px 0;
 }
@@ -635,11 +635,11 @@
 }
 
 .footer-social a:hover {
-    background: #43A900;
-    border-color: #43A900;
+    background: #499B08;
+    border-color: #499B08;
     color: #fff;
     transform: translateY(-4px) scale(1.1);
-    box-shadow: 0 6px 16px rgba(67, 169, 0, 0.4);
+    box-shadow: 0 6px 16px rgba(73, 155, 8, 0.4);
 }
 
 
@@ -672,7 +672,7 @@
 }
 
 .footer-links a i {
-    color: #43A900;
+    color: #499B08;
     font-size: 11px;
     margin-right: 9px;
     margin-top: 5px;
@@ -680,7 +680,7 @@
 }
 
 .footer-links a:hover {
-    color: #43A900;
+    color: #499B08;
     transform: translateX(6px);
 }
 
@@ -705,7 +705,7 @@
     min-width: 38px;
     height: 38px;
 
-    background: #43A900;
+    background: #499B08;
     color: #fff;
     border-radius: 8px;
 
@@ -719,8 +719,8 @@
 
 .footer-contact-item:hover .footer-contact-icon {
     transform: translateY(-2px) scale(1.05);
-    background: #399200;
-    box-shadow: 0 4px 12px rgba(67, 169, 0, 0.35);
+    background: #387c06;
+    box-shadow: 0 4px 12px rgba(73, 155, 8, 0.35);
 }
 
 .footer-contact-text span {
@@ -762,7 +762,7 @@
 }
 
 .footer-contact-text a:hover {
-    color: #43A900;
+    color: #499B08;
 }
 
 
@@ -772,7 +772,7 @@
 
 .footer-bottom {
     margin-top: 50px;
-    background: #07162A;
+    background: #03162B;
     padding: 18px 0;
 }
 
@@ -807,7 +807,7 @@
 }
 
 .footer-bottom-links a:hover {
-    color: #43A900;
+    color: #499B08;
 }
 
 .footer-bottom-links span {

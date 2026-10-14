@@ -11,17 +11,18 @@
 ========================================================= */
 
 :root {
-    --pbi-navy: #082f57;
-    --pbi-navy-dark: #051f3a;
-    --pbi-blue: #0b4d82;
-    --pbi-green: #43a900;
-    --pbi-green-dark: #328700;
-    --pbi-orange: #ffb000;
-    --pbi-light: #f4f7fa;
+    --pbi-navy: #05213F;
+    --pbi-navy-dark: #03162B;
+    --pbi-blue: #063464;
+    --pbi-green: #499B08;
+    --pbi-green-dark: #387c06;
+    --pbi-accent-blue: #0D85FD;
+    --pbi-light: #EEF3FA;
+    --pbi-offwhite: #F5F5F7;
     --pbi-white: #ffffff;
     --pbi-text: #333333;
-    --pbi-muted: #555555;
-    --pbi-border: #e2e7eb;
+    --pbi-muted: #8299B1;
+    --pbi-border: #DCDDE8;
 }
 
 .pbi-home *,
@@ -114,7 +115,7 @@
 .pbi-btn:hover {
     background: var(--pbi-green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(67, 169, 0, .28);
+    box-shadow: 0 6px 18px rgba(73, 155, 8, .28);
     color: #fff !important;
 }
 
@@ -331,10 +332,9 @@
 
 .pbi-values {
     background: linear-gradient(
-        115deg,
-        #43a900 0%,
-        #1caa9a 50%,
-        #138fe6 100%
+        135deg,
+        #499B08 0%,
+        #0D85FD 100%
     );
     color: #ffffff;
     padding: 70px 0;
@@ -416,7 +416,7 @@
     width: 62px;
     height: 62px;
     margin: 0 auto 20px;
-    background: #42a900;
+    background: #499B08;
     color: #ffffff;
     border-radius: 10px;
     font-size: 28px;
@@ -424,7 +424,7 @@
 
 .pbi-value-card h3 {
     margin: 0 0 12px;
-    color: #073763;
+    color: #05213F;
     font-family: 'Inter', sans-serif;
     font-size: 17px;
     font-weight: 900;
@@ -446,7 +446,7 @@
 .pbi-stats {
     padding: 42px 0;
     background: #fff;
-    border-bottom: 1px solid #edf1f4;
+    border-bottom: 1px solid #DCDDE8;
 }
 
 .pbi-stats-grid {
@@ -458,7 +458,7 @@
 
 .pbi-stat {
     text-align: center;
-    border-right: 1px solid #e0e6ec;
+    border-right: 1px solid #DCDDE8;
     padding: 8px 18px;
 }
 
@@ -472,7 +472,7 @@
 .pbi-stat-number span {
     display: block;
     margin-bottom: 6px;
-    color: var(--pbi-green, #43a900) !important;
+    color: var(--pbi-green, #499B08) !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 46px !important;
     font-weight: 900 !important;
@@ -483,7 +483,7 @@
 .pbi-stat-label,
 .pbi-stat > span:not([data-counter]) {
     display: block;
-    color: #0B3158 !important;
+    color: #05213F !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 14.5px !important;
     font-weight: 800 !important;
@@ -581,12 +581,11 @@
 .pbi-feature {
     margin: 0 auto;
     background: linear-gradient(
-        to bottom,
-        #cde9bb 0%,
-        #e8f5df 40%,
-        #fff 100%
+        180deg,
+        rgba(73, 155, 8, 0.15) 0%,
+        rgba(255, 255, 255, 0) 100%
     );
-    border-radius: 20px 20px 0 0;
+    border-radius: 35px 35px 0 0;
     padding: 65px 0 50px;
 }
 
@@ -625,7 +624,7 @@
     color: #fff;
     border-radius: 4px;
     font-size: 20px;
-    box-shadow: 0 4px 12px rgba(67,169,0,.3);
+    box-shadow: 0 4px 12px rgba(73, 155, 8, .3);
 }
 
 .pbi-feature-item h4 {
@@ -658,9 +657,9 @@
     background:
         linear-gradient(
             90deg,
-            rgba(3, 44, 78, 0.96) 0%,
-            rgba(3, 44, 78, 0.85) 45%,
-            rgba(3, 44, 78, 0.30) 100%
+            rgba(5, 33, 63, 0.96) 0%,
+            rgba(5, 33, 63, 0.85) 45%,
+            rgba(5, 33, 63, 0.30) 100%
         ),
         url('{{ asset('images/schedule.jpeg') }}') center right / cover no-repeat;
     padding: 110px 0;
@@ -760,7 +759,7 @@
     background: #ffffff;
     border-color: var(--pbi-green) !important;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(67,169,0,.15);
+    box-shadow: 0 0 0 3px rgba(73,155,8,.15);
 }
 
 .pbi-form-box select {
@@ -1680,30 +1679,30 @@
 
 
 {{-- =========================================================
-     9. PRICING ("CHOOSE OUR BEST VALUE INSPECTION PACKAGES")
+     9. PRICING ("CHOOSE PACKAGE")
 ========================================================= --}}
 <section class="pbi-section pbi-pricing">
     <div class="pbi-container">
 
         <div class="pbi-title" data-aos="fade-up">
             <div class="small-title">
-                Pricing
+                Choose Package
             </div>
             <h2>
-                Choose Our Best Value Inspection Packages
+                Defending Your Space, Full Inspection at a Time
             </h2>
         </div>
 
         <div class="pbi-pricing-grid">
 
-            {{-- 1. Pre-Purchase Building --}}
+            {{-- 1. Building & Pest Inspection --}}
             <div class="pbi-price-card hover-lift" data-aos="fade-up" data-aos-delay="100">
                 <div>
                     <div class="pbi-price-icon">
                         <i class="fas fa-home"></i>
                     </div>
                     <h3>
-                        Pre-Purchase Building
+                        Building &amp; Pest Inspection
                     </h3>
                     <div class="pbi-price">
                         <span class="price-from">From</span>
@@ -1711,7 +1710,7 @@
                     </div>
                     <ul class="pbi-price-features">
                         <li>Comprehensive Inspection</li>
-                        <li>Building & Pest Report</li>
+                        <li>Building &amp; Pest Report</li>
                     </ul>
                 </div>
                 <a href="{{ route('contact') }}" class="pbi-btn btn-glow">
@@ -1719,22 +1718,22 @@
                 </a>
             </div>
 
-            {{-- 2. Pest & Termite Inspection --}}
+            {{-- 2. Pool Barrier Inspection --}}
             <div class="pbi-price-card hover-lift" data-aos="fade-up" data-aos-delay="200">
                 <div>
                     <div class="pbi-price-icon">
-                        <i class="fas fa-bug"></i>
+                        <i class="fas fa-swimming-pool"></i>
                     </div>
                     <h3>
-                        Pest & Termite Inspection
+                        Pool Barrier Inspection
                     </h3>
                     <div class="pbi-price">
                         <span class="price-from">From</span>
                         $250
                     </div>
                     <ul class="pbi-price-features">
-                        <li>Property Inspection</li>
-                        <li>Professional Report</li>
+                        <li>Safety Barrier Inspection</li>
+                        <li>Compliance Certificate / Report</li>
                     </ul>
                 </div>
                 <a href="{{ route('contact') }}" class="pbi-btn btn-glow">
@@ -1742,22 +1741,22 @@
                 </a>
             </div>
 
-            {{-- 3. Combined Building & Pest --}}
+            {{-- 3. Building Handover Inspection --}}
             <div class="pbi-price-card hover-lift" data-aos="fade-up" data-aos-delay="300">
                 <div>
                     <div class="pbi-price-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="far fa-building"></i>
                     </div>
                     <h3>
-                        Combined Building & Pest
+                        Building Handover Inspection
                     </h3>
                     <div class="pbi-price">
                         <span class="price-from">From</span>
                         $450
                     </div>
                     <ul class="pbi-price-features">
-                        <li>Comprehensive Inspection</li>
-                        <li>Building & Pest Report</li>
+                        <li>New Build Defect Check</li>
+                        <li>Full Handover Report</li>
                     </ul>
                 </div>
                 <a href="{{ route('contact') }}" class="pbi-btn btn-glow">
@@ -1765,21 +1764,21 @@
                 </a>
             </div>
 
-            {{-- 4. Stage Inspections --}}
+            {{-- 4. Others Inspection --}}
             <div class="pbi-price-card hover-lift" data-aos="fade-up" data-aos-delay="400">
                 <div>
                     <div class="pbi-price-icon">
-                        <i class="fas fa-tasks"></i>
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
                     <h3>
-                        Stage Inspections
+                        Others Inspection
                     </h3>
                     <div class="pbi-price">
-                        <span class="price-from" style="visibility: hidden;">From</span>
+                        <span class="price-from">From</span>
                         TBA
                     </div>
                     <ul class="pbi-price-features">
-                        <li>Custom Inspection</li>
+                        <li>Custom Inspection Services</li>
                         <li>Contact For Pricing</li>
                     </ul>
                 </div>

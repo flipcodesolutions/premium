@@ -256,10 +256,10 @@
 ========================================================= --}}
 <style>
     :root {
-        --c-green: #43a900;
-        --c-green-hover: #378e00;
-        --c-navy: #000000;
-        --c-navy-dark: #000000;
+        --c-green: #499B08;
+        --c-green-hover: #387c06;
+        --c-navy: #05213F;
+        --c-navy-dark: #03162B;
         --c-text: #000000;
         --c-input-bg: #edf2f7;
         --c-input-border: #cbd5e1;

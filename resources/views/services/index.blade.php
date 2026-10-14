@@ -12,14 +12,14 @@
 ========================================================= */
 
 :root {
-    --service-navy: #0b3158;
-    --service-navy-dark: #082846;
-    --service-blue: #123f67;
-    --service-green: #43a900;
-    --service-green-dark: #319000;
-    --service-light: #eef4f9;
+    --service-navy: #05213F;
+    --service-navy-dark: #03162B;
+    --service-blue: #063464;
+    --service-green: #499B08;
+    --service-green-dark: #387c06;
+    --service-light: #EEF3FA;
     --service-text: #334b61;
-    --service-muted: #66798a;
+    --service-muted: #8299B1;
 }
 
 

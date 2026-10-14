@@ -102,29 +102,33 @@
 
         :root {
 
-            --primary-color: #0B3158;
+            --primary-color: #063464;
 
-            --secondary-color: #123F67;
+            --secondary-color: #05213F;
 
-            --green-color: #43A900;
+            --navy-dark: #03162B;
 
-            --green-dark: #329000;
+            --green-color: #499B08;
 
-            --green-light: #eaf6df;
+            --green-dark: #387c06;
 
-            --blue-color: #168DD1;
+            --green-light: rgba(73, 155, 8, 0.1);
+
+            --blue-color: #0D85FD;
 
             --white-color: #ffffff;
 
-            --light-color: #f2f6fa;
+            --light-color: #EEF3FA;
 
-            --lighter-color: #f7f9fb;
+            --lighter-color: #F5F5F7;
 
             --text-color: #526477;
 
-            --dark-text: #162B40;
+            --muted-color: #8299B1;
 
-            --border-color: #dfe7ee;
+            --dark-text: #05213F;
+
+            --border-color: #DCDDE8;
 
             --transition: all 0.3s ease;
 
@@ -212,7 +216,7 @@
         .btn-glow:hover,
         .pbi-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(67, 169, 0, 0.35) !important;
+            box-shadow: 0 10px 24px rgba(73, 155, 8, 0.35) !important;
         }
 
         /* Subtle button icon interactions */
@@ -240,10 +244,10 @@
         /* Breathing pulse animation */
         @keyframes pulseGreenGlow {
             0%, 100% {
-                box-shadow: 0 0 0 0 rgba(67, 169, 0, 0.5);
+                box-shadow: 0 0 0 0 rgba(73, 155, 8, 0.5);
             }
             50% {
-                box-shadow: 0 0 0 12px rgba(67, 169, 0, 0);
+                box-shadow: 0 0 0 12px rgba(73, 155, 8, 0);
             }
         }
 
@@ -660,10 +664,9 @@
             background:
 
                 linear-gradient(
-                    110deg,
-                    #43A900 0%,
-                    #299C93 50%,
-                    #168DD1 100%
+                    135deg,
+                    #499B08 0%,
+                    #0D85FD 100%
                 );
 
         }
@@ -795,7 +798,7 @@
 
             border-color: var(--green-color) !important;
 
-            box-shadow: 0 0 0 .15rem rgba(67,169,0,.12) !important;
+            box-shadow: 0 0 0 .15rem rgba(73, 155, 8, .15) !important;
 
             outline: none;
 

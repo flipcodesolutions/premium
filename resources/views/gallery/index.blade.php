@@ -209,7 +209,7 @@
     .gallery-zoom-icon {
         width: 48px;
         height: 48px;
-        background: #43a900;
+        background: #499B08;
         color: #ffffff;
         border-radius: 50%;
         display: flex;

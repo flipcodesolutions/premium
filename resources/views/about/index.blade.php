@@ -11,12 +11,12 @@
 ========================================================= */
 
 .about-page {
-    --about-navy: #0b3158;
-    --about-navy-dark: #082846;
-    --about-blue: #123f67;
-    --about-green: #43a900;
-    --about-green-dark: #319000;
-    --about-light: #eef4f9;
+    --about-navy: #05213F;
+    --about-navy-dark: #03162B;
+    --about-blue: #063464;
+    --about-green: #499B08;
+    --about-green-dark: #387c06;
+    --about-light: #EEF3FA;
     --about-text: #607487;
     --about-white: #ffffff;
 }
@@ -105,11 +105,11 @@
 
     position: relative;
 
-    background-color: #052c4d;
+    background-color: #063464;
     background-image:
         linear-gradient(
-            rgba(5, 45, 78, .72),
-            rgba(5, 45, 78, .78)
+            rgba(6, 52, 100, .75),
+            rgba(5, 33, 63, .85)
         ),
         url("{{ asset('images/about banner.jpg') }}");
     background-position: center 15%;
@@ -319,7 +319,7 @@
 }
 
 .inspector-label {
-    background: #0b1f3a;
+    background: #05213F;
 
     color: #fff;
 
@@ -386,10 +386,9 @@
 .value-section {
     background:
         linear-gradient(
-            110deg,
-            #43a900 0%,
-            #299d92 52%,
-            #168dd1 100%
+            135deg,
+            #499B08 0%,
+            #0D85FD 100%
         );
 
     padding: 70px 0;
