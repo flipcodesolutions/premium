@@ -69,7 +69,7 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr style="font-size: 0.8rem; text-transform: uppercase; color: var(--admin-text-muted);">
-                    <th style="width: 70px;">ID</th>
+                    <th style="width: 75px;">SR No.</th>
                     <th>Customer</th>
                     <th>Service Type</th>
                     <th>Inspection Schedule</th>
@@ -82,7 +82,7 @@
                 @forelse($bookings as $booking)
                     <tr>
                         <td>
-                            <span class="text-muted fw-bold">#{{ $booking->id }}</span>
+                            <span class="text-muted fw-bold">{{ $bookings->firstItem() + $loop->index }}</span>
                         </td>
                         <td>
                             <div class="fw-semibold text-dark">{{ $booking->name }}</div>

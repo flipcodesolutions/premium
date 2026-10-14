@@ -68,6 +68,7 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr style="font-size: 0.8rem; text-transform: uppercase; color: var(--admin-text-muted);">
+                    <th style="width: 75px;">SR No.</th>
                     <th style="width: 80px;">Cover</th>
                     <th>Article Title</th>
                     <th>Category</th>
@@ -80,8 +81,11 @@
                 @forelse($posts as $post)
                     <tr>
                         <td>
-                            @if($post->image)
-                                <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="rounded border" style="width: 60px; height: 42px; object-fit: cover;">
+                            <span class="text-muted fw-bold">{{ $posts->firstItem() + $loop->index }}</span>
+                        </td>
+                        <td>
+                            @if($post->image_url || $post->image)
+                                <img src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}" alt="{{ $post->title }}" class="rounded border" style="width: 60px; height: 42px; object-fit: cover;" onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
                             @else
                                 <div class="rounded border bg-light d-flex align-items-center justify-content-center text-muted" style="width: 60px; height: 42px; font-size: 0.85rem;">
                                     <i class="bi bi-file-earmark-richtext"></i>
@@ -146,7 +150,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">
+                        <td colspan="7" class="text-center py-5 text-muted">
                             <i class="bi bi-journal-x fs-1 d-block mb-2"></i>
                             <h6 class="fw-semibold">No blog posts found</h6>
                             <p class="small text-muted mb-3">Publish articles and tips to improve your website's SEO.</p>

@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\QuoteRequestController as AdminQuoteController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminMessageController;
 use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
+use App\Http\Controllers\Admin\InspectionAgreementController as AdminInspectionAgreementController;
 
 
 // =========================================================
@@ -428,23 +429,10 @@ Route::post(
 
 
 // ---------------------------------------------------------
-// Admin Register Page
+// Admin Registration (Disabled - Redirects to Login)
 // ---------------------------------------------------------
 
-Route::get(
-    '/register',
-    [AdminLoginController::class, 'showRegister']
-)->name('register');
-
-
-// ---------------------------------------------------------
-// Admin Register Submit
-// ---------------------------------------------------------
-
-Route::post(
-    '/register',
-    [AdminLoginController::class, 'register']
-)->name('register.submit');
+Route::redirect('/register', '/login')->name('register');
 
 
 // ---------------------------------------------------------
@@ -664,5 +652,43 @@ Route::middleware(['admin'])
             '/blogs/{post}/toggle-status',
             [AdminBlogPostController::class, 'toggleStatus']
         )->name('blogs.toggle-status');
+
+
+        // =================================================
+        // ADMIN INSPECTION AGREEMENTS
+        // =================================================
+
+        Route::get(
+            '/agreements',
+            [AdminInspectionAgreementController::class, 'index']
+        )->name('agreements.index');
+
+        Route::get(
+            '/agreements/{agreement}',
+            [AdminInspectionAgreementController::class, 'show']
+        )->name('agreements.show');
+
+        Route::get(
+            '/agreements/{agreement}/print',
+            [AdminInspectionAgreementController::class, 'print']
+        )->name('agreements.print');
+
+        Route::patch(
+            '/agreements/{agreement}/status',
+            [AdminInspectionAgreementController::class, 'updateStatus']
+        )->name('agreements.update-status');
+
+        Route::post(
+            '/agreements/{agreement}/send-email',
+            [AdminInspectionAgreementController::class, 'sendEmail']
+        )->name('agreements.send-email');
+
+        Route::delete(
+            '/agreements/{agreement}',
+            [AdminInspectionAgreementController::class, 'destroy']
+        )->name('agreements.destroy');
+
+        Route::redirect('/inspection-agreements', '/admin/agreements');
+        Route::redirect('/inspection-agreement', '/admin/agreements');
 
     });

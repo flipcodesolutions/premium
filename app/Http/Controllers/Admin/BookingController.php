@@ -70,18 +70,28 @@ class BookingController extends Controller
             'status' => $validated['status'],
         ]);
 
-        $msg = 'Booking status updated successfully to ' . ucfirst($booking->status) . '.';
+        if ($request->boolean('notify_customer')) {
+            if (empty(trim($booking->email ?? ''))) {
+                return redirect()
+                    ->back()
+                    ->with('warning', 'Booking status updated to ' . ucfirst($booking->status) . ', but client has no email address on file.');
+            }
 
-        if ($request->boolean('notify_customer') && !empty($booking->email)) {
             $sent = CustomerMailService::sendBookingStatusUpdate($booking, $request->input('note'));
             if ($sent) {
-                $msg .= ' A status update email was sent to ' . $booking->email . '.';
+                return redirect()
+                    ->back()
+                    ->with('success', 'Booking status updated to ' . ucfirst($booking->status) . ' and notification email sent to ' . $booking->email . '.');
             }
+
+            return redirect()
+                ->back()
+                ->with('warning', 'Booking status updated to ' . ucfirst($booking->status) . ', but the notification email could not be delivered to ' . $booking->email . '. Please check system mail logs.');
         }
 
         return redirect()
             ->back()
-            ->with('success', $msg);
+            ->with('success', 'Booking status updated successfully to ' . ucfirst($booking->status) . '.');
     }
 
     /**

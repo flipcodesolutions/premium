@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\InspectionAgreement;
 use App\Services\CustomerMailService;
 use Illuminate\Http\Request;
 
@@ -46,6 +47,24 @@ class InspectionAgreementController extends Controller
             'inspection_date' => now()->toDateString(),
             'message' => $notes,
             'status' => 'confirmed',
+        ]);
+
+        InspectionAgreement::create([
+            'booking_id' => $booking->id,
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'name' => $fullName,
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'property_address' => $validated['property_address'],
+            'agent_mobile' => $validated['agent_mobile'] ?? null,
+            'service_type' => 'Pre-Purchase Inspection Agreement (AS 4349.1-2007 & AS 4349.3-2010)',
+            'agreement_version' => 'AS 4349.1-2007 & AS 4349.3-2010',
+            'status' => 'accepted',
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'accepted_at' => now(),
+            'notes' => $notes,
         ]);
 
         if (!empty($booking->email)) {

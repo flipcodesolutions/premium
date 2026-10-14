@@ -519,14 +519,16 @@
 
     font-family: 'Inter', sans-serif;
 
-    font-size: 13px;
+    font-size: 14.5px;
+
+    font-weight: 500;
 
 }
 
 
 .top-contact-inner {
 
-    min-height: 38px;
+    min-height: 40px;
 
     width: 100%;
 
@@ -583,9 +585,9 @@
 
     color: var(--premium-green);
 
-    margin-right: 6px;
+    margin-right: 7px;
 
-    font-size: 13px;
+    font-size: 14px;
 
 }
 
@@ -639,9 +641,9 @@
 
     color: var(--premium-green);
 
-    margin-right: 6px;
+    margin-right: 7px;
 
-    font-size: 13px;
+    font-size: 14px;
 
 }
 
@@ -738,7 +740,7 @@
 
     font-family: 'Inter', sans-serif;
 
-    font-size: 13.5px;
+    font-size: 15.5px;
 
     font-weight: 700;
 
@@ -869,7 +871,7 @@
 
 .services-dropdown-btn i {
 
-    font-size: 11px;
+    font-size: 12px;
 
     transition: transform .25s ease;
 
@@ -938,7 +940,7 @@
 
     font-family: 'Inter', sans-serif;
 
-    font-size: 13.5px;
+    font-size: 14.5px;
 
     font-weight: 600;
 
@@ -1011,13 +1013,13 @@
 
     color: #fff !important;
 
-    padding: 11px 17px !important;
+    padding: 11px 18px !important;
 
-    border-radius: 2px;
+    border-radius: 3px;
 
     font-weight: 800;
 
-    font-size: 13.5px;
+    font-size: 15px;
 
     font-family: 'Inter', sans-serif;
 
@@ -1206,11 +1208,11 @@
 
     .premium-navbar .nav-link {
 
-        font-size: 12px;
+        font-size: 13.5px;
 
-        padding-left: 8px !important;
+        padding-left: 7px !important;
 
-        padding-right: 8px !important;
+        padding-right: 7px !important;
 
     }
 
@@ -1271,7 +1273,7 @@
     .top-contact-email a,
     .top-contact-phone a {
 
-        font-size: 12px;
+        font-size: 13px;
 
     }
 
@@ -1323,7 +1325,7 @@
 
         padding: 12px 18px !important;
 
-        font-size: 14px;
+        font-size: 15.5px;
 
     }
 
@@ -1414,7 +1416,7 @@
 
         padding: 10px 30px;
 
-        font-size: 13px;
+        font-size: 14.5px;
 
     }
 
@@ -1440,7 +1442,9 @@
 
         text-align: center;
 
-        padding: 12px 17px !important;
+        padding: 12px 18px !important;
+
+        font-size: 15px;
 
     }
 
@@ -1459,7 +1463,7 @@
 
     .top-contact-inner {
 
-        min-height: 32px;
+        min-height: 34px;
 
         gap: 8px;
 
@@ -1469,7 +1473,7 @@
     .top-contact-email a,
     .top-contact-phone a {
 
-        font-size: 11px;
+        font-size: 12px;
 
     }
 
@@ -1477,7 +1481,7 @@
     .top-contact-email i,
     .top-contact-phone i {
 
-        font-size: 11px;
+        font-size: 12px;
 
         margin-right: 4px;
 

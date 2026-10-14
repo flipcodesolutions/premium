@@ -66,12 +66,12 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr style="font-size: 0.8rem; text-transform: uppercase; color: var(--admin-text-muted);">
-                    <th style="width: 70px;">ID</th>
+                    <th style="width: 75px;">SR No.</th>
                     <th>Client Name</th>
                     <th>Contact Info</th>
                     <th>Requested Service</th>
                     <th>Property Address</th>
-                    <th>Date Received</th>
+                    <th style="min-width: 175px;">Received (AU Time)</th>
                     <th>Status</th>
                     <th class="text-end" style="width: 140px;">Actions</th>
                 </tr>
@@ -80,7 +80,7 @@
                 @forelse($quotes as $quote)
                     <tr>
                         <td>
-                            <span class="text-muted fw-bold">#{{ $quote->id }}</span>
+                            <span class="text-muted fw-bold">{{ $quotes->firstItem() + $loop->index }}</span>
                         </td>
                         <td>
                             <div class="fw-semibold text-dark">{{ $quote->name }}</div>
@@ -98,8 +98,18 @@
                             </span>
                         </td>
                         <td>
-                            <small class="text-nowrap">{{ $quote->created_at->format('d M Y') }}</small>
-                            <div class="text-muted" style="font-size: 0.72rem;">{{ $quote->created_at->diffForHumans() }}</div>
+                            @if($quote->created_at)
+                                <div class="text-nowrap fw-semibold text-dark" style="font-size: 0.82rem;">
+                                    <i class="bi bi-clock me-1 text-primary"></i>{{ $quote->created_at_australia->format('d M Y, h:i A') }}
+                                </div>
+                                <div class="text-muted d-flex align-items-center gap-1 mt-1" style="font-size: 0.72rem;">
+                                    <span class="badge bg-light text-secondary border px-1 py-0 fw-semibold" style="font-size: 0.65rem;">{{ $quote->australian_timezone_abbr }}</span>
+                                    <span>&bull;</span>
+                                    <span>{{ $quote->created_at->diffForHumans() }}</span>
+                                </div>
+                            @else
+                                <span class="text-muted small">N/A</span>
+                            @endif
                         </td>
                         <td>
                             <span class="status-badge status-{{ $quote->status }}">

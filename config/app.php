@@ -69,6 +69,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Display Timezone (Australian Time Zone)
+    |--------------------------------------------------------------------------
+    |
+    | Default timezone for displaying customer inquiries, quotes, and
+    | bookings in the Australian Eastern timezone (Victoria / NSW).
+    |
+    */
+
+    'display_timezone' => env('APP_DISPLAY_TIMEZONE', 'Australia/Melbourne'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |

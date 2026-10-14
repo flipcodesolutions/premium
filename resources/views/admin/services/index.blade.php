@@ -23,6 +23,7 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr style="font-size: 0.8rem; text-transform: uppercase; color: var(--admin-text-muted);">
+                    <th style="width: 75px;">SR No.</th>
                     <th style="width: 80px;">Image</th>
                     <th>Service Name</th>
                     <th>Slug</th>
@@ -34,6 +35,9 @@
             <tbody>
                 @forelse($services as $service)
                     <tr>
+                        <td>
+                            <span class="text-muted fw-bold">{{ $services->firstItem() + $loop->index }}</span>
+                        </td>
                         <td>
                             @if($service->image)
                                 <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="rounded border" style="width: 54px; height: 42px; object-fit: cover;">
@@ -98,7 +102,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">
+                        <td colspan="7" class="text-center py-5 text-muted">
                             <i class="bi bi-tools fs-1 d-block mb-2"></i>
                             <h6 class="fw-semibold">No services found</h6>
                             <p class="small text-muted mb-3">Add your first inspection service to have it featured on the website.</p>

@@ -29,19 +29,16 @@
                     <article class="blog-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ ($loop->index % 3 + 1) * 80 }}">
 
                         {{-- IMAGE --}}
-                        <div class="blog-item-image">
-                            <a href="{{ route('blog.show', $post->slug) }}">
-                                @if($post->image)
-                                    <img src="{{ \Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image) }}"
+                        @if($post->image_url || $post->image)
+                            <div class="blog-item-image">
+                                <a href="{{ route('blog.show', $post->slug) }}">
+                                    <img src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}"
                                          alt="{{ $post->title }}"
-                                         loading="lazy">
-                                @else
-                                    <img src="{{ asset('images/banner1.jpg') }}"
-                                         alt="{{ $post->title }}"
-                                         loading="lazy">
-                                @endif
-                            </a>
-                        </div>
+                                         loading="lazy"
+                                         onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
+                                </a>
+                            </div>
+                        @endif
 
                         {{-- BODY --}}
                         <div class="blog-item-body">
@@ -76,37 +73,31 @@
             {{-- =====================================================
                  03. PAGINATION
             ====================================================== --}}
-            <div class="blog-pagination-wrapper" data-aos="fade-up" data-aos-duration="500">
+            @if ($posts->hasPages())
+                <div class="blog-pagination-wrapper" data-aos="fade-up" data-aos-duration="500">
 
-                @if ($posts->onFirstPage())
-                    <span class="pagination-arrow disabled">&lt; Previous</span>
-                @else
-                    <a href="{{ $posts->previousPageUrl() }}" class="pagination-arrow">&lt; Previous</a>
-                @endif
+                    @if ($posts->onFirstPage())
+                        <span class="pagination-arrow disabled">&lt; Previous</span>
+                    @else
+                        <a href="{{ $posts->previousPageUrl() }}" class="pagination-arrow">&lt; Previous</a>
+                    @endif
 
-                @php
-                    $totalPages = max($posts->lastPage(), 4);
-                @endphp
-
-                @for ($page = 1; $page <= $totalPages; $page++)
-                    @if ($page <= $posts->lastPage())
+                    @for ($page = 1; $page <= $posts->lastPage(); $page++)
                         @if ($page == $posts->currentPage())
                             <span class="pagination-page active">{{ $page }}</span>
                         @else
                             <a href="{{ $posts->url($page) }}" class="pagination-page">{{ $page }}</a>
                         @endif
+                    @endfor
+
+                    @if ($posts->hasMorePages())
+                        <a href="{{ $posts->nextPageUrl() }}" class="pagination-arrow">Next &gt;</a>
                     @else
-                        <span class="pagination-page">{{ $page }}</span>
+                        <span class="pagination-arrow disabled">Next &gt;</span>
                     @endif
-                @endfor
 
-                @if ($posts->hasMorePages())
-                    <a href="{{ $posts->nextPageUrl() }}" class="pagination-arrow">Next &gt;</a>
-                @else
-                    <span class="pagination-arrow disabled">Next &gt;</span>
-                @endif
-
-            </div>
+                </div>
+            @endif
 
         @else
 

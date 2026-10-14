@@ -70,18 +70,28 @@ class QuoteRequestController extends Controller
             'status' => $validated['status'],
         ]);
 
-        $msg = 'Quote status updated successfully to ' . ucfirst($quote->status) . '.';
+        if ($request->boolean('notify_customer')) {
+            if (empty(trim($quote->email ?? ''))) {
+                return redirect()
+                    ->back()
+                    ->with('warning', 'Quote status updated to ' . ucfirst($quote->status) . ', but client has no email address on file.');
+            }
 
-        if ($request->boolean('notify_customer') && !empty($quote->email)) {
             $sent = CustomerMailService::sendQuoteStatusUpdate($quote, $request->input('note'));
             if ($sent) {
-                $msg .= ' A status update email was sent to ' . $quote->email . '.';
+                return redirect()
+                    ->back()
+                    ->with('success', 'Quote status updated to ' . ucfirst($quote->status) . ' and notification email sent to ' . $quote->email . '.');
             }
+
+            return redirect()
+                ->back()
+                ->with('warning', 'Quote status updated to ' . ucfirst($quote->status) . ', but the notification email could not be delivered to ' . $quote->email . '. Please check system mail logs.');
         }
 
         return redirect()
             ->back()
-            ->with('success', $msg);
+            ->with('success', 'Quote status updated successfully to ' . ucfirst($quote->status) . '.');
     }
 
     /**

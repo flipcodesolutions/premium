@@ -334,26 +334,80 @@
 
 
         /* =================================================
-           HEADINGS
+           HEADINGS TYPOGRAPHY (H1 TO H6 FORMATTING)
         ================================================= */
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-
+        h1, h2, h3, h4, h5, h6,
+        .h1, .h2, .h3, .h4, .h5, .h6 {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
             color: var(--primary-color);
-
-            font-weight: 800;
-
-            line-height: 1.2;
-
+            margin-top: 0;
+            margin-bottom: 0.65rem;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
         }
 
+        h1, .h1 {
+            font-size: clamp(2rem, 3.2vw + 1rem, 2.75rem); /* ~32px to 44px */
+            font-weight: 800;
+            line-height: 1.18;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        h2, .h2 {
+            font-size: clamp(1.65rem, 2vw + 0.85rem, 2.15rem); /* ~26px to 34px */
+            font-weight: 800;
+            line-height: 1.24;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.85rem;
+        }
+
+        h3, .h3 {
+            font-size: clamp(1.35rem, 1.3vw + 0.75rem, 1.65rem); /* ~21px to 26px */
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.015em;
+            margin-bottom: 0.75rem;
+        }
+
+        h4, .h4 {
+            font-size: clamp(1.15rem, 0.8vw + 0.68rem, 1.35rem); /* ~18px to 21px */
+            font-weight: 700;
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.65rem;
+        }
+
+        h5, .h5 {
+            font-size: clamp(1rem, 0.5vw + 0.62rem, 1.15rem); /* ~16px to 18px */
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.005em;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        h6, .h6 {
+            font-size: clamp(0.85rem, 0.3vw + 0.55rem, 0.95rem); /* ~13.5px to 15px */
+            font-weight: 600;
+            line-height: 1.45;
+            letter-spacing: 0.025em;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Heading Links & Hover */
+        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
+        .h1 a, .h2 a, .h3 a, .h4 a, .h5 a, .h6 a {
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover,
+        .h1 a:hover, .h2 a:hover, .h3 a:hover, .h4 a:hover, .h5 a:hover, .h6 a:hover {
+            color: var(--green-color);
+        }
 
         /*
          * Condensed heading utility
@@ -789,6 +843,12 @@
 
             }
 
+            h1, .h1 { font-size: 1.85rem; line-height: 1.22; margin-bottom: 0.75rem; }
+            h2, .h2 { font-size: 1.5rem; line-height: 1.26; margin-bottom: 0.65rem; }
+            h3, .h3 { font-size: 1.28rem; line-height: 1.3; margin-bottom: 0.55rem; }
+            h4, .h4 { font-size: 1.12rem; line-height: 1.35; margin-bottom: 0.5rem; }
+            h5, .h5 { font-size: 1rem; line-height: 1.4; margin-bottom: 0.45rem; }
+            h6, .h6 { font-size: 0.875rem; line-height: 1.45; margin-bottom: 0.4rem; }
 
             .section-padding {
 
@@ -838,6 +898,13 @@
         ================================================= */
 
         @media (max-width: 575px) {
+
+            h1, .h1 { font-size: 1.65rem; line-height: 1.22; }
+            h2, .h2 { font-size: 1.38rem; line-height: 1.25; }
+            h3, .h3 { font-size: 1.2rem; line-height: 1.3; }
+            h4, .h4 { font-size: 1.05rem; line-height: 1.35; }
+            h5, .h5 { font-size: 0.95rem; line-height: 1.4; }
+            h6, .h6 { font-size: 0.82rem; line-height: 1.45; }
 
             .section-padding {
 

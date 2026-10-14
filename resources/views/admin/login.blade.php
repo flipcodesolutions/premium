@@ -32,11 +32,14 @@
         }
 
         /* =====================================================
-           FULL-PAGE BACKGROUND (100% SCREEN COVERAGE)
+           FULL-PAGE BACKGROUND (100% SCREEN COVERAGE, NO SCROLL)
         ===================================================== */
+        html,
         body {
+            height: 100%;
             margin: 0;
-            min-height: 100vh;
+            padding: 0;
+            overflow: hidden; /* Prevent desktop scrollbar completely */
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background:
                 linear-gradient(
@@ -48,11 +51,13 @@
         }
 
         .admin-login-wrapper {
-            min-height: 100vh;
+            height: 100vh;
+            max-height: 100vh;
             width: 100%;
             display: flex;
-            align-items: stretch;
+            align-items: center;
             position: relative;
+            overflow: hidden;
         }
 
         /* =====================================================
@@ -60,29 +65,30 @@
         ===================================================== */
         .admin-brand-panel {
             flex: 1.1;
-            min-height: 100vh;
-            background: transparent; /* Background image shines through completely */
+            height: 100vh;
+            max-height: 100vh;
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 60px 50px 60px 70px;
+            padding: 24px 40px 24px 60px;
             position: relative;
             z-index: 2;
         }
 
         .brand-content {
-            max-width: 540px;
+            max-width: 520px;
             width: 100%;
         }
 
         /* =====================================================
-           LOGO (NO WHITE BACKGROUND, PURE WHITE LOGO)
+           LOGO (PURE WHITE LOGO ON TRANSPARENT BG)
         ===================================================== */
         .brand-logo {
             display: inline-block;
-            background: transparent !important; /* White box removed */
+            background: transparent !important;
             padding: 0 !important;
-            margin-bottom: 28px;
+            margin-bottom: 18px;
         }
 
         .brand-logo a {
@@ -93,12 +99,11 @@
         .brand-logo img,
         .brand-logo img.white-logo,
         img.white-logo {
-            max-width: 170px !important;
-            width: 170px !important;
+            max-width: 155px !important;
+            width: 155px !important;
             height: auto !important;
             display: block !important;
             background: transparent !important;
-            /* Pure crisp white logo */
             filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4)) !important;
             transition: transform 0.25s ease;
         }
@@ -113,19 +118,19 @@
             color: #7ee030;
             font-size: 11px;
             font-weight: 800;
-            letter-spacing: 2.2px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
 
         .brand-content h1 {
             color: #ffffff;
             font-family: 'Inter', sans-serif;
-            font-size: clamp(34px, 3.8vw, 50px);
-            line-height: 1.08;
+            font-size: clamp(28px, 3.2vw, 42px);
+            line-height: 1.1;
             font-weight: 900;
-            margin: 0 0 18px;
+            margin: 0 0 12px;
             letter-spacing: -0.5px;
         }
 
@@ -137,17 +142,17 @@
         .brand-description {
             max-width: 480px;
             color: rgba(255, 255, 255, 0.82);
-            font-size: 13.5px;
-            line-height: 1.75;
-            margin-bottom: 34px;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 22px;
         }
 
         /* TRUST ITEMS */
         .brand-trust-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            max-width: 500px;
+            gap: 10px;
+            max-width: 490px;
         }
 
         .brand-trust-item {
@@ -157,7 +162,7 @@
             color: rgba(255, 255, 255, 0.92);
             font-size: 12px;
             font-weight: 600;
-            padding: 12px 14px;
+            padding: 10px 14px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 8px;
@@ -172,7 +177,7 @@
 
         .brand-trust-item i {
             color: #7ee030;
-            font-size: 18px;
+            font-size: 17px;
             flex-shrink: 0;
         }
 
@@ -181,30 +186,31 @@
         ===================================================== */
         .admin-login-panel {
             flex: 0.95;
-            min-height: 100vh;
-            background: transparent; /* No white background covering half screen */
+            height: 100vh;
+            max-height: 100vh;
+            background: transparent;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 50px 40px;
+            padding: 16px 36px;
             position: relative;
             z-index: 2;
         }
 
         .login-card {
             width: 100%;
-            max-width: 450px;
+            max-width: 430px;
             background: #ffffff;
             border-radius: 12px;
-            padding: 38px 36px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+            padding: 26px 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* HEADER */
         .login-header {
-            margin-bottom: 22px;
+            margin-bottom: 14px;
         }
 
         .login-header .login-label {
@@ -219,16 +225,16 @@
         .login-header h2 {
             color: var(--navy);
             font-family: 'Inter', sans-serif;
-            font-size: 27px;
+            font-size: 24px;
             font-weight: 800;
-            margin: 6px 0 8px;
+            margin: 3px 0 5px;
             line-height: 1.2;
         }
 
         .login-header p {
             color: var(--text);
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 12.5px;
+            line-height: 1.45;
             margin: 0;
         }
 
@@ -236,27 +242,27 @@
         .login-alert {
             border-radius: 6px;
             font-size: 12px;
-            margin-bottom: 20px;
-            padding: 12px 14px;
+            margin-bottom: 12px;
+            padding: 8px 12px;
         }
 
         .login-alert ul {
             margin: 0;
-            padding-left: 17px;
+            padding-left: 16px;
         }
 
         /* FORM */
         .login-form-group {
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
 
         .login-form-label {
             display: block;
             color: var(--navy);
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 800;
             letter-spacing: 0.5px;
-            margin-bottom: 7px;
+            margin-bottom: 4px;
         }
 
         .login-input-wrapper {
@@ -265,21 +271,21 @@
 
         .login-input-icon {
             position: absolute;
-            left: 14px;
+            left: 13px;
             top: 50%;
             transform: translateY(-50%);
             color: #8995A2;
-            font-size: 16px;
+            font-size: 15px;
             z-index: 2;
         }
 
         .login-input {
             width: 100%;
-            height: 48px;
+            height: 42px;
             border: 1px solid var(--border);
             border-radius: 6px;
-            padding: 0 42px 0 42px;
-            font-size: 14px;
+            padding: 0 38px 0 38px;
+            font-size: 13.5px;
             color: var(--navy);
             background: #fbfcfd;
             transition: all 0.2s ease;
@@ -294,13 +300,13 @@
 
         .login-input::placeholder {
             color: #9aa7b5;
-            font-size: 13.5px;
+            font-size: 13px;
         }
 
         /* PASSWORD TOGGLE */
         .password-toggle {
             position: absolute;
-            right: 12px;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
@@ -308,7 +314,7 @@
             color: #8995A2;
             cursor: pointer;
             padding: 4px;
-            font-size: 16px;
+            font-size: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -325,8 +331,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 22px;
-            font-size: 12.5px;
+            margin-bottom: 14px;
+            font-size: 12px;
         }
 
         .remember-check {
@@ -341,8 +347,8 @@
 
         .remember-check input {
             accent-color: var(--green);
-            width: 15px;
-            height: 15px;
+            width: 14px;
+            height: 14px;
             cursor: pointer;
         }
 
@@ -361,12 +367,12 @@
         /* SUBMIT BUTTON */
         .login-button {
             width: 100%;
-            height: 48px;
+            height: 44px;
             background: var(--green);
             color: #fff;
             border: none;
             border-radius: 6px;
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 800;
             letter-spacing: 0.8px;
             text-transform: uppercase;
@@ -389,74 +395,164 @@
             transform: translateY(0);
         }
 
-        /* SWITCH TO REGISTER */
-        .switch-auth-link {
-            text-align: center;
-            margin-top: 18px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-            font-size: 13px;
-            color: var(--text);
-        }
-
-        .switch-auth-link a {
-            color: var(--blue);
-            font-weight: 700;
-            text-decoration: none;
-            margin-left: 4px;
-        }
-
-        .switch-auth-link a:hover {
-            color: var(--green);
-            text-decoration: underline;
-        }
-
         /* SECURITY FOOTER INSIDE CARD */
         .login-security {
-            margin-top: 20px;
-            padding: 12px 14px;
+            margin-top: 12px;
+            padding: 8px 12px;
             background: #f6f8fb;
             border-radius: 6px;
             border: 1px solid #e7ecf2;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
         }
 
         .login-security i {
             color: var(--green);
-            font-size: 18px;
+            font-size: 16px;
             flex-shrink: 0;
         }
 
         .login-security p {
             margin: 0;
             font-size: 11px;
-            line-height: 1.5;
+            line-height: 1.4;
             color: #6d7b8b;
         }
 
         /* PAGE FOOTER */
         .login-page-footer {
-            margin-top: 20px;
+            margin-top: 12px;
             text-align: center;
             color: rgba(255, 255, 255, 0.75);
-            font-size: 12px;
+            font-size: 11.5px;
+        }
+
+        .login-page-footer p {
+            margin: 0;
         }
 
         .login-page-footer strong {
             color: #ffffff;
         }
 
-        /* RESPONSIVE */
+        /* =====================================================
+           COMPACT VIEWPORT HEIGHT FIX (< 760px HEIGHT)
+        ===================================================== */
+        @media (min-width: 992px) and (max-height: 760px) {
+            .admin-brand-panel {
+                padding: 16px 30px 16px 50px;
+            }
+
+            .brand-logo {
+                margin-bottom: 12px;
+            }
+
+            .brand-logo img,
+            .brand-logo img.white-logo,
+            img.white-logo {
+                max-width: 135px !important;
+                width: 135px !important;
+            }
+
+            .brand-content h1 {
+                font-size: 30px;
+                margin-bottom: 8px;
+            }
+
+            .brand-description {
+                font-size: 12px;
+                line-height: 1.5;
+                margin-bottom: 14px;
+            }
+
+            .brand-trust-item {
+                padding: 7px 10px;
+                font-size: 11px;
+            }
+
+            .admin-login-panel {
+                padding: 10px 24px;
+            }
+
+            .login-card {
+                padding: 20px 24px;
+                max-width: 410px;
+            }
+
+            .login-header {
+                margin-bottom: 10px;
+            }
+
+            .login-header h2 {
+                font-size: 21px;
+                margin: 2px 0 3px;
+            }
+
+            .login-header p {
+                font-size: 11.5px;
+            }
+
+            .login-alert {
+                margin-bottom: 8px;
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .login-form-group {
+                margin-bottom: 9px;
+            }
+
+            .login-input {
+                height: 38px;
+                font-size: 13px;
+            }
+
+            .login-options {
+                margin-bottom: 10px;
+                font-size: 11.5px;
+            }
+
+            .login-button {
+                height: 38px;
+                font-size: 12px;
+            }
+
+            .login-security {
+                margin-top: 8px;
+                padding: 6px 10px;
+            }
+
+            .login-page-footer {
+                margin-top: 8px;
+                font-size: 11px;
+            }
+        }
+
+        /* =====================================================
+           RESPONSIVE (MOBILE & TABLETS)
+        ===================================================== */
         @media (max-width: 991px) {
+            html,
+            body {
+                height: auto;
+                min-height: 100vh;
+                overflow-x: hidden;
+                overflow-y: auto !important; /* Allow natural scroll on mobile */
+            }
+
             .admin-login-wrapper {
+                height: auto;
+                min-height: 100vh;
+                max-height: none;
                 flex-direction: column;
+                overflow: visible;
             }
 
             .admin-brand-panel {
+                height: auto;
                 min-height: auto;
-                padding: 50px 30px 20px;
+                padding: 40px 25px 20px;
                 text-align: center;
             }
 
@@ -469,22 +565,23 @@
             }
 
             .admin-login-panel {
+                height: auto;
                 min-height: auto;
-                padding: 20px 20px 50px;
+                padding: 15px 20px 40px;
             }
         }
 
         @media (max-width: 575px) {
             .login-card {
-                padding: 28px 22px;
+                padding: 24px 20px;
             }
 
             .login-header h2 {
-                font-size: 23px;
+                font-size: 21px;
             }
 
             .brand-content h1 {
-                font-size: 30px;
+                font-size: 28px;
             }
 
             .brand-trust-list {
@@ -620,7 +717,7 @@
                                 name="email"
                                 class="login-input"
                                 placeholder="Enter your admin email"
-                                value="{{ old('email', session('registered_email')) }}"
+                                value="{{ old('email') }}"
                                 autocomplete="email"
                                 required
                                 autofocus
@@ -680,12 +777,6 @@
                         <i class="bi bi-box-arrow-in-right"></i>
                         SIGN IN TO ADMIN PANEL
                     </button>
-
-                    <!-- SWITCH TO REGISTER -->
-                    <div class="switch-auth-link">
-                        Don't have an admin account?
-                        <a href="{{ route('register') }}">Create an Account</a>
-                    </div>
 
                 </form>
 

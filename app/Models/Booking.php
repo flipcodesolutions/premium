@@ -21,4 +21,12 @@ class Booking extends Model
     protected $casts = [
         'inspection_date' => 'date',
     ];
+
+    /**
+     * Relationship with InspectionAgreement model.
+     */
+    public function agreement()
+    {
+        return $this->hasOne(InspectionAgreement::class, 'booking_id');
+    }
 }

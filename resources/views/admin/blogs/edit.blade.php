@@ -104,9 +104,9 @@
                     <!-- Featured Image -->
                     <div class="col-md-7">
                         <label for="image" class="form-label fw-semibold">Cover Image</label>
-                        @if($post->image)
+                        @if($post->image_url || $post->image)
                             <div class="mb-2 d-flex align-items-center gap-3 p-2 bg-light rounded border">
-                                <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" style="width: 80px; height: 50px; object-fit: cover;" class="rounded border">
+                                <img src="{{ $post->image_url ?? asset('storage/' . $post->image) }}" alt="{{ $post->title }}" style="width: 80px; height: 50px; object-fit: cover;" class="rounded border" onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
                                 <div>
                                     <small class="fw-semibold text-dark d-block">Current Cover</small>
                                     <small class="text-muted">Uploading a new image will replace this one.</small>

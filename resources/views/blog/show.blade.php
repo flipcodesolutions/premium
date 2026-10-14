@@ -107,25 +107,15 @@
                          FEATURED IMAGE
                     ================================================== --}}
 
-                    <div class="article-featured-image">
-
-                        @if($post->image)
-
+                    @if($post->image_url || $post->image)
+                        <div class="article-featured-image">
                             <img
-                                src="{{ \Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image) }}"
+                                src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}"
                                 alt="{{ $post->title }}"
+                                onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
                             >
-
-                        @else
-
-                            <img
-                                src="{{ asset('images/banner1.jpg') }}"
-                                alt="{{ $post->title }}"
-                            >
-
-                        @endif
-
-                    </div>
+                        </div>
+                    @endif
 
 
                     {{-- =================================================
@@ -382,28 +372,18 @@
 
                                         <div class="latest-post">
 
-                                            <a
-                                                href="{{ route('blog.show', $latest->slug) }}"
-                                                class="latest-image"
-                                            >
-
-                                                @if($latest->image)
-
+                                            @if($latest->image_url || $latest->image)
+                                                <a
+                                                    href="{{ route('blog.show', $latest->slug) }}"
+                                                    class="latest-image"
+                                                >
                                                     <img
-                                                        src="{{ asset('storage/' . $latest->image) }}"
+                                                        src="{{ $latest->image_url ?? (\Illuminate\Support\Str::startsWith($latest->image, ['http://', 'https://']) ? $latest->image : asset('storage/' . $latest->image)) }}"
                                                         alt="{{ $latest->title }}"
+                                                        onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
                                                     >
-
-                                                @else
-
-                                                    <img
-                                                        src="{{ asset('images/schedule.jpeg') }}"
-                                                        alt="{{ $latest->title }}"
-                                                    >
-
-                                                @endif
-
-                                            </a>
+                                                </a>
+                                            @endif
 
 
                                             <div class="latest-content">
@@ -714,27 +694,18 @@
 
                     <article class="related-card">
 
-                        <div class="related-image">
-
-                            @if($related->image)
-
-                                <img
-                                    src="{{ asset('storage/' . $related->image) }}"
-                                    alt="{{ $related->title }}"
-                                    loading="lazy"
-                                >
-
-                            @else
-
-                                <img
-                                    src="{{ asset('images/pre purchase service.jpeg') }}"
-                                    alt="{{ $related->title }}"
-                                    loading="lazy"
-                                >
-
-                            @endif
-
-                        </div>
+                        @if($related->image_url || $related->image)
+                            <div class="related-image">
+                                <a href="{{ route('blog.show', $related->slug) }}">
+                                    <img
+                                        src="{{ $related->image_url ?? (\Illuminate\Support\Str::startsWith($related->image, ['http://', 'https://']) ? $related->image : asset('storage/' . $related->image)) }}"
+                                        alt="{{ $related->title }}"
+                                        loading="lazy"
+                                        onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
+                                    >
+                                </a>
+                            </div>
+                        @endif
 
 
                         <div class="related-body">
@@ -1164,54 +1135,65 @@
 }
 
 
-.article-body h2 {
-
-    margin-top: 40px;
-
-    margin-bottom: 16px;
-
+.article-body h1 {
+    margin-top: 44px;
+    margin-bottom: 18px;
     color: var(--article-navy);
-
     font-family: 'Inter', sans-serif;
-
-    font-size: 29px;
-
-    font-weight: 750;
-
-    line-height: 1.3;
-
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.25;
 }
 
+.article-body h2 {
+    margin-top: 38px;
+    margin-bottom: 16px;
+    color: var(--article-navy);
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 750;
+    line-height: 1.3;
+}
 
 .article-body h3 {
-
-    margin-top: 32px;
-
+    margin-top: 30px;
     margin-bottom: 13px;
-
     color: var(--article-blue);
-
     font-family: 'Inter', sans-serif;
-
     font-size: 22px;
-
     font-weight: 700;
-
+    line-height: 1.35;
 }
 
-
 .article-body h4 {
-
-    margin-top: 25px;
-
+    margin-top: 24px;
     margin-bottom: 10px;
-
     color: var(--article-navy);
-
     font-size: 18px;
-
     font-weight: 700;
+    line-height: 1.4;
+}
 
+.article-body h5 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: var(--article-blue);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.article-body h6 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: var(--article-text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 
@@ -2573,6 +2555,13 @@
         font-size: 13px;
 
     }
+
+    .article-body h1 { font-size: 26px; margin-top: 32px; margin-bottom: 14px; }
+    .article-body h2 { font-size: 22px; margin-top: 28px; margin-bottom: 12px; }
+    .article-body h3 { font-size: 19px; margin-top: 24px; margin-bottom: 10px; }
+    .article-body h4 { font-size: 17px; margin-top: 20px; margin-bottom: 8px; }
+    .article-body h5 { font-size: 15px; margin-top: 18px; margin-bottom: 6px; }
+    .article-body h6 { font-size: 13.5px; margin-top: 16px; margin-bottom: 6px; }
 
 
     .article-cta {

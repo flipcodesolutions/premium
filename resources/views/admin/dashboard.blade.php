@@ -659,8 +659,8 @@
             <a href="{{ route('admin.messages.index') }}" class="command-pill">
                 <i class="bi bi-envelope-fill text-danger"></i> Unread Messages ({{ $unreadMessages }})
             </a>
-            <a href="{{ route('inspection.agreement') }}" target="_blank" class="command-pill">
-                <i class="bi bi-file-earmark-check text-success"></i> Inspection Agreement Page
+            <a href="{{ route('admin.agreements.index') }}" class="command-pill">
+                <i class="bi bi-shield-check text-success"></i> Inspection Agreements ({{ \App\Models\InspectionAgreement::count() }})
             </a>
         </div>
     </div>
@@ -953,9 +953,13 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <small class="text-muted text-nowrap">
-                                        <i class="bi bi-clock me-1"></i>{{ $quote->created_at->diffForHumans() }}
-                                    </small>
+                                    <div class="text-nowrap fw-semibold text-dark" style="font-size: 0.82rem;">
+                                        <i class="bi bi-clock me-1 text-primary"></i>{{ $quote->australian_received_time }}
+                                    </div>
+                                    <div class="text-muted" style="font-size: 0.70rem;">
+                                        <span class="badge bg-light text-secondary border px-1 py-0">{{ $quote->australian_timezone_abbr }}</span>
+                                        <span>{{ $quote->created_at ? $quote->created_at->diffForHumans() : '' }}</span>
+                                    </div>
                                 </td>
                                 <td>
                                     <span class="status-badge status-{{ $quote->status }}">

@@ -57,7 +57,7 @@
                                 <div class="form-check m-0">
                                     <input class="form-check-input" type="checkbox" name="notify_customer" id="notifyBooking" value="1" checked>
                                     <label class="form-check-label small text-dark fw-semibold" for="notifyBooking">
-                                        <i class="bi bi-envelope-check me-1 text-primary"></i>Notify customer via email
+                                        <i class="bi bi-envelope-check me-1 text-primary"></i>Notify Client via Email
                                     </label>
                                 </div>
                             @endif
@@ -126,6 +126,15 @@
                                         {{ $booking->status }}
                                     </span>
                                 </dd>
+
+                                @if($booking->agreement)
+                                    <dt class="col-sm-5 text-muted">Pre-Engagement:</dt>
+                                    <dd class="col-sm-7">
+                                        <a href="{{ route('admin.agreements.show', $booking->agreement->id) }}" class="btn btn-xs btn-outline-success py-0 px-2 fw-semibold">
+                                            <i class="bi bi-shield-check me-1"></i> Agreement {{ $booking->agreement->reference_code }}
+                                        </a>
+                                    </dd>
+                                @endif
                             </dl>
                         </div>
                     </div>

@@ -33,7 +33,9 @@
                             {{ $quote->status }}
                         </span>
                     </h5>
-                    <small class="text-muted">Received on {{ $quote->created_at->format('d M Y, h:i A') }} ({{ $quote->created_at->diffForHumans() }})</small>
+                    <small class="text-muted">
+                        <i class="bi bi-clock me-1 text-primary"></i>Received on <strong class="text-dark">{{ $quote->australian_received_time }} {{ $quote->australian_timezone_abbr }}</strong> (Australian Time) &bull; {{ $quote->created_at ? $quote->created_at->diffForHumans() : '' }}
+                    </small>
                 </div>
             </div>
 
@@ -113,8 +115,12 @@
                                     </span>
                                 </dd>
 
-                                <dt class="col-sm-5 text-muted">Received Date:</dt>
-                                <dd class="col-sm-7 text-muted">{{ $quote->created_at->format('d M Y, h:i A') }}</dd>
+                                <dt class="col-sm-5 text-muted">Received Time:</dt>
+                                <dd class="col-sm-7">
+                                    <span class="fw-semibold text-dark">{{ $quote->australian_received_time }}</span>
+                                    <span class="badge bg-light text-secondary border ms-1">{{ $quote->australian_timezone_abbr }}</span>
+                                    <div class="text-muted" style="font-size: 0.75rem;">Australian Time Zone &bull; {{ $quote->created_at ? $quote->created_at->diffForHumans() : '' }}</div>
+                                </dd>
                             </dl>
                         </div>
                     </div>

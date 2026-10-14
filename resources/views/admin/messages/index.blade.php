@@ -58,6 +58,7 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr style="font-size: 0.8rem; text-transform: uppercase; color: var(--admin-text-muted);">
+                    <th style="width: 75px;">SR No.</th>
                     <th style="width: 50px;"></th>
                     <th>Sender</th>
                     <th>Subject</th>
@@ -69,6 +70,9 @@
             <tbody>
                 @forelse($messages as $msg)
                     <tr class="{{ !$msg->is_read ? 'table-warning bg-opacity-10 fw-medium' : '' }}">
+                        <td>
+                            <span class="text-muted fw-bold">{{ $messages->firstItem() + $loop->index }}</span>
+                        </td>
                         <td class="text-center">
                             @if(!$msg->is_read)
                                 <i class="bi bi-envelope-fill text-danger fs-5" title="Unread message"></i>
@@ -124,7 +128,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">
+                        <td colspan="7" class="text-center py-5 text-muted">
                             <i class="bi bi-inboxes fs-1 d-block mb-2"></i>
                             <h6 class="fw-semibold">No messages found</h6>
                             <p class="small text-muted mb-0">No contact messages match your filter.</p>

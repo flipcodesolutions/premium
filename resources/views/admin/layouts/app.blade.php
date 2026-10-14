@@ -51,6 +51,66 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* ---------------- Headings Hierarchy (H1 to H6) ---------------- */
+        h1, h2, h3, h4, h5, h6,
+        .h1, .h2, .h3, .h4, .h5, .h6 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--admin-navy);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, .h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        h2, .h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.015em;
+            margin-bottom: 0.65rem;
+        }
+
+        h3, .h3 {
+            font-size: 1.28rem;
+            font-weight: 700;
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.55rem;
+        }
+
+        h4, .h4 {
+            font-size: 1.12rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+
+        h5, .h5 {
+            font-size: 0.98rem;
+            font-weight: 600;
+            line-height: 1.45;
+            color: var(--admin-text-main);
+            margin-bottom: 0.45rem;
+        }
+
+        h6, .h6 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--admin-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+        }
+
         /* ---------------- Sidebar ---------------- */
         .admin-sidebar {
             width: var(--sidebar-width);
@@ -678,9 +738,15 @@
             <div class="sidebar-heading">Client Tools</div>
 
             <!-- Inspection Agreement Link -->
-            <a href="{{ route('inspection.agreement') }}" target="_blank" class="nav-item-link">
+            @php
+                $acceptedAgreementsBadge = \App\Models\InspectionAgreement::where('status', 'accepted')->count();
+            @endphp
+            <a href="{{ route('admin.agreements.index') }}" class="nav-item-link {{ request()->routeIs('admin.agreements.*') ? 'active' : '' }}">
                 <i class="bi bi-shield-check"></i>
                 <span>Inspection Agreement</span>
+                @if($acceptedAgreementsBadge > 0)
+                    <span class="badge bg-success nav-badge">{{ $acceptedAgreementsBadge }}</span>
+                @endif
             </a>
 
             <div class="sidebar-heading">System</div>
@@ -820,7 +886,7 @@
                 </div>
             @endif
 
-            @if($errors->any())
+            @if(isset($errors) && $errors->any())
                 <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm" role="alert">
                     <div class="fw-semibold mb-1 d-flex align-items-center gap-2">
                         <i class="bi bi-exclamation-octagon-fill text-danger"></i>

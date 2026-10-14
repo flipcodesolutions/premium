@@ -92,7 +92,7 @@ class CustomerMailService
                 'introMessage' => $intro,
                 'customMessage' => $customNote,
             ], function ($message) use ($booking, $subject, $fromAddress, $fromName) {
-                $message->to($booking->email, $booking->name)
+                $message->to(trim($booking->email), $booking->name)
                         ->from($fromAddress, $fromName)
                         ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
@@ -208,7 +208,7 @@ class CustomerMailService
                 'introMessage' => $intro,
                 'customMessage' => $customNote,
             ], function ($message) use ($quote, $subject, $fromAddress, $fromName) {
-                $message->to($quote->email, $quote->name)
+                $message->to(trim($quote->email), $quote->name)
                         ->from($fromAddress, $fromName)
                         ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
