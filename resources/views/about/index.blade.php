@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'About Us | Premium Building & Pest Inspections')
+@section('meta_description', 'Learn about Premium Building & Pest Inspections Melbourne. Fully licensed and insured inspectors delivering detailed, same-day reports across Victoria.')
 
 @section('content')
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Gallery | Premium Building & Pest Inspections')
+@section('meta_description', 'Browse photographic examples of building defects, termite damage, moisture issues, and structural inspection findings from Melbourne inspections.')
 
 @section('content')
 

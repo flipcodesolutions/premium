@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Vendor Inspection Melbourne | Pre-Sale Building & Pest Inspections')
+@section('meta_description', 'Pre-sale vendor building and pest inspections in Melbourne. Identify property defects before listing, avoid last-minute price reductions, and sell with complete confidence.')
 
 @section('content')
 

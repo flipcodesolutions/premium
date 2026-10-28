@@ -15,6 +15,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\InspectionAgreementController;
+use App\Http\Controllers\SitemapController;
 
 
 // =========================================================
@@ -428,11 +429,37 @@ Route::post(
 )->name('login.submit');
 
 
+Route::redirect('/register', '/login')->name('register');
+
+
 // ---------------------------------------------------------
-// Admin Registration (Disabled - Redirects to Login)
+// Admin Forgot Password
 // ---------------------------------------------------------
 
-Route::redirect('/register', '/login')->name('register');
+Route::get(
+    '/forgot-password',
+    [AdminLoginController::class, 'showForgotPassword']
+)->name('password.request');
+
+Route::post(
+    '/forgot-password',
+    [AdminLoginController::class, 'sendResetLink']
+)->name('password.email');
+
+
+// ---------------------------------------------------------
+// Admin Reset Password
+// ---------------------------------------------------------
+
+Route::get(
+    '/reset-password/{token}',
+    [AdminLoginController::class, 'showResetPassword']
+)->name('password.reset');
+
+Route::post(
+    '/reset-password',
+    [AdminLoginController::class, 'resetPassword']
+)->name('password.update');
 
 
 // ---------------------------------------------------------
@@ -547,6 +574,16 @@ Route::middleware(['admin'])
             '/bookings/{booking}/send-email',
             [AdminBookingController::class, 'sendEmail']
         )->name('bookings.send-email');
+
+        Route::get(
+            '/bookings/{booking}/report',
+            [AdminBookingController::class, 'report']
+        )->name('bookings.report');
+
+        Route::post(
+            '/bookings/{booking}/email-report',
+            [AdminBookingController::class, 'emailReport']
+        )->name('bookings.email-report');
 
         Route::delete(
             '/bookings/{booking}',
@@ -692,3 +729,9 @@ Route::middleware(['admin'])
         Route::redirect('/inspection-agreement', '/admin/agreements');
 
     });
+
+// =========================================================
+// SITEMAP (DYNAMIC XML)
+// =========================================================
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');

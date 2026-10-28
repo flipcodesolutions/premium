@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Premium Building & Pest Inspections | Melbourne')
+@section('title', 'Premium Building & Pest Inspections | Trusted Reports')
+@section('meta_description', 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.')
 
 @section('content')
 

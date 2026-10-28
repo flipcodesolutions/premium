@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Pool Barrier Inspection Melbourne | Premium Building & Pest Inspections')
+@section('meta_description', 'VBA compliant swimming pool and spa barrier safety inspections across Melbourne. Fast certification and expert advice to ensure child safety and council compliance.')
 
 @section('content')
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Privacy Policy | Premium Building & Pest Inspections')
+@section('meta_description', 'Privacy Policy for Premium Building & Pest Inspections. Learn how we collect, handle, and protect your personal information in compliance with Australian privacy laws.')
 
 @section('content')
 

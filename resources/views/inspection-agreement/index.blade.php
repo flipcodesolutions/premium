@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Inspection Agreement | Premium Building & Pest Inspections')
+@section('meta_description', 'Complete your pre-inspection agreement with Premium Building & Pest Inspections online. Compliant with Australian Standards AS 4349.1 and AS 4349.3.')
 
 @section('content')
 

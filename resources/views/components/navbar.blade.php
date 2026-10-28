@@ -769,36 +769,26 @@
 
 
 /* =========================================================
-   NAV UNDERLINE ANIMATION
+   NAV UNDERLINE ANIMATION (DESKTOP ONLY)
 ========================================================= */
 
-.premium-navbar .nav-link:not(.estimate-btn)::after {
+@media (min-width: 992px) {
+    .premium-navbar .nav-link:not(.estimate-btn)::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        bottom: 18px;
+        height: 2px;
+        background: var(--premium-green);
+        transition: left .28s cubic-bezier(0.165, 0.84, 0.44, 1), right .28s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
 
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    right: 50%;
-
-    bottom: 18px;
-
-    height: 2px;
-
-    background: var(--premium-green);
-
-    transition: left .28s cubic-bezier(0.165, 0.84, 0.44, 1), right .28s cubic-bezier(0.165, 0.84, 0.44, 1);
-
-}
-
-.premium-navbar .nav-link:not(.estimate-btn):hover::after,
-.premium-navbar .nav-link:not(.estimate-btn).active::after {
-
-    left: 12px;
-
-    right: 12px;
-
+    .premium-navbar .nav-link:not(.estimate-btn):hover::after,
+    .premium-navbar .nav-link:not(.estimate-btn).active::after {
+        left: 12px;
+        right: 12px;
+    }
 }
 
 
@@ -1330,10 +1320,22 @@
     }
 
 
-    .premium-navbar .nav-link.active::after {
-
-        display: none;
-
+    .premium-navbar .nav-link::after,
+    .premium-navbar .nav-link:hover::after,
+    .premium-navbar .nav-link:focus::after,
+    .premium-navbar .nav-link:active::after,
+    .premium-navbar .nav-link.active::after,
+    .premium-navbar .nav-link:not(.estimate-btn)::after,
+    .premium-navbar .nav-link:not(.estimate-btn):hover::after,
+    .premium-navbar .nav-link:not(.estimate-btn):focus::after,
+    .premium-navbar .nav-link:not(.estimate-btn):active::after,
+    .premium-navbar .nav-link:not(.estimate-btn).active::after {
+        display: none !important;
+        content: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
 
 

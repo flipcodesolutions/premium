@@ -114,6 +114,12 @@
                         </td>
                         <td class="text-end">
                             <div class="d-flex align-items-center justify-content-end gap-1">
+                                @if($booking->status === 'completed')
+                                    <a href="{{ route('admin.bookings.report', $booking->id) }}" target="_blank" class="btn btn-sm btn-light border text-success fw-semibold" title="Generate &amp; Print Inspection Report">
+                                        <i class="bi bi-file-earmark-check"></i> Report
+                                    </a>
+                                @endif
+
                                 <a href="{{ route('admin.bookings.show', $booking->id) }}" class="btn btn-sm btn-light border text-primary" title="View Booking Details">
                                     <i class="bi bi-eye"></i> Details
                                 </a>

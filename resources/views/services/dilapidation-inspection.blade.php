@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Dilapidation Inspection Melbourne | Premium Building & Pest Inspections')
+@section('meta_description', 'Comprehensive dilapidation reports in Melbourne. Photographic condition documentation of adjacent properties before and after construction to protect against claims.')
 
 @section('content')
 

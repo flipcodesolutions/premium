@@ -589,6 +589,15 @@
             background-color: #6366F1;
         }
 
+        .status-scheduled {
+            background-color: #E0F2FE;
+            color: #0369A1;
+            border: 1px solid #BAE6FD;
+        }
+        .status-scheduled::before {
+            background-color: #0284C7;
+        }
+
         /* Avatar in tables */
         .table-avatar-initials {
             width: 36px;
@@ -709,17 +718,7 @@
                 @endif
             </a>
 
-            <!-- Messages -->
-            @php
-                $unreadMessagesBadge = \App\Models\ContactMessage::where('is_read', false)->count();
-            @endphp
-            <a href="{{ route('admin.messages.index') }}" class="nav-item-link {{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">
-                <i class="bi bi-chat-dots"></i>
-                <span>Messages</span>
-                @if($unreadMessagesBadge > 0)
-                    <span class="badge bg-danger nav-badge">{{ $unreadMessagesBadge }}</span>
-                @endif
-            </a>
+            <!-- Content Management Heading -->
 
             <div class="sidebar-heading">Content Management</div>
 
@@ -795,7 +794,7 @@
 
                 <!-- Notification Alert Pill -->
                 @php
-                    $totalAlerts = $pendingBookingsBadge + $pendingQuotesBadge + $unreadMessagesBadge;
+                    $totalAlerts = $pendingBookingsBadge + $pendingQuotesBadge;
                 @endphp
                 <div class="dropdown">
                     <button class="topbar-icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Pending Action Alerts">
@@ -816,12 +815,6 @@
                             <a class="dropdown-item small py-2 d-flex justify-content-between align-items-center" href="{{ route('admin.quotes.index', ['status' => 'pending']) }}">
                                 <span><i class="bi bi-file-earmark-text me-2 text-info"></i>Pending Quotes</span>
                                 <span class="badge bg-info">{{ $pendingQuotesBadge }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item small py-2 d-flex justify-content-between align-items-center" href="{{ route('admin.messages.index') }}">
-                                <span><i class="bi bi-chat-dots me-2 text-danger"></i>Unread Messages</span>
-                                <span class="badge bg-danger">{{ $unreadMessagesBadge }}</span>
                             </a>
                         </li>
                     </ul>
@@ -916,5 +909,6 @@
         }
     </script>
     @yield('scripts')
+    @stack('scripts')
 </body>
 </html>

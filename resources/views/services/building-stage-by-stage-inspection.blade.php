@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Building Stage-by-Stage Inspection Melbourne | Premium Building & Pest Inspections')
+@section('meta_description', 'Independent new home construction stage inspections in Melbourne. Verification of slab, frame, lockup, fixing, and handover compliance with Australian Standards.')
 
 @section('content')
 

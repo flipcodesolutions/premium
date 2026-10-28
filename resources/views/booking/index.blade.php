@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Book an Inspection | Premium Building & Pest Inspections')
+@section('meta_description', 'Book your professional building and pest inspection online. Fast scheduling across Melbourne, certified inspectors, and comprehensive same-day reports.')
 
 @section('content')
 

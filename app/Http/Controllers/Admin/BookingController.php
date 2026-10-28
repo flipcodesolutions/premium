@@ -52,7 +52,47 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
+        $booking->load('agreement');
+
         return view('admin.bookings.show', compact('booking'));
+    }
+
+    /**
+     * Generate and view inspection completion report for a booking.
+     */
+    public function report(Booking $booking)
+    {
+        $booking->load('agreement');
+
+        return view('admin.bookings.report', compact('booking'));
+    }
+
+    /**
+     * Send official inspection report notification to client.
+     */
+    public function emailReport(Request $request, Booking $booking)
+    {
+        if (empty($booking->email)) {
+            return redirect()
+                ->back()
+                ->withErrors(['email' => 'This booking does not have a client email address on file.']);
+        }
+
+        $validated = $request->validate([
+            'notes' => 'nullable|string|max:2000',
+        ]);
+
+        $sent = CustomerMailService::sendBookingInspectionReport($booking, $validated['notes'] ?? null);
+
+        if ($sent) {
+            return redirect()
+                ->back()
+                ->with('success', 'Inspection completion report sent successfully to ' . $booking->email . '.');
+        }
+
+        return redirect()
+            ->back()
+            ->with('warning', 'Report email dispatched for ' . $booking->email . '. Please check system mail logs.');
     }
 
     /**

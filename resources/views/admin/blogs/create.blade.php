@@ -21,39 +21,19 @@
             <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data" class="p-4">
                 @csrf
 
-                <div class="row g-3 mb-3">
-                    <!-- Title -->
-                    <div class="col-md-8">
-                        <label for="title" class="form-label fw-semibold">Article Title <span class="text-danger">*</span></label>
-                        <input type="text"
-                               class="form-control @error('title') is-invalid @enderror"
-                               id="title"
-                               name="title"
-                               value="{{ old('title') }}"
-                               placeholder="e.g. Signs of Termites You Should Know About"
-                               required>
-                        @error('title')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Category -->
-                    <div class="col-md-4">
-                        <label for="blog_category_id" class="form-label fw-semibold">Category</label>
-                        <select class="form-select @error('blog_category_id') is-invalid @enderror"
-                                id="blog_category_id"
-                                name="blog_category_id">
-                            <option value="">-- Select Category --</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('blog_category_id') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('blog_category_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                <!-- Title -->
+                <div class="mb-3">
+                    <label for="title" class="form-label fw-semibold">Article Title <span class="text-danger">*</span></label>
+                    <input type="text"
+                           class="form-control @error('title') is-invalid @enderror"
+                           id="title"
+                           name="title"
+                           value="{{ old('title') }}"
+                           placeholder="e.g. Signs of Termites You Should Know About"
+                           required>
+                    @error('title')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Slug -->
@@ -98,48 +78,87 @@
                     @enderror
                 </div>
 
-                <div class="row g-3 mb-4">
-                    <!-- Featured Image -->
-                    <div class="col-md-7">
-                        <label for="image" class="form-label fw-semibold">Featured Cover Image</label>
-                        <input type="file"
-                               class="form-control @error('image') is-invalid @enderror"
-                               id="image"
-                               name="image"
-                               accept="image/jpeg,image/png,image/webp,image/jpg">
-                        @error('image')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        <div class="form-text">Formats accepted: JPG, JPEG, PNG, WEBP. Max size: 2MB.</div>
+                <!-- Featured Image -->
+                <div class="mb-4">
+                    <label for="image" class="form-label fw-semibold">Featured Cover Image</label>
+                    <input type="file"
+                           class="form-control @error('image') is-invalid @enderror"
+                           id="image"
+                           name="image"
+                           accept="image/jpeg,image/png,image/webp,image/jpg">
+                    @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <div class="form-text">Formats accepted: JPG, JPEG, PNG, WEBP. Max size: 2MB.</div>
+                </div>
+
+                <!-- Schedule Post Switch & Date Picker Card -->
+                <div class="card p-3 mb-3 bg-light border rounded">
+                    <div class="form-check form-switch d-flex align-items-center justify-content-between p-0 m-0">
+                        <div>
+                            <label class="form-check-label fw-bold text-dark cursor-pointer d-block" for="is_scheduled">
+                                <i class="bi bi-clock-history text-primary me-1"></i> Schedule Post for Later
+                            </label>
+                            <small class="text-muted">Turn on to pick a future date and time for automatic publishing.</small>
+                        </div>
+                        <input class="form-check-input ms-3"
+                               type="checkbox"
+                               role="switch"
+                               id="is_scheduled"
+                               name="is_scheduled"
+                               value="1"
+                               {{ old('is_scheduled') == '1' ? 'checked' : '' }}
+                               onchange="toggleScheduleDateBox()"
+                               style="width: 2.75em; height: 1.4em; cursor: pointer;">
                     </div>
 
-                    <!-- Publication Date -->
-                    <div class="col-md-5">
-                        <label for="published_at" class="form-label fw-semibold">Publish Date</label>
-                        <input type="datetime-local"
-                               class="form-control @error('published_at') is-invalid @enderror"
-                               id="published_at"
-                               name="published_at"
-                               value="{{ old('published_at', now()->format('Y-m-d\TH:i')) }}">
-                        @error('published_at')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <!-- Schedule Date & Time Picker (Revealed when ON) -->
+                    <div id="schedule_date_box" class="mt-3 pt-3 border-top" style="display: {{ old('is_scheduled') == '1' ? 'block' : 'none' }};">
+                        <div class="row align-items-center g-3">
+                            <div class="col-md-6">
+                                <label for="scheduled_at" class="form-label fw-semibold text-primary mb-1">
+                                    <i class="bi bi-calendar2-event me-1"></i> Schedule Date &amp; Time <span class="text-danger">*</span>
+                                </label>
+                                <input type="datetime-local"
+                                       class="form-control border-primary @error('scheduled_at') is-invalid @enderror"
+                                       id="scheduled_at"
+                                       name="scheduled_at"
+                                       value="{{ old('scheduled_at', now()->addDay()->format('Y-m-d\TH:i')) }}"
+                                       min="{{ now()->format('Y-m-d\TH:i') }}">
+                                @error('scheduled_at')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                                <div class="form-text text-muted">
+                                    The post will remain hidden from visitors until this exact scheduled date &amp; time arrives.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert alert-info py-2 px-3 mb-0 small">
+                                    <i class="bi bi-info-circle-fill me-1"></i>
+                                    <strong>Scheduled Post:</strong> Once scheduled, this article will show a blue <span class="badge bg-primary">Scheduled</span> badge in the admin table until it automatically goes live.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Status Checkbox -->
+                <!-- Publication Status Switch -->
                 <div class="mb-4 p-3 bg-light rounded border">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input"
+                    <div class="form-check form-switch d-flex align-items-center justify-content-between p-0 m-0">
+                        <div>
+                            <label class="form-check-label fw-semibold text-dark cursor-pointer d-block" for="status">
+                                Active (Published)
+                            </label>
+                            <small class="text-muted">Turn off to save as a Draft (completely hidden and unpublished).</small>
+                        </div>
+                        <input class="form-check-input ms-3"
                                type="checkbox"
                                role="switch"
                                id="status"
                                name="status"
                                value="1"
-                               {{ old('status', '1') == '1' ? 'checked' : '' }}>
-                        <label class="form-check-label fw-semibold" for="status">
-                            Publish Article Immediately (Visible on website blog)
-                        </label>
+                               {{ old('status', '1') == '1' ? 'checked' : '' }}
+                               style="width: 2.75em; height: 1.4em; cursor: pointer;">
                     </div>
                 </div>
 
@@ -149,12 +168,38 @@
                         Cancel
                     </a>
                     <button type="submit" class="btn btn-green px-4">
-                        <i class="bi bi-check-lg me-1"></i> Save & Publish Post
+                        <i class="bi bi-check-lg me-1"></i> Save Blog Post
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    function toggleScheduleDateBox() {
+        const switchEl = document.getElementById('is_scheduled');
+        const box = document.getElementById('schedule_date_box');
+        if (switchEl && box) {
+            box.style.display = switchEl.checked ? 'block' : 'none';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const switchEl = document.getElementById('is_scheduled');
+        if (switchEl) {
+            switchEl.addEventListener('change', toggleScheduleDateBox);
+        }
+        toggleScheduleDateBox();
+    });
+</script>
+
+@section('scripts')
+<script>
+    if (typeof toggleScheduleDateBox === 'function') {
+        toggleScheduleDateBox();
+    }
+</script>
+@endsection
 
 @endsection

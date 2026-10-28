@@ -8,19 +8,23 @@
 <!-- Header Action & Filters -->
 <div class="card-custom mb-4">
     <div class="p-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
-        <!-- Status & Category Filter -->
+        <!-- Status Filter -->
         <div class="d-flex flex-wrap align-items-center gap-2">
             <a href="{{ route('admin.blogs.index') }}" 
-               class="btn btn-sm {{ !request('status') && !request('category_id') ? 'btn-navy' : 'btn-light border' }}">
-                All Posts
+               class="btn btn-sm {{ !request('status') ? 'btn-navy' : 'btn-light border' }}">
+                All Posts ({{ $counts['all'] ?? 0 }})
             </a>
-            <a href="{{ route('admin.blogs.index', ['status' => 'published', 'category_id' => request('category_id'), 'search' => request('search')]) }}" 
+            <a href="{{ route('admin.blogs.index', ['status' => 'published', 'search' => request('search')]) }}" 
                class="btn btn-sm {{ request('status') === 'published' ? 'btn-success fw-semibold' : 'btn-light border' }}">
-                Published
+                Published ({{ $counts['published'] ?? 0 }})
             </a>
-            <a href="{{ route('admin.blogs.index', ['status' => 'draft', 'category_id' => request('category_id'), 'search' => request('search')]) }}" 
+            <a href="{{ route('admin.blogs.index', ['status' => 'scheduled', 'search' => request('search')]) }}" 
+               class="btn btn-sm {{ request('status') === 'scheduled' ? 'btn-primary fw-semibold' : 'btn-light border' }}">
+                <i class="bi bi-clock-history me-1"></i> Scheduled ({{ $counts['scheduled'] ?? 0 }})
+            </a>
+            <a href="{{ route('admin.blogs.index', ['status' => 'draft', 'search' => request('search')]) }}" 
                class="btn btn-sm {{ request('status') === 'draft' ? 'btn-warning text-dark fw-semibold' : 'btn-light border' }}">
-                Drafts
+                Drafts ({{ $counts['draft'] ?? 0 }})
             </a>
         </div>
 
@@ -29,9 +33,6 @@
             <form method="GET" action="{{ route('admin.blogs.index') }}" class="d-flex gap-2">
                 @if(request('status'))
                     <input type="hidden" name="status" value="{{ request('status') }}">
-                @endif
-                @if(request('category_id'))
-                    <input type="hidden" name="category_id" value="{{ request('category_id') }}">
                 @endif
                 <div class="input-group input-group-sm" style="min-width: 220px;">
                     <input type="text" 
@@ -44,7 +45,7 @@
                     </button>
                 </div>
                 @if(request('search'))
-                    <a href="{{ route('admin.blogs.index', ['status' => request('status'), 'category_id' => request('category_id')]) }}" class="btn btn-sm btn-light border" title="Clear">
+                    <a href="{{ route('admin.blogs.index', ['status' => request('status')]) }}" class="btn btn-sm btn-light border" title="Clear">
                         <i class="bi bi-x-lg"></i>
                     </a>
                 @endif
@@ -71,7 +72,6 @@
                     <th style="width: 75px;">SR No.</th>
                     <th style="width: 80px;">Cover</th>
                     <th>Article Title</th>
-                    <th>Category</th>
                     <th>Published At</th>
                     <th>Status</th>
                     <th class="text-end" style="width: 200px;">Actions</th>
@@ -99,27 +99,33 @@
                             </small>
                         </td>
                         <td>
-                            @if($post->category)
-                                <span class="badge bg-light text-primary border">{{ $post->category->name }}</span>
+                            @if($post->status && $post->published_at && $post->published_at->isFuture())
+                                <span class="text-primary fw-semibold d-block text-nowrap">
+                                    <i class="bi bi-calendar2-event me-1"></i>{{ $post->published_at->format('d M Y') }}
+                                </span>
+                                <small class="text-muted text-nowrap">{{ $post->published_at->format('h:i A') }}</small>
+                            @elseif($post->published_at)
+                                <small class="text-nowrap">{{ $post->published_at->format('d M Y') }}</small>
                             @else
-                                <span class="badge bg-light text-secondary border">Uncategorized</span>
+                                <small class="text-muted">Not published</small>
                             @endif
-                        </td>
-                        <td>
-                            <small class="text-nowrap">{{ $post->published_at ? $post->published_at->format('d M Y') : 'Not scheduled' }}</small>
                         </td>
                         <td>
                             <form action="{{ route('admin.blogs.toggle-status', $post->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit" class="btn btn-sm p-0 border-0 bg-transparent" title="Toggle publication status">
-                                    @if($post->status)
-                                        <span class="status-badge status-active cursor-pointer">
-                                            <i class="bi bi-check-circle-fill me-1"></i> Published
-                                        </span>
-                                    @else
+                                    @if(!$post->status)
                                         <span class="status-badge status-pending cursor-pointer">
                                             <i class="bi bi-hourglass-split me-1"></i> Draft
+                                        </span>
+                                    @elseif($post->published_at && $post->published_at->isFuture())
+                                        <span class="status-badge status-scheduled cursor-pointer">
+                                            <i class="bi bi-clock-history me-1"></i> Scheduled
+                                        </span>
+                                    @else
+                                        <span class="status-badge status-active cursor-pointer">
+                                            <i class="bi bi-check-circle-fill me-1"></i> Published
                                         </span>
                                     @endif
                                 </button>
@@ -150,7 +156,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-5 text-muted">
+                        <td colspan="6" class="text-center py-5 text-muted">
                             <i class="bi bi-journal-x fs-1 d-block mb-2"></i>
                             <h6 class="fw-semibold">No blog posts found</h6>
                             <p class="small text-muted mb-3">Publish articles and tips to improve your website's SEO.</p>

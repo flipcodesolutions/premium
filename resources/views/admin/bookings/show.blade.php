@@ -13,6 +13,11 @@
                 <i class="bi bi-arrow-left me-1"></i> Back to Bookings
             </a>
             <div class="d-flex gap-2">
+                @if($booking->status === 'completed')
+                    <a href="{{ route('admin.bookings.report', $booking->id) }}" target="_blank" class="btn btn-sm btn-success fw-semibold">
+                        <i class="bi bi-file-earmark-check-fill me-1"></i> Generate Report
+                    </a>
+                @endif
                 <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to permanently delete this booking?');">
                     @csrf
                     @method('DELETE')
@@ -38,6 +43,31 @@
             </div>
 
             <div class="p-4">
+                @if($booking->status === 'completed')
+                    <!-- Completion Banner -->
+                    <div class="alert alert-success d-flex flex-wrap align-items-center justify-content-between p-3 mb-4 rounded-3 border-success shadow-sm">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px; font-size: 20px;">
+                                <i class="bi bi-file-earmark-check-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-success">Inspection Completed &amp; Verified</h6>
+                                <small class="text-muted">This booking is completed. You can now generate, print, or email the official Inspection Completion Report (Ref #PBI-REP-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }}).</small>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mt-2 mt-md-0">
+                            <a href="{{ route('admin.bookings.report', $booking->id) }}" target="_blank" class="btn btn-sm btn-success fw-semibold">
+                                <i class="bi bi-printer me-1"></i> Generate &amp; Print Report
+                            </a>
+                            @if($booking->email)
+                                <button type="button" class="btn btn-sm btn-outline-success fw-semibold" data-bs-toggle="modal" data-bs-target="#sendReportModal">
+                                    <i class="bi bi-envelope-paper me-1"></i> Email Report
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Status Update Bar -->
                 <div class="p-3 mb-4 rounded border bg-light">
                     <form action="{{ route('admin.bookings.update-status', $booking->id) }}" method="POST" class="d-flex flex-wrap align-items-center justify-content-between gap-3">
@@ -173,6 +203,11 @@
 
                 <!-- Quick Action Buttons -->
                 <div class="d-flex flex-wrap gap-2 pt-4 mt-3 border-top">
+                    @if($booking->status === 'completed')
+                        <a href="{{ route('admin.bookings.report', $booking->id) }}" target="_blank" class="btn btn-success fw-semibold">
+                            <i class="bi bi-file-earmark-check-fill me-1"></i> View / Print Inspection Report
+                        </a>
+                    @endif
                     <a href="tel:{{ $booking->phone }}" class="btn btn-navy">
                         <i class="bi bi-telephone-fill me-1"></i> Call Customer
                     </a>
@@ -230,6 +265,43 @@ Premium Building & Pest Inspections Team</textarea>
                     <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-sm btn-navy">
                         <i class="bi bi-send-fill me-1"></i> Send Email Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
+
+@if($booking->email && $booking->status === 'completed')
+<!-- Send Inspection Report Modal -->
+<div class="modal fade" id="sendReportModal" tabindex="-1" aria-labelledby="sendReportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="{{ route('admin.bookings.email-report', $booking->id) }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center gap-2" id="sendReportModalLabel">
+                        <i class="bi bi-envelope-check text-success"></i>
+                        <span>Email Inspection Report to {{ $booking->name }}</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="alert alert-info py-2 px-3 mb-3 small">
+                        Recipient: <strong>{{ $booking->email }}</strong><br>
+                        Report Reference: <strong>PBI-REP-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }}</strong>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="reportModalNotes" class="form-label fw-bold small text-dark">Additional Notes for Client (Optional)</label>
+                        <textarea class="form-control" id="reportModalNotes" name="notes" rows="4" placeholder="Enter any extra notes or recommendations for the client..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="bi bi-send-fill me-1"></i> Send Report Now
                     </button>
                 </div>
             </form>

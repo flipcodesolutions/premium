@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Blog | Premium Building & Pest Inspections')
+@section('meta_description', 'Expert property buying guides, building inspection insights, and termite prevention advice for homeowners and property investors in Melbourne, Victoria.')
 
 @section('content')
 

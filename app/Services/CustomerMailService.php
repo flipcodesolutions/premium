@@ -107,6 +107,43 @@ class CustomerMailService
     }
 
     /**
+     * Send official inspection report notification to booking customer.
+     */
+    public static function sendBookingInspectionReport(Booking $booking, ?string $customNote = null): bool
+    {
+        if (empty($booking->email)) {
+            return false;
+        }
+
+        try {
+            $refNumber = 'PBI-REP-' . str_pad($booking->id, 5, '0', STR_PAD_LEFT);
+            $subject = "Official Inspection Report #{$refNumber} - {$booking->service_type} - Premium Building & Pest Inspections";
+            $fromAddress = self::getFromAddress();
+            $fromName = self::getFromName();
+
+            $intro = "Your building and pest inspection for property '{$booking->property_address}' has been officially completed. Your Inspection Completion Report #{$refNumber} has been finalized and issued by Licensed Building Inspector Ronak Gami.";
+
+            Mail::send('emails.booking-notification', [
+                'booking' => $booking,
+                'subjectLine' => $subject,
+                'introMessage' => $intro,
+                'customMessage' => $customNote ?? 'Please retain this document for your official records and building compliance verification. If you have any questions or require further clarification, do not hesitate to contact our office.',
+            ], function ($message) use ($booking, $subject, $fromAddress, $fromName) {
+                $message->to(trim($booking->email), $booking->name)
+                        ->from($fromAddress, $fromName)
+                        ->replyTo($fromAddress, $fromName)
+                        ->subject($subject);
+            });
+
+            Log::info("Inspection report notification sent to {$booking->email} for Booking #{$booking->id}");
+            return true;
+        } catch (\Throwable $e) {
+            Log::error("Failed to send inspection report notification to {$booking->email}: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
      * Send a custom email composed by admin directly to booking customer.
      */
     public static function sendBookingCustomEmail(Booking $booking, string $subject, string $messageContent): bool

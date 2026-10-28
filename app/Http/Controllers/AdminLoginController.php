@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\CustomerMailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class AdminLoginController extends Controller
 {
@@ -161,5 +166,128 @@ class AdminLoginController extends Controller
         return redirect()
             ->route('login')
             ->with('success', 'You have been logged out successfully.');
+    }
+
+
+    /**
+     * Show Forgot Password Form
+     */
+    public function showForgotPassword()
+    {
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return view('admin.forgot-password');
+    }
+
+
+    /**
+     * Send Password Reset Link Email
+     */
+    public function sendResetLink(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ], [
+            'email.required' => 'Please enter your registered admin email address.',
+            'email.email' => 'Please enter a valid email address.',
+        ]);
+
+        $user = User::where('email', $request->email)->where('role', 'admin')->first();
+
+        if (!$user) {
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors(['email' => 'We could not find an administrator account with that email address.']);
+        }
+
+        // Generate token using Laravel password broker
+        $token = Password::broker()->createToken($user);
+
+        $resetUrl = route('password.reset', [
+            'token' => $token,
+            'email' => $user->email,
+        ]);
+
+        try {
+            $fromAddress = CustomerMailService::getFromAddress();
+            $fromName = CustomerMailService::getFromName();
+
+            Mail::send('emails.password-reset', [
+                'user' => $user,
+                'resetUrl' => $resetUrl,
+                'token' => $token,
+            ], function ($message) use ($user, $fromAddress, $fromName) {
+                $message->to($user->email, $user->name)
+                        ->from($fromAddress, $fromName)
+                        ->subject('Reset Your Password - Premium Building & Pest Inspections');
+            });
+
+            return back()->with('status', 'A password reset link has been dispatched to ' . $user->email . '. Please check your inbox and spam folder.');
+        } catch (\Throwable $e) {
+            Log::error('Password reset email error: ' . $e->getMessage());
+
+            // Friendly fallback with reset link in case of local SMTP restrictions
+            return back()->with('status', 'Reset link generated successfully! You can use this link directly: ' . $resetUrl);
+        }
+    }
+
+
+    /**
+     * Show Reset Password Form
+     */
+    public function showResetPassword(Request $request, $token)
+    {
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return view('admin.reset-password', [
+            'token' => $token,
+            'email' => $request->query('email', old('email', '')),
+        ]);
+    }
+
+
+    /**
+     * Handle Password Reset
+     */
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'email.required' => 'Please provide your account email address.',
+            'password.required' => 'Please enter a new password.',
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.confirmed' => 'Password confirmation does not match.',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, string $password) {
+                $user->password = $password; // Cast automatically hashes it
+                $user->setRememberToken(Str::random(60));
+                $user->save();
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()
+                ->route('login')
+                ->with('success', 'Your password has been successfully reset! Please log in with your new password.');
+        }
+
+        $errorMessage = 'This password reset token is invalid or has expired. Please request a new one.';
+        if ($status === Password::INVALID_USER) {
+            $errorMessage = 'We could not find an account associated with this email address.';
+        }
+
+        return back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => $errorMessage]);
     }
 }

@@ -18,15 +18,16 @@ class BlogPostController extends Controller
     {
         $query = BlogPost::with('category')->latest();
 
-        // Filter by category
-        if ($request->filled('category_id') && $request->category_id !== 'all') {
-            $query->where('blog_category_id', $request->category_id);
-        }
-
         // Filter by status
         if ($request->filled('status')) {
             if ($request->status === 'published') {
-                $query->where('status', true);
+                $query->where('status', true)
+                      ->where(function ($q) {
+                          $q->whereNull('published_at')->orWhere('published_at', '<=', now());
+                      });
+            } elseif ($request->status === 'scheduled') {
+                $query->where('status', true)
+                      ->where('published_at', '>', now());
             } elseif ($request->status === 'draft') {
                 $query->where('status', false);
             }
@@ -43,9 +44,17 @@ class BlogPostController extends Controller
         }
 
         $posts = $query->paginate(10)->withQueryString();
-        $categories = BlogCategory::orderBy('name')->get();
 
-        return view('admin.blogs.index', compact('posts', 'categories'));
+        $counts = [
+            'all' => BlogPost::count(),
+            'published' => BlogPost::where('status', true)->where(function ($q) {
+                $q->whereNull('published_at')->orWhere('published_at', '<=', now());
+            })->count(),
+            'scheduled' => BlogPost::where('status', true)->where('published_at', '>', now())->count(),
+            'draft' => BlogPost::where('status', false)->count(),
+        ];
+
+        return view('admin.blogs.index', compact('posts', 'counts'));
     }
 
     /**
@@ -53,9 +62,7 @@ class BlogPostController extends Controller
      */
     public function create()
     {
-        $categories = BlogCategory::orderBy('name')->get();
-
-        return view('admin.blogs.create', compact('categories'));
+        return view('admin.blogs.create');
     }
 
     /**
@@ -66,12 +73,12 @@ class BlogPostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:blog_posts,slug',
-            'blog_category_id' => 'nullable|exists:blog_categories,id',
             'excerpt' => 'nullable|string|max:1000',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'is_scheduled' => 'nullable|boolean',
+            'scheduled_at' => 'nullable|required_if:is_scheduled,1|date',
             'status' => 'nullable|boolean',
-            'published_at' => 'nullable|date',
         ]);
 
         // Auto-generate slug if not provided
@@ -90,13 +97,27 @@ class BlogPostController extends Controller
             $imagePath = $request->file('image')->store('blogs', 'public');
         }
 
-        $status = $request->boolean('status');
-        $publishedAt = $validated['published_at'] ?? ($status ? now() : null);
+        $isScheduled = $request->boolean('is_scheduled');
+        $isActive = $request->boolean('status', true);
+
+        if ($isScheduled && $request->filled('scheduled_at')) {
+            $status = true;
+            $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'));
+            $message = 'Blog post scheduled successfully for ' . $publishedAt->format('d M Y, h:i A') . '.';
+        } elseif (!$isActive) {
+            $status = false;
+            $publishedAt = null;
+            $message = 'Blog post saved as draft successfully.';
+        } else {
+            $status = true;
+            $publishedAt = now();
+            $message = 'Blog post published successfully.';
+        }
 
         BlogPost::create([
             'title' => $validated['title'],
             'slug' => $slug,
-            'blog_category_id' => $validated['blog_category_id'] ?? null,
+            'blog_category_id' => null,
             'excerpt' => $validated['excerpt'] ?? null,
             'content' => $validated['content'],
             'image' => $imagePath,
@@ -106,7 +127,7 @@ class BlogPostController extends Controller
 
         return redirect()
             ->route('admin.blogs.index')
-            ->with('success', 'Blog post created successfully.');
+            ->with('success', $message);
     }
 
     /**
@@ -114,9 +135,7 @@ class BlogPostController extends Controller
      */
     public function edit(BlogPost $post)
     {
-        $categories = BlogCategory::orderBy('name')->get();
-
-        return view('admin.blogs.edit', compact('post', 'categories'));
+        return view('admin.blogs.edit', compact('post'));
     }
 
     /**
@@ -127,12 +146,12 @@ class BlogPostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:blog_posts,slug,' . $post->id,
-            'blog_category_id' => 'nullable|exists:blog_categories,id',
             'excerpt' => 'nullable|string|max:1000',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'is_scheduled' => 'nullable|boolean',
+            'scheduled_at' => 'nullable|required_if:is_scheduled,1|date',
             'status' => 'nullable|boolean',
-            'published_at' => 'nullable|date',
         ]);
 
         $slug = $validated['slug'] ?? Str::slug($validated['title']);
@@ -145,16 +164,27 @@ class BlogPostController extends Controller
             $imagePath = $request->file('image')->store('blogs', 'public');
         }
 
-        $status = $request->boolean('status');
-        $publishedAt = $validated['published_at'] ?? $post->published_at;
-        if ($status && !$publishedAt) {
-            $publishedAt = now();
+        $isScheduled = $request->boolean('is_scheduled');
+        $isActive = $request->boolean('status', true);
+
+        if ($isScheduled && $request->filled('scheduled_at')) {
+            $status = true;
+            $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'));
+            $message = 'Blog post scheduled successfully for ' . $publishedAt->format('d M Y, h:i A') . '.';
+        } elseif (!$isActive) {
+            $status = false;
+            $publishedAt = null;
+            $message = 'Blog post moved to draft successfully.';
+        } else {
+            $status = true;
+            $publishedAt = ($post->published_at && $post->published_at->isPast()) ? $post->published_at : now();
+            $message = 'Blog post updated and published successfully.';
         }
 
         $post->update([
             'title' => $validated['title'],
             'slug' => $slug,
-            'blog_category_id' => $validated['blog_category_id'] ?? null,
+            'blog_category_id' => null,
             'excerpt' => $validated['excerpt'] ?? null,
             'content' => $validated['content'],
             'image' => $imagePath,
@@ -164,7 +194,7 @@ class BlogPostController extends Controller
 
         return redirect()
             ->route('admin.blogs.index')
-            ->with('success', 'Blog post updated successfully.');
+            ->with('success', $message);
     }
 
     /**

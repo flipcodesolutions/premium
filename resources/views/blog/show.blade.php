@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', ($post->title ?? 'Blog Article') . ' | Premium Building & Pest Inspections')
+@section('meta_description', Str::limit(strip_tags($post->excerpt ?? $post->content), 155))
 
 @section('content')
 

@@ -4,7 +4,7 @@
 <head>
 
     <!-- =====================================================
-         BASIC META
+         BASIC META & SEO
     ====================================================== -->
 
     <meta charset="UTF-8">
@@ -15,23 +15,180 @@
     <meta name="csrf-token"
           content="{{ csrf_token() }}">
 
+    <title>@yield('title', 'Premium Building & Pest Inspections | Trusted Reports')</title>
+
     <meta name="description"
-          content="Premium Building & Pest Inspections provides professional building and pest inspection services across Melbourne and Victoria.">
+          content="@yield('meta_description', 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.')">
 
     <meta name="keywords"
-          content="building inspection, pest inspection, pre purchase inspection, Melbourne building inspector, property inspection">
+          content="@yield('meta_keywords', 'building inspection, pest inspection, pre purchase inspection, Melbourne building inspector, property inspection, termites inspection, structural defects')">
+
+    <meta name="robots"
+          content="@yield('meta_robots', 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large')">
 
     <meta name="author"
           content="Premium Building & Pest Inspections">
 
+    <link rel="canonical"
+          href="@yield('canonical_url', url()->current())">
 
-    <!-- =====================================================
-         PAGE TITLE
-    ====================================================== -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('og_title', View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports')">
+    <meta property="og:description" content="@yield('og_description', View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.')">
+    <meta property="og:url" content="@yield('og_url', url()->current())">
+    <meta property="og:site_name" content="Premium Building & Pest Inspections">
+    <meta property="og:updated_time" content="2026-05-04T07:29:53+00:00">
+    <meta property="og:image" content="@yield('og_image', asset('images/logo.png'))">
 
-    <title>
-        @yield('title', 'Premium Building & Pest Inspections')
-    </title>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('twitter_title', View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports')">
+    <meta name="twitter:description" content="@yield('twitter_description', View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.')">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="rongorwa@yahoo.com">
+    <meta name="twitter:label2" content="Time to read">
+    <meta name="twitter:data2" content="3 minutes">
+
+    <!-- Preconnect / DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5W2HM48L');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) - Google Ads -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17373755173"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-17373755173');
+    </script>
+
+    <!-- Google tag (gtag.js) - Call conversion tag -->
+    <script>
+      gtag('config', 'AW-17373755173/xJlVCJ3N-5UbEKXuudxA', {
+        'phone_conversion_number': '0466 001 551'
+      });
+    </script>
+
+    <!-- Google tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-36HVBD3ZRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-36HVBD3ZRY');
+    </script>
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@graph": [
+        {
+          "@@type": "Place",
+          "@@id": "https://premiumbuildinginspections.com.au/#place",
+          "geo": {
+            "@@type": "GeoCoordinates",
+            "latitude": "-38.104789",
+            "longitude": " 145.358324"
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=-38.104789,145.358324",
+          "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "37 Burlina Boulevard,",
+            "addressLocality": "Clyde North",
+            "addressRegion": "VIC",
+            "postalCode": "3978",
+            "addressCountry": "AU"
+          }
+        },
+        {
+          "@@type": [
+            "ProfessionalService",
+            "Organization"
+          ],
+          "@@id": "https://premiumbuildinginspections.com.au/#organization",
+          "name": "Premium Building & Pest Inspections",
+          "url": "https://premiumbuildinginspections.com.au",
+          "email": "info@premiumbuildinginspections.com.au",
+          "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "37 Burlina Boulevard,",
+            "addressLocality": "Clyde North",
+            "addressRegion": "VIC",
+            "postalCode": "3978",
+            "addressCountry": "AU"
+          },
+          "logo": {
+            "@@type": "ImageObject",
+            "@@id": "https://premiumbuildinginspections.com.au/#logo",
+            "url": "https://premiumbuildinginspections.com.au/wp-content/uploads/2024/08/Untitled-1.2-TB.png",
+            "contentUrl": "https://premiumbuildinginspections.com.au/wp-content/uploads/2024/08/Untitled-1.2-TB.png",
+            "caption": "Premium Building & Pest Inspections",
+            "inLanguage": "en-US",
+            "width": "610",
+            "height": "314"
+          },
+          "priceRange": "$$",
+          "openingHours": [
+            "Mo,Tu,We,Th,Fr 08:00-18:00",
+            "Sa 01:00-16:00"
+          ],
+          "description": "Premium Building & Pest Inspections is your trusted partner for comprehensive building and pest inspections in Melbourne, Victoria, and nearby areas. Our certified inspectors are dedicated to protecting your investment by providing meticulous and easy-to-understand reports. We specialize in identifying structural defects, safety hazards, and pest infestations (including termites) so you can proceed with confidence. With our commitment to exceptional service and a keen eye for detail, we ensure you have all the information you need before you buy. Contact us today to schedule your inspection!",
+          "legalName": "Premium Building & Pest Inspections",
+          "location": {
+            "@@id": "https://premiumbuildinginspections.com.au/#place"
+          },
+          "image": {
+            "@@id": "https://premiumbuildinginspections.com.au/#logo"
+          },
+          "telephone": "+61466001551"
+        },
+        {
+          "@@type": "WebSite",
+          "@@id": "https://premiumbuildinginspections.com.au/#website",
+          "url": "https://premiumbuildinginspections.com.au",
+          "name": "Premium Building & Pest Inspections",
+          "alternateName": "Premium Building & Pest Inspections",
+          "publisher": {
+            "@@id": "https://premiumbuildinginspections.com.au/#organization"
+          },
+          "inLanguage": "en-US",
+          "potentialAction": {
+            "@@type": "SearchAction",
+            "target": "https://premiumbuildinginspections.com.au/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@@type": "WebPage",
+          "@@id": "https://premiumbuildinginspections.com.au/#webpage",
+          "url": "https://premiumbuildinginspections.com.au/",
+          "name": "Premium Building & Pest Inspections | Trusted Reports",
+          "datePublished": "2024-07-09T18:49:30+00:00",
+          "dateModified": "2026-05-04T07:29:53+00:00",
+          "about": {
+            "@@id": "https://premiumbuildinginspections.com.au/#organization"
+          },
+          "isPartOf": {
+            "@@id": "https://premiumbuildinginspections.com.au/#website"
+          },
+          "inLanguage": "en-US"
+        }
+      ]
+    }
+    </script>
 
 
     <!-- =====================================================
@@ -946,6 +1103,11 @@
 
 
 <body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W2HM48L"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
 
     <!-- =====================================================
