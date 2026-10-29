@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 
 <head>
 
@@ -33,10 +33,10 @@
           href="@yield('canonical_url', url()->current())">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:locale" content="en_US">
+    <meta property="og:locale" content="en_AU">
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:title" content="@yield('og_title', View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports')">
-    <meta property="og:description" content="@yield('og_description', View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.')">
+    <meta property="og:title" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
+    <meta property="og:description" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
     <meta property="og:url" content="@yield('og_url', url()->current())">
     <meta property="og:site_name" content="Premium Building & Pest Inspections">
     <meta property="og:updated_time" content="2026-05-04T07:29:53+00:00">
@@ -44,12 +44,12 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('twitter_title', View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports')">
-    <meta name="twitter:description" content="@yield('twitter_description', View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.')">
-    <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="rongorwa@yahoo.com">
-    <meta name="twitter:label2" content="Time to read">
-    <meta name="twitter:data2" content="3 minutes">
+    <meta name="twitter:title" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
+    <meta name="twitter:description" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/logo.png'))">
+
+
+
 
     <!-- Preconnect / DNS Prefetch -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -97,7 +97,7 @@
       "@@graph": [
         {
           "@@type": "Place",
-          "@@id": "https://premiumbuildinginspections.com.au/#place",
+          "@@id": "{{ url('/') }}/#place",
           "geo": {
             "@@type": "GeoCoordinates",
             "latitude": "-38.104789",
@@ -118,9 +118,9 @@
             "ProfessionalService",
             "Organization"
           ],
-          "@@id": "https://premiumbuildinginspections.com.au/#organization",
+          "@@id": "{{ url('/') }}/#organization",
           "name": "Premium Building & Pest Inspections",
-          "url": "https://premiumbuildinginspections.com.au",
+          "url": "{{ url('/') }}",
           "email": "info@premiumbuildinginspections.com.au",
           "address": {
             "@@type": "PostalAddress",
@@ -132,59 +132,59 @@
           },
           "logo": {
             "@@type": "ImageObject",
-            "@@id": "https://premiumbuildinginspections.com.au/#logo",
-            "url": "https://premiumbuildinginspections.com.au/wp-content/uploads/2024/08/Untitled-1.2-TB.png",
-            "contentUrl": "https://premiumbuildinginspections.com.au/wp-content/uploads/2024/08/Untitled-1.2-TB.png",
+            "@@id": "{{ url('/') }}/#logo",
+            "url": "{{ asset('images/logo.png') }}",
+            "contentUrl": "{{ asset('images/logo.png') }}",
             "caption": "Premium Building & Pest Inspections",
-            "inLanguage": "en-US",
+            "inLanguage": "en-AU",
             "width": "610",
             "height": "314"
           },
           "priceRange": "$$",
           "openingHours": [
             "Mo,Tu,We,Th,Fr 08:00-18:00",
-            "Sa 01:00-16:00"
+            "Sa 08:00-16:00"
           ],
           "description": "Premium Building & Pest Inspections is your trusted partner for comprehensive building and pest inspections in Melbourne, Victoria, and nearby areas. Our certified inspectors are dedicated to protecting your investment by providing meticulous and easy-to-understand reports. We specialize in identifying structural defects, safety hazards, and pest infestations (including termites) so you can proceed with confidence. With our commitment to exceptional service and a keen eye for detail, we ensure you have all the information you need before you buy. Contact us today to schedule your inspection!",
           "legalName": "Premium Building & Pest Inspections",
           "location": {
-            "@@id": "https://premiumbuildinginspections.com.au/#place"
+            "@@id": "{{ url('/') }}/#place"
           },
           "image": {
-            "@@id": "https://premiumbuildinginspections.com.au/#logo"
+            "@@id": "{{ url('/') }}/#logo"
           },
           "telephone": "+61466001551"
         },
         {
           "@@type": "WebSite",
           "@@id": "https://premiumbuildinginspections.com.au/#website",
-          "url": "https://premiumbuildinginspections.com.au",
+          "url": "{{ url('/') }}",
           "name": "Premium Building & Pest Inspections",
           "alternateName": "Premium Building & Pest Inspections",
           "publisher": {
-            "@@id": "https://premiumbuildinginspections.com.au/#organization"
+            "@@id": "{{ url('/') }}/#organization"
           },
-          "inLanguage": "en-US",
+          "inLanguage": "en-AU",
           "potentialAction": {
             "@@type": "SearchAction",
-            "target": "https://premiumbuildinginspections.com.au/?s={search_term_string}",
+            "target": "{{ url('/') }}/?s={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         },
         {
           "@@type": "WebPage",
-          "@@id": "https://premiumbuildinginspections.com.au/#webpage",
-          "url": "https://premiumbuildinginspections.com.au/",
-          "name": "Premium Building & Pest Inspections | Trusted Reports",
+          "@@id": "{{ url()->current() }}/#webpage",
+          "url": "{{ url()->current() }}",
+          "name": "{!! addslashes(html_entity_decode(View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports', ENT_QUOTES, 'UTF-8')) !!}",
           "datePublished": "2024-07-09T18:49:30+00:00",
           "dateModified": "2026-05-04T07:29:53+00:00",
           "about": {
-            "@@id": "https://premiumbuildinginspections.com.au/#organization"
+            "@@id": "{{ url('/') }}/#organization"
           },
           "isPartOf": {
-            "@@id": "https://premiumbuildinginspections.com.au/#website"
+            "@@id": "{{ url('/') }}/#website"
           },
-          "inLanguage": "en-US"
+          "inLanguage": "en-AU"
         }
       ]
     }

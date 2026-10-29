@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pre-Purchase Building & Pest Inspection | Premium Building & Pest Inspections')
+@section('title', 'Pre-Purchase Building & Pest Inspection | PB Inspections')
 @section('meta_description', 'Melbourne’s leading pre-purchase building and pest inspection. Detailed same-day reports uncovering structural defects, timber pests, and safety hazards.')
 
 @section('content')

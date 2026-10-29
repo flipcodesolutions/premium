@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Builders Warranty Inspection Melbourne | Premium Building & Pest Inspections')
+@section('title', 'Builders Warranty Inspection Melbourne | PB Inspections')
 @section('meta_description', 'Protect your investment with a 6-year builders warranty inspection in Melbourne. Identify major structural defects before your statutory warranty protection expires.')
 
 @section('content')

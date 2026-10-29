@@ -1041,7 +1041,7 @@
                     @endif
 
                     <!-- Login Form -->
-                    <form action="{{ route('login') }}" method="POST" autocomplete="on" id="adminLoginForm">
+                    <form action="{{ route('login.submit') }}" method="POST" autocomplete="on" id="adminLoginForm">
                         @csrf
 
                         <!-- Email Field -->
@@ -1172,7 +1172,10 @@
         const submitBtnText = document.getElementById('submitBtnText');
 
         if (loginForm && submitBtn && submitBtnText) {
-            loginForm.addEventListener('submit', function () {
+            loginForm.addEventListener('submit', function (e) {
+                if (!loginForm.checkValidity()) {
+                    return;
+                }
                 submitBtn.disabled = true;
                 submitBtn.style.opacity = '0.85';
                 submitBtnText.textContent = 'Verifying Credentials...';

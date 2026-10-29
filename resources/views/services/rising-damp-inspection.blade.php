@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Professional Rising Damp Inspection Services In Melbourne | Premium Building & Pest Inspections')
+@section('title', 'Rising Damp Inspection Melbourne | PB Inspections')
 @section('meta_description', 'Certified rising damp inspection in Melbourne. Advanced moisture meter testing, thermal imaging detection, root cause identification, and remediation advice.')
 
 @section('content')

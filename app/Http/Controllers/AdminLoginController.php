@@ -33,6 +33,11 @@ class AdminLoginController extends Controller
     
     public function register(Request $request)
     {
+        $request->merge([
+            'email' => strtolower(trim($request->input('email', ''))),
+            'name' => trim($request->input('name', '')),
+        ]);
+
         $validated = $request->validate([
             'name' => [
                 'required',
@@ -97,6 +102,11 @@ class AdminLoginController extends Controller
      */
     public function login(Request $request)
     {
+        // Trim and normalize email before validation
+        $request->merge([
+            'email' => strtolower(trim($request->input('email', ''))),
+        ]);
+
         // Validate login form
         $credentials = $request->validate([
             'email' => [
@@ -109,8 +119,21 @@ class AdminLoginController extends Controller
                 'required',
                 'string',
             ],
+        ], [
+            'email.required' => 'Please enter your administrator email address.',
+            'email.email' => 'Please enter a valid email address.',
+            'password.required' => 'Please enter your password.',
         ]);
 
+        // Check if user exists but lacks admin role
+        $user = User::where('email', $credentials['email'])->first();
+        if ($user && $user->role !== 'admin') {
+            return back()
+                ->withErrors([
+                    'email' => 'This account does not have administrator privileges.',
+                ])
+                ->onlyInput('email');
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -139,7 +162,6 @@ class AdminLoginController extends Controller
                 ->intended(route('admin.dashboard'))
                 ->with('success', 'Welcome to Admin Dashboard.');
         }
-
 
         // Login failed
         return back()
@@ -187,6 +209,10 @@ class AdminLoginController extends Controller
      */
     public function sendResetLink(Request $request)
     {
+        $request->merge([
+            'email' => strtolower(trim($request->input('email', ''))),
+        ]);
+
         $request->validate([
             'email' => ['required', 'email'],
         ], [
@@ -255,6 +281,10 @@ class AdminLoginController extends Controller
      */
     public function resetPassword(Request $request)
     {
+        $request->merge([
+            'email' => strtolower(trim($request->input('email', ''))),
+        ]);
+
         $request->validate([
             'token' => ['required'],
             'email' => ['required', 'email'],

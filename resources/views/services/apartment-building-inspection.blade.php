@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Expert Apartment Building Inspections Melbourne | Premium Building & Pest Inspections')
+@section('title', 'Apartment Building Inspection Melbourne | PB Inspections')
 @section('meta_description', 'Specialist apartment and unit building inspections in Melbourne. Thorough assessment of internal finishes, structural integrity, water leaks, and common property.')
 
 @section('content')

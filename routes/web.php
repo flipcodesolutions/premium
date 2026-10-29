@@ -50,6 +50,8 @@ Route::get('/about', function () {
 
 })->name('about');
 
+Route::permanentRedirect('/about-us', '/about');
+
 
 // =========================================================
 // SERVICES
@@ -282,6 +284,8 @@ Route::get('/contact', function () {
 
 })->name('contact');
 
+Route::permanentRedirect('/contact-us', '/contact');
+
 
 // ---------------------------------------------------------
 // Contact Form Submit
@@ -428,8 +432,23 @@ Route::post(
     [AdminLoginController::class, 'login']
 )->name('login.submit');
 
+Route::redirect('/admin/login', '/login');
+Route::redirect('/admin', '/admin/dashboard');
 
-Route::redirect('/register', '/login')->name('register');
+
+// ---------------------------------------------------------
+// Admin Registration
+// ---------------------------------------------------------
+
+Route::get(
+    '/register',
+    [AdminLoginController::class, 'showRegister']
+)->name('register');
+
+Route::post(
+    '/register',
+    [AdminLoginController::class, 'register']
+)->name('register.submit');
 
 
 // ---------------------------------------------------------
