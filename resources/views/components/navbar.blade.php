@@ -217,193 +217,104 @@
                             @else
 
                             <!-- 01 PRE-PURCHASE -->
-
                             <li>
-
                                 <a
-                                    class="dropdown-item"
+                                    class="dropdown-item {{ request()->is('services/pre-purchase-building-and-pest-inspection') ? 'active' : '' }}"
                                     href="{{ route('services.pre-purchase') }}"
                                 >
-
                                     <i class="bi bi-house-check"></i>
-
-                                    <span>
-                                        Pre-Purchase Building & Pest Inspection
-                                    </span>
-
+                                    <span>Pre-Purchase Building and Pest Inspection</span>
                                 </a>
-
                             </li>
-
-
 
                             <!-- 02 BUILDING STAGE -->
-
                             <li>
-
                                 <a
-                                    class="dropdown-item"
+                                    class="dropdown-item {{ request()->is('services/building-stage-by-stage-inspection') ? 'active' : '' }}"
                                     href="{{ route('services.building-stage') }}"
                                 >
-
                                     <i class="bi bi-building"></i>
-
-                                    <span>
-                                        Building Stage by Stage Inspection
-                                    </span>
-
+                                    <span>Building Stage by Stage Inspection</span>
                                 </a>
-
                             </li>
 
-
-
-                            <!-- 03 APARTMENT -->
-
+                            <!-- 03 NEW BUILD HANDOVER -->
                             <li>
-
                                 <a
-                                    class="dropdown-item"
-                                    href="{{ route('services.apartment') }}"
-                                >
-
-                                    <i class="bi bi-buildings"></i>
-
-                                    <span>
-                                        Apartment Building Inspection
-                                    </span>
-
-                                </a>
-
-                            </li>
-
-
-
-                            <!-- 04 RISING DAMP -->
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="{{ route('services.rising-damp') }}"
-                                >
-
-                                    <i class="bi bi-droplet-half"></i>
-
-                                    <span>
-                                        Rising Damp Inspection
-                                    </span>
-
-                                </a>
-
-                            </li>
-
-
-
-                            <!-- 05 POOL BARRIER -->
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="{{ route('services.pool-barrier') }}"
-                                >
-
-                                    <i class="bi bi-water"></i>
-
-                                    <span>
-                                        Pool Barrier Inspection
-                                    </span>
-
-                                </a>
-
-                            </li>
-
-
-
-                            <!-- 06 DILAPIDATION -->
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="{{ route('services.dilapidation') }}"
-                                >
-
-                                    <i class="bi bi-file-earmark-text"></i>
-
-                                    <span>
-                                        Dilapidation Inspection / Report
-                                    </span>
-
-                                </a>
-
-                            </li>
-
-
-
-                            <!-- 07 NEW BUILD HANDOVER -->
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
+                                    class="dropdown-item {{ request()->is('services/new-build-handover-inspection') ? 'active' : '' }}"
                                     href="{{ route('services.new-build-handover') }}"
                                 >
-
                                     <i class="bi bi-house-check-fill"></i>
-
-                                    <span>
-                                        New Build Handover Inspection
-                                    </span>
-
+                                    <span>New Build Handover Inspection</span>
                                 </a>
-
                             </li>
 
+                            <!-- 04 RISING DAMP -->
+                            <li>
+                                <a
+                                    class="dropdown-item {{ request()->is('services/rising-damp-inspection') ? 'active' : '' }}"
+                                    href="{{ route('services.rising-damp') }}"
+                                >
+                                    <i class="bi bi-droplet-half"></i>
+                                    <span>Rising Damp Inspection</span>
+                                </a>
+                            </li>
 
+                            <!-- 05 POOL BARRIER -->
+                            <li>
+                                <a
+                                    class="dropdown-item {{ request()->is('services/pool-barrier-inspection') ? 'active' : '' }}"
+                                    href="{{ route('services.pool-barrier') }}"
+                                >
+                                    <i class="bi bi-water"></i>
+                                    <span>Pool Barrier Inspection</span>
+                                </a>
+                            </li>
+
+                            <!-- 06 APARTMENT -->
+                            <li>
+                                <a
+                                    class="dropdown-item {{ request()->is('services/apartment-building-inspection') ? 'active' : '' }}"
+                                    href="{{ route('services.apartment') }}"
+                                >
+                                    <i class="bi bi-buildings"></i>
+                                    <span>Apartment Building Inspection</span>
+                                </a>
+                            </li>
+
+                            <!-- 07 DILAPIDATION -->
+                            <li>
+                                <a
+                                    class="dropdown-item {{ request()->is('services/dilapidation-inspection') ? 'active' : '' }}"
+                                    href="{{ route('services.dilapidation') }}"
+                                >
+                                    <i class="bi bi-file-earmark-text"></i>
+                                    <span>Dilapidation Report</span>
+                                </a>
+                            </li>
 
                             <!-- 08 VENDOR -->
-
                             <li>
-
                                 <a
-                                    class="dropdown-item"
+                                    class="dropdown-item {{ request()->is('services/vendor-inspection') ? 'active' : '' }}"
                                     href="{{ route('services.vendor') }}"
                                 >
-
                                     <i class="bi bi-person-check"></i>
-
-                                    <span>
-                                        Vendor Inspection
-                                    </span>
-
+                                    <span>Vendor Inspection</span>
                                 </a>
-
                             </li>
-
-
 
                             <!-- 09 BUILDERS WARRANTY -->
-
                             <li>
-
                                 <a
-                                    class="dropdown-item"
+                                    class="dropdown-item {{ request()->is('services/builders-warranty-inspection') ? 'active' : '' }}"
                                     href="{{ route('services.builders-warranty') }}"
                                 >
-
                                     <i class="bi bi-shield-check"></i>
-
-                                    <span>
-                                        Builders Warranty Inspection
-                                    </span>
-
+                                    <span>Builders Warranty Inspection</span>
                                 </a>
-
                             </li>
-
-                            @endif
+@endif
 
 
 
@@ -945,17 +856,15 @@
 
     left: 0;
 
-    width: 375px;
+    width: 360px;
 
-    padding: 9px 0;
+    padding: 10px 0;
 
-    margin-top: 0;
+    margin-top: 2px;
 
-    border: 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
 
-    border-top: 3px solid var(--premium-green);
-
-    border-radius: 0 0 5px 5px;
+    border-radius: 6px;
 
     box-shadow: 0 15px 35px rgba(11, 31, 58, .16);
 

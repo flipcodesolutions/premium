@@ -75,12 +75,22 @@
                         @else
                             <li>
                                 <a href="{{ route('services.pre-purchase') }}">
-                                    Pre-Purchase Building and Pest Inspections
+                                    Pre-Purchase Building and Pest Inspection
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('services.building-stage') }}">
-                                    Building Stage-by-Stage Inspection
+                                    Building Stage by Stage Inspection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.new-build-handover') }}">
+                                    New Build Handover Inspection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.rising-damp') }}">
+                                    Rising Damp Inspection
                                 </a>
                             </li>
                             <li>
@@ -90,27 +100,17 @@
                             </li>
                             <li>
                                 <a href="{{ route('services.apartment') }}">
-                                    Apartment Building Inspections
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('services.rising-damp') }}">
-                                    Rising Damp Inspection
+                                    Apartment Building Inspection
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('services.dilapidation') }}">
-                                    Dilapidation Inspection
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('services.new-build-handover') }}">
-                                    New Build Handover Inspection
+                                    Dilapidation Report
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('services.vendor') }}">
-                                    Vendor Inspections
+                                    Vendor Inspection
                                 </a>
                             </li>
                             <li>
