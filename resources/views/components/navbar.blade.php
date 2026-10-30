@@ -190,32 +190,7 @@
 
                         <ul class="dropdown-menu premium-services-menu">
 
-                            @if(isset($navServices) && $navServices->count() > 0)
-                                @php
-                                    $navIcons = [
-                                        'pre-purchase-building-and-pest-inspection' => 'bi-house-check',
-                                        'building-stage-by-stage-inspection' => 'bi-building',
-                                        'apartment-building-inspection' => 'bi-buildings',
-                                        'rising-damp-inspection' => 'bi-droplet-half',
-                                        'pool-barrier-inspection' => 'bi-water',
-                                        'dilapidation-inspection' => 'bi-file-earmark-text',
-                                        'new-build-handover-inspection' => 'bi-house-check-fill',
-                                        'vendor-inspection' => 'bi-person-check',
-                                        'builders-warranty-inspection' => 'bi-shield-check',
-                                    ];
-                                @endphp
-                                @foreach($navServices as $navService)
-                                    <li>
-                                        <a
-                                            class="dropdown-item {{ request()->is('services/' . $navService->slug) ? 'active' : '' }}"
-                                            href="{{ url('/services/' . $navService->slug) }}"
-                                        >
-                                            <i class="bi {{ $navIcons[$navService->slug] ?? 'bi-shield-check' }}"></i>
-                                            <span>{{ $navService->name }}</span>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @else
+
 
 
                             <!-- 01 PRE-PURCHASE -->
@@ -405,7 +380,7 @@
 
                             </li>
 
-                            @endif
+
 
                         </ul>
 

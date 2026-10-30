@@ -26,13 +26,6 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        view()->composer(['components.navbar', 'components.footer'], function ($view) {
-            try {
-                $navServices = \App\Models\Service::where('status', true)->orderBy('id', 'asc')->get();
-                $view->with('navServices', $navServices);
-            } catch (\Throwable $e) {
-                $view->with('navServices', collect());
-            }
-        });
+        
     }
 }
