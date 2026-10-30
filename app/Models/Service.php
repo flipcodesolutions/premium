@@ -62,4 +62,33 @@ class Service extends Model
 
         return asset('images/service banner.jpg');
     }
+
+    /**
+     * Order services so standard services appear in their canonical order,
+     * followed by any custom-added services by creation order.
+     */
+    public function scopeOrdered($query)
+    {
+        $orderedSlugs = [
+            'pre-purchase-building-and-pest-inspection',
+            'building-stage-by-stage-inspection',
+            'new-build-handover-inspection',
+            'rising-damp-inspection',
+            'pool-barrier-inspection',
+            'apartment-building-inspection',
+            'dilapidation-inspection',
+            'vendor-inspection',
+            'builders-warranty-inspection',
+        ];
+
+        $cases = [];
+        $params = [];
+        foreach ($orderedSlugs as $i => $slug) {
+            $cases[] = "WHEN slug = ? THEN " . ($i + 1);
+            $params[] = $slug;
+        }
+        $caseSql = "CASE " . implode(" ", $cases) . " ELSE 999 END, id ASC";
+
+        return $query->orderByRaw($caseSql, $params);
+    }
 }

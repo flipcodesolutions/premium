@@ -1273,8 +1273,32 @@
         </div>
 
         <div class="pbi-services-grid">
-
-            
+@if(isset($services) && $services->count() > 0)
+                @foreach($services as $index => $service)
+                    <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="{{ (($index % 3) + 1) * 50 }}">
+                        <div class="pbi-service-image img-zoom-hover">
+                            <img
+                                src="{{ $service->image_url }}"
+                                alt="{{ $service->name }}"
+                                title="{{ $service->name }}"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='{{ asset('images/service banner.jpg') }}';"
+                            >
+                        </div>
+                        <div class="pbi-service-content">
+                            <h3>
+                                {{ $service->name }}
+                            </h3>
+                            <p>
+                                {{ $service->short_description }}
+                            </p>
+                            <a href="{{ url('/services/' . $service->slug) }}" class="pbi-btn">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            @else
 
             {{-- 1. Pre-Purchase Building and Pest Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="50">
@@ -1486,6 +1510,9 @@
             
 
         </div>
+
+            @endif
+
     </div>
 </section>
 

@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $services = Service::where('status', true)
-            ->orderBy('id', 'asc')
+            ->ordered()
             ->get();
 
         $pricingPackages = PricingPackage::where('status', true)

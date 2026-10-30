@@ -64,7 +64,15 @@
                     </h4>
 
                     <ul class="footer-links">
-
+@if(isset($navServices) && $navServices->count() > 0)
+                            @foreach($navServices as $fService)
+                                <li>
+                                    <a href="{{ url('/services/' . $fService->slug) }}">
+                                        {{ $fService->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
                             <li>
                                 <a href="{{ route('services.pre-purchase') }}">
                                     Pre-Purchase Building and Pest Inspections
@@ -110,6 +118,8 @@
                                     Builders Warranty Inspection
                                 </a>
                             </li>
+                        @endif
+
 
                     </ul>
 
