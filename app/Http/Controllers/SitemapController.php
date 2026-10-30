@@ -50,8 +50,8 @@ class SitemapController extends Controller
             ->orderBy('id', 'asc')
             ->get();
 
-        // Published dynamic blog posts from DB
-        $posts = BlogPost::where('status', true)
+        // Published dynamic blog posts from DB (scheduled posts hidden until live)
+        $posts = BlogPost::published()
             ->whereNotNull('slug')
             ->where('slug', '!=', '')
             ->orderBy('id', 'desc')

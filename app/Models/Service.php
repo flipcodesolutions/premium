@@ -27,7 +27,7 @@ class Service extends Model
     public function getImageUrlAttribute(): ?string
     {
         if (empty($this->image)) {
-            return null;
+            return asset('images/service banner.jpg');
         }
 
         if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
@@ -44,6 +44,22 @@ class Service extends Model
             return asset($cleanPath);
         }
 
-        return asset('storage/' . $cleanPath);
+        if (file_exists(public_path('images/' . $cleanPath))) {
+            return asset('images/' . $cleanPath);
+        }
+
+        if (file_exists(storage_path('app/public/' . $cleanPath))) {
+            return asset('storage/' . $cleanPath);
+        }
+
+        if (file_exists(public_path('storage/' . $cleanPath))) {
+            return asset('storage/' . $cleanPath);
+        }
+
+        if (str_starts_with($cleanPath, 'services/')) {
+            return asset('storage/' . $cleanPath);
+        }
+
+        return asset('images/service banner.jpg');
     }
 }

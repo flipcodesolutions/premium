@@ -37,7 +37,10 @@ class ContactMessageController extends Controller
             });
         }
 
-        $messages = $query->paginate(12)->withQueryString();
+        $perPage = (int) $request->input('per_page', 10);
+        $perPage = in_array($perPage, [5, 10, 25, 50]) ? $perPage : 10;
+
+        $messages = $query->paginate($perPage)->withQueryString();
 
         // Counts for tabs
         $counts = [

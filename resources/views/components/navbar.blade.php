@@ -70,6 +70,7 @@
             <img
                 src="{{ asset('images/logo.png') }}"
                 alt="Premium Building & Pest Inspections"
+                title="Premium Building & Pest Inspections"
             >
 
         </a>
@@ -173,6 +174,7 @@
                             type="button"
                             class="services-dropdown-btn"
                             data-bs-toggle="dropdown"
+                            data-bs-display="static"
                             aria-expanded="false"
                             aria-label="Open Services Menu"
                         >
@@ -187,6 +189,33 @@
                         ================================================== -->
 
                         <ul class="dropdown-menu premium-services-menu">
+
+                            @if(isset($navServices) && $navServices->count() > 0)
+                                @php
+                                    $navIcons = [
+                                        'pre-purchase-building-and-pest-inspection' => 'bi-house-check',
+                                        'building-stage-by-stage-inspection' => 'bi-building',
+                                        'apartment-building-inspection' => 'bi-buildings',
+                                        'rising-damp-inspection' => 'bi-droplet-half',
+                                        'pool-barrier-inspection' => 'bi-water',
+                                        'dilapidation-inspection' => 'bi-file-earmark-text',
+                                        'new-build-handover-inspection' => 'bi-house-check-fill',
+                                        'vendor-inspection' => 'bi-person-check',
+                                        'builders-warranty-inspection' => 'bi-shield-check',
+                                    ];
+                                @endphp
+                                @foreach($navServices as $navService)
+                                    <li>
+                                        <a
+                                            class="dropdown-item {{ request()->is('services/' . $navService->slug) ? 'active' : '' }}"
+                                            href="{{ url('/services/' . $navService->slug) }}"
+                                        >
+                                            <i class="bi {{ $navIcons[$navService->slug] ?? 'bi-shield-check' }}"></i>
+                                            <span>{{ $navService->name }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
 
 
                             <!-- 01 PRE-PURCHASE -->
@@ -376,6 +405,8 @@
 
                             </li>
 
+                            @endif
+
                         </ul>
 
                     </div>
@@ -447,7 +478,9 @@
 
                     <a
                         class="estimate-btn btn-glow"
-                        href="{{ route('contact') }}"
+                        href="javascript:void(0)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#quickQuoteModal"
                     >
                         Get an Estimate
                     </a>
@@ -470,8 +503,10 @@
 ========================================================= -->
 
 <a
-    href="{{ route('contact') }}"
+    href="javascript:void(0)"
     class="floating-quote"
+    data-bs-toggle="modal"
+    data-bs-target="#quickQuoteModal"
     aria-label="Get Your Free Quote Now"
 >
     <span>Get Your Free Quote Now</span>
@@ -499,7 +534,7 @@
 
     --premium-green-dark: #387c06;
 
-    --premium-orange: #FF6B00;
+
 
     --premium-light: #EEF3FA;
 
@@ -789,6 +824,14 @@
         left: 12px;
         right: 12px;
     }
+
+    .services-nav-item:hover .premium-services-menu {
+        display: block;
+    }
+
+    .services-nav-item:hover .services-dropdown-btn i {
+        transform: rotate(180deg);
+    }
 }
 
 
@@ -870,7 +913,7 @@
 
 .services-dropdown-btn:hover {
 
-    color: var(--premium-navy);
+    color: var(--premium-green);
 
 }
 
@@ -880,7 +923,8 @@
    ARROW ROTATION WHEN DROPDOWN OPEN
 ========================================================= */
 
-.services-dropdown-btn[aria-expanded="true"] i {
+.services-dropdown-btn[aria-expanded="true"] i,
+.services-dropdown-btn.show i {
 
     transform: rotate(180deg);
 
@@ -894,6 +938,12 @@
 
 .premium-services-menu {
 
+    position: absolute;
+
+    top: 100%;
+
+    left: 0;
+
     width: 375px;
 
     padding: 9px 0;
@@ -902,13 +952,37 @@
 
     border: 0;
 
-    border-top: 3px solid var(--premium-orange);
+    border-top: 3px solid var(--premium-green);
 
     border-radius: 0 0 5px 5px;
 
     box-shadow: 0 15px 35px rgba(11, 31, 58, .16);
 
     background: #fff;
+
+    z-index: 1050;
+
+}
+
+.premium-services-menu.show {
+
+    animation: dropdownFadeIn 0.2s ease forwards;
+
+}
+
+@keyframes dropdownFadeIn {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
 
 }
 
@@ -949,7 +1023,7 @@
 
     flex: 0 0 20px;
 
-    color: var(--premium-orange);
+    color: var(--premium-green);
 
     font-size: 16px;
 
@@ -965,7 +1039,10 @@
 }
 
 
-.premium-services-menu .dropdown-item:hover {
+.premium-services-menu .dropdown-item:hover,
+.premium-services-menu .dropdown-item:focus,
+.premium-services-menu .dropdown-item:active,
+.premium-services-menu .dropdown-item.active {
 
     background: #f4f8f1;
 
@@ -976,7 +1053,10 @@
 }
 
 
-.premium-services-menu .dropdown-item:hover i {
+.premium-services-menu .dropdown-item:hover i,
+.premium-services-menu .dropdown-item:focus i,
+.premium-services-menu .dropdown-item:active i,
+.premium-services-menu .dropdown-item.active i {
 
     color: var(--premium-green);
 
@@ -1340,6 +1420,14 @@
 
 
 
+    /* NAV ITEM SEPARATORS ON MOBILE */
+    .premium-navbar .navbar-nav > .nav-item:not(.estimate-item) {
+
+        border-bottom: 1px solid #f1f4f8;
+
+    }
+
+
     /* =================================================
        MOBILE SERVICES
     ================================================= */
@@ -1357,25 +1445,35 @@
 
         display: flex;
 
-        align-items: center;
+        flex-wrap: wrap;
+
+        align-items: stretch;
+
+        position: relative;
 
     }
 
 
     .services-main-link {
 
-        flex: 1;
+        flex: 1 1 auto;
 
-        padding: 12px 18px !important;
+        min-width: 0;
+
+        padding: 13px 18px !important;
 
     }
 
 
     .services-dropdown-btn {
 
-        width: 48px;
+        flex: 0 0 52px;
 
-        min-height: 44px;
+        width: 52px;
+
+        min-height: 48px;
+
+        border: 0;
 
         border-left: 1px solid #edf0f2;
 
@@ -1383,14 +1481,48 @@
 
         background: #fff;
 
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        cursor: pointer;
+
+        padding: 0;
+
+        margin: 0;
+
+        transition: background .2s ease, color .2s ease;
+
     }
 
 
-    .services-dropdown-btn:hover {
+    .services-dropdown-btn:hover,
+    .services-dropdown-btn:focus,
+    .services-dropdown-btn[aria-expanded="true"],
+    .services-dropdown-btn.show {
 
-        background: #f4f8f1;
+        background: #f0f7ec;
 
-        color: var(--premium-green);
+        color: var(--premium-green-dark);
+
+    }
+
+
+    .services-dropdown-btn i {
+
+        font-size: 13px;
+
+        transition: transform .25s ease;
+
+    }
+
+
+    .services-dropdown-btn[aria-expanded="true"] i,
+    .services-dropdown-btn.show i {
+
+        transform: rotate(180deg);
 
     }
 
@@ -1401,31 +1533,134 @@
 
         transform: none !important;
 
+        float: none !important;
+
+        flex: 0 0 100% !important;
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        box-sizing: border-box !important;
+
+        margin: 0 !important;
+
+        padding: 4px 0 !important;
+
+        background: #f8fafc !important;
+
+        border: 0 !important;
+
+        border-top: 1px solid #e9edf1 !important;
+
+        border-left: 3px solid var(--premium-green) !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: inset 0 2px 4px rgba(11, 31, 58, 0.03) !important;
+
+    }
+
+
+    .premium-services-menu li {
+
         width: 100%;
 
-        border-top: 2px solid var(--premium-orange);
+        list-style: none;
 
-        border-radius: 0;
+        border-bottom: 1px solid #edf2f7;
 
-        box-shadow: none;
+    }
 
-        margin: 0;
+
+    .premium-services-menu li:last-child {
+
+        border-bottom: 0;
 
     }
 
 
     .premium-services-menu .dropdown-item {
 
-        padding: 10px 30px;
+        display: flex !important;
 
-        font-size: 14.5px;
+        align-items: center;
+
+        gap: 12px;
+
+        padding: 12px 18px 12px 22px !important;
+
+        font-size: 14px !important;
+
+        font-weight: 600;
+
+        color: var(--premium-navy) !important;
+
+        background: transparent;
+
+        white-space: normal !important;
+
+        line-height: 1.35;
+
+        min-height: 44px;
+
+        box-sizing: border-box;
+
+        transition: background .2s ease, color .2s ease, padding-left .2s ease;
 
     }
 
 
-    .premium-services-menu .dropdown-item:hover {
+    .premium-services-menu .dropdown-item i {
 
-        padding-left: 34px;
+        width: 20px;
+
+        flex: 0 0 20px;
+
+        color: var(--premium-green);
+
+        font-size: 15px;
+
+        text-align: center;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+    }
+
+
+    .premium-services-menu .dropdown-item span {
+
+        flex: 1;
+
+        line-height: 1.35;
+
+    }
+
+
+    .premium-services-menu .dropdown-item:hover,
+    .premium-services-menu .dropdown-item:focus,
+    .premium-services-menu .dropdown-item:active {
+
+        background: #eef6ea !important;
+
+        color: var(--premium-green-dark) !important;
+
+        padding-left: 26px !important;
+
+    }
+
+
+    .premium-services-menu .dropdown-item.active {
+
+        background: #e4f2dc !important;
+
+        color: var(--premium-green-dark) !important;
+
+        font-weight: 700;
 
     }
 
@@ -1489,6 +1724,26 @@
 
     }
 
+
+
+    /* DROPDOWN ITEM ADJUSTMENT ON SMALL SCREENS */
+    .premium-services-menu .dropdown-item {
+
+        padding: 11px 14px 11px 18px !important;
+
+        font-size: 13.5px !important;
+
+        gap: 10px;
+
+    }
+
+    .premium-services-menu .dropdown-item:hover,
+    .premium-services-menu .dropdown-item:focus,
+    .premium-services-menu .dropdown-item:active {
+
+        padding-left: 22px !important;
+
+    }
 
 
     /* LOGO */

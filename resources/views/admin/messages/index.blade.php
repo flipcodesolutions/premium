@@ -116,7 +116,7 @@
                                 </a>
 
                                 <!-- Delete -->
-                                <form action="{{ route('admin.messages.destroy', $msg->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?');" class="d-inline">
+                                <form action="{{ route('admin.messages.destroy', $msg->id) }}" method="POST" data-confirm="Are you sure you want to delete this message?" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-light border text-danger" title="Delete Message">
@@ -139,11 +139,7 @@
         </table>
     </div>
 
-    @if($messages->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $messages->links('pagination::bootstrap-5') }}
-        </div>
-    @endif
+    @include('admin.components.pagination', ['paginator' => $messages])
 </div>
 
 @endsection

@@ -21,13 +21,9 @@ class BlogPostController extends Controller
         // Filter by status
         if ($request->filled('status')) {
             if ($request->status === 'published') {
-                $query->where('status', true)
-                      ->where(function ($q) {
-                          $q->whereNull('published_at')->orWhere('published_at', '<=', now());
-                      });
+                $query->published();
             } elseif ($request->status === 'scheduled') {
-                $query->where('status', true)
-                      ->where('published_at', '>', now());
+                $query->scheduled();
             } elseif ($request->status === 'draft') {
                 $query->where('status', false);
             }
@@ -43,14 +39,15 @@ class BlogPostController extends Controller
             });
         }
 
-        $posts = $query->paginate(10)->withQueryString();
+        $perPage = (int) $request->input('per_page', 10);
+        $perPage = in_array($perPage, [5, 10, 25, 50]) ? $perPage : 10;
+
+        $posts = $query->paginate($perPage)->withQueryString();
 
         $counts = [
             'all' => BlogPost::count(),
-            'published' => BlogPost::where('status', true)->where(function ($q) {
-                $q->whereNull('published_at')->orWhere('published_at', '<=', now());
-            })->count(),
-            'scheduled' => BlogPost::where('status', true)->where('published_at', '>', now())->count(),
+            'published' => BlogPost::published()->count(),
+            'scheduled' => BlogPost::scheduled()->count(),
             'draft' => BlogPost::where('status', false)->count(),
         ];
 
@@ -102,8 +99,15 @@ class BlogPostController extends Controller
 
         if ($isScheduled && $request->filled('scheduled_at')) {
             $status = true;
-            $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'));
-            $message = 'Blog post scheduled successfully for ' . $publishedAt->format('d M Y, h:i A') . '.';
+            $userTz = $request->input('user_timezone') ?: config('app.display_timezone', 'Australia/Melbourne');
+            try {
+                $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'), $userTz)
+                    ->setTimezone(config('app.timezone', 'UTC'));
+            } catch (\Exception $e) {
+                $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'));
+            }
+            $displayDate = (clone $publishedAt)->setTimezone($userTz)->format('d M Y, h:i A');
+            $message = 'Blog post scheduled successfully for ' . $displayDate . '.';
         } elseif (!$isActive) {
             $status = false;
             $publishedAt = null;
@@ -169,8 +173,15 @@ class BlogPostController extends Controller
 
         if ($isScheduled && $request->filled('scheduled_at')) {
             $status = true;
-            $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'));
-            $message = 'Blog post scheduled successfully for ' . $publishedAt->format('d M Y, h:i A') . '.';
+            $userTz = $request->input('user_timezone') ?: config('app.display_timezone', 'Australia/Melbourne');
+            try {
+                $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'), $userTz)
+                    ->setTimezone(config('app.timezone', 'UTC'));
+            } catch (\Exception $e) {
+                $publishedAt = \Carbon\Carbon::parse($request->input('scheduled_at'));
+            }
+            $displayDate = (clone $publishedAt)->setTimezone($userTz)->format('d M Y, h:i A');
+            $message = 'Blog post scheduled successfully for ' . $displayDate . '.';
         } elseif (!$isActive) {
             $status = false;
             $publishedAt = null;

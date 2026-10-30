@@ -984,7 +984,7 @@
                         YOUR INSPECTOR
                     </div>
 
-                    <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami | VBA Licensed Building Inspector">
+                    <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami | VBA Licensed Building Inspector" title="Ronak Gami | VBA Licensed Building Inspector">
 
                     <div class="st-inspector-name">
                         Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200
@@ -1094,8 +1094,27 @@
                     </div>
                 </div>
 
-                <div class="st-process-image-wrapper hover-lift" data-aos="fade-left">
-                    <img src="{{ asset('images/stage-inspection-hallway.jpeg') }}" alt="Ronak Gami performing building stage inspection in hallway">
+                <div class="st-process-image-wrapper" data-aos="fade-left">
+                    <x-service-issues-carousel
+                        id="stageByStageCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/stage-inspection-hallway.jpeg'),
+                                'alt' => 'Ronak Gami performing building stage inspection in hallway',
+                                'title' => 'Ronak Gami performing building stage inspection in hallway'
+                            ],
+                            [
+                                'src' => asset('images/building-stage.jpg'),
+                                'alt' => 'Building Stage Inspection - Pre-Pour Slab, Frame and Lockup Stage',
+                                'title' => 'Building Stage Inspection - Pre-Pour Slab, Frame and Lockup Stage'
+                            ],
+                            [
+                                'src' => asset('images/g23.jpeg'),
+                                'alt' => 'Stage by Stage Quality and Compliance Inspection Melbourne',
+                                'title' => 'Stage by Stage Quality and Compliance Inspection Melbourne'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

@@ -113,6 +113,7 @@
                             <img
                                 src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}"
                                 alt="{{ $post->title }}"
+                                title="{{ $post->title }}"
                                 onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
                             >
                         </div>
@@ -381,6 +382,7 @@
                                                     <img
                                                         src="{{ $latest->image_url ?? (\Illuminate\Support\Str::startsWith($latest->image, ['http://', 'https://']) ? $latest->image : asset('storage/' . $latest->image)) }}"
                                                         alt="{{ $latest->title }}"
+                                                        title="{{ $latest->title }}"
                                                         onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
                                                     >
                                                 </a>
@@ -701,6 +703,7 @@
                                     <img
                                         src="{{ $related->image_url ?? (\Illuminate\Support\Str::startsWith($related->image, ['http://', 'https://']) ? $related->image : asset('storage/' . $related->image)) }}"
                                         alt="{{ $related->title }}"
+                                        title="{{ $related->title }}"
                                         loading="lazy"
                                         onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
                                     >

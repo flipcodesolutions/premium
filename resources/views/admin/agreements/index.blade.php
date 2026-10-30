@@ -214,7 +214,7 @@
                                 <a href="{{ route('admin.agreements.print', $agreement->id) }}" target="_blank" class="btn btn-sm btn-light border text-secondary" title="Print Agreement">
                                     <i class="bi bi-printer"></i>
                                 </a>
-                                <form action="{{ route('admin.agreements.destroy', $agreement->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to permanently delete this agreement record?');" class="d-inline">
+                                <form action="{{ route('admin.agreements.destroy', $agreement->id) }}" method="POST" data-confirm="Are you sure you want to permanently delete this agreement record?" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-light border text-danger" title="Delete">
@@ -255,11 +255,7 @@
         </table>
     </div>
 
-    @if($agreements->hasPages())
-        <div class="p-3 border-top d-flex justify-content-center">
-            {{ $agreements->links() }}
-        </div>
-    @endif
+    @include('admin.components.pagination', ['paginator' => $agreements])
 </div>
 
 <!-- Toast Notification for Link Copy -->
@@ -282,9 +278,18 @@ function copyClientAgreementLink() {
     const url = "{{ route('inspection.agreement') }}";
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url).then(() => {
-            const toastEl = document.getElementById('copyToast');
-            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
-            toast.show();
+            if (window.SwalToast) {
+                window.SwalToast.fire({
+                    icon: 'success',
+                    title: 'Link copied to clipboard!'
+                });
+            } else {
+                const toastEl = document.getElementById('copyToast');
+                if (toastEl) {
+                    const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+                    toast.show();
+                }
+            }
         }).catch(() => {
             prompt("Copy this Inspection Agreement link:", url);
         });

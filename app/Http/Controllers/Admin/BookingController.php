@@ -33,7 +33,10 @@ class BookingController extends Controller
             });
         }
 
-        $bookings = $query->paginate(12)->withQueryString();
+        $perPage = (int) $request->input('per_page', 10);
+        $perPage = in_array($perPage, [5, 10, 25, 50]) ? $perPage : 10;
+
+        $bookings = $query->paginate($perPage)->withQueryString();
 
         // Status counts for filtering pills
         $counts = [

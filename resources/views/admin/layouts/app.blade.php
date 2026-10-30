@@ -37,6 +37,72 @@
             box-sizing: border-box;
         }
 
+        /* ---------------- Admin Pagination ---------------- */
+        .pagination {
+            margin-bottom: 0;
+            gap: 4px;
+        }
+        .page-link {
+            color: var(--admin-navy);
+            border-radius: 6px !important;
+            border: 1px solid var(--admin-border);
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .page-link:hover {
+            color: #ffffff;
+            background-color: var(--admin-green);
+            border-color: var(--admin-green);
+        }
+        .page-item.active .page-link {
+            background-color: var(--admin-green);
+            border-color: var(--admin-green);
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .page-item.disabled .page-link {
+            color: #94a3b8;
+            background-color: #f8fafc;
+            border-color: var(--admin-border-subtle);
+        }
+
+        /* ---------------- SweetAlert2 Brand Customization ---------------- */
+        .swal2-popup {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            border-radius: 14px !important;
+            padding: 1.85rem !important;
+            box-shadow: 0 20px 40px rgba(11, 31, 58, 0.18) !important;
+        }
+        .swal2-title {
+            color: var(--admin-navy) !important;
+            font-size: 1.35rem !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.01em !important;
+        }
+        .swal2-html-container {
+            color: #475569 !important;
+            font-size: 0.95rem !important;
+            line-height: 1.55 !important;
+        }
+        .swal2-actions {
+            gap: 10px !important;
+            margin-top: 1.5rem !important;
+        }
+        .swal2-styled {
+            border-radius: 7px !important;
+            padding: 0.65rem 1.45rem !important;
+            font-size: 0.9rem !important;
+            font-weight: 600 !important;
+            box-shadow: none !important;
+            transition: all 0.2s ease !important;
+        }
+        .swal2-styled:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--admin-bg);
@@ -667,7 +733,7 @@
     <aside id="adminSidebar" class="admin-sidebar">
         <!-- Brand -->
         <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-            <img src="{{ asset('images/logo.png') }}" alt="Premium Building & Pest Inspections" class="sidebar-brand-logo">
+            <img src="{{ asset('images/logo.png') }}" alt="Premium Building & Pest Inspections" title="Premium Building & Pest Inspections" class="sidebar-brand-logo">
             <div class="sidebar-brand-badge">ADMIN PANEL</div>
         </a>
 
@@ -732,6 +798,12 @@
             <a href="{{ route('admin.blogs.index') }}" class="nav-item-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
                 <i class="bi bi-journal-text"></i>
                 <span>Blog Posts</span>
+            </a>
+
+            <!-- Gallery -->
+            <a href="{{ route('admin.galleries.index') }}" class="nav-item-link {{ request()->routeIs('admin.galleries.*') ? 'active' : '' }}">
+                <i class="bi bi-images"></i>
+                <span>Gallery</span>
             </a>
 
             <div class="sidebar-heading">Client Tools</div>
@@ -824,34 +896,21 @@
                 <div class="dropdown">
                     <button class="d-flex align-items-center gap-2 bg-transparent border-0 p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="admin-avatar">
-                            {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
+                            {{ strtoupper(substr(Auth::user()->name ?: (Auth::user()->email ?? 'A'), 0, 1)) }}
                         </div>
                         <div class="d-none d-md-flex flex-column text-start">
-                            <span class="fw-semibold text-dark" style="font-size: 0.85rem; line-height: 1.2;">{{ Auth::user()->name ?? 'Administrator' }}</span>
-                            <span class="text-muted" style="font-size: 0.72rem;">Super Admin</span>
+                            <span class="fw-semibold text-dark" style="font-size: 0.85rem; line-height: 1.2;">{{ Auth::user()->name ?: (explode('@', Auth::user()->email ?? 'Administrator')[0]) }}</span>
+                            <span class="text-muted" style="font-size: 0.72rem;">{{ ucfirst(Auth::user()->role ?? 'Admin') }}</span>
                         </div>
                         <i class="bi bi-chevron-down text-muted small ms-1 d-none d-md-inline"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border p-2 mt-2" style="min-width: 200px;">
-                        <li class="px-2 py-1 text-muted small border-bottom mb-1">
-                            Logged in as<br><strong class="text-dark">{{ Auth::user()->email ?? 'admin' }}</strong>
-                        </li>
-                        <li>
-                            <a class="dropdown-item small py-2" href="{{ route('home') }}" target="_blank">
-                                <i class="bi bi-globe me-2 text-primary"></i> Live Website
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item small py-2" href="{{ route('inspection.agreement') }}" target="_blank">
-                                <i class="bi bi-file-earmark-check me-2 text-success"></i> Inspection Agreement
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-1"></li>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border p-1 mt-2" style="min-width: 160px;">
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="dropdown-item small py-2 text-danger">
-                                    <i class="bi bi-box-arrow-left me-2"></i> Log Out
+                                <button type="submit" class="dropdown-item small py-2 text-danger d-flex align-items-center">
+                                    <i class="bi bi-box-arrow-left me-2"></i>
+                                    <span>Log Out</span>
                                 </button>
                             </form>
                         </li>
@@ -907,6 +966,193 @@
             sidebar.classList.toggle('show');
             backdrop.classList.toggle('show');
         }
+    </script>
+    <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Global SweetAlert Toast helper
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+        window.SwalToast = Toast;
+
+        // Global helper for programmatic alerts
+        window.showAlert = function (icon, title, text) {
+            Swal.fire({
+                icon: icon || 'info',
+                title: title || '',
+                text: text || '',
+                confirmButtonColor: '#48A900'
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. Flash Session Success
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: "{{ addslashes(session('success')) }}",
+                    confirmButtonColor: '#48A900',
+                    timer: 3500,
+                    timerProgressBar: true
+                });
+            @endif
+
+            // 2. Flash Session Error
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: "{{ addslashes(session('error')) }}",
+                    confirmButtonColor: '#dc3545'
+                });
+            @endif
+
+            // 3. Flash Session Warning
+            @if(session('warning'))
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning!',
+                    text: "{{ addslashes(session('warning')) }}",
+                    confirmButtonColor: '#f59e0b'
+                });
+            @endif
+
+            // 4. Flash Session Info
+            @if(session('info'))
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Notice',
+                    text: "{{ addslashes(session('info')) }}",
+                    confirmButtonColor: '#0B1F3A'
+                });
+            @endif
+
+            // 5. Validation Errors
+            @if(isset($errors) && $errors->any())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Errors',
+                    html: '<div class="text-start ps-3"><ul class="mb-0 text-danger small">@foreach($errors->all() as $err)<li>{{ addslashes($err) }}</li>@endforeach</ul></div>',
+                    confirmButtonColor: '#dc3545'
+                });
+            @endif
+        });
+
+        // 6. Global Form Action Interceptor (Capture phase runs before any inline onsubmit)
+        document.addEventListener('submit', function (e) {
+            const form = e.target;
+            if (!form || form.tagName !== 'FORM') return;
+
+            // If already confirmed by SweetAlert, let it submit naturally
+            if (form.dataset.swalConfirmed === 'true') {
+                return;
+            }
+
+            const isDelete = form.querySelector('input[name="_method"][value="DELETE"]') !== null
+                || form.action.includes('destroy')
+                || form.action.includes('delete')
+                || form.classList.contains('delete-form');
+
+            const isLogout = form.action.includes('logout');
+            const isToggleStatus = form.action.includes('toggle-status') || form.action.includes('toggle-read');
+            const isSendEmail = form.action.includes('send-email') || form.action.includes('email-report');
+            const isStatusUpdate = form.action.includes('update-status');
+
+            const hasInlineConfirm = form.hasAttribute('onsubmit') && form.getAttribute('onsubmit').includes('confirm');
+            const customPrompt = form.getAttribute('data-confirm');
+
+            // Intercept if any confirmation is needed
+            if (isDelete || isLogout || isToggleStatus || isSendEmail || isStatusUpdate || hasInlineConfirm || customPrompt) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                let title = 'Are you sure?';
+                let text = 'Please confirm this action.';
+                let icon = 'warning';
+                let confirmText = 'Yes, Proceed';
+                let confirmColor = '#48A900';
+
+                if (isDelete) {
+                    title = 'Delete Confirmation';
+                    text = 'Are you sure you want to delete this record? This action cannot be undone.';
+                    icon = 'warning';
+                    confirmText = 'Yes, Delete it!';
+                    confirmColor = '#dc3545';
+                } else if (isLogout) {
+                    title = 'Log Out?';
+                    text = 'Are you sure you want to end your administrator session?';
+                    icon = 'question';
+                    confirmText = 'Yes, Log Out';
+                    confirmColor = '#dc3545';
+                } else if (isToggleStatus) {
+                    title = 'Change Status?';
+                    text = 'Are you sure you want to toggle the status of this item?';
+                    icon = 'question';
+                    confirmText = 'Yes, Change';
+                    confirmColor = '#0B1F3A';
+                } else if (isSendEmail) {
+                    title = 'Send Email to Client?';
+                    text = 'This will immediately dispatch an email notification to the customer.';
+                    icon = 'info';
+                    confirmText = 'Yes, Send Email';
+                    confirmColor = '#48A900';
+                } else if (isStatusUpdate) {
+                    title = 'Update Status?';
+                    text = 'Are you sure you want to change the status of this request?';
+                    icon = 'question';
+                    confirmText = 'Yes, Update';
+                    confirmColor = '#48A900';
+                }
+
+                if (customPrompt) {
+                    text = customPrompt;
+                } else if (hasInlineConfirm) {
+                    const onsubmitStr = form.getAttribute('onsubmit');
+                    const match = onsubmitStr.match(/confirm\(['"](.*?)['"]\)/);
+                    if (match && match[1]) {
+                        text = match[1];
+                    }
+                }
+
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: icon,
+                    showCancelButton: true,
+                    confirmButtonColor: confirmColor,
+                    cancelButtonColor: '#64748B',
+                    confirmButtonText: confirmText,
+                    cancelButtonText: 'Cancel',
+                    reverseButtons: true,
+                    focusCancel: isDelete
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.dataset.swalConfirmed = 'true';
+                        form.removeAttribute('onsubmit');
+                        Swal.fire({
+                            title: 'Processing...',
+                            text: 'Please wait while we complete your request.',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+                        form.submit();
+                    }
+                });
+            }
+        }, true);
     </script>
     @yield('scripts')
     @stack('scripts')

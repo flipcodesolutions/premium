@@ -282,11 +282,11 @@
 
     padding: 11px 22px;
 
-    font-size: 11.5px;
+    font-size: 13px;
 
-    font-weight: 800;
+    font-weight: 700;
 
-    text-transform: uppercase;
+    text-transform: none;
 
     text-decoration: none;
 
@@ -321,21 +321,21 @@
 }
 
 .environment-wrapper {
-    max-width: 1080px;
+    max-width: 1140px;
 
     margin: 0 auto;
 
     min-height: 280px;
 
-    padding: 50px 40px 45px;
+    padding: 60px 40px 55px;
 
-    border-radius: 18px 0 0 0;
+    border-radius: 30px 30px 0 0;
 
     background:
         linear-gradient(
             180deg,
-            #d7ecc7 0%,
-            #edf6e9 55%,
+            #d4edc0 0%,
+            #edf7e9 45%,
             #ffffff 100%
         );
 }
@@ -353,15 +353,15 @@
 .environment-heading {
     color: var(--service-navy);
 
-    font-size: 25px;
+    font-size: 32px;
 
-    line-height: 1.15;
+    line-height: 1.2;
 
     font-weight: 900;
 
     text-transform: uppercase;
 
-    max-width: 580px;
+    max-width: 720px;
 
     margin: 0 auto;
 }
@@ -382,13 +382,24 @@
 
 .environment-item {
     text-align: center;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 10px 8px !important;
+    transition: transform 0.3s ease;
+}
+
+.environment-item:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: none !important;
+    background: transparent !important;
 }
 
 .environment-icon {
-    width: 38px;
-    height: 38px;
+    width: 48px;
+    height: 48px;
 
-    margin: 0 auto 12px;
+    margin: 0 auto 16px;
 
     display: flex;
 
@@ -400,15 +411,15 @@
 
     color: #ffffff;
 
-    border-radius: 4px;
+    border-radius: 9px;
 
-    font-size: 16px;
+    font-size: 22px;
 }
 
 .environment-item h3 {
     color: var(--service-navy);
 
-    font-size: 14px;
+    font-size: 15px;
 
     font-weight: 900;
 
@@ -862,6 +873,41 @@
 
             <div class="services-grid">
 
+                @if(isset($services) && $services->count() > 0)
+                    @foreach($services as $index => $service)
+                        <article class="service-card hover-lift" data-aos="fade-up" data-aos-delay="{{ (($index % 3) + 1) * 50 }}">
+
+                            <div class="service-card-image img-zoom-hover">
+                                <img
+                                    src="{{ $service->image_url }}"
+                                    alt="{{ $service->name }}"
+                                    title="{{ $service->name }}"
+                                    loading="lazy"
+                                    onerror="this.onerror=null;this.src='{{ asset('images/service banner.jpg') }}';"
+                                >
+                            </div>
+
+                            <div class="service-card-body">
+                                <h3 class="service-card-title">
+                                    {{ $service->name }}
+                                </h3>
+
+                                <p class="service-card-description">
+                                    {{ $service->short_description }}
+                                </p>
+
+                                <a
+                                    href="{{ url('/services/' . $service->slug) }}"
+                                    class="service-learn-btn"
+                                >
+                                    Learn More
+                                </a>
+                            </div>
+
+                        </article>
+                    @endforeach
+                @else
+
 
                 {{-- =================================================
                      SERVICE 1
@@ -874,6 +920,7 @@
                         <img
                             src="{{ asset('images/pre-purchase.png') }}"
                             alt="Pre-Purchase Building and Pest Inspection"
+                            title="Pre-Purchase Building and Pest Inspection"
                             loading="lazy"
                         >
 
@@ -918,6 +965,7 @@
                         <img
                             src="{{ asset('images/building-stage.jpg') }}"
                             alt="Building Stage by Stage Inspection"
+                            title="Building Stage by Stage Inspection"
                             loading="lazy"
                         >
 
@@ -962,6 +1010,7 @@
                         <img
                             src="{{ asset('images/new-build-handover.jpg') }}"
                             alt="New Build Handover Inspection"
+                            title="New Build Handover Inspection"
                             loading="lazy"
                         >
 
@@ -1006,6 +1055,7 @@
                         <img
                             src="{{ asset('images/rising-damp.jpg') }}"
                             alt="Rising Damp Inspection"
+                            title="Rising Damp Inspection"
                             loading="lazy"
                         >
 
@@ -1049,6 +1099,7 @@
                         <img
                             src="{{ asset('images/pool-barrier.jpg') }}"
                             alt="Pool Barrier Inspection"
+                            title="Pool Barrier Inspection"
                             loading="lazy"
                         >
 
@@ -1092,6 +1143,7 @@
                         <img
                             src="{{ asset('images/apartment.jpeg') }}"
                             alt="Apartment Building Inspection"
+                            title="Apartment Building Inspection"
                             loading="lazy"
                         >
 
@@ -1135,6 +1187,7 @@
                         <img
                             src="{{ asset('images/dilapidation.jpg') }}"
                             alt="Dilapidation Inspection"
+                            title="Dilapidation Inspection"
                             loading="lazy"
                         >
 
@@ -1179,6 +1232,7 @@
                         <img
                             src="{{ asset('images/vendor.jpg') }}"
                             alt="Vendor Inspection"
+                            title="Vendor Inspection"
                             loading="lazy"
                         >
 
@@ -1222,6 +1276,7 @@
                         <img
                             src="{{ asset('images/builders-warranty.jpg') }}"
                             alt="Builders Warranty Inspection"
+                            title="Builders Warranty Inspection"
                             loading="lazy"
                         >
 
@@ -1253,6 +1308,7 @@
 
                 </article>
 
+                @endif
 
             </div>
 
@@ -1290,7 +1346,7 @@
 
                     {{-- Experienced Inspectors --}}
 
-                    <div class="environment-item hover-lift" data-aos="fade-up" data-aos-delay="100">
+                    <div class="environment-item" data-aos="fade-up" data-aos-delay="100">
 
                         <div class="environment-icon">
 
@@ -1312,7 +1368,7 @@
 
                     {{-- Advanced Technology --}}
 
-                    <div class="environment-item hover-lift" data-aos="fade-up" data-aos-delay="200">
+                    <div class="environment-item" data-aos="fade-up" data-aos-delay="200">
 
                         <div class="environment-icon">
 
@@ -1334,7 +1390,7 @@
 
                     {{-- Detailed Reports --}}
 
-                    <div class="environment-item hover-lift" data-aos="fade-up" data-aos-delay="300">
+                    <div class="environment-item" data-aos="fade-up" data-aos-delay="300">
 
                         <div class="environment-icon">
 
@@ -1356,7 +1412,7 @@
 
                     {{-- Customer Focused --}}
 
-                    <div class="environment-item hover-lift" data-aos="fade-up" data-aos-delay="400">
+                    <div class="environment-item" data-aos="fade-up" data-aos-delay="400">
 
                         <div class="environment-icon">
 

@@ -39,6 +39,7 @@
                             <div class="gallery-img-wrapper">
                                 <img src="{{ $item['image'] }}"
                                      alt="{{ $item['title'] }}"
+                                     title="{{ $item['title'] }}"
                                      loading="lazy">
                                 <div class="gallery-hover-overlay">
                                     <span class="gallery-zoom-icon">
@@ -49,27 +50,10 @@
                         </a>
                     </div>
                 @endforeach
-            @elseif(!empty($localImages) && count($localImages) > 0)
-                {{-- Fallback --}}
-                @foreach($localImages as $img)
-                    <div class="gallery-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ ($loop->index % 3 + 1) * 70 }}">
-                        <a href="{{ asset('images/' . $img) }}"
-                           data-fancybox="gallery"
-                           data-caption="<div class='gallery-lb-caption'><div class='gallery-lb-title'>Building Inspection in Melbourne</div><div class='gallery-lb-desc'>Comprehensive property inspections by certified building inspectors in Melbourne.</div></div>"
-                           class="gallery-link-wrap">
-                            <div class="gallery-img-wrapper">
-                                <img src="{{ asset('images/' . $img) }}"
-                                     alt="Premium Building & Pest Inspection Photo {{ $loop->iteration }}"
-                                     loading="lazy">
-                                <div class="gallery-hover-overlay">
-                                    <span class="gallery-zoom-icon">
-                                        <i class="bi bi-arrows-fullscreen"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
+            @else
+                <div class="text-center py-5 w-100">
+                    <p class="text-muted">No gallery photos currently available.</p>
+                </div>
             @endif
 
         </div>

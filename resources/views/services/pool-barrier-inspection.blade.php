@@ -1021,7 +1021,7 @@
                             YOUR INSPECTOR
                         </div>
 
-                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
+                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector" title="Ronak Gami - Registered Building Inspector">
 
                         <div class="pool-inspector-body">
                             <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
@@ -1125,9 +1125,28 @@
                     </ul>
                 </div>
 
-                {{-- Right Photo --}}
+                {{-- Right Photo Carousel --}}
                 <div class="pool-photo-box">
-                    <img src="{{ asset('images/pool-barrier-inspection.jpg') }}" alt="Certified inspector conducting pool barrier compliance inspection">
+                    <x-service-issues-carousel
+                        id="poolIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/pool-barrier-inspection.jpg'),
+                                'alt' => 'Certified inspector conducting pool barrier compliance inspection',
+                                'title' => 'Certified inspector conducting pool barrier compliance inspection'
+                            ],
+                            [
+                                'src' => asset('images/pool-barrier.jpg'),
+                                'alt' => 'Swimming Pool Safety Barrier and Gate Latch Compliance Check',
+                                'title' => 'Swimming Pool Safety Barrier and Gate Latch Compliance Check'
+                            ],
+                            [
+                                'src' => asset('images/g8.jpeg'),
+                                'alt' => 'Pool Fence Non-Climbable Zone and Height Compliance Audit',
+                                'title' => 'Pool Fence Non-Climbable Zone and Height Compliance Audit'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

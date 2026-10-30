@@ -35,6 +35,7 @@
                                 <a href="{{ route('blog.show', $post->slug) }}">
                                     <img src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}"
                                          alt="{{ $post->title }}"
+                                         title="{{ $post->title }}"
                                          loading="lazy"
                                          onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
                                 </a>

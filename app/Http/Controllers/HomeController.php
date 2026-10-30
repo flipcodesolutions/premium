@@ -13,8 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $services = Service::where('status', true)
-            ->latest()
-            ->take(6)
+            ->orderBy('id', 'asc')
             ->get();
 
         $pricingPackages = PricingPackage::where('status', true)
@@ -32,8 +31,8 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        $blogs = BlogPost::where('status', true)
-            ->latest()
+        $blogs = BlogPost::published()
+            ->latest('published_at')
             ->take(3)
             ->get();
 

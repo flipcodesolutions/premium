@@ -990,7 +990,7 @@
                             YOUR INSPECTOR
                         </div>
 
-                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
+                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector" title="Ronak Gami - Registered Building Inspector">
 
                         <div class="v-inspector-body">
                             <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
@@ -1110,9 +1110,28 @@
 
                 </div>
 
-                {{-- Right Image --}}
+                {{-- Right Image Carousel --}}
                 <div class="v-issues-img">
-                    <img src="{{ asset('images/dilapidation-inspection.jpg') }}" alt="Vendor Inspection Melbourne - Thorough Structural Inspection">
+                    <x-service-issues-carousel
+                        id="vendorIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/vendor.jpg'),
+                                'alt' => 'Vendor Inspection Melbourne - Pre-Sale Property Structural Inspection',
+                                'title' => 'Vendor Inspection Melbourne - Pre-Sale Property Structural Inspection'
+                            ],
+                            [
+                                'src' => asset('images/g2.jpg'),
+                                'alt' => 'Vendor Inspection - Comprehensive Building Defect Identification',
+                                'title' => 'Vendor Inspection - Comprehensive Building Defect Identification'
+                            ],
+                            [
+                                'src' => asset('images/g10.jpeg'),
+                                'alt' => 'Vendor Inspection - Roof Cavity and Structural Check',
+                                'title' => 'Vendor Inspection - Roof Cavity and Structural Check'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

@@ -1029,33 +1029,6 @@
 
 
 
-/* =========================================================
-   BACK TO TOP
-========================================================= */
-
-.pp-back-top {
-    display: none;
-
-    position: fixed;
-
-    right: 15px;
-    bottom: 18px;
-
-    width: 32px;
-    height: 32px;
-
-    border: 0;
-
-    background: #7100d8;
-
-    color: #fff;
-
-    font-size: 14px;
-
-    cursor: pointer;
-
-    z-index: 99999;
-}
 
 
 /* =========================================================
@@ -1444,6 +1417,7 @@
                     <img
                         src="{{ asset('images/ronak gami.jpeg') }}"
                         alt="Ronak Gami | VBA Licensed Inspector"
+                        title="Ronak Gami | VBA Licensed Inspector"
                     >
 
                     <div class="pp-inspector-name">
@@ -1594,13 +1568,27 @@
                 </div>
 
 
-                <div class="pp-issues-image img-zoom-hover" data-aos="fade-left">
-
-                    <img
-                        src="{{ asset('images/g3.jpg') }}"
-                        alt="Pre-Purchase Property Inspection - Common Issues"
-                    >
-
+                <div class="pp-issues-image" data-aos="fade-left">
+                    <x-service-issues-carousel
+                        id="prePurchaseIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/g3.jpg'),
+                                'alt' => 'Pre-Purchase Property Inspection - Moisture and Structural Issues',
+                                'title' => 'Pre-Purchase Property Inspection - Moisture and Structural Issues'
+                            ],
+                            [
+                                'src' => asset('images/pre 1.jpeg'),
+                                'alt' => 'Pre-Purchase Building Inspection - Subfloor and Foundation Assessment',
+                                'title' => 'Pre-Purchase Building Inspection - Subfloor and Foundation Assessment'
+                            ],
+                            [
+                                'src' => asset('images/pre2.jpg'),
+                                'alt' => 'Pre-Purchase Pest and Timber Defect Inspection Melbourne',
+                                'title' => 'Pre-Purchase Pest and Timber Defect Inspection Melbourne'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>
@@ -1921,6 +1909,7 @@
                         <img
                             src="{{ asset('images/pre2.jpg') }}"
                             alt="Infrared Thermography - FLIR E5 Camera"
+                            title="Infrared Thermography - FLIR E5 Camera"
                         >
 
                     </div>
@@ -1945,6 +1934,7 @@
                         <img
                             src="{{ asset('images/pre3.jpg') }}"
                             alt="Moisture Meter"
+                            title="Moisture Meter"
                         >
 
                     </div>
@@ -1969,6 +1959,7 @@
                         <img
                             src="{{ asset('images/pre4.jpg') }}"
                             alt="Foundation Level - Zip Level"
+                            title="Foundation Level - Zip Level"
                         >
 
                     </div>
@@ -2349,19 +2340,7 @@
     </section>
 
 
-    {{-- =====================================================
-         BACK TO TOP
-    ====================================================== --}}
-
-    <button
-        type="button"
-        id="ppBackTop"
-        class="pp-back-top"
-        aria-label="Back to top"
-    >
-        ↑
-    </button>
-
+    
 </div>
 
 
@@ -2413,34 +2392,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-
-    /* =====================================================
-       BACK TO TOP
-    ===================================================== */
-
-    const backTop =
-        document.getElementById('ppBackTop');
-
-    if (backTop) {
-
-        function toggleBackTop() {
-            if (window.scrollY > 400) {
-                backTop.style.display = 'block';
-            } else {
-                backTop.style.display = 'none';
-            }
-        }
-
-        window.addEventListener('scroll', toggleBackTop);
-
-        backTop.addEventListener('click', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-    }
 
 });
 

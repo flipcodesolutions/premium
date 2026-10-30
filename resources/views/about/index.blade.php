@@ -1086,6 +1086,7 @@
                         <img
                             src="{{ asset('images/about ronak.jpg') }}?v=2"
                             alt="Professional Building Inspection"
+                            title="Professional Building Inspection"
                             class="who-image"
                         >
 
@@ -1121,6 +1122,7 @@
                         <img
                             src="{{ asset('images/ronak gami.jpeg') }}?v=2"
                             alt="Ronak Gami - Building Inspector"
+                            title="Ronak Gami - Building Inspector"
                             class="inspector-image"
                         >
 

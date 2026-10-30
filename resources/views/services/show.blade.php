@@ -8,7 +8,7 @@
 {{-- =========================================================
      HERO
 ========================================================= --}}
-<section class="service-detail-hero">
+<section class="service-detail-hero" style="background: linear-gradient(90deg, rgba(7, 28, 52, .96), rgba(7, 28, 52, .78)), url('{{ $service->image_url }}') center/cover no-repeat;">
 
     <div class="container">
 
@@ -29,7 +29,7 @@
             <div class="hero-buttons">
 
                 <a href="{{ url('/#quote') }}"
-                   class="btn btn-orange btn-glow">
+                   class="btn btn-green btn-glow">
 
                     <i class="bi bi-calendar-check me-2"></i>
                     Request an Inspection
@@ -77,7 +77,7 @@
 
                 <div class="service-description">
 
-                    {!! nl2br(e($service->description)) !!}
+                    {!! strip_tags($service->description) === $service->description ? nl2br(e($service->description)) : $service->description !!}
 
                 </div>
 
@@ -223,7 +223,7 @@
                     @endif
 
 
-                    @if($errors->any())
+                    @if(isset($errors) && $errors->any())
 
                         <div class="alert alert-danger">
 
@@ -405,7 +405,7 @@
 
                         <button
                             type="submit"
-                            class="btn btn-orange w-100 quote-submit btn-glow"
+                            class="btn btn-green w-100 quote-submit btn-glow"
                         >
 
                             <i class="bi bi-send-fill me-2"></i>
@@ -441,8 +441,10 @@
                 <div class="why-image img-zoom-hover">
 
                     <img
-                        src="{{ asset('images/schedule.jpeg') }}"
-                        alt="Property inspection"
+                        src="{{ $service->image_url }}"
+                        alt="{{ $service->name }}"
+                        title="{{ $service->name }}"
+                        onerror="this.onerror=null;this.src='{{ asset('images/schedule.jpeg') }}';"
                     >
 
                     <div class="image-badge">
@@ -793,10 +795,27 @@
 
                 <div class="technology-image img-zoom-hover">
 
-                    <img
-                        src="{{ asset('images/g3.jpg') }}"
-                        alt="Building inspection technology"
-                    >
+                    <x-service-issues-carousel
+                        id="technologyIssuesCarousel"
+                        height="500px"
+                        :images="[
+                            [
+                                'src' => asset('images/g3.jpg'),
+                                'alt' => 'Building inspection technology - Moisture & Thermal Imaging',
+                                'title' => 'Building inspection technology - Moisture & Thermal Imaging'
+                            ],
+                            [
+                                'src' => asset('images/g1.jpg'),
+                                'alt' => 'Advanced Building Inspection Detection Equipment',
+                                'title' => 'Advanced Building Inspection Detection Equipment'
+                            ],
+                            [
+                                'src' => asset('images/g7.jpeg'),
+                                'alt' => 'Comprehensive Digital Defect Reporting Melbourne',
+                                'title' => 'Comprehensive Digital Defect Reporting Melbourne'
+                            ],
+                        ]"
+                    />
 
                     <div class="technology-overlay">
 
@@ -843,6 +862,7 @@
                         <img
                             src="{{ asset('images/ronak gami.jpeg') }}"
                             alt="Ronak Gami - Professional building inspector"
+                            title="Ronak Gami - Professional building inspector"
                         >
 
                     </div>
@@ -1103,7 +1123,7 @@
             <div class="cta-buttons">
 
                 <a href="#quote-form"
-                   class="btn btn-orange btn-glow">
+                   class="btn btn-green btn-glow">
 
                     <i class="bi bi-calendar-check me-2"></i>
 
@@ -1163,7 +1183,7 @@
     .hero-label {
         display: inline-block;
 
-        color: #FF6B00;
+        color: #499B08;
 
         font-size: 13px;
 
@@ -1214,7 +1234,7 @@
     .section-tag {
         display: inline-block;
 
-        color: #FF6B00;
+        color: #499B08;
 
         font-size: 13px;
 
@@ -1240,7 +1260,7 @@
 
     .section-title span,
     .service-main-title span {
-        color: #FF6B00;
+        color: #499B08;
     }
 
     .section-text {
@@ -1266,6 +1286,37 @@
         line-height: 1.9;
 
         margin-bottom: 25px;
+    }
+
+    .service-description p {
+        margin-bottom: 1rem;
+    }
+
+    .service-description ul,
+    .service-description ol {
+        margin-bottom: 1.25rem;
+        padding-left: 1.5rem;
+    }
+
+    .service-description li {
+        margin-bottom: 0.4rem;
+    }
+
+    .service-description h2,
+    .service-description h3,
+    .service-description h4 {
+        color: #0b2238;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .service-description blockquote {
+        border-left: 4px solid #48A900;
+        padding-left: 1rem;
+        margin: 1.25rem 0;
+        color: #4b5563;
+        font-style: italic;
     }
 
     .service-price-box {
@@ -1297,7 +1348,7 @@
 
         border-radius: 10px;
 
-        background: #FF6B00;
+        background: #499B08;
 
         font-size: 20px;
     }
@@ -1361,9 +1412,9 @@
 
         border-radius: 10px;
 
-        background: rgba(255,107,0,.1);
+        background: rgba(73,155,8,.1);
 
-        color: #FF6B00;
+        color: #499B08;
     }
 
     .feature-item h5 {
@@ -1433,7 +1484,7 @@
     }
 
     .service-quote-card label span {
-        color: #FF6B00;
+        color: #499B08;
     }
 
     .service-quote-card .form-control,
@@ -1449,10 +1500,10 @@
 
     .service-quote-card .form-control:focus,
     .service-quote-card .form-select:focus {
-        border-color: #FF6B00;
+        border-color: #499B08;
 
         box-shadow:
-            0 0 0 3px rgba(255,107,0,.1);
+            0 0 0 3px rgba(73,155,8,.1);
     }
 
     .service-quote-card textarea.form-control {
@@ -1515,7 +1566,7 @@
     }
 
     .image-badge > i {
-        color: #FF6B00;
+        color: #499B08;
 
         font-size: 27px;
     }
@@ -1605,9 +1656,9 @@
 
         border-radius: 13px;
 
-        background: rgba(255,107,0,.1);
+        background: rgba(73,155,8,.1);
 
-        color: #FF6B00;
+        color: #499B08;
 
         font-size: 25px;
 
@@ -1669,9 +1720,9 @@
 
         border-radius: 11px;
 
-        background: rgba(255,107,0,.1);
+        background: rgba(73,155,8,.1);
 
-        color: #FF6B00;
+        color: #499B08;
 
         font-size: 21px;
     }
@@ -1727,7 +1778,7 @@
     .technology-overlay i {
         display: block;
 
-        color: #FF6B00;
+        color: #499B08;
 
         font-size: 25px;
 
@@ -1791,11 +1842,11 @@
     }
 
     .inspector-box h2 span {
-        color: #FF6B00;
+        color: #499B08;
     }
 
     .inspector-role {
-        color: #FF6B00;
+        color: #499B08;
 
         font-weight: 700;
 
@@ -1862,7 +1913,7 @@
     }
 
     .faq-accordion .accordion-button:not(.collapsed) {
-        color: #FF6B00;
+        color: #499B08;
 
         background: #fff7ef;
     }
@@ -1906,7 +1957,7 @@
     }
 
     .final-cta-box h2 span {
-        color: #FF6B00;
+        color: #499B08;
     }
 
     .final-cta-box p {
@@ -1927,10 +1978,10 @@
         gap: 15px;
     }
 
-    .btn-orange {
-        background: #FF6B00;
+    .btn-green {
+        background: #499B08;
 
-        border: 2px solid #FF6B00;
+        border: 2px solid #499B08;
 
         color: #fff;
 
@@ -1941,7 +1992,7 @@
         border-radius: 8px;
     }
 
-    .btn-orange:hover {
+    .btn-green:hover {
         background: #e95f00;
 
         border-color: #e95f00;

@@ -1021,7 +1021,7 @@
                             YOUR INSPECTOR
                         </div>
 
-                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
+                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector" title="Ronak Gami - Registered Building Inspector">
 
                         <div class="rd-inspector-body">
                             <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
@@ -1130,9 +1130,28 @@
                     </ul>
                 </div>
 
-                {{-- Right Photo --}}
+                {{-- Right Photo Carousel --}}
                 <div class="rd-photo-box">
-                    <img src="{{ asset('images/rising-damp-stain.jpg') }}" alt="Rough concrete wall showing rising damp stains">
+                    <x-service-issues-carousel
+                        id="risingDampIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/rising-damp-stain.jpg'),
+                                'alt' => 'Rough concrete wall showing rising damp stains and efflorescence',
+                                'title' => 'Rough concrete wall showing rising damp stains and efflorescence'
+                            ],
+                            [
+                                'src' => asset('images/rising-damp.jpg'),
+                                'alt' => 'Rising Damp Digital Moisture Inspection and Assessment',
+                                'title' => 'Rising Damp Digital Moisture Inspection and Assessment'
+                            ],
+                            [
+                                'src' => asset('images/r1.jpg'),
+                                'alt' => 'Subfloor Ventilation and Damp Proof Course Defect Inspection',
+                                'title' => 'Subfloor Ventilation and Damp Proof Course Defect Inspection'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

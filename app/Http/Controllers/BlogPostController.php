@@ -72,19 +72,17 @@ class BlogPostController extends Controller
             ],
         ];
 
-        foreach ($defaultArticles as $article) {
-            BlogPost::updateOrCreate(
-                ['slug' => $article['slug']],
-                $article
-            );
+        if (BlogPost::count() === 0) {
+            foreach ($defaultArticles as $article) {
+                BlogPost::firstOrCreate(
+                    ['slug' => $article['slug']],
+                    $article
+                );
+            }
         }
 
         $query = BlogPost::with('category')
-            ->where('status', true)
-            ->where(function ($q) {
-                $q->whereNull('published_at')
-                  ->orWhere('published_at', '<=', now());
-            })
+            ->published()
             ->latest('published_at');
 
         // Category filter
@@ -101,11 +99,7 @@ class BlogPostController extends Controller
         // Blog categories
         $categories = BlogCategory::withCount([
             'posts' => function ($q) {
-                $q->where('status', true)
-                  ->where(function ($query) {
-                      $query->whereNull('published_at')
-                            ->orWhere('published_at', '<=', now());
-                  });
+                $q->published();
             }
         ])
         ->orderBy('name')
@@ -124,33 +118,25 @@ class BlogPostController extends Controller
 
     public function show($slug)
     {
-        // Current blog post
+        // Current blog post (only published posts visible to public)
         $post = BlogPost::with('category')
             ->where('slug', $slug)
-            ->where('status', true)
-            ->where(function ($q) {
-                $q->whereNull('published_at')
-                  ->orWhere('published_at', '<=', now());
-            })
+            ->published()
             ->firstOrFail();
 
 
         // Latest blog posts
         $latestPosts = BlogPost::with('category')
-            ->where('status', true)
+            ->published()
             ->where('id', '!=', $post->id)
-            ->where(function ($q) {
-                $q->whereNull('published_at')
-                  ->orWhere('published_at', '<=', now());
-            })
-            ->latest()
+            ->latest('published_at')
             ->take(5)
             ->get();
 
 
         // Related blog posts
         $relatedPosts = BlogPost::with('category')
-            ->where('status', true)
+            ->published()
             ->where('id', '!=', $post->id)
             ->when($post->blog_category_id, function ($q) use ($post) {
                 $q->where(
@@ -158,11 +144,7 @@ class BlogPostController extends Controller
                     $post->blog_category_id
                 );
             })
-            ->where(function ($q) {
-                $q->whereNull('published_at')
-                  ->orWhere('published_at', '<=', now());
-            })
-            ->latest()
+            ->latest('published_at')
             ->take(3)
             ->get();
 

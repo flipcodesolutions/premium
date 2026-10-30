@@ -301,28 +301,6 @@ class DatabaseSeeder extends Seeder
         |--------------------------------------------------------------------------
         */
 
-        Gallery::create([
-            'title' => 'Professional Property Inspection',
-            'image' => 'gallery/inspection-1.jpg',
-            'description' => 'Professional property inspection.',
-            'status' => true,
-            'sort_order' => 1,
-        ]);
-
-        Gallery::create([
-            'title' => 'Building Inspection',
-            'image' => 'gallery/inspection-2.jpg',
-            'description' => 'Detailed building inspection.',
-            'status' => true,
-            'sort_order' => 2,
-        ]);
-
-        Gallery::create([
-            'title' => 'Property Assessment',
-            'image' => 'gallery/inspection-3.jpg',
-            'description' => 'Property assessment and inspection.',
-            'status' => true,
-            'sort_order' => 3,
-        ]);
+        $this->call(GallerySeeder::class);
     }
 }

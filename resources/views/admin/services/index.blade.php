@@ -40,7 +40,7 @@
                         </td>
                         <td>
                             @if($service->image)
-                                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="rounded border" style="width: 54px; height: 42px; object-fit: cover;">
+                                <img src="{{ $service->image_url }}" alt="{{ $service->name }}" title="{{ $service->name }}" class="rounded border" style="width: 54px; height: 42px; object-fit: cover;" onerror="this.onerror=null;this.src='{{ asset('images/service banner.jpg') }}';">
                             @else
                                 <div class="rounded border bg-light d-flex align-items-center justify-content-center text-muted" style="width: 54px; height: 42px; font-size: 0.8rem;">
                                     <i class="bi bi-image"></i>
@@ -90,7 +90,7 @@
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
 
-                                <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this service? This cannot be undone.');" class="d-inline">
+                                <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" data-confirm="Are you sure you want to delete this service? This cannot be undone." class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-light border text-danger" title="Delete Service">
@@ -116,11 +116,7 @@
         </table>
     </div>
 
-    @if($services->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $services->links('pagination::bootstrap-5') }}
-        </div>
-    @endif
+    @include('admin.components.pagination', ['paginator' => $services])
 </div>
 
 @endsection

@@ -583,11 +583,12 @@
     margin: 0 auto;
     background: linear-gradient(
         180deg,
-        rgba(73, 155, 8, 0.15) 0%,
-        rgba(255, 255, 255, 0) 100%
+        #d4edc0 0%,
+        #edf7e9 45%,
+        #ffffff 100%
     );
-    border-radius: 35px 35px 0 0;
-    padding: 65px 0 50px;
+    border-radius: 30px 30px 0 0;
+    padding: 60px 0 55px;
 }
 
 .pbi-feature .pbi-title {
@@ -610,39 +611,55 @@
 }
 
 .pbi-feature-item {
-    padding: 15px 12px;
+    padding: 10px 8px !important;
     text-align: center;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    transition: transform 0.3s ease;
+}
+
+.pbi-feature-item:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.pbi-feature-item:hover .pbi-feature-icon {
+    transform: scale(1.08);
 }
 
 .pbi-feature-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    margin: auto;
-    background: var(--pbi-green);
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 16px;
+    background: var(--pbi-green, #499B08);
     color: #fff;
-    border-radius: 4px;
-    font-size: 20px;
-    box-shadow: 0 4px 12px rgba(73, 155, 8, .3);
+    border-radius: 9px;
+    font-size: 22px;
+    box-shadow: none;
+    transition: transform 0.3s ease;
 }
 
 .pbi-feature-item h4 {
-    margin: 16px 0 8px;
-    color: var(--pbi-navy);
+    margin: 0 0 8px;
+    color: var(--pbi-navy, #05213F);
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: .4px;
+    letter-spacing: .3px;
 }
 
 .pbi-feature-item p {
-    margin: 0;
-    color: #555;
+    margin: 0 auto;
+    color: #4b5d6d;
     font-size: 13.5px;
-    line-height: 1.65;
+    line-height: 1.55;
+    max-width: 220px;
 }
 
 /* =========================================================
@@ -894,40 +911,6 @@
     font-weight: 800;
 }
 
-/* =========================================================
-   BACK TO TOP BUTTON
-========================================================= */
-
-.pbi-back-top {
-    position: fixed;
-    right: 15px;
-    bottom: 20px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: var(--pbi-green);
-    color: #fff;
-    border-radius: 3px;
-    text-decoration: none;
-    box-shadow: 0 4px 14px rgba(0,0,0,.2);
-    transition: all .25s ease;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.pbi-back-top.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.pbi-back-top:hover {
-    background: var(--pbi-green-dark);
-    color: #fff;
-    transform: translateY(-2px);
-}
 
 /* =========================================================
    RESPONSIVE QUERIES
@@ -1172,6 +1155,7 @@
                 <img
                     src="{{ asset('images/ronak gami.jpeg') }}"
                     alt="Ronak Gami Building Inspector"
+                    title="Ronak Gami Building Inspector"
                 >
 
                 <div class="pbi-inspector-name">
@@ -1183,6 +1167,7 @@
                     0466 001 551
                 </a>
             </div>
+
 
         </div>
     </div>
@@ -1233,6 +1218,7 @@
                 </p>
             </div>
 
+
         </div>
     </div>
 </section>
@@ -1265,6 +1251,7 @@
                 <span class="pbi-stat-label">Services</span>
             </div>
 
+
         </div>
     </div>
 </section>
@@ -1287,12 +1274,40 @@
 
         <div class="pbi-services-grid">
 
+            @if(isset($services) && $services->count() > 0)
+                @foreach($services as $index => $service)
+                    <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="{{ (($index % 3) + 1) * 50 }}">
+                        <div class="pbi-service-image img-zoom-hover">
+                            <img
+                                src="{{ $service->image_url }}"
+                                alt="{{ $service->name }}"
+                                title="{{ $service->name }}"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='{{ asset('images/service banner.jpg') }}';"
+                            >
+                        </div>
+                        <div class="pbi-service-content">
+                            <h3>
+                                {{ $service->name }}
+                            </h3>
+                            <p>
+                                {{ $service->short_description }}
+                            </p>
+                            <a href="{{ url('/services/' . $service->slug) }}" class="pbi-btn">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+
             {{-- 1. Pre-Purchase Building and Pest Inspection --}}
             <div class="pbi-service-card hover-lift" data-aos="fade-up" data-aos-delay="50">
                 <div class="pbi-service-image img-zoom-hover">
                     <img
                         src="{{ asset('images/pre-purchase.png') }}"
                         alt="Pre Purchase Building and Pest Inspection"
+                        title="Pre Purchase Building and Pest Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1315,6 +1330,7 @@
                     <img
                         src="{{ asset('images/building-stage.jpg') }}"
                         alt="Building Stage by Stage Inspection"
+                        title="Building Stage by Stage Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1337,6 +1353,7 @@
                     <img
                         src="{{ asset('images/new-build-handover.jpg') }}"
                         alt="New Build Handover Inspection"
+                        title="New Build Handover Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1359,6 +1376,7 @@
                     <img
                         src="{{ asset('images/rising-damp.jpg') }}"
                         alt="Rising Damp Inspection"
+                        title="Rising Damp Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1381,6 +1399,7 @@
                     <img
                         src="{{ asset('images/pool-barrier.jpg') }}"
                         alt="Pool Barrier Inspection"
+                        title="Pool Barrier Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1403,6 +1422,7 @@
                     <img
                         src="{{ asset('images/apartment.jpeg') }}"
                         alt="Apartment Building Inspection"
+                        title="Apartment Building Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1425,6 +1445,7 @@
                     <img
                         src="{{ asset('images/dilapidation.jpg') }}"
                         alt="Dilapidation Report"
+                        title="Dilapidation Report"
                         loading="lazy"
                     >
                 </div>
@@ -1447,6 +1468,7 @@
                     <img
                         src="{{ asset('images/vendor.jpg') }}"
                         alt="Vendor Inspection"
+                        title="Vendor Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1469,6 +1491,7 @@
                     <img
                         src="{{ asset('images/builders-warranty.jpg') }}"
                         alt="Builders Warranty Inspection"
+                        title="Builders Warranty Inspection"
                         loading="lazy"
                     >
                 </div>
@@ -1485,6 +1508,8 @@
                 </div>
             </div>
 
+            @endif
+
         </div>
     </div>
 </section>
@@ -1498,7 +1523,7 @@
 
         <div class="pbi-title" data-aos="fade-up">
             <div class="small-title">
-                Our Promise
+                Why Choose Us
             </div>
             <h2>
                 We Use Safe And Environmentally Friendly Measures
@@ -1507,53 +1532,54 @@
 
         <div class="pbi-feature-grid">
 
-            <div class="pbi-feature-item hover-lift" data-aos="fade-up" data-aos-delay="100">
+            <div class="pbi-feature-item" data-aos="fade-up" data-aos-delay="100">
                 <div class="pbi-feature-icon">
-                    <i class="fas fa-check"></i>
+                    <i class="bi bi-hand-thumbs-up-fill"></i>
                 </div>
                 <h4>
-                    Professional
+                    Experienced Inspectors
                 </h4>
                 <p>
-                    Reliable inspection methods and professional reporting.
+                    Certified professionals with extensive expertise.
                 </p>
             </div>
 
-            <div class="pbi-feature-item hover-lift" data-aos="fade-up" data-aos-delay="200">
+            <div class="pbi-feature-item" data-aos="fade-up" data-aos-delay="200">
                 <div class="pbi-feature-icon">
-                    <i class="fas fa-leaf"></i>
+                    <i class="bi bi-search"></i>
                 </div>
                 <h4>
-                    Responsible
+                    Advanced Technology
                 </h4>
                 <p>
-                    Safe and practical inspection approaches for property owners.
+                    Utilizing the latest tools for precise assessments.
                 </p>
             </div>
 
-            <div class="pbi-feature-item hover-lift" data-aos="fade-up" data-aos-delay="300">
+            <div class="pbi-feature-item" data-aos="fade-up" data-aos-delay="300">
                 <div class="pbi-feature-icon">
-                    <i class="fas fa-file-alt"></i>
+                    <i class="bi bi-file-earmark-text-fill"></i>
                 </div>
                 <h4>
                     Detailed Reports
                 </h4>
                 <p>
-                    Clear documentation to help you understand inspection findings.
+                    Clear, comprehensive reports with actionable insights.
                 </p>
             </div>
 
-            <div class="pbi-feature-item hover-lift" data-aos="fade-up" data-aos-delay="400">
+            <div class="pbi-feature-item" data-aos="fade-up" data-aos-delay="400">
                 <div class="pbi-feature-icon">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="bi bi-shield-check"></i>
                 </div>
                 <h4>
-                    Peace Of Mind
+                    Customer Focused
                 </h4>
                 <p>
-                    Better information before making important property decisions.
+                    Exceptional support throughout the process.
                 </p>
             </div>
+
 
         </div>
     </div>
@@ -1673,6 +1699,7 @@
                     referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
             </div>
+
 
         </div>
     </div>
@@ -1794,46 +1821,12 @@
 </section>
 
 
-{{-- =========================================================
-     BACK TO TOP
-========================================================= --}}
-<a
-    href="#"
-    class="pbi-back-top"
-    id="pbiBackTop"
-    aria-label="Back to top"
->
-    <i class="fas fa-chevron-up"></i>
-</a>
 
 </div>
 
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-
-    /* =========================================
-       BACK TO TOP SCROLL VISIBILITY
-    ========================================= */
-    const backTop = document.getElementById('pbiBackTop');
-
-    if (backTop) {
-        window.addEventListener('scroll', function () {
-            if (window.scrollY > 400) {
-                backTop.classList.add('show');
-            } else {
-                backTop.classList.remove('show');
-            }
-        });
-
-        backTop.addEventListener('click', function (e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
 
     /* =========================================
        SMOOTH SCROLL FOR IN-PAGE ANCHORS

@@ -18,7 +18,7 @@
                         <i class="bi bi-file-earmark-check-fill me-1"></i> Generate Report
                     </a>
                 @endif
-                <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to permanently delete this booking?');">
+                <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" data-confirm="Are you sure you want to permanently delete this booking?">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-outline-danger">

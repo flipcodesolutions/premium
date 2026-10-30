@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\QuoteRequestController as AdminQuoteController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminMessageController;
 use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\InspectionAgreementController as AdminInspectionAgreementController;
 
 
@@ -305,6 +306,9 @@ Route::get(
     '/gallery',
     [GalleryController::class, 'index']
 )->name('gallery.index');
+
+// Route alias to ensure both route('gallery') and route('gallery.index') resolve safely
+Route::redirect('/public-gallery', '/gallery')->name('gallery');
 
 
 // =========================================================
@@ -708,6 +712,51 @@ Route::middleware(['admin'])
             '/blogs/{post}/toggle-status',
             [AdminBlogPostController::class, 'toggleStatus']
         )->name('blogs.toggle-status');
+
+
+        // =================================================
+        // ADMIN GALLERY PHOTOS
+        // =================================================
+
+        Route::get(
+            '/galleries',
+            [AdminGalleryController::class, 'index']
+        )->name('galleries.index');
+
+        Route::get(
+            '/galleries/create',
+            [AdminGalleryController::class, 'create']
+        )->name('galleries.create');
+
+        Route::post(
+            '/galleries',
+            [AdminGalleryController::class, 'store']
+        )->name('galleries.store');
+
+        Route::get(
+            '/galleries/{gallery}/edit',
+            [AdminGalleryController::class, 'edit']
+        )->name('galleries.edit');
+
+        Route::put(
+            '/galleries/{gallery}',
+            [AdminGalleryController::class, 'update']
+        )->name('galleries.update');
+
+        Route::delete(
+            '/galleries/{gallery}',
+            [AdminGalleryController::class, 'destroy']
+        )->name('galleries.destroy');
+
+        Route::patch(
+            '/galleries/{gallery}/toggle-status',
+            [AdminGalleryController::class, 'toggleStatus']
+        )->name('galleries.toggle-status');
+
+        Route::post(
+            '/galleries/sync-defaults',
+            [AdminGalleryController::class, 'syncDefaults']
+        )->name('galleries.sync-defaults');
 
 
         // =================================================

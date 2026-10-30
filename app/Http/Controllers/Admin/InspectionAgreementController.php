@@ -38,7 +38,10 @@ class InspectionAgreementController extends Controller
             });
         }
 
-        $agreements = $query->paginate(15)->withQueryString();
+        $perPage = (int) $request->input('per_page', 10);
+        $perPage = in_array($perPage, [5, 10, 25, 50]) ? $perPage : 10;
+
+        $agreements = $query->paginate($perPage)->withQueryString();
 
         // Status counts for filtering pills
         $counts = [

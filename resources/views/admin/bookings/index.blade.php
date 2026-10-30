@@ -124,7 +124,7 @@
                                     <i class="bi bi-eye"></i> Details
                                 </a>
 
-                                <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this booking?');" class="d-inline">
+                                <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" data-confirm="Are you sure you want to delete this booking?" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-light border text-danger" title="Delete Booking">
@@ -147,11 +147,7 @@
         </table>
     </div>
 
-    @if($bookings->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $bookings->links('pagination::bootstrap-5') }}
-        </div>
-    @endif
+    @include('admin.components.pagination', ['paginator' => $bookings])
 </div>
 
 @endsection

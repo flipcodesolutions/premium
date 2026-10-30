@@ -1108,6 +1108,7 @@
                     <img
                         src="{{ asset('images/ronak gami.jpeg') }}"
                         alt="Ronak Gami - VBA Registered Building Inspector"
+                        title="Ronak Gami - VBA Registered Building Inspector"
                     >
 
                     <div class="d-inspector-name">
@@ -1247,18 +1248,26 @@
 
                 {{-- RIGHT: IMAGE WITH ARROWS (g11.jpeg) --}}
                 <div class="d-scope-image-wrapper" data-aos="fade-left">
-                    <button class="d-slide-arrow d-slide-prev" type="button" aria-label="Previous">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-
-                    <img
-                        src="{{ asset('images/g11.jpeg') }}"
-                        alt="Ronak Gami conducting builders warranty electrical and external brickwork inspection"
-                    >
-
-                    <button class="d-slide-arrow d-slide-next" type="button" aria-label="Next">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
+                    <x-service-issues-carousel
+                        id="buildersWarrantyIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/g11.jpeg'),
+                                'alt' => 'Ronak Gami conducting builders warranty electrical and external brickwork inspection',
+                                'title' => 'Ronak Gami conducting builders warranty electrical and external brickwork inspection'
+                            ],
+                            [
+                                'src' => asset('images/builders-warranty.jpg'),
+                                'alt' => 'Builders Warranty Inspection - Structural Warranty Defect Audit',
+                                'title' => 'Builders Warranty Inspection - Structural Warranty Defect Audit'
+                            ],
+                            [
+                                'src' => asset('images/g21.jpeg'),
+                                'alt' => 'Builders Warranty Inspection - Wet Areas, Waterproofing and Plumbing Assessment',
+                                'title' => 'Builders Warranty Inspection - Wet Areas, Waterproofing and Plumbing Assessment'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

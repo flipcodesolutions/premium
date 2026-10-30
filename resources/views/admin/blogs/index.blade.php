@@ -85,7 +85,7 @@
                         </td>
                         <td>
                             @if($post->image_url || $post->image)
-                                <img src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}" alt="{{ $post->title }}" class="rounded border" style="width: 60px; height: 42px; object-fit: cover;" onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
+                                <img src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}" alt="{{ $post->title }}" title="{{ $post->title }}" class="rounded border" style="width: 60px; height: 42px; object-fit: cover;" onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
                             @else
                                 <div class="rounded border bg-light d-flex align-items-center justify-content-center text-muted" style="width: 60px; height: 42px; font-size: 0.85rem;">
                                     <i class="bi bi-file-earmark-richtext"></i>
@@ -99,13 +99,15 @@
                             </small>
                         </td>
                         <td>
-                            @if($post->status && $post->published_at && $post->published_at->isFuture())
-                                <span class="text-primary fw-semibold d-block text-nowrap">
-                                    <i class="bi bi-calendar2-event me-1"></i>{{ $post->published_at->format('d M Y') }}
+                            @if($post->isScheduled())
+                                <span class="text-primary fw-semibold d-block text-nowrap local-datetime" data-utc="{{ $post->published_at->toISOString() }}">
+                                    <i class="bi bi-calendar2-event me-1"></i><span class="date-part">{{ $post->published_at->timezone(config('app.display_timezone', 'Australia/Melbourne'))->format('d M Y') }}</span>
                                 </span>
-                                <small class="text-muted text-nowrap">{{ $post->published_at->format('h:i A') }}</small>
+                                <small class="text-muted text-nowrap local-time-part">{{ $post->published_at->timezone(config('app.display_timezone', 'Australia/Melbourne'))->format('h:i A') }}</small>
                             @elseif($post->published_at)
-                                <small class="text-nowrap">{{ $post->published_at->format('d M Y') }}</small>
+                                <span class="local-datetime text-nowrap" data-utc="{{ $post->published_at->toISOString() }}">
+                                    <small class="text-nowrap date-part">{{ $post->published_at->timezone(config('app.display_timezone', 'Australia/Melbourne'))->format('d M Y') }}</small>
+                                </span>
                             @else
                                 <small class="text-muted">Not published</small>
                             @endif
@@ -119,7 +121,7 @@
                                         <span class="status-badge status-pending cursor-pointer">
                                             <i class="bi bi-hourglass-split me-1"></i> Draft
                                         </span>
-                                    @elseif($post->published_at && $post->published_at->isFuture())
+                                    @elseif($post->isScheduled())
                                         <span class="status-badge status-scheduled cursor-pointer">
                                             <i class="bi bi-clock-history me-1"></i> Scheduled
                                         </span>
@@ -144,7 +146,7 @@
                                 </a>
 
                                 <!-- Delete -->
-                                <form action="{{ route('admin.blogs.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this blog post?');" class="d-inline">
+                                <form action="{{ route('admin.blogs.destroy', $post->id) }}" method="POST" data-confirm="Are you sure you want to delete this blog post?" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-light border text-danger" title="Delete Post">
@@ -170,11 +172,27 @@
         </table>
     </div>
 
-    @if($posts->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $posts->links('pagination::bootstrap-5') }}
-        </div>
-    @endif
+    @include('admin.components.pagination', ['paginator' => $posts])
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.local-datetime[data-utc]').forEach(el => {
+            const utc = el.dataset.utc;
+            if (!utc) return;
+            const d = new Date(utc);
+            const datePart = el.querySelector('.date-part');
+            if (datePart) {
+                datePart.textContent = d.toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' });
+            }
+            const timePart = el.nextElementSibling;
+            if (timePart && timePart.classList.contains('local-time-part')) {
+                timePart.textContent = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: true });
+            }
+        });
+    });
+</script>
 @endsection

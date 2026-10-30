@@ -1037,7 +1037,7 @@
                             YOUR INSPECTOR
                         </div>
 
-                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
+                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector" title="Ronak Gami - Registered Building Inspector">
 
                         <div class="d-inspector-body">
                             <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
@@ -1141,9 +1141,28 @@
                     </ul>
                 </div>
 
-                {{-- Right Photo --}}
+                {{-- Right Photo Carousel --}}
                 <div class="d-photo-box">
-                    <img src="{{ asset('images/dilapidation-inspection.jpg') }}" alt="Ronak Gami inspecting timber wall framing">
+                    <x-service-issues-carousel
+                        id="dilapidationIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/dilapidation-inspection.jpg'),
+                                'alt' => 'Ronak Gami inspecting timber wall framing and pre-existing cracks',
+                                'title' => 'Ronak Gami inspecting timber wall framing and pre-existing cracks'
+                            ],
+                            [
+                                'src' => asset('images/dilapidation.jpg'),
+                                'alt' => 'Dilapidation Inspection - External Boundary and Pavement Assessment',
+                                'title' => 'Dilapidation Inspection - External Boundary and Pavement Assessment'
+                            ],
+                            [
+                                'src' => asset('images/g16.jpeg'),
+                                'alt' => 'Dilapidation Inspection - Structural Condition and Crack Recording',
+                                'title' => 'Dilapidation Inspection - Structural Condition and Crack Recording'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

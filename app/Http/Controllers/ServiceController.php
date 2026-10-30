@@ -12,7 +12,7 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::where('status', true)
-            ->latest()
+            ->orderBy('id', 'asc')
             ->get();
 
         return view('services.index', compact('services'));

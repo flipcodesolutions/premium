@@ -1033,7 +1033,7 @@
                             YOUR INSPECTOR
                         </div>
 
-                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
+                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector" title="Ronak Gami - Registered Building Inspector">
 
                         <div class="nb-inspector-body">
                             <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
@@ -1161,19 +1161,27 @@
                 </div>
 
                 {{-- Right Image Carousel --}}
-                <div class="nb-carousel-container" id="handoverCarousel">
-                    <div class="nb-carousel-slide active">
-                        <img src="{{ asset('images/handover-inspection-1.jpeg') }}" alt="New Build Handover Inspection - Ceiling Thermal Imaging">
-                    </div>
-                    <div class="nb-carousel-slide">
-                        <img src="{{ asset('images/handover-inspection-2.jpeg') }}" alt="New Build Handover Inspection - Room Inspection">
-                    </div>
-                    <button class="nb-carousel-btn nb-carousel-prev" type="button" onclick="moveNbSlide(-1)">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <button class="nb-carousel-btn nb-carousel-next" type="button" onclick="moveNbSlide(1)">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
+                <div class="nb-carousel-container" style="height: 420px;">
+                    <x-service-issues-carousel
+                        id="handoverIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/handover-inspection-1.jpeg'),
+                                'alt' => 'New Build Handover Inspection - Ceiling Thermal Imaging Defect Detection',
+                                'title' => 'New Build Handover Inspection - Ceiling Thermal Imaging Defect Detection'
+                            ],
+                            [
+                                'src' => asset('images/handover-inspection-2.jpeg'),
+                                'alt' => 'New Build Handover Inspection - Quality Finishes and Room Inspection',
+                                'title' => 'New Build Handover Inspection - Quality Finishes and Room Inspection'
+                            ],
+                            [
+                                'src' => asset('images/new-build-handover.jpg'),
+                                'alt' => 'New Build Handover Final Practical Completion Inspection',
+                                'title' => 'New Build Handover Final Practical Completion Inspection'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

@@ -422,6 +422,7 @@
                 <img
                     src="{{ asset('images/logo.png') }}"
                     alt="Premium Building & Pest Inspections"
+                    title="Premium Building & Pest Inspections"
                     class="company-logo"
                 >
                 <h1 class="company-title">Premium Building &amp; Pest Inspections</h1>

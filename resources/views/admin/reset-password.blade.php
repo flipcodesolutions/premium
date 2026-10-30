@@ -543,6 +543,7 @@
                         <img
                             src="{{ asset('images/logo.png') }}"
                             alt="Premium Building & Pest Inspections"
+                            title="Premium Building & Pest Inspections"
                             class="brand-logo-img"
                         >
                     </a>

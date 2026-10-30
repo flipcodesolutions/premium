@@ -20,6 +20,7 @@
 
             <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data" class="p-4">
                 @csrf
+                <input type="hidden" name="user_timezone" id="user_timezone" value="">
 
                 <!-- Title -->
                 <div class="mb-3">
@@ -71,8 +72,7 @@
                               id="content"
                               name="content"
                               rows="12"
-                              placeholder="Write your article content here..."
-                              required>{{ old('content') }}</textarea>
+                              placeholder="Write your article content here...">{{ old('content') }}</textarea>
                     @error('content')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -123,19 +123,21 @@
                                        class="form-control border-primary @error('scheduled_at') is-invalid @enderror"
                                        id="scheduled_at"
                                        name="scheduled_at"
-                                       value="{{ old('scheduled_at', now()->addDay()->format('Y-m-d\TH:i')) }}"
-                                       min="{{ now()->format('Y-m-d\TH:i') }}">
+                                       value="{{ old('scheduled_at') }}">
                                 @error('scheduled_at')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                                 <div class="form-text text-muted">
                                     The post will remain hidden from visitors until this exact scheduled date &amp; time arrives.
                                 </div>
+                                <div class="small text-muted mt-1">
+                                    <i class="bi bi-clock me-1"></i> Timezone: <strong id="tz_display_name" class="text-dark">Local Time</strong>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="alert alert-info py-2 px-3 mb-0 small">
                                     <i class="bi bi-info-circle-fill me-1"></i>
-                                    <strong>Scheduled Post:</strong> Once scheduled, this article will show a blue <span class="badge bg-primary">Scheduled</span> badge in the admin table until it automatically goes live.
+                                    <strong>Automatic Publishing:</strong> Posts are scheduled in your computer's local time. Once this selected time arrives, it automatically switches from <span class="badge bg-primary">Scheduled</span> to <span class="badge bg-success">Published</span> and goes live across the site!
                                 </div>
                             </div>
                         </div>
@@ -176,6 +178,35 @@
     </div>
 </div>
 
+@endsection
+
+@section('styles')
+<style>
+    .ck-editor__editable_inline {
+        min-height: 400px;
+        font-size: 15px;
+        line-height: 1.65;
+    }
+    .ck.ck-toolbar {
+        border-top-left-radius: 6px !important;
+        border-top-right-radius: 6px !important;
+        border-color: #dee2e6 !important;
+        background-color: #f8fafc !important;
+    }
+    .ck.ck-editor__main > .ck-editor__editable {
+        border-bottom-left-radius: 6px !important;
+        border-bottom-right-radius: 6px !important;
+        border-color: #dee2e6 !important;
+    }
+    .ck.ck-editor__main > .ck-editor__editable:focus {
+        border-color: #48A900 !important;
+        box-shadow: 0 0 0 0.25rem rgba(72, 169, 0, 0.15) !important;
+    }
+</style>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
     function toggleScheduleDateBox() {
         const switchEl = document.getElementById('is_scheduled');
@@ -185,21 +216,73 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const switchEl = document.getElementById('is_scheduled');
         if (switchEl) {
             switchEl.addEventListener('change', toggleScheduleDateBox);
         }
         toggleScheduleDateBox();
+
+        // Detect user timezone and set local min and default date
+        try {
+            const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Australia/Melbourne';
+            const tzInput = document.getElementById('user_timezone');
+            if (tzInput) tzInput.value = userTz;
+            const tzDisplay = document.getElementById('tz_display_name');
+            if (tzDisplay) tzDisplay.textContent = userTz;
+
+            const scheduledInput = document.getElementById('scheduled_at');
+            if (scheduledInput) {
+                const now = new Date();
+                const nowLocal = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+                scheduledInput.min = nowLocal.toISOString().slice(0, 16);
+
+                if (!scheduledInput.value) {
+                    const tomorrow = new Date(now.getTime() + 86400000 - now.getTimezoneOffset() * 60000);
+                    scheduledInput.value = tomorrow.toISOString().slice(0, 16);
+                }
+            }
+        } catch (e) {
+            console.error('Timezone detection error:', e);
+        }
+
+        // CKEditor initialization for Blog Content
+        const contentEl = document.querySelector('#content');
+        if (contentEl) {
+            ClassicEditor
+                .create(contentEl, {
+                    toolbar: [
+                        'heading', '|',
+                        'bold', 'italic', 'underline', 'strikethrough', '|',
+                        'bulletedList', 'numberedList', 'blockQuote', '|',
+                        'insertTable', '|',
+                        'link', '|',
+                        'undo', 'redo'
+                    ],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+                        ]
+                    }
+                })
+                .then(editor => {
+                    const form = contentEl.closest('form');
+                    if (form) {
+                        form.addEventListener('submit', function () {
+                            contentEl.value = editor.getData();
+                        });
+                    }
+                    editor.model.document.on('change:data', () => {
+                        contentEl.value = editor.getData();
+                    });
+                })
+                .catch(error => {
+                    console.error('CKEditor initialization error:', error);
+                });
+        }
     });
 </script>
-
-@section('scripts')
-<script>
-    if (typeof toggleScheduleDateBox === 'function') {
-        toggleScheduleDateBox();
-    }
-</script>
-@endsection
-
 @endsection

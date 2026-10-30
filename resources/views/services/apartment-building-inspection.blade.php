@@ -1077,7 +1077,7 @@
                             YOUR INSPECTOR
                         </div>
 
-                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector">
+                        <img src="{{ asset('images/ronak gami.jpeg') }}" alt="Ronak Gami - Registered Building Inspector" title="Ronak Gami - Registered Building Inspector">
 
                         <div class="apt-inspector-body">
                             <h4>Ronak Gami, vba lic No: IN-PS 74654, Builder Lic No: DB-L 100200</h4>
@@ -1182,20 +1182,27 @@
                 </div>
 
                 {{-- Right Carousel --}}
-                <div class="apt-carousel-box" id="aptCarousel">
-                    <div class="apt-carousel-slide active">
-                        <img src="{{ asset('images/apartment-inspection-carousel.jpeg') }}" alt="Ronak Gami inspecting apartment waterproofing">
-                    </div>
-                    <div class="apt-carousel-slide">
-                        <img src="{{ asset('images/apartment-inspection-carousel-2.jpeg') }}" alt="Apartment Inspection Melbourne">
-                    </div>
-
-                    <button class="apt-carousel-arrow apt-carousel-prev" type="button" aria-label="Previous" onclick="aptSlidePrev()">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <button class="apt-carousel-arrow apt-carousel-next" type="button" aria-label="Next" onclick="aptSlideNext()">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
+                <div class="apt-carousel-box">
+                    <x-service-issues-carousel
+                        id="aptIssuesCarousel"
+                        :images="[
+                            [
+                                'src' => asset('images/apartment-inspection-carousel.jpeg'),
+                                'alt' => 'Ronak Gami inspecting apartment waterproofing and wet areas',
+                                'title' => 'Ronak Gami inspecting apartment waterproofing and wet areas'
+                            ],
+                            [
+                                'src' => asset('images/apartment-inspection-carousel-2.jpeg'),
+                                'alt' => 'Apartment Balcony and Structural Defect Inspection Melbourne',
+                                'title' => 'Apartment Balcony and Structural Defect Inspection Melbourne'
+                            ],
+                            [
+                                'src' => asset('images/apartment.jpeg'),
+                                'alt' => 'Apartment Building Common Property and External Facade Inspection',
+                                'title' => 'Apartment Building Common Property and External Facade Inspection'
+                            ],
+                        ]"
+                    />
                 </div>
 
             </div>

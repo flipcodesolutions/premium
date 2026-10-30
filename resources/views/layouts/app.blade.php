@@ -1090,6 +1090,96 @@
 
         }
 
+
+        /* =========================================================
+           SERVICE ISSUES AUTO-PLAY CAROUSEL STYLES
+        ========================================================= */
+        .service-issues-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #072B52;
+        }
+        .service-issues-carousel .carousel-inner {
+            width: 100%;
+            height: 100% !important;
+        }
+        .service-issues-carousel .carousel-item {
+            width: 100%;
+            height: 100% !important;
+            background: #072B52;
+        }
+        .service-issues-carousel .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .service-issues-carousel .carousel-indicators {
+            margin-bottom: 12px;
+            z-index: 5;
+        }
+        .service-issues-carousel .carousel-indicators [data-bs-target] {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            opacity: 0.65;
+            margin: 0 4px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .service-issues-carousel .carousel-indicators .active {
+            opacity: 1;
+            width: 24px;
+            border-radius: 10px;
+            background-color: #48A900;
+        }
+        .service-issues-carousel .service-carousel-arrow {
+            width: 38px;
+            height: 38px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #072B52;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+            border: none;
+            opacity: 0;
+            transition: all 0.25s ease;
+            z-index: 6;
+            margin: 0 10px;
+        }
+        .service-issues-carousel:hover .service-carousel-arrow {
+            opacity: 0.95;
+        }
+        .service-issues-carousel .service-carousel-arrow:hover {
+            background: #ffffff;
+            color: #48A900;
+            opacity: 1;
+            transform: translateY(-50%) scale(1.08);
+        }
+        .service-issues-carousel .service-carousel-arrow i {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1;
+        }
+        @media (max-width: 768px) {
+            .service-issues-carousel .service-carousel-arrow {
+                opacity: 0.85;
+                width: 32px;
+                height: 32px;
+                margin: 0 6px;
+            }
+            .service-issues-carousel .service-carousel-arrow i {
+                font-size: 15px;
+            }
+        }
     </style>
 
 
@@ -1133,6 +1223,8 @@
     ====================================================== -->
 
     @include('components.footer')
+
+    @include('components.quick-quote-modal')
 
 
     <!-- =====================================================
@@ -1217,12 +1309,12 @@
 
             const navbarLinks =
                 document.querySelectorAll(
-                    '.navbar-nav .nav-link:not(.dropdown-toggle)'
+                    '.navbar-nav .nav-link:not(.dropdown-toggle), .navbar-nav .dropdown-item'
                 );
 
 
             const navbarCollapse =
-                document.getElementById('mainNavbar');
+                document.getElementById('premiumNavbar') || document.getElementById('mainNavbar');
 
 
             if (navbarCollapse) {

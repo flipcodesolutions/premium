@@ -13,7 +13,7 @@
                 <i class="bi bi-arrow-left me-1"></i> Back to Quotes
             </a>
             <div class="d-flex gap-2">
-                <form action="{{ route('admin.quotes.destroy', $quote->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to permanently delete this quote request?');">
+                <form action="{{ route('admin.quotes.destroy', $quote->id) }}" method="POST" data-confirm="Are you sure you want to permanently delete this quote request?">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-outline-danger">
@@ -41,32 +41,43 @@
 
             <div class="p-4">
                 <!-- Status Update Bar -->
-                <div class="p-3 mb-4 rounded border bg-light">
-                    <form action="{{ route('admin.quotes.update-status', $quote->id) }}" method="POST" class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                <div class="p-3 mb-4 rounded-3 border bg-light shadow-sm">
+                    <form action="{{ route('admin.quotes.update-status', $quote->id) }}" method="POST">
                         @csrf
                         @method('PATCH')
-                        <div class="d-flex flex-wrap align-items-center gap-3">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="fw-semibold text-dark"><i class="bi bi-sliders me-1"></i>Update Status:</span>
-                                <select name="status" class="form-select form-select-sm" style="width: 170px;">
-                                    <option value="pending" {{ $quote->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="contacted" {{ $quote->status === 'contacted' ? 'selected' : '' }}>Contacted</option>
-                                    <option value="quoted" {{ $quote->status === 'quoted' ? 'selected' : '' }}>Quoted</option>
-                                    <option value="closed" {{ $quote->status === 'closed' ? 'selected' : '' }}>Closed</option>
-                                </select>
-                            </div>
-                            @if($quote->email)
-                                <div class="form-check m-0">
-                                    <input class="form-check-input" type="checkbox" name="notify_customer" id="notifyQuote" value="1" checked>
-                                    <label class="form-check-label small text-dark fw-semibold" for="notifyQuote">
-                                        <i class="bi bi-envelope-check me-1 text-primary"></i>Notify client via email
-                                    </label>
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-2">
+                            <div class="d-flex flex-wrap align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="fw-semibold text-dark"><i class="bi bi-sliders me-1"></i>Update Status:</span>
+                                    <select name="status" class="form-select form-select-sm" style="width: 170px;">
+                                        <option value="pending" {{ $quote->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="contacted" {{ $quote->status === 'contacted' ? 'selected' : '' }}>Contacted</option>
+                                        <option value="quoted" {{ $quote->status === 'quoted' ? 'selected' : '' }}>Quoted</option>
+                                        <option value="closed" {{ $quote->status === 'closed' ? 'selected' : '' }}>Closed</option>
+                                    </select>
                                 </div>
-                            @endif
+                                @if($quote->email)
+                                    <div class="form-check m-0">
+                                        <input class="form-check-input" type="checkbox" name="notify_customer" id="notifyQuote" value="1" checked>
+                                        <label class="form-check-label small text-dark fw-semibold" for="notifyQuote">
+                                            <i class="bi bi-envelope-check me-1 text-primary"></i>Notify client via email (<strong>{{ $quote->email }}</strong>)
+                                        </label>
+                                    </div>
+                                @else
+                                    <span class="badge bg-warning text-dark"><i class="bi bi-exclamation-triangle me-1"></i>No email address on file</span>
+                                @endif
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-navy px-3 fw-semibold">
+                                <i class="bi bi-check-lg me-1"></i>Save Status Change
+                            </button>
                         </div>
-                        <button type="submit" class="btn btn-sm btn-navy">
-                            Save Status Change
-                        </button>
+                        <div class="mt-2">
+                            <input type="text"
+                                   name="note"
+                                   class="form-control form-control-sm"
+                                   placeholder="Optional inspector note / quote details to include in email (e.g. Quoted Price: $450, proposed inspection date, etc.)"
+                                   value="{{ old('note') }}">
+                        </div>
                     </form>
                 </div>
 

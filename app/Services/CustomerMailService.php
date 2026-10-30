@@ -187,7 +187,8 @@ class CustomerMailService
      */
     public static function sendQuoteConfirmation(QuoteRequest $quote): bool
     {
-        if (empty($quote->email)) {
+        $recipientEmail = trim($quote->email ?? '');
+        if (empty($recipientEmail)) {
             return false;
         }
 
@@ -195,23 +196,29 @@ class CustomerMailService
             $subject = 'Quote Request Received - Ref #' . $quote->id . ' - Premium Building & Pest Inspections';
             $fromAddress = self::getFromAddress();
             $fromName = self::getFromName();
+            $recipientName = trim($quote->name ?? '') ?: 'Valued Client';
 
             Mail::send('emails.quote-notification', [
                 'quote' => $quote,
                 'subjectLine' => $subject,
                 'introMessage' => 'Thank you for requesting an estimate from Premium Building & Pest Inspections. We have received your inquiry and our team is preparing a comprehensive quote for your inspection needs.',
                 'customMessage' => null,
-            ], function ($message) use ($quote, $subject, $fromAddress, $fromName) {
-                $message->to($quote->email, $quote->name)
+            ], function ($message) use ($recipientEmail, $recipientName, $subject, $fromAddress, $fromName) {
+                $message->to($recipientEmail, $recipientName)
                         ->from($fromAddress, $fromName)
                         ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
+
+                // Send a confirmation BCC to company email if recipient is different
+                if (strtolower($recipientEmail) !== strtolower($fromAddress)) {
+                    $message->bcc($fromAddress, $fromName);
+                }
             });
 
-            Log::info("Quote confirmation email sent to {$quote->email} for Quote #{$quote->id}");
+            Log::info("Quote confirmation email sent to {$recipientEmail} for Quote #{$quote->id}");
             return true;
         } catch (\Throwable $e) {
-            Log::error("Failed to send quote confirmation to {$quote->email}: " . $e->getMessage());
+            Log::error("Failed to send quote confirmation to {$recipientEmail}: " . $e->getMessage());
             return false;
         }
     }
@@ -221,7 +228,9 @@ class CustomerMailService
      */
     public static function sendQuoteStatusUpdate(QuoteRequest $quote, ?string $customNote = null): bool
     {
-        if (empty($quote->email)) {
+        $recipientEmail = trim($quote->email ?? '');
+        if (empty($recipientEmail)) {
+            Log::warning("Cannot send quote status update for Quote #{$quote->id}: No email address provided.");
             return false;
         }
 
@@ -238,23 +247,29 @@ class CustomerMailService
 
             $fromAddress = self::getFromAddress();
             $fromName = self::getFromName();
+            $recipientName = trim($quote->name ?? '') ?: 'Valued Client';
 
             Mail::send('emails.quote-notification', [
                 'quote' => $quote,
                 'subjectLine' => $subject,
                 'introMessage' => $intro,
                 'customMessage' => $customNote,
-            ], function ($message) use ($quote, $subject, $fromAddress, $fromName) {
-                $message->to(trim($quote->email), $quote->name)
+            ], function ($message) use ($recipientEmail, $recipientName, $subject, $fromAddress, $fromName) {
+                $message->to($recipientEmail, $recipientName)
                         ->from($fromAddress, $fromName)
                         ->replyTo($fromAddress, $fromName)
                         ->subject($subject);
+
+                // Also BCC company email so the admin always has a record and delivery confirmation
+                if (strtolower($recipientEmail) !== strtolower($fromAddress)) {
+                    $message->bcc($fromAddress, $fromName);
+                }
             });
 
-            Log::info("Quote status email sent to {$quote->email}");
+            Log::info("Quote status email sent to {$recipientEmail} for Quote #{$quote->id} (Status: {$quote->status})");
             return true;
         } catch (\Throwable $e) {
-            Log::error("Failed to send quote status email to {$quote->email}: " . $e->getMessage());
+            Log::error("Failed to send quote status email to {$recipientEmail}: " . $e->getMessage());
             return false;
         }
     }

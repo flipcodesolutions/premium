@@ -11,11 +11,14 @@ use Illuminate\Support\Str;
 class ServiceController extends Controller
 {
     /**
-     * Display all services.
+     * Display all services with pagination.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::latest()->paginate(10);
+        $perPage = (int) $request->input('per_page', 10);
+        $perPage = in_array($perPage, [5, 10, 25, 50]) ? $perPage : 10;
+
+        $services = Service::latest()->paginate($perPage)->withQueryString();
 
         return view('admin.services.index', compact('services'));
     }

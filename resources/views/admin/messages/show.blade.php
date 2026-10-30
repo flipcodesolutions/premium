@@ -21,7 +21,7 @@
                     </button>
                 </form>
 
-                <form action="{{ route('admin.messages.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to permanently delete this message?');">
+                <form action="{{ route('admin.messages.destroy', $message->id) }}" method="POST" data-confirm="Are you sure you want to permanently delete this message?">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-outline-danger">

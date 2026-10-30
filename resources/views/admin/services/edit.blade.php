@@ -96,8 +96,7 @@
                     <textarea class="form-control @error('description') is-invalid @enderror"
                               id="description"
                               name="description"
-                              rows="6"
-                              required>{{ old('description', $service->description) }}</textarea>
+                              rows="6">{{ old('description', $service->description) }}</textarea>
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -108,7 +107,7 @@
                     <label for="image" class="form-label fw-semibold">Featured Image</label>
                     @if($service->image)
                         <div class="mb-2 d-flex align-items-center gap-3 p-2 bg-light rounded border">
-                            <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" style="width: 80px; height: 60px; object-fit: cover;" class="rounded border">
+                            <img src="{{ $service->image_url }}" alt="{{ $service->name }}" title="{{ $service->name }}" style="width: 80px; height: 60px; object-fit: cover;" class="rounded border" onerror="this.onerror=null;this.src='{{ asset('images/service banner.jpg') }}';">
                             <div>
                                 <small class="fw-semibold text-dark d-block">Current Image</small>
                                 <small class="text-muted">Uploading a new image will replace this one.</small>
@@ -156,4 +155,73 @@
     </div>
 </div>
 
+@endsection
+
+@section('styles')
+<style>
+    .ck-editor__editable_inline {
+        min-height: 280px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+    .ck.ck-toolbar {
+        border-top-left-radius: 6px !important;
+        border-top-right-radius: 6px !important;
+        border-color: #dee2e6 !important;
+        background-color: #f8fafc !important;
+    }
+    .ck.ck-editor__main > .ck-editor__editable {
+        border-bottom-left-radius: 6px !important;
+        border-bottom-right-radius: 6px !important;
+        border-color: #dee2e6 !important;
+    }
+    .ck.ck-editor__main > .ck-editor__editable:focus {
+        border-color: #48A900 !important;
+        box-shadow: 0 0 0 0.25rem rgba(72, 169, 0, 0.15) !important;
+    }
+</style>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const descEl = document.querySelector('#description');
+        if (descEl) {
+            ClassicEditor
+                .create(descEl, {
+                    toolbar: [
+                        'heading', '|',
+                        'bold', 'italic', 'underline', 'strikethrough', '|',
+                        'bulletedList', 'numberedList', 'blockQuote', '|',
+                        'insertTable', '|',
+                        'link', '|',
+                        'undo', 'redo'
+                    ],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+                        ]
+                    }
+                })
+                .then(editor => {
+                    const form = descEl.closest('form');
+                    if (form) {
+                        form.addEventListener('submit', function () {
+                            descEl.value = editor.getData();
+                        });
+                    }
+                    editor.model.document.on('change:data', () => {
+                        descEl.value = editor.getData();
+                    });
+                })
+                .catch(error => {
+                    console.error('CKEditor initialization error:', error);
+                });
+        }
+    });
+</script>
 @endsection

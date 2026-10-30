@@ -33,7 +33,10 @@ class QuoteRequestController extends Controller
             });
         }
 
-        $quotes = $query->paginate(12)->withQueryString();
+        $perPage = (int) $request->input('per_page', 10);
+        $perPage = in_array($perPage, [5, 10, 25, 50]) ? $perPage : 10;
+
+        $quotes = $query->paginate($perPage)->withQueryString();
 
         // Status counts for filtering pills
         $counts = [
@@ -81,7 +84,7 @@ class QuoteRequestController extends Controller
             if ($sent) {
                 return redirect()
                     ->back()
-                    ->with('success', 'Quote status updated to ' . ucfirst($quote->status) . ' and notification email sent to ' . $quote->email . '.');
+                    ->with('success', 'Quote status updated to ' . ucfirst($quote->status) . ' and notification email sent to ' . $quote->email . '. (A confirmation copy was also archived).');
             }
 
             return redirect()

@@ -19,6 +19,7 @@
                         <img
                             src="{{ asset('images/logo.png') }}"
                             alt="Premium Building &amp; Pest Inspection"
+                            title="Premium Building &amp; Pest Inspection"
                             class="footer-logo"
                         >
                     </a>
@@ -63,51 +64,61 @@
                     </h4>
 
                     <ul class="footer-links">
-                        <li>
-                            <a href="{{ route('services.pre-purchase') }}">
-                                Pre-Purchase Building and Pest Inspections
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.building-stage') }}">
-                                Building Stage-by-Stage Inspection
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.pool-barrier') }}">
-                                Pool Barrier Inspection
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.apartment') }}">
-                                Apartment Building Inspections
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.rising-damp') }}">
-                                Rising Damp Inspection
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.dilapidation') }}">
-                                Dilapidation Inspection
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.new-build-handover') }}">
-                                New Build Handover Inspection
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.vendor') }}">
-                                Vendor Inspections
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('services.builders-warranty') }}">
-                                Builders Warranty Inspection
-                            </a>
-                        </li>
+                        @if(isset($navServices) && $navServices->count() > 0)
+                            @foreach($navServices as $fService)
+                                <li>
+                                    <a href="{{ url('/services/' . $fService->slug) }}">
+                                        {{ $fService->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
+                            <li>
+                                <a href="{{ route('services.pre-purchase') }}">
+                                    Pre-Purchase Building and Pest Inspections
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.building-stage') }}">
+                                    Building Stage-by-Stage Inspection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.pool-barrier') }}">
+                                    Pool Barrier Inspection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.apartment') }}">
+                                    Apartment Building Inspections
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.rising-damp') }}">
+                                    Rising Damp Inspection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.dilapidation') }}">
+                                    Dilapidation Inspection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.new-build-handover') }}">
+                                    New Build Handover Inspection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.vendor') }}">
+                                    Vendor Inspections
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.builders-warranty') }}">
+                                    Builders Warranty Inspection
+                                </a>
+                            </li>
+                        @endif
                     </ul>
 
                 </div>

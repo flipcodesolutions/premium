@@ -112,9 +112,30 @@
                             @endif
                         </td>
                         <td>
-                            <span class="status-badge status-{{ $quote->status }}">
-                                {{ $quote->status }}
-                            </span>
+                            <div class="dropdown">
+                                <button class="status-badge status-{{ $quote->status }} dropdown-toggle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Click to quickly change status & notify client">
+                                    {{ ucfirst($quote->status) }}
+                                </button>
+                                <ul class="dropdown-menu shadow-sm p-2" style="min-width: 210px; font-size: 0.85rem;">
+                                    <li class="dropdown-header text-uppercase fw-bold text-muted px-2 py-1" style="font-size: 0.7rem;">Quick Change Status</li>
+                                    @foreach(['pending' => 'Pending', 'contacted' => 'Contacted', 'quoted' => 'Quoted', 'closed' => 'Closed'] as $stKey => $stLabel)
+                                        <li>
+                                            <form action="{{ route('admin.quotes.update-status', $quote->id) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="status" value="{{ $stKey }}">
+                                                <input type="hidden" name="notify_customer" value="1">
+                                                <button type="submit" class="dropdown-item d-flex align-items-center justify-content-between rounded px-2 py-1 {{ $quote->status === $stKey ? 'active fw-bold' : '' }}">
+                                                    <span>{{ $stLabel }}</span>
+                                                    @if($quote->status === $stKey)
+                                                        <i class="bi bi-check2"></i>
+                                                    @endif
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </td>
                         <td class="text-end">
                             <div class="d-flex align-items-center justify-content-end gap-1">
@@ -122,7 +143,7 @@
                                     <i class="bi bi-eye"></i> Details
                                 </a>
 
-                                <form action="{{ route('admin.quotes.destroy', $quote->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this quote request?');" class="d-inline">
+                                <form action="{{ route('admin.quotes.destroy', $quote->id) }}" method="POST" data-confirm="Are you sure you want to delete this quote request?" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-light border text-danger" title="Delete Quote">
@@ -145,11 +166,7 @@
         </table>
     </div>
 
-    @if($quotes->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $quotes->links('pagination::bootstrap-5') }}
-        </div>
-    @endif
+    @include('admin.components.pagination', ['paginator' => $quotes])
 </div>
 
 @endsection

@@ -474,6 +474,7 @@
                         <img
                             src="{{ asset('images/logo.png') }}"
                             alt="Premium Building & Pest Inspections"
+                            title="Premium Building & Pest Inspections"
                             class="white-logo"
                             style="max-width: 170px !important; width: 170px !important; height: auto !important; filter: brightness(0) invert(1) !important; background: transparent !important; display: block;"
                         >

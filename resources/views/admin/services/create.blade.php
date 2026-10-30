@@ -93,8 +93,7 @@
                               id="description"
                               name="description"
                               rows="6"
-                              placeholder="Provide detailed description of what this inspection covers..."
-                              required>{{ old('description') }}</textarea>
+                              placeholder="Provide detailed description of what this inspection covers...">{{ old('description') }}</textarea>
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -144,4 +143,73 @@
     </div>
 </div>
 
+@endsection
+
+@section('styles')
+<style>
+    .ck-editor__editable_inline {
+        min-height: 280px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+    .ck.ck-toolbar {
+        border-top-left-radius: 6px !important;
+        border-top-right-radius: 6px !important;
+        border-color: #dee2e6 !important;
+        background-color: #f8fafc !important;
+    }
+    .ck.ck-editor__main > .ck-editor__editable {
+        border-bottom-left-radius: 6px !important;
+        border-bottom-right-radius: 6px !important;
+        border-color: #dee2e6 !important;
+    }
+    .ck.ck-editor__main > .ck-editor__editable:focus {
+        border-color: #48A900 !important;
+        box-shadow: 0 0 0 0.25rem rgba(72, 169, 0, 0.15) !important;
+    }
+</style>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const descEl = document.querySelector('#description');
+        if (descEl) {
+            ClassicEditor
+                .create(descEl, {
+                    toolbar: [
+                        'heading', '|',
+                        'bold', 'italic', 'underline', 'strikethrough', '|',
+                        'bulletedList', 'numberedList', 'blockQuote', '|',
+                        'insertTable', '|',
+                        'link', '|',
+                        'undo', 'redo'
+                    ],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+                        ]
+                    }
+                })
+                .then(editor => {
+                    const form = descEl.closest('form');
+                    if (form) {
+                        form.addEventListener('submit', function () {
+                            descEl.value = editor.getData();
+                        });
+                    }
+                    editor.model.document.on('change:data', () => {
+                        descEl.value = editor.getData();
+                    });
+                })
+                .catch(error => {
+                    console.error('CKEditor initialization error:', error);
+                });
+        }
+    });
+</script>
 @endsection

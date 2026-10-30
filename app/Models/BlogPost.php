@@ -31,6 +31,44 @@ class BlogPost extends Model
     }
 
     /**
+     * Scope a query to only include published posts (status = true and published_at <= now or null).
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('status', true)
+            ->where(function ($q) {
+                $q->whereNull('published_at')
+                  ->orWhere('published_at', '<=', now());
+            });
+    }
+
+    /**
+     * Scope a query to only include scheduled posts (status = true and published_at > now).
+     */
+    public function scopeScheduled($query)
+    {
+        return $query->where('status', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '>', now());
+    }
+
+    /**
+     * Determine if the post is scheduled for future publication.
+     */
+    public function isScheduled(): bool
+    {
+        return (bool) ($this->status && $this->published_at && $this->published_at->isFuture());
+    }
+
+    /**
+     * Determine if the post is currently published.
+     */
+    public function isPublished(): bool
+    {
+        return (bool) ($this->status && (!$this->published_at || $this->published_at->isPast()));
+    }
+
+    /**
      * Get the resolved URL for the post's featured image.
      */
     public function getImageUrlAttribute(): ?string
