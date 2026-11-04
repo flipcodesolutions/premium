@@ -175,6 +175,11 @@
                                 Privacy Policy
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url('/sitemap.html') }}">
+                                Sitemap
+                            </a>
+                        </li>
                     </ul>
 
                 </div>
@@ -262,6 +267,9 @@
                 <div class="footer-bottom-links">
                     <a href="{{ route('privacy-policy') }}">
                         Privacy Policy
+                    </a>
+                    <a href="{{ url('/sitemap.html') }}">
+                        Sitemap
                     </a>
                 </div>
             </div>

@@ -9,7 +9,8 @@ use Illuminate\Http\Response;
 class SitemapController extends Controller
 {
     /**
-     * Generate dynamic XML sitemap from database & static routes.
+     * Generate dynamic XML sitemap from database & static routes,
+     * categorized with comments matching the XML structure specification.
      */
     public function index(): Response
     {
@@ -21,50 +22,96 @@ class SitemapController extends Controller
             $baseUrl = 'https://premiumbuildinginspections.com.au';
         }
 
-        // Static pages
-        $staticUrls = [
-            ['loc' => $baseUrl . '/', 'priority' => '1.0', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/about', 'priority' => '0.8', 'changefreq' => 'monthly'],
-            ['loc' => $baseUrl . '/services', 'priority' => '0.9', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/pre-purchase-building-and-pest-inspection', 'priority' => '0.9', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/building-stage-by-stage-inspection', 'priority' => '0.9', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/apartment-building-inspection', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/rising-damp-inspection', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/pool-barrier-inspection', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/dilapidation-inspection', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/new-build-handover-inspection', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/vendor-inspection', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/services/builders-warranty-inspection', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/blog', 'priority' => '0.8', 'changefreq' => 'daily'],
-            ['loc' => $baseUrl . '/contact', 'priority' => '0.8', 'changefreq' => 'monthly'],
-            ['loc' => $baseUrl . '/gallery', 'priority' => '0.7', 'changefreq' => 'monthly'],
-            ['loc' => $baseUrl . '/inspection-agreement', 'priority' => '0.6', 'changefreq' => 'monthly'],
-            ['loc' => $baseUrl . '/booking', 'priority' => '0.8', 'changefreq' => 'weekly'],
-            ['loc' => $baseUrl . '/privacy-policy', 'priority' => '0.3', 'changefreq' => 'yearly'],
+        $today = now()->tz('UTC')->toDateString();
+
+        // 1. Core Company & Service Landing Pages
+        $corePages = [
+            ['loc' => $baseUrl . '/', 'lastmod' => $today, 'priority' => '1.0', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services', 'lastmod' => $today, 'priority' => '0.9', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/about', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => $baseUrl . '/contact', 'lastmod' => $today, 'priority' => '0.9', 'changefreq' => 'monthly'],
+            ['loc' => $baseUrl . '/gallery', 'lastmod' => $today, 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => $baseUrl . '/booking', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/blog', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/inspection-agreement', 'lastmod' => $today, 'priority' => '0.6', 'changefreq' => 'monthly'],
+            ['loc' => $baseUrl . '/privacy-policy', 'lastmod' => $today, 'priority' => '0.3', 'changefreq' => 'yearly'],
         ];
 
-        // Active dynamic services from DB
-        $services = Service::where('status', true)
-            ->whereNotNull('slug')
-            ->where('slug', '!=', '')
-            ->orderBy('id', 'asc')
-            ->get();
+        // 2. Core Inspection Services
+        $defaultServices = [
+            ['loc' => $baseUrl . '/services/pre-purchase-building-and-pest-inspection', 'lastmod' => $today, 'priority' => '0.9', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/building-stage-by-stage-inspection', 'lastmod' => $today, 'priority' => '0.9', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/new-build-handover-inspection', 'lastmod' => $today, 'priority' => '0.9', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/rising-damp-inspection', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/pool-barrier-inspection', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/apartment-building-inspection', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/dilapidation-inspection', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/vendor-inspection', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/services/builders-warranty-inspection', 'lastmod' => $today, 'priority' => '0.8', 'changefreq' => 'weekly'],
+        ];
 
-        // Published dynamic blog posts from DB (scheduled posts hidden until live)
-        $posts = BlogPost::published()
-            ->whereNotNull('slug')
-            ->where('slug', '!=', '')
-            ->orderBy('id', 'desc')
-            ->get();
+        $servicePages = [];
+        try {
+            $dbServices = Service::where('status', true)
+                ->whereNotNull('slug')
+                ->where('slug', '!=', '')
+                ->orderBy('id', 'asc')
+                ->get();
+
+            if ($dbServices->isNotEmpty()) {
+                foreach ($dbServices as $service) {
+                    $servicePages[] = [
+                        'loc' => $baseUrl . '/services/' . ltrim($service->slug, '/'),
+                        'lastmod' => ($service->updated_at ?? now())->tz('UTC')->toDateString(),
+                        'changefreq' => 'weekly',
+                        'priority' => '0.8',
+                    ];
+                }
+            } else {
+                $servicePages = $defaultServices;
+            }
+        } catch (\Throwable $e) {
+            $servicePages = $defaultServices;
+        }
+
+        // 3. Published Blog Articles & Inspection Guides
+        $defaultBlogs = [
+            ['loc' => $baseUrl . '/blog/why-you-should-inspect-a-property-before-buying', 'lastmod' => $today, 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => $baseUrl . '/blog/common-problems-found-during-building-inspections', 'lastmod' => $today, 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => $baseUrl . '/blog/signs-of-termites-you-should-know-about', 'lastmod' => $today, 'priority' => '0.7', 'changefreq' => 'monthly'],
+        ];
+
+        $blogPages = [];
+        try {
+            $dbPosts = BlogPost::published()
+                ->whereNotNull('slug')
+                ->where('slug', '!=', '')
+                ->orderBy('id', 'desc')
+                ->get();
+
+            if ($dbPosts->isNotEmpty()) {
+                foreach ($dbPosts as $post) {
+                    $blogPages[] = [
+                        'loc' => $baseUrl . '/blog/' . ltrim($post->slug, '/'),
+                        'lastmod' => ($post->updated_at ?? $post->published_at ?? now())->tz('UTC')->toDateString(),
+                        'changefreq' => 'monthly',
+                        'priority' => '0.7',
+                    ];
+                }
+            } else {
+                $blogPages = $defaultBlogs;
+            }
+        } catch (\Throwable $e) {
+            $blogPages = $defaultBlogs;
+        }
 
         $content = view('sitemap', [
-            'staticUrls' => $staticUrls,
-            'services'   => $services,
-            'posts'      => $posts,
-            'baseUrl'    => $baseUrl,
+            'corePages'    => $corePages,
+            'servicePages' => $servicePages,
+            'blogPages'    => $blogPages,
         ])->render();
 
         return response($content, 200)
-            ->header('Content-Type', 'application/xml; charset=utf-8');
+            ->header('Content-Type', 'text/xml; charset=utf-8');
     }
 }

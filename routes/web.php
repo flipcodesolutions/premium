@@ -799,7 +799,9 @@ Route::middleware(['admin'])
     });
 
 // =========================================================
-// SITEMAP (DYNAMIC XML)
+// SITEMAP (DYNAMIC XML & SITEMAP.HTML)
 // =========================================================
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/sitemap.html', [SitemapController::class, 'index'])->name('sitemap.html');
+Route::get('/sitemap', [SitemapController::class, 'index'])->name('sitemap.index');
