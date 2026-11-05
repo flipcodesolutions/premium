@@ -3,6 +3,36 @@
 @section('title', 'Manage Bookings')
 @section('page_title', 'Inspection Bookings')
 
+@section('styles')
+<style>
+    /* Prevent table and dropdown menu from being cut off */
+    .bookings-table-card {
+        overflow: visible !important;
+    }
+
+    .bookings-table-card .table-responsive {
+        min-height: 290px;
+        overflow-y: visible !important;
+    }
+
+    @media (max-width: 991px) {
+        .bookings-table-card .table-responsive {
+            overflow-x: auto;
+        }
+    }
+
+    .bookings-table-card .dropdown-menu {
+        z-index: 1060 !important;
+        box-shadow: 0 10px 30px rgba(11, 31, 58, 0.16) !important;
+        border-radius: 10px;
+    }
+
+    .bookings-table-card .dropdown-item {
+        transition: all 0.15s ease;
+    }
+</style>
+@endsection
+
 @section('content')
 
 <!-- Filter Tabs & Search -->
@@ -57,7 +87,7 @@
 </div>
 
 <!-- Bookings Table -->
-<div class="card-custom">
+<div class="card-custom bookings-table-card">
     <div class="card-custom-header">
         <div>
             <h5>Bookings List ({{ $bookings->total() }})</h5>
@@ -65,7 +95,7 @@
         </div>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive bookings-table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr style="font-size: 0.8rem; text-transform: uppercase; color: var(--admin-text-muted);">
@@ -75,7 +105,7 @@
                     <th>Inspection Schedule</th>
                     <th>Property Address</th>
                     <th>Status</th>
-                    <th class="text-end" style="width: 140px;">Actions</th>
+                    <th class="text-end" style="width: 150px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,7 +118,7 @@
                             <div class="fw-semibold text-dark">{{ $booking->name }}</div>
                             <div class="text-muted small"><i class="bi bi-telephone me-1"></i>{{ $booking->phone }}</div>
                             @if($booking->email)
-                                <div class="text-muted small"><i class="bi bi-envelope me-1"></i>{{ $booking->email }}</div>
+                                <div class="text-muted small" style="word-break: break-all;"><i class="bi bi-envelope me-1"></i>{{ $booking->email }}</div>
                             @endif
                         </td>
                         <td>
@@ -103,20 +133,47 @@
                             @endif
                         </td>
                         <td>
-                            <span class="small text-truncate d-inline-block" style="max-width: 250px;" title="{{ $booking->property_address }}">
+                            <div class="small text-dark" style="min-width: 150px; max-width: 250px; word-break: break-word;">
                                 <i class="bi bi-geo-alt me-1 text-danger"></i>{{ $booking->property_address }}
-                            </span>
+                            </div>
                         </td>
                         <td>
-                            <span class="status-badge status-{{ $booking->status }}">
-                                {{ $booking->status }}
-                            </span>
+                            <div class="dropdown">
+                                <button class="status-badge status-{{ $booking->status }} dropdown-toggle border-0" 
+                                        type="button" 
+                                        data-bs-toggle="dropdown" 
+                                        data-bs-boundary="viewport"
+                                        data-bs-popper-config='{"strategy":"fixed"}'
+                                        aria-expanded="false" 
+                                        title="Click to quickly change booking status & update client">
+                                    {{ ucfirst($booking->status) }}
+                                </button>
+                                <ul class="dropdown-menu shadow-lg p-2 border" style="min-width: 215px; font-size: 0.85rem; z-index: 1060;">
+                                    <li class="dropdown-header text-uppercase fw-bold text-muted px-2 py-1" style="font-size: 0.7rem;">Quick Change Status</li>
+                                    @foreach(['pending' => 'Pending', 'confirmed' => 'Confirmed', 'completed' => 'Completed', 'cancelled' => 'Cancelled'] as $stKey => $stLabel)
+                                        <li>
+                                            <form action="{{ route('admin.bookings.update-status', $booking->id) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="status" value="{{ $stKey }}">
+                                                <input type="hidden" name="notify_customer" value="1">
+                                                <button type="submit" class="dropdown-item d-flex align-items-center justify-content-between rounded px-2 py-1 {{ $booking->status === $stKey ? 'active fw-bold' : '' }}">
+                                                    <span>{{ $stLabel }}</span>
+                                                    @if($booking->status === $stKey)
+                                                        <i class="bi bi-check2"></i>
+                                                    @endif
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </td>
                         <td class="text-end">
                             <div class="d-flex align-items-center justify-content-end gap-1">
                                 @if($booking->status === 'completed')
-                                    <a href="{{ route('admin.bookings.report', $booking->id) }}" target="_blank" class="btn btn-sm btn-light border text-success fw-semibold" title="Generate &amp; Print Inspection Report">
-                                        <i class="bi bi-file-earmark-check"></i> Report
+                                    <a href="{{ route('admin.bookings.report', $booking->id) }}" target="_blank" class="btn btn-sm btn-success text-white fw-semibold" title="Generate &amp; Print {{ $booking->service_type }} Report">
+                                        <i class="bi bi-file-earmark-check-fill"></i> Report
                                     </a>
                                 @endif
 
@@ -149,5 +206,41 @@
 
     @include('admin.components.pagination', ['paginator' => $bookings])
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize dropdowns with fixed positioning to prevent clipping by table overflow
+        const statusDropdowns = document.querySelectorAll('.bookings-table-responsive [data-bs-toggle="dropdown"]');
+        statusDropdowns.forEach(function (toggleEl) {
+            new bootstrap.Dropdown(toggleEl, {
+                boundary: 'viewport',
+                popperConfig: function () {
+                    return {
+                        strategy: 'fixed',
+                        modifiers: [
+                            {
+                                name: 'preventOverflow',
+                                options: {
+                                    boundary: 'viewport',
+                                    altAxis: true,
+                                    padding: 10
+                                }
+                            },
+                            {
+                                name: 'flip',
+                                options: {
+                                    boundary: 'viewport',
+                                    fallbackPlacements: ['top-start', 'top-end', 'bottom-start']
+                                }
+                            }
+                        ]
+                    };
+                }
+            });
+        });
+    });
+</script>
+@endpush
 
 @endsection

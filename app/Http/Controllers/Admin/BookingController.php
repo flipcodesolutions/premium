@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Services\CustomerMailService;
+use App\Services\InspectionReportService;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -66,8 +67,9 @@ class BookingController extends Controller
     public function report(Booking $booking)
     {
         $booking->load('agreement');
+        $reportConfig = InspectionReportService::getReportConfig($booking);
 
-        return view('admin.bookings.report', compact('booking'));
+        return view('admin.bookings.report', compact('booking', 'reportConfig'));
     }
 
     /**
@@ -122,9 +124,13 @@ class BookingController extends Controller
 
             $sent = CustomerMailService::sendBookingStatusUpdate($booking, $request->input('note'));
             if ($sent) {
+                $successMsg = $booking->status === 'completed'
+                    ? "Booking status updated to Completed and notification email sent to {$booking->email}. Official {$booking->service_type} completion report is now ready."
+                    : 'Booking status updated to ' . ucfirst($booking->status) . ' and notification email sent to ' . $booking->email . '.';
+
                 return redirect()
                     ->back()
-                    ->with('success', 'Booking status updated to ' . ucfirst($booking->status) . ' and notification email sent to ' . $booking->email . '.');
+                    ->with('success', $successMsg);
             }
 
             return redirect()
@@ -132,9 +138,13 @@ class BookingController extends Controller
                 ->with('warning', 'Booking status updated to ' . ucfirst($booking->status) . ', but the notification email could not be delivered to ' . $booking->email . '. Please check system mail logs.');
         }
 
+        $successMsg = $booking->status === 'completed'
+            ? "Booking status updated to Completed! Official {$booking->service_type} completion report is now ready."
+            : 'Booking status updated successfully to ' . ucfirst($booking->status) . '.';
+
         return redirect()
             ->back()
-            ->with('success', 'Booking status updated successfully to ' . ucfirst($booking->status) . '.');
+            ->with('success', $successMsg);
     }
 
     /**

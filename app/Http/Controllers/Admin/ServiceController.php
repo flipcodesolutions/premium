@@ -76,10 +76,65 @@ class ServiceController extends Controller
                 'max:2048',
             ],
 
+            'meta_title' => [
+                'nullable',
+                'string',
+                'max:70',
+            ],
+
+            'meta_description' => [
+                'nullable',
+                'string',
+                'max:160',
+            ],
+
+            'meta_keywords' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+
+            'og_title' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+
+            'og_description' => [
+                'nullable',
+                'string',
+                'max:1000',
+            ],
+
+            'og_image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
+
+            'og_url' => [
+                'nullable',
+                'string',
+                'max:500',
+            ],
+
+            'author' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
+
             'status' => [
                 'nullable',
                 'boolean',
             ],
+        ], [
+            'meta_title.max' => 'Meta Title should not exceed 70 characters (optimal for Google search is 50–60 characters).',
+            'meta_description.max' => 'Meta Description should not exceed 160 characters (optimal length is 140–160 characters).',
+            'meta_keywords.max' => 'Meta Keywords must not exceed 255 characters.',
+            'og_image.max' => 'Og Image size must not exceed 2MB for optimal SEO loading speed.',
+            'author.max' => 'Author name must not exceed 100 characters.',
         ]);
 
 
@@ -122,6 +177,14 @@ class ServiceController extends Controller
                 ->store('services', 'public');
         }
 
+        $ogImagePath = null;
+
+        if ($request->hasFile('og_image')) {
+            $ogImagePath = $request
+                ->file('og_image')
+                ->store('services/meta', 'public');
+        }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -144,6 +207,29 @@ class ServiceController extends Controller
                 $validated['starting_price'] ?? null,
 
             'image' => $imagePath,
+
+            'meta_title' =>
+                $validated['meta_title'] ?? $validated['og_title'] ?? null,
+
+            'meta_description' =>
+                $validated['meta_description'] ?? null,
+
+            'meta_keywords' =>
+                $validated['meta_keywords'] ?? null,
+
+            'og_title' =>
+                $validated['og_title'] ?? $validated['meta_title'] ?? null,
+
+            'og_description' =>
+                $validated['og_description'] ?? null,
+
+            'og_image' => $ogImagePath,
+
+            'og_url' =>
+                $validated['og_url'] ?? null,
+
+            'author' =>
+                $validated['author'] ?? null,
 
             'status' =>
                 $request->boolean('status'),
@@ -216,10 +302,65 @@ class ServiceController extends Controller
                 'max:2048',
             ],
 
+            'meta_title' => [
+                'nullable',
+                'string',
+                'max:70',
+            ],
+
+            'meta_description' => [
+                'nullable',
+                'string',
+                'max:160',
+            ],
+
+            'meta_keywords' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+
+            'og_title' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+
+            'og_description' => [
+                'nullable',
+                'string',
+                'max:1000',
+            ],
+
+            'og_image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
+
+            'og_url' => [
+                'nullable',
+                'string',
+                'max:500',
+            ],
+
+            'author' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
+
             'status' => [
                 'nullable',
                 'boolean',
             ],
+        ], [
+            'meta_title.max' => 'Meta Title should not exceed 70 characters (optimal for Google search is 50–60 characters).',
+            'meta_description.max' => 'Meta Description should not exceed 160 characters (optimal length is 140–160 characters).',
+            'meta_keywords.max' => 'Meta Keywords must not exceed 255 characters.',
+            'og_image.max' => 'Og Image size must not exceed 2MB for optimal SEO loading speed.',
+            'author.max' => 'Author name must not exceed 100 characters.',
         ]);
 
 
@@ -259,6 +400,22 @@ class ServiceController extends Controller
                 ->store('services', 'public');
         }
 
+        $ogImagePath = $service->og_image;
+
+        if ($request->hasFile('og_image')) {
+            if (
+                $service->og_image &&
+                Storage::disk('public')->exists($service->og_image)
+            ) {
+                Storage::disk('public')
+                    ->delete($service->og_image);
+            }
+
+            $ogImagePath = $request
+                ->file('og_image')
+                ->store('services/meta', 'public');
+        }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -281,6 +438,29 @@ class ServiceController extends Controller
                 $validated['starting_price'] ?? null,
 
             'image' => $imagePath,
+
+            'meta_title' =>
+                $validated['meta_title'] ?? $validated['og_title'] ?? null,
+
+            'meta_description' =>
+                $validated['meta_description'] ?? null,
+
+            'meta_keywords' =>
+                $validated['meta_keywords'] ?? null,
+
+            'og_title' =>
+                $validated['og_title'] ?? $validated['meta_title'] ?? null,
+
+            'og_description' =>
+                $validated['og_description'] ?? null,
+
+            'og_image' => $ogImagePath,
+
+            'og_url' =>
+                $validated['og_url'] ?? null,
+
+            'author' =>
+                $validated['author'] ?? null,
 
             'status' =>
                 $request->boolean('status'),
@@ -313,6 +493,14 @@ class ServiceController extends Controller
         ) {
             Storage::disk('public')
                 ->delete($service->image);
+        }
+
+        if (
+            $service->og_image &&
+            Storage::disk('public')->exists($service->og_image)
+        ) {
+            Storage::disk('public')
+                ->delete($service->og_image);
         }
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Vendor Pre-Sale Inspection Melbourne | PB Inspections')
-@section('meta_description', 'Pre-sale vendor building and pest inspections in Melbourne. Identify property defects before listing, avoid last-minute price reductions, and sell with complete confidence.')
+@section('title', 'Vendor Building Inspection Melbourne | Sell With Confidence')
+@section('meta_description', 'Pre-sale building inspection in Melbourne. Identify issues early, boost value & avoid renegotiation. Know your property before buyers do. Book today.')
 
 @section('content')
 

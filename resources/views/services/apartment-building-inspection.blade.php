@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Apartment Building Inspection Melbourne | PB Inspections')
-@section('meta_description', 'Specialist apartment and unit building inspections in Melbourne. Thorough assessment of internal finishes, structural integrity, water leaks, and common property.')
+@section('title', 'Apartment Building Inspection Melbourne | VBA Licensed')
+@section('meta_description', 'Apartment inspection in Melbourne. We check structure, common areas, HVAC, electrical & fire safety. Clear photo report delivered within 24 hrs.')
 
 @section('content')
 

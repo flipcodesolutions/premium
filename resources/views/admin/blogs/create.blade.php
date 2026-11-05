@@ -144,6 +144,9 @@
                     </div>
                 </div>
 
+                <!-- Meta Properties -->
+                @include('admin.components.meta-properties-form', ['for' => 'Blog'])
+
                 <!-- Publication Status Switch -->
                 <div class="mb-4 p-3 bg-light rounded border">
                     <div class="form-check form-switch d-flex align-items-center justify-content-between p-0 m-0">
@@ -217,6 +220,24 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        // Auto-generate slug from title
+        const titleInput = document.getElementById('title');
+        const slugInput = document.getElementById('slug');
+        function slugify(text) {
+            return text.toString().toLowerCase().trim()
+                .replace(/&/g, '-and-')
+                .replace(/[\s\W-]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+        if (titleInput && slugInput) {
+            let isCustom = Boolean(slugInput.value && slugInput.value.trim().length > 0);
+            titleInput.addEventListener('input', function () {
+                if (!isCustom) slugInput.value = slugify(titleInput.value);
+            });
+            slugInput.addEventListener('input', function () {
+                isCustom = slugInput.value.trim().length > 0;
+            });
+        }
         const switchEl = document.getElementById('is_scheduled');
         if (switchEl) {
             switchEl.addEventListener('change', toggleScheduleDateBox);

@@ -175,11 +175,6 @@
                                 Privacy Policy
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ url('/sitemap.html') }}">
-                                Sitemap
-                            </a>
-                        </li>
                     </ul>
 
                 </div>

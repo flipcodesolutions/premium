@@ -125,6 +125,9 @@
                     <div class="form-text">Formats accepted: JPG, JPEG, PNG, WEBP. Max size: 2MB.</div>
                 </div>
 
+                <!-- Meta Properties -->
+                @include('admin.components.meta-properties-form', ['for' => 'Service', 'model' => $service])
+
                 <!-- Status Checkbox -->
                 <div class="mb-4 p-3 bg-light rounded border">
                     <div class="form-check form-switch">

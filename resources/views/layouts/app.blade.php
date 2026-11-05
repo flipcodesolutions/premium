@@ -27,7 +27,7 @@
           content="@yield('meta_robots', 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large')">
 
     <meta name="author"
-          content="Premium Building & Pest Inspections">
+          content="@yield('meta_author', 'Premium Building & Pest Inspections')">
 
     <link rel="canonical"
           href="@yield('canonical_url', url()->current())">
@@ -35,8 +35,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:locale" content="en_AU">
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:title" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
-    <meta property="og:description" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
+    <meta property="og:title" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('og_title') ? View::getSection('og_title') : (View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports'), ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
+    <meta property="og:description" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('og_description') ? View::getSection('og_description') : (View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.'), ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
     <meta property="og:url" content="@yield('og_url', url()->current())">
     <meta property="og:site_name" content="Premium Building & Pest Inspections">
     <meta property="og:updated_time" content="2026-05-04T07:29:53+00:00">
@@ -44,8 +44,8 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
-    <meta name="twitter:description" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.', ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
+    <meta name="twitter:title" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('og_title') ? View::getSection('og_title') : (View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports'), ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
+    <meta name="twitter:description" content="{!! htmlspecialchars(html_entity_decode(View::hasSection('og_description') ? View::getSection('og_description') : (View::hasSection('meta_description') ? View::getSection('meta_description') : 'Get expert building and pest inspections. We offer detailed reports and peace of mind for your property investment. Book your inspection today.'), ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8') !!}">
     <meta name="twitter:image" content="@yield('og_image', asset('images/logo.png'))">
 
 
@@ -175,7 +175,7 @@
           "@@type": "WebPage",
           "@@id": "{{ url()->current() }}/#webpage",
           "url": "{{ url()->current() }}",
-          "name": "{!! addslashes(html_entity_decode(View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports', ENT_QUOTES, 'UTF-8')) !!}",
+          "name": "{!! addslashes(html_entity_decode(View::hasSection('og_title') ? View::getSection('og_title') : (View::hasSection('title') ? View::getSection('title') : 'Premium Building & Pest Inspections | Trusted Reports'), ENT_QUOTES, 'UTF-8')) !!}",
           "datePublished": "2024-07-09T18:49:30+00:00",
           "dateModified": "2026-05-04T07:29:53+00:00",
           "about": {

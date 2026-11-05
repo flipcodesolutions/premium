@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Us | Premium Building & Pest Inspections')
-@section('meta_description', 'Get in touch with Premium Building & Pest Inspections Melbourne. Call 0466 001 551 or submit an inquiry for rapid quotes and flexible inspection bookings.')
+@section('title', 'Contact Premium Building & Pest Inspections')
+@section('meta_description', 'Have a question or need to book? Contact Premium Building & Pest Inspections today for help with all your property inspection needs.')
 
 @section('content')
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'New Build Handover Inspection Melbourne | PB Inspections')
-@section('meta_description', 'Thorough new home handover (PCI) inspections in Melbourne. Identify builder defects, non-compliant work, and cosmetic flaws before paying your final construction invoice.')
+@section('title', 'New Build Handover Inspection Melbourne | From $450')
+@section('meta_description', 'New build handover inspection in Melbourne. VBA-licensed inspector finds defects before settlement. Detailed report in 24 hrs. From $450, book now.')
 
 @section('content')
 

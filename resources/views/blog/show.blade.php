@@ -1,7 +1,25 @@
 @extends('layouts.app')
 
-@section('title', ($post->title ?? 'Blog Article') . ' | Premium Building & Pest Inspections')
-@section('meta_description', Str::limit(strip_tags($post->excerpt ?? $post->content), 155))
+@section('title', ($post->meta_title ?: $post->og_title) ?: (($post->title ?? 'Blog Article') . ' | Premium Building & Pest Inspections'))
+@section('meta_description', ($post->meta_description ?: $post->og_description) ?: Str::limit(strip_tags($post->excerpt ?? $post->content), 155))
+@if(!empty($post->meta_keywords))
+@section('meta_keywords', $post->meta_keywords)
+@endif
+@if(!empty($post->author))
+@section('meta_author', $post->author)
+@endif
+@if(!empty($post->og_title))
+@section('og_title', $post->og_title)
+@endif
+@if(!empty($post->og_description))
+@section('og_description', $post->og_description)
+@endif
+@if(!empty($post->og_image_url) || !empty($post->image_url))
+@section('og_image', $post->og_image_url ?: $post->image_url)
+@endif
+@if(!empty($post->og_url))
+@section('og_url', $post->og_url)
+@endif
 
 @section('content')
 

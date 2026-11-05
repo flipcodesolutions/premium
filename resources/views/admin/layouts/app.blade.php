@@ -806,6 +806,12 @@
                 <span>Gallery</span>
             </a>
 
+            <!-- CRM Master -->
+            <a href="{{ route('admin.crm-masters.index') }}" class="nav-item-link {{ request()->routeIs('admin.crm-masters.*') ? 'active' : '' }}">
+                <i class="bi bi-kanban"></i>
+                <span>CRM Master</span>
+            </a>
+
             <div class="sidebar-heading">Client Tools</div>
 
             <!-- Inspection Agreement Link -->

@@ -80,9 +80,9 @@ class CustomerMailService
             $fromName = self::getFromName();
 
             $intro = match ($booking->status) {
-                'confirmed' => 'Good news! Your inspection booking has been officially CONFIRMED. Our inspector is scheduled to attend the property at the agreed date and time.',
-                'completed' => 'Your building and pest inspection has been COMPLETED. We appreciate your business and trust in our licensed inspection services.',
-                'cancelled' => 'Your inspection booking has been marked as CANCELLED. If this was unexpected or if you wish to reschedule, please get in touch with our team.',
+                'confirmed' => "Good news! Your {$booking->service_type} booking has been officially CONFIRMED. Our inspector is scheduled to attend the property at the agreed date and time.",
+                'completed' => "Your {$booking->service_type} has been officially COMPLETED. We appreciate your business and trust in our licensed inspection services.",
+                'cancelled' => "Your {$booking->service_type} booking has been marked as CANCELLED. If this was unexpected or if you wish to reschedule, please get in touch with our team.",
                 default => "Your inspection booking status has been updated to {$statusTitle}.",
             };
 
@@ -121,7 +121,7 @@ class CustomerMailService
             $fromAddress = self::getFromAddress();
             $fromName = self::getFromName();
 
-            $intro = "Your building and pest inspection for property '{$booking->property_address}' has been officially completed. Your Inspection Completion Report #{$refNumber} has been finalized and issued by Licensed Building Inspector Ronak Gami.";
+            $intro = "Your {$booking->service_type} for property '{$booking->property_address}' has been officially completed. Your Inspection Completion Report #{$refNumber} has been finalized and issued by Licensed Building Inspector Ronak Gami.";
 
             Mail::send('emails.booking-notification', [
                 'booking' => $booking,

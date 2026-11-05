@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Building Stage Inspection Melbourne | PB Inspections')
-@section('meta_description', 'Independent new home construction stage inspections in Melbourne. Verification of slab, frame, lockup, fixing, and handover compliance with Australian Standards.')
+@section('title', 'Stage by Stage Building Inspection Melbourne | New Builds')
+@section('meta_description', 'Stage-by-stage building inspections in Melbourne—slab, frame, lock-up, fixing & handover. Catch defects early. VBA licensed. Get a quote today.')
 
 @section('content')
 

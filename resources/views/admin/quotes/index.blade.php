@@ -3,6 +3,36 @@
 @section('title', 'Manage Quotes')
 @section('page_title', 'Quote Requests')
 
+@section('styles')
+<style>
+    /* Prevent table and dropdown menu from being cut off */
+    .quotes-table-card {
+        overflow: visible !important;
+    }
+
+    .quotes-table-card .table-responsive {
+        min-height: 290px;
+        overflow-y: visible !important;
+    }
+
+    @media (max-width: 991px) {
+        .quotes-table-card .table-responsive {
+            overflow-x: auto;
+        }
+    }
+
+    .quotes-table-card .dropdown-menu {
+        z-index: 1060 !important;
+        box-shadow: 0 10px 30px rgba(11, 31, 58, 0.16) !important;
+        border-radius: 10px;
+    }
+
+    .quotes-table-card .dropdown-item {
+        transition: all 0.15s ease;
+    }
+</style>
+@endsection
+
 @section('content')
 
 <!-- Filter Tabs & Search -->
@@ -57,12 +87,12 @@
 </div>
 
 <!-- Quotes Table -->
-<div class="card-custom">
+<div class="card-custom quotes-table-card">
     <div class="card-custom-header">
         <h5>Quotes List ({{ $quotes->total() }})</h5>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive quotes-table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr style="font-size: 0.8rem; text-transform: uppercase; color: var(--admin-text-muted);">
@@ -87,15 +117,15 @@
                         </td>
                         <td>
                             <div><i class="bi bi-telephone me-1 text-muted"></i>{{ $quote->phone }}</div>
-                            <small class="text-muted"><i class="bi bi-envelope me-1"></i>{{ $quote->email }}</small>
+                            <small class="text-muted" style="word-break: break-all;"><i class="bi bi-envelope me-1"></i>{{ $quote->email }}</small>
                         </td>
                         <td>
                             <span class="badge bg-light text-dark border">{{ $quote->service_type ?? 'General' }}</span>
                         </td>
                         <td>
-                            <span class="small text-truncate d-inline-block" style="max-width: 200px;" title="{{ $quote->property_address }}">
+                            <div class="small text-dark" style="min-width: 150px; max-width: 250px; word-break: break-word;">
                                 {{ $quote->property_address ?? 'Not specified' }}
-                            </span>
+                            </div>
                         </td>
                         <td>
                             @if($quote->created_at)
@@ -113,10 +143,16 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="status-badge status-{{ $quote->status }} dropdown-toggle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Click to quickly change status & notify client">
+                                <button class="status-badge status-{{ $quote->status }} dropdown-toggle border-0" 
+                                        type="button" 
+                                        data-bs-toggle="dropdown" 
+                                        data-bs-boundary="viewport"
+                                        data-bs-popper-config='{"strategy":"fixed"}'
+                                        aria-expanded="false" 
+                                        title="Click to quickly change status & notify client">
                                     {{ ucfirst($quote->status) }}
                                 </button>
-                                <ul class="dropdown-menu shadow-sm p-2" style="min-width: 210px; font-size: 0.85rem;">
+                                <ul class="dropdown-menu shadow-lg p-2 border" style="min-width: 215px; font-size: 0.85rem; z-index: 1060;">
                                     <li class="dropdown-header text-uppercase fw-bold text-muted px-2 py-1" style="font-size: 0.7rem;">Quick Change Status</li>
                                     @foreach(['pending' => 'Pending', 'contacted' => 'Contacted', 'quoted' => 'Quoted', 'closed' => 'Closed'] as $stKey => $stLabel)
                                         <li>
@@ -168,5 +204,41 @@
 
     @include('admin.components.pagination', ['paginator' => $quotes])
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize dropdowns with fixed positioning to prevent clipping by table overflow
+        const statusDropdowns = document.querySelectorAll('.quotes-table-responsive [data-bs-toggle="dropdown"]');
+        statusDropdowns.forEach(function (toggleEl) {
+            new bootstrap.Dropdown(toggleEl, {
+                boundary: 'viewport',
+                popperConfig: function () {
+                    return {
+                        strategy: 'fixed',
+                        modifiers: [
+                            {
+                                name: 'preventOverflow',
+                                options: {
+                                    boundary: 'viewport',
+                                    altAxis: true,
+                                    padding: 10
+                                }
+                            },
+                            {
+                                name: 'flip',
+                                options: {
+                                    boundary: 'viewport',
+                                    fallbackPlacements: ['top-start', 'top-end', 'bottom-start']
+                                }
+                            }
+                        ]
+                    };
+                }
+            });
+        });
+    });
+</script>
+@endpush
 
 @endsection

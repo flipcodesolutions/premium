@@ -13,6 +13,14 @@ class BlogPost extends Model
         'image',
         'excerpt',
         'content',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'og_title',
+        'og_description',
+        'og_image',
+        'og_url',
+        'author',
         'status',
         'published_at',
     ];
@@ -82,6 +90,32 @@ class BlogPost extends Model
         }
 
         $cleanPath = ltrim($this->image, '/');
+
+        if (str_starts_with($cleanPath, 'storage/')) {
+            return asset($cleanPath);
+        }
+
+        if (file_exists(public_path($cleanPath))) {
+            return asset($cleanPath);
+        }
+
+        return asset('storage/' . $cleanPath);
+    }
+
+    /**
+     * Get the resolved URL for the post's OG image.
+     */
+    public function getOgImageUrlAttribute(): ?string
+    {
+        if (empty($this->og_image)) {
+            return null;
+        }
+
+        if (str_starts_with($this->og_image, 'http://') || str_starts_with($this->og_image, 'https://')) {
+            return $this->og_image;
+        }
+
+        $cleanPath = ltrim($this->og_image, '/');
 
         if (str_starts_with($cleanPath, 'storage/')) {
             return asset($cleanPath);

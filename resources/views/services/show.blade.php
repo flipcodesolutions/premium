@@ -1,7 +1,25 @@
 @extends('layouts.app')
 
-@section('title', $service->name . ' | PB Inspections')
-@section('meta_description', Str::limit(strip_tags($service->short_description ?? $service->description), 155))
+@section('title', ($service->meta_title ?: $service->og_title) ?: ($service->name . ' | PB Inspections'))
+@section('meta_description', ($service->meta_description ?: $service->og_description) ?: Str::limit(strip_tags($service->short_description ?? $service->description), 155))
+@if(!empty($service->meta_keywords))
+@section('meta_keywords', $service->meta_keywords)
+@endif
+@if(!empty($service->author))
+@section('meta_author', $service->author)
+@endif
+@if(!empty($service->og_title))
+@section('og_title', $service->og_title)
+@endif
+@if(!empty($service->og_description))
+@section('og_description', $service->og_description)
+@endif
+@if(!empty($service->og_image_url) || !empty($service->image_url))
+@section('og_image', $service->og_image_url ?: $service->image_url)
+@endif
+@if(!empty($service->og_url))
+@section('og_url', $service->og_url)
+@endif
 
 @section('content')
 

@@ -15,7 +15,7 @@
             <div class="d-flex gap-2">
                 @if($booking->status === 'completed')
                     <a href="{{ route('admin.bookings.report', $booking->id) }}" target="_blank" class="btn btn-sm btn-success fw-semibold">
-                        <i class="bi bi-file-earmark-check-fill me-1"></i> Generate Report
+                        <i class="bi bi-file-earmark-check-fill me-1"></i> Generate {{ $booking->service_type }} Report
                     </a>
                 @endif
                 <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" data-confirm="Are you sure you want to permanently delete this booking?">
@@ -51,8 +51,8 @@
                                 <i class="bi bi-file-earmark-check-fill"></i>
                             </div>
                             <div>
-                                <h6 class="mb-0 fw-bold text-success">Inspection Completed &amp; Verified</h6>
-                                <small class="text-muted">This booking is completed. You can now generate, print, or email the official Inspection Completion Report (Ref #PBI-REP-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }}).</small>
+                                <h6 class="mb-0 fw-bold text-success">{{ $booking->service_type }} Completed &amp; Verified</h6>
+                                <small class="text-muted">This booking is completed. You can now generate, print, or email the official <strong>{{ $booking->service_type }}</strong> Completion Report (Ref #PBI-REP-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }}).</small>
                             </div>
                         </div>
                         <div class="d-flex gap-2 mt-2 mt-md-0">

@@ -113,6 +113,9 @@
                     <div class="form-text">Formats accepted: JPG, JPEG, PNG, WEBP. Max size: 2MB.</div>
                 </div>
 
+                <!-- Meta Properties -->
+                @include('admin.components.meta-properties-form', ['for' => 'Service'])
+
                 <!-- Status Checkbox -->
                 <div class="mb-4 p-3 bg-light rounded border">
                     <div class="form-check form-switch">
@@ -174,6 +177,24 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // Auto-generate slug from service name
+        const nameInput = document.getElementById('name');
+        const slugInput = document.getElementById('slug');
+        function slugify(text) {
+            return text.toString().toLowerCase().trim()
+                .replace(/&/g, '-and-')
+                .replace(/[\s\W-]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+        if (nameInput && slugInput) {
+            let isCustom = Boolean(slugInput.value && slugInput.value.trim().length > 0);
+            nameInput.addEventListener('input', function () {
+                if (!isCustom) slugInput.value = slugify(nameInput.value);
+            });
+            slugInput.addEventListener('input', function () {
+                isCustom = slugInput.value.trim().length > 0;
+            });
+        }
         const descEl = document.querySelector('#description');
         if (descEl) {
             ClassicEditor

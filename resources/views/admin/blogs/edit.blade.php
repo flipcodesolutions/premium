@@ -160,6 +160,9 @@
                     </div>
                 </div>
 
+                <!-- Meta Properties -->
+                @include('admin.components.meta-properties-form', ['for' => 'Blog', 'model' => $post])
+
                 <!-- Publication Status Switch -->
                 <div class="mb-4 p-3 bg-light rounded border">
                     <div class="form-check form-switch d-flex align-items-center justify-content-between p-0 m-0">

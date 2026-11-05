@@ -1,9 +1,12 @@
+@php
+    $reportConfig = $reportConfig ?? \App\Services\InspectionReportService::getReportConfig($booking);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspection Report - PBI-REP-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }} - {{ $booking->name }}</title>
+    <title>{{ $reportConfig['document_title'] }} - PBI-REP-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }} - {{ $booking->name }}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -435,11 +438,11 @@
             </div>
 
             <div class="doc-badge-card">
-                <span class="doc-type-badge">Inspection Certificate</span>
+                <span class="doc-type-badge">{{ $reportConfig['doc_type_badge'] }}</span>
                 <div class="doc-ref-number">PBI-REP-{{ str_pad($booking->id, 5, '0', STR_PAD_LEFT) }}</div>
                 <div class="doc-date">Issue Date: {{ now()->format('d M Y') }}</div>
                 <div class="compliance-pill">
-                    <i class="bi bi-shield-check"></i> AS 4349.1 &amp; AS 4349.3
+                    <i class="bi bi-shield-check"></i> {{ $reportConfig['compliance_pill'] }}
                 </div>
             </div>
         </div>
@@ -470,7 +473,12 @@
             </tr>
             <tr>
                 <th>Inspection Service</th>
-                <td>{{ $booking->service_type }}</td>
+                <td>
+                    <strong class="text-dark">{{ $reportConfig['service_display'] }}</strong>
+                    @if(strtolower(trim($booking->service_type)) !== strtolower(trim($reportConfig['service_display'])))
+                        <span class="text-muted small">({{ $booking->service_type }})</span>
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th>Date of Inspection</th>
@@ -506,68 +514,32 @@
             <i class="bi bi-clipboard2-check"></i> 2. Scope of Works &amp; Inspection Assessment Areas
         </div>
 
-        <p class="text-muted small mb-2">
-            The visual inspection was executed in compliance with Australian Standards <strong>AS 4349.1-2010</strong> (Pre-Purchase Inspections of Residential Buildings) and <strong>AS 4349.3-2010</strong> (Timber Pest Inspections).
+        <p class="text-muted small mb-3">
+            {!! $reportConfig['standards_description'] !!}
         </p>
 
         <table class="scope-checklist-table">
             <thead>
                 <tr>
                     <th style="width: 5%;">#</th>
-                    <th style="width: 45%;">Inspection Area / Zone</th>
-                    <th style="width: 30%;">Scope Details</th>
-                    <th style="width: 20%; text-align: center;">Outcome</th>
+                    <th style="width: 40%;">Inspection Area / Zone</th>
+                    <th style="width: 37%;">Scope Details</th>
+                    <th style="width: 18%; text-align: center;">Outcome</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><strong>Internal Living Areas &amp; Rooms</strong></td>
-                    <td>Walls, ceilings, timber floors, joinery, doors, windows &amp; architraves</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><strong>External Building Envelope</strong></td>
-                    <td>Brickwork, cladding, mortar joints, flashings, lintels, eaves &amp; fascias</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><strong>Roof Exterior &amp; Stormwater Drainage</strong></td>
-                    <td>Roof tiles / metal sheets, flashings, valleys, ridge caps, gutters &amp; downpipes</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><strong>Roof Space &amp; Framing Void</strong></td>
-                    <td>Structural roof trusses, rafters, ceiling joists, sarking, insulation &amp; party walls</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><strong>Subfloor &amp; Foundation Systems</strong></td>
-                    <td>Concrete slab / stumps, bearers, joists, ventilation, damp course, ant caps</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td><strong>Wet Areas &amp; Plumbing Fixtures</strong></td>
-                    <td>Bathrooms, ensuite, kitchen, laundry, tapware, waste outlets, moisture checks</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td><strong>Timber Pest &amp; Termite Evaluation</strong></td>
-                    <td>Visual scan for subterranean termites, active borer damage &amp; fungal wood decay</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td><strong>Site, Drainage Fall &amp; Outbuildings</strong></td>
-                    <td>Driveway, pathways, surface grading, boundary fencing, retaining walls &amp; patio</td>
-                    <td class="text-center"><span class="badge-verified"><i class="bi bi-check-circle"></i> Inspected</span></td>
-                </tr>
+                @foreach($reportConfig['checklist'] as $idx => $item)
+                    <tr>
+                        <td>{{ $idx + 1 }}</td>
+                        <td><strong>{{ $item['area'] }}</strong></td>
+                        <td>{{ $item['scope'] }}</td>
+                        <td class="text-center">
+                            <span class="badge-verified">
+                                <i class="bi bi-check-circle-fill"></i> {{ $item['outcome'] }}
+                            </span>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
@@ -583,7 +555,7 @@
                     <strong>Client Instructions &amp; Recorded Notes:</strong><br>
                     {{ $booking->message }}<br><br>
                 @endif
-                The visual assessment for <strong>{{ $booking->property_address }}</strong> was conducted under standard inspection conditions in accordance with Victorian Building Regulations and Australian Standards. All accessible elements within the agreed scope have been visually appraised, verified, and noted in our official inspection records.
+                {{ $reportConfig['assessment_summary'] }}
             </p>
         </div>
 
@@ -592,7 +564,7 @@
             <div class="cert-statement">
                 <h6>Official Inspector Declaration</h6>
                 <p>
-                    I, <strong>Ronak Gami</strong>, certify that I have conducted this building and pest inspection for the property specified above in an objective, professional, and compliant manner in accordance with Australian Standards <strong>AS 4349.1</strong> and <strong>AS 4349.3</strong>.
+                    {{ $reportConfig['inspector_declaration'] }}
                 </p>
             </div>
 
@@ -606,7 +578,7 @@
 
         <!-- Footer Disclaimer -->
         <div class="disclaimer-text">
-            <strong>NOTICE &amp; LIMITATIONS:</strong> This inspection completion certificate is a visual report carried out in accordance with Australian Standard AS 4349.1-2010 and AS 4349.3-2010. It is based on visible and readily accessible areas at the time of inspection only. It is not an invasive or destructive test, nor a warranty against future defects. Premium Building &amp; Pest Inspections accepts no liability for concealed, inaccessible, or latent building components. All intellectual property and report data remain under the ownership of Premium Building &amp; Pest Inspections.
+            {{ $reportConfig['disclaimer'] }}
         </div>
 
     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Pre-Purchase Building & Pest Inspection | PB Inspections')
-@section('meta_description', 'Melbourne’s leading pre-purchase building and pest inspection. Detailed same-day reports uncovering structural defects, timber pests, and safety hazards.')
+@section('title', 'Pre-Purchase Building & Pest Inspection Melbourne | From $400')
+@section('meta_description', 'Pre-purchase building inspection by VBA-licensed expert. Check structure, roof, plumbing, electrical & pests. Detailed report in 24 hrs. Book from $400.')
 
 @section('content')
 

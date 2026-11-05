@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\ContactMessageController as AdminMessageControlle
 use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\InspectionAgreementController as AdminInspectionAgreementController;
+use App\Http\Controllers\Admin\CrmMasterController as AdminCrmMasterController;
 
 
 // =========================================================
@@ -792,6 +793,46 @@ Route::middleware(['admin'])
             '/agreements/{agreement}',
             [AdminInspectionAgreementController::class, 'destroy']
         )->name('agreements.destroy');
+
+
+        // =================================================
+        // ADMIN CRM MASTER
+        // =================================================
+
+        Route::get(
+            '/crm-masters',
+            [AdminCrmMasterController::class, 'index']
+        )->name('crm-masters.index');
+
+        Route::get(
+            '/crm-masters/create',
+            [AdminCrmMasterController::class, 'create']
+        )->name('crm-masters.create');
+
+        Route::post(
+            '/crm-masters',
+            [AdminCrmMasterController::class, 'store']
+        )->name('crm-masters.store');
+
+        Route::get(
+            '/crm-masters/{crmMaster}/edit',
+            [AdminCrmMasterController::class, 'edit']
+        )->name('crm-masters.edit');
+
+        Route::put(
+            '/crm-masters/{crmMaster}',
+            [AdminCrmMasterController::class, 'update']
+        )->name('crm-masters.update');
+
+        Route::delete(
+            '/crm-masters/{crmMaster}',
+            [AdminCrmMasterController::class, 'destroy']
+        )->name('crm-masters.destroy');
+
+        Route::patch(
+            '/crm-masters/{crmMaster}/toggle-status',
+            [AdminCrmMasterController::class, 'toggleStatus']
+        )->name('crm-masters.toggle-status');
 
         Route::redirect('/inspection-agreements', '/admin/agreements');
         Route::redirect('/inspection-agreement', '/admin/agreements');

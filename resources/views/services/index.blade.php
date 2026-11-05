@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Our Services | Premium Building & Pest Inspections')
-@section('meta_description', 'Comprehensive building and pest inspection services in Melbourne. Pre-purchase, construction stages, apartment, pool barrier, rising damp, and handover reports.')
+@section('title', 'Our Inspection Services | Premium Building & Pest')
+@section('meta_description', 'We offer a full range of building & pest inspection services, including pre-purchase, handover, and warranty reports. Protect your investment.')
 
 @section('content')
 

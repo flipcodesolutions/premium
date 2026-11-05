@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Dilapidation Inspection Melbourne | PB Inspections')
-@section('meta_description', 'Comprehensive dilapidation reports in Melbourne. Photographic condition documentation of adjacent properties before and after construction to protect against claims.')
+@section('title', 'Dilapidation Report Melbourne | Pre-Construction Property Condition')
+@section('meta_description', 'Dilapidation report in Melbourne. Photographic evidence of existing property condition before construction. Protect against disputes. Book today.')
 
 @section('content')
 
