@@ -846,3 +846,17 @@ Route::middleware(['admin'])
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/sitemap.html', [SitemapController::class, 'index'])->name('sitemap.html');
 Route::get('/sitemap', [SitemapController::class, 'index'])->name('sitemap.index');
+
+// =========================================================
+// RUN MIGRATIONS HELPER (FOR LIVE / SHARED HOSTING)
+// =========================================================
+
+Route::get('/run-migration', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $output = \Illuminate\Support\Facades\Artisan::output();
+        return response('<div style="font-family:sans-serif;padding:30px;background:#f0fdf4;color:#166534;border-radius:8px;border:1px solid #bbf7d0;"><h2>✅ Migration Completed Successfully!</h2><pre style="background:#fff;padding:15px;border-radius:4px;border:1px solid #ddd;color:#333;">' . e($output) . '</pre><p><a href="/admin/crm-masters" style="display:inline-block;padding:8px 16px;background:#16a34a;color:#fff;text-decoration:none;border-radius:4px;">Go to CRM Master Admin</a></p></div>');
+    } catch (\Exception $e) {
+        return response('<div style="font-family:sans-serif;padding:30px;background:#fef2f2;color:#991b1b;border-radius:8px;border:1px solid #fecaca;"><h2>❌ Migration Failed</h2><pre style="background:#fff;padding:15px;border-radius:4px;border:1px solid #ddd;color:#333;">' . e($e->getMessage()) . '</pre></div>', 500);
+    }
+});
