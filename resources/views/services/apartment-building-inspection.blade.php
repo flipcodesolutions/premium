@@ -1,7 +1,32 @@
 @extends('layouts.app')
 
-@section('title', 'Apartment Building Inspection Melbourne | VBA Licensed')
-@section('meta_description', 'Apartment inspection in Melbourne. We check structure, common areas, HVAC, electrical & fire safety. Clear photo report delivered within 24 hrs.')
+@php
+    $defaultTitle = 'Apartment Building Inspection Melbourne | VBA Licensed';
+    $defaultDesc = 'Apartment inspection in Melbourne. We check structure, common areas, HVAC, electrical & fire safety. Clear photo report delivered within 24 hrs.';
+    $defaultKeywords = 'apartment building inspection, unit inspection Melbourne, strata inspection, apartment pre purchase inspection, body corporate defects';
+    $metaTitle = !empty($service?->meta_title) ? $service->meta_title : (!empty($service?->og_title) ? $service->og_title : $defaultTitle);
+    $metaDesc = !empty($service?->meta_description) ? $service->meta_description : (!empty($service?->og_description) ? $service->og_description : $defaultDesc);
+    $metaKeywords = !empty($service?->meta_keywords) ? $service->meta_keywords : $defaultKeywords;
+    $metaAuthor = !empty($service?->author) ? $service->author : 'Premium Building & Pest Inspections';
+@endphp
+
+@section('title', $metaTitle)
+@section('meta_description', $metaDesc)
+@section('meta_keywords', $metaKeywords)
+@section('meta_author', $metaAuthor)
+
+@if(!empty($service?->og_title))
+@section('og_title', $service->og_title)
+@endif
+@if(!empty($service?->og_description))
+@section('og_description', $service->og_description)
+@endif
+@if(!empty($service?->og_image_url) || !empty($service?->image_url))
+@section('og_image', $service->og_image_url ?: $service->image_url)
+@endif
+@if(!empty($service?->og_url))
+@section('og_url', $service->og_url)
+@endif
 
 @section('content')
 

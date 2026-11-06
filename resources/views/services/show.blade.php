@@ -1,13 +1,18 @@
 @extends('layouts.app')
 
-@section('title', ($service->meta_title ?: $service->og_title) ?: ($service->name . ' | PB Inspections'))
-@section('meta_description', ($service->meta_description ?: $service->og_description) ?: Str::limit(strip_tags($service->short_description ?? $service->description), 155))
-@if(!empty($service->meta_keywords))
-@section('meta_keywords', $service->meta_keywords)
-@endif
-@if(!empty($service->author))
-@section('meta_author', $service->author)
-@endif
+@php
+    $defaultServiceKeywords = strtolower($service->name ?? 'building inspection') . ', building inspection Melbourne, pest inspection, property inspection Victoria, PB Inspections';
+    $serviceKeywords = !empty($service->meta_keywords) ? $service->meta_keywords : $defaultServiceKeywords;
+    $serviceAuthor = !empty($service->author) ? $service->author : 'Premium Building & Pest Inspections';
+    $serviceTitle = ($service->meta_title ?: $service->og_title) ?: (($service->name ?? 'Inspection Service') . ' | PB Inspections');
+    $serviceDesc = ($service->meta_description ?: $service->og_description) ?: Str::limit(strip_tags($service->short_description ?? ($service->description ?? '')), 155);
+@endphp
+
+@section('title', $serviceTitle)
+@section('meta_description', $serviceDesc)
+@section('meta_keywords', $serviceKeywords)
+@section('meta_author', $serviceAuthor)
+
 @if(!empty($service->og_title))
 @section('og_title', $service->og_title)
 @endif

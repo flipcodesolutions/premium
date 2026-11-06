@@ -22,6 +22,10 @@ class BlogPostController extends Controller
                 'image' => 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80',
                 'excerpt' => "Older Homes Have Character—But They Also Have a Story. There's a reason older homes continue to attract buyers across Melbourne and Victoria. From established suburbs and generous block sizes to unique architectural features, they often offer qualities that are difficult to find in newer developments. However, every older property also carries years of history...",
                 'content' => "Older homes have character, charm, and established locations, but they also require diligent inspection. From aging electrical wiring and galvanized plumbing to hidden foundation settling, subfloor dampness, and roof degradation, older properties require specialized assessment before purchase.",
+                'meta_title' => "Buying an Older Home in Melbourne: Expert Inspection Guide",
+                'meta_description' => "Crucial inspection checklist for buyers of older Melbourne homes. Learn what to look for regarding wiring, plumbing, dampness, and foundations.",
+                'meta_keywords' => "buying older home, building inspection Melbourne, older property defects, pre purchase check, Melbourne heritage homes",
+                'author' => "Premium Building & Pest Inspections",
                 'published_at' => '2026-07-23 10:00:00',
                 'status' => true,
             ],
@@ -31,6 +35,10 @@ class BlogPostController extends Controller
                 'image' => 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80',
                 'excerpt' => "A new home handover inspection is one of the most important steps before taking ownership of a newly built property. Many homeowners assume that a newly completed property will be free from defects; however, construction projects involve multiple trades, materials, and workmanship standards, making minor and sometimes significant defects relatively common...",
                 'content' => "During new home handover inspections, common defects include paint blemishes, unsealed wet areas, roof tile misalignment, non-compliant stair nosings, and drainage issues. Independent verification ensures your builder rectifies these issues under warranty.",
+                'meta_title' => "Top Defects Found During New Home Handover Inspections",
+                'meta_description' => "Discover the most common defects found in new builds before handover in Melbourne. Protect your investment and warranty rights before final payment.",
+                'meta_keywords' => "new home defects, handover inspection, PCI inspection Melbourne, practical completion defects, builder warranty claim",
+                'author' => "Premium Building & Pest Inspections",
                 'published_at' => '2026-06-22 10:00:00',
                 'status' => true,
             ],
@@ -40,6 +48,10 @@ class BlogPostController extends Controller
                 'image' => 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=900&q=80',
                 'excerpt' => "Australia is no stranger to challenging weather conditions. From intense summer heatwaves and severe storms to prolonged periods of heavy rainfall and flooding, homes across the country are regularly exposed to environmental conditions that can test their durability. While most homeowners expect extreme weather to cause visible damage, many are surprised by hidden defects...",
                 'content' => "Extreme heat and heavy storm rainfall can stress building envelopes, causing flashings to fail, gutters to overflow, and expansion joints to crack. Discover the critical areas our inspectors assess following severe weather events.",
+                'meta_title' => "How Extreme Australian Weather Reveals Hidden Home Defects",
+                'meta_description' => "Severe storms, flooding, and heatwaves test property durability in Australia. Learn how seasoned building inspectors identify hidden weather damage.",
+                'meta_keywords' => "weather damage building, storm damage inspection, roof leak inspection Melbourne, structural weather defects",
+                'author' => "Premium Building & Pest Inspections",
                 'published_at' => '2026-06-05 10:00:00',
                 'status' => true,
             ],
@@ -49,6 +61,10 @@ class BlogPostController extends Controller
                 'image' => 'https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=900&q=80',
                 'excerpt' => "When people think about termites, they usually imagine old timber or visible pest damage. But one of the biggest hidden causes of termite activity is moisture. When people think about termite infestations, they often imagine old timber, neglected buildings, or visible pest damage. However, one of the most common hidden causes of termite infestations is untreated moisture...",
                 'content' => "Subterranean termites require constant moisture to survive. Leaking pipes, poorly drained subfloors, and dripping air conditioning units create prime conditions for termite colonies to thrive silently inside wall cavities.",
+                'meta_title' => "Moisture and Termites: Why Damp Properties Are at High Risk",
+                'meta_description' => "Understand the direct link between subfloor dampness, plumbing leaks, and termite infestations in Melbourne. Expert tips on prevention and inspection.",
+                'meta_keywords' => "termite inspection, moisture problems termites, pest inspection Melbourne, termite dampness risk, timber pest report",
+                'author' => "Premium Building & Pest Inspections",
                 'published_at' => '2026-05-23 10:00:00',
                 'status' => true,
             ],
@@ -58,6 +74,10 @@ class BlogPostController extends Controller
                 'image' => 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80',
                 'excerpt' => "Buying a newly built home is an exciting milestone. After months of planning, construction, and waiting, most homeowners expect their property to be completed perfectly and ready for immediate move-in. A brand-new home often gives the impression that everything will be flawless, modern, and built to the highest standard. However, expert independent inspections often reveal...",
                 'content' => "Even with municipal surveyor certifications, cosmetic and workmanship oversights frequently slip through fast-paced building schedules. Our independent handover inspections give you full peace of mind before signing final payments.",
+                'meta_title' => "Why New Homes Need Independent Inspections Before Handover",
+                'meta_description' => "Even brand-new homes have defects. Learn why independent handover inspection is essential before you sign off on final handover and settlement.",
+                'meta_keywords' => "new home handover, independent handover inspection, Melbourne builder defects, pre settlement building check",
+                'author' => "Premium Building & Pest Inspections",
                 'published_at' => '2026-05-09 10:00:00',
                 'status' => true,
             ],
@@ -67,6 +87,10 @@ class BlogPostController extends Controller
                 'image' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80',
                 'excerpt' => "Buildings are more than walls, roofs, and foundations. Every property carries the story of its design, construction, environment, and care over time. For most people, these stories remain silent, hidden in plain sight. But for seasoned building professionals, every detail speaks — and understanding that language can prevent costly mistakes, structural failures, and future repairs...",
                 'content' => "Hairline foundation cracks, slight floor bounce, microscopic water stains, and hollow wall resonances tell seasoned inspectors precisely how a building is performing. Learning to read these signals early saves thousands in future repair bills.",
+                'meta_title' => "The Hidden Language of Buildings: What Expert Inspectors Notice",
+                'meta_description' => "Every building tells a story. From subtle cracks to hollow sounds, see how licensed inspectors spot hidden issues that could cost thousands.",
+                'meta_keywords' => "structural defects signs, building inspection insights, property cracking inspection, building inspector Melbourne",
+                'author' => "Premium Building & Pest Inspections",
                 'published_at' => '2026-04-23 10:00:00',
                 'status' => true,
             ],
@@ -118,11 +142,12 @@ class BlogPostController extends Controller
 
     public function show($slug)
     {
-        // Current blog post (only published posts visible to public)
-        $post = BlogPost::with('category')
-            ->where('slug', $slug)
-            ->published()
-            ->firstOrFail();
+        // Current blog post (published posts visible to public, drafts/scheduled viewable by authenticated admin)
+        $query = BlogPost::with('category')->where('slug', $slug);
+        if (!auth()->check()) {
+            $query->published();
+        }
+        $post = $query->firstOrFail();
 
 
         // Latest blog posts

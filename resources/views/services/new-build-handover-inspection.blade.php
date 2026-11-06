@@ -1,7 +1,32 @@
 @extends('layouts.app')
 
-@section('title', 'New Build Handover Inspection Melbourne | From $450')
-@section('meta_description', 'New build handover inspection in Melbourne. VBA-licensed inspector finds defects before settlement. Detailed report in 24 hrs. From $450, book now.')
+@php
+    $defaultTitle = 'New Build Handover Inspection Melbourne | From $450';
+    $defaultDesc = 'New build handover inspection in Melbourne. VBA-licensed inspector finds defects before settlement. Detailed report in 24 hrs. From $450, book now.';
+    $defaultKeywords = 'new build handover inspection, practical completion inspection Melbourne, handover inspection PCI, defect report new home, PCI inspection';
+    $metaTitle = !empty($service?->meta_title) ? $service->meta_title : (!empty($service?->og_title) ? $service->og_title : $defaultTitle);
+    $metaDesc = !empty($service?->meta_description) ? $service->meta_description : (!empty($service?->og_description) ? $service->og_description : $defaultDesc);
+    $metaKeywords = !empty($service?->meta_keywords) ? $service->meta_keywords : $defaultKeywords;
+    $metaAuthor = !empty($service?->author) ? $service->author : 'Premium Building & Pest Inspections';
+@endphp
+
+@section('title', $metaTitle)
+@section('meta_description', $metaDesc)
+@section('meta_keywords', $metaKeywords)
+@section('meta_author', $metaAuthor)
+
+@if(!empty($service?->og_title))
+@section('og_title', $service->og_title)
+@endif
+@if(!empty($service?->og_description))
+@section('og_description', $service->og_description)
+@endif
+@if(!empty($service?->og_image_url) || !empty($service?->image_url))
+@section('og_image', $service->og_image_url ?: $service->image_url)
+@endif
+@if(!empty($service?->og_url))
+@section('og_url', $service->og_url)
+@endif
 
 @section('content')
 

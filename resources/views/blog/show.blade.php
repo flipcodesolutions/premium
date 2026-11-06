@@ -1,13 +1,18 @@
 @extends('layouts.app')
 
-@section('title', ($post->meta_title ?: $post->og_title) ?: (($post->title ?? 'Blog Article') . ' | Premium Building & Pest Inspections'))
-@section('meta_description', ($post->meta_description ?: $post->og_description) ?: Str::limit(strip_tags($post->excerpt ?? $post->content), 155))
-@if(!empty($post->meta_keywords))
-@section('meta_keywords', $post->meta_keywords)
-@endif
-@if(!empty($post->author))
-@section('meta_author', $post->author)
-@endif
+@php
+    $defaultBlogKeywords = strtolower($post->title ?? 'building inspection') . ', building inspection blog, property inspection Melbourne, pest inspection guide, Melbourne building inspector';
+    $postKeywords = !empty($post->meta_keywords) ? $post->meta_keywords : $defaultBlogKeywords;
+    $postAuthor = !empty($post->author) ? $post->author : 'Premium Building & Pest Inspections';
+    $postTitle = ($post->meta_title ?: $post->og_title) ?: (($post->title ?? 'Blog Article') . ' | Premium Building & Pest Inspections');
+    $postDesc = ($post->meta_description ?: $post->og_description) ?: Str::limit(strip_tags($post->excerpt ?? ($post->content ?? '')), 155);
+@endphp
+
+@section('title', $postTitle)
+@section('meta_description', $postDesc)
+@section('meta_keywords', $postKeywords)
+@section('meta_author', $postAuthor)
+
 @if(!empty($post->og_title))
 @section('og_title', $post->og_title)
 @endif

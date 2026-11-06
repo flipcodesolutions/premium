@@ -82,13 +82,7 @@ Route::redirect('/our-services', '/services', 301);
 
 Route::get(
     '/services/pre-purchase-building-and-pest-inspection',
-    function () {
-
-        return view(
-            'services.pre-purchase-building-and-pest-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showPrePurchase']
 )->name('services.pre-purchase');
 
 
@@ -98,13 +92,7 @@ Route::get(
 
 Route::get(
     '/services/building-stage-by-stage-inspection',
-    function () {
-
-        return view(
-            'services.building-stage-by-stage-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showBuildingStage']
 )->name('services.building-stage');
 
 
@@ -114,13 +102,7 @@ Route::get(
 
 Route::get(
     '/services/apartment-building-inspection',
-    function () {
-
-        return view(
-            'services.apartment-building-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showApartment']
 )->name('services.apartment');
 
 
@@ -130,13 +112,7 @@ Route::get(
 
 Route::get(
     '/services/rising-damp-inspection',
-    function () {
-
-        return view(
-            'services.rising-damp-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showRisingDamp']
 )->name('services.rising-damp');
 
 
@@ -146,13 +122,7 @@ Route::get(
 
 Route::get(
     '/services/pool-barrier-inspection',
-    function () {
-
-        return view(
-            'services.pool-barrier-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showPoolBarrier']
 )->name('services.pool-barrier');
 
 
@@ -162,13 +132,7 @@ Route::get(
 
 Route::get(
     '/services/dilapidation-inspection',
-    function () {
-
-        return view(
-            'services.dilapidation-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showDilapidation']
 )->name('services.dilapidation');
 
 Route::permanentRedirect('/our-services/dilapidation-inspection', '/services/dilapidation-inspection');
@@ -180,13 +144,7 @@ Route::permanentRedirect('/our-services/dilapidation-inspection', '/services/dil
 
 Route::get(
     '/services/new-build-handover-inspection',
-    function () {
-
-        return view(
-            'services.new-build-handover-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showNewBuildHandover']
 )->name('services.new-build-handover');
 
 Route::permanentRedirect('/our-services/new-build-handover-inspection', '/services/new-build-handover-inspection');
@@ -198,13 +156,7 @@ Route::permanentRedirect('/our-services/new-build-handover-inspection', '/servic
 
 Route::get(
     '/services/vendor-inspection',
-    function () {
-
-        return view(
-            'services.vendor-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showVendor']
 )->name('services.vendor');
 
 Route::permanentRedirect('/our-services/vendor-inspection', '/services/vendor-inspection');
@@ -217,13 +169,7 @@ Route::permanentRedirect('/our-services/vendor-inspections', '/services/vendor-i
 
 Route::get(
     '/services/builders-warranty-inspection',
-    function () {
-
-        return view(
-            'services.builders-warranty-inspection'
-        );
-
-    }
+    [ServiceController::class, 'showBuildersWarranty']
 )->name('services.builders-warranty');
 
 

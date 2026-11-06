@@ -2,6 +2,8 @@
 
 @section('title', 'Building Inspection Blog | Expert Tips & Property Insights Australia')
 @section('meta_description', 'Expert guides on building and pest inspections in Australia. Learn about property reports, defects, and pre purchase checks.')
+@section('meta_keywords', 'building inspection blog, property inspection tips, Melbourne inspection news, building defects Australia, pest inspection guide')
+@section('meta_author', 'Premium Building & Pest Inspections')
 
 @section('content')
 

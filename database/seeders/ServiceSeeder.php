@@ -24,6 +24,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'A pre-purchase building and pest inspection provides an independent assessment of accessible areas of a property before purchase. Our inspection looks for visible building defects, deterioration, cracking, moisture concerns, termite and timber pest activity, roof and drainage issues, and other conditions that may require attention. You receive a professional and easy-to-understand report to help you make a more informed property decision.',
                 'image' => 'images/pre-purchase.png',
                 'starting_price' => 400.00,
+                'meta_title' => 'Pre-Purchase Building & Pest Inspection Melbourne | From $400',
+                'meta_description' => 'Pre-purchase building inspection by VBA-licensed expert. Check structure, roof, plumbing, electrical & pests. Detailed report in 24 hrs. Book from $400.',
+                'meta_keywords' => 'pre purchase building inspection, pest inspection Melbourne, building and pest inspection, property inspection',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -37,6 +41,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'Building stage by stage inspections provide independent checks throughout the construction process. Inspections can be arranged at important construction stages such as the foundation, frame, lock-up, fixing and final stages. Our inspection helps identify visible construction defects, workmanship concerns and areas requiring attention before the next stage of construction proceeds.',
                 'image' => 'images/building-stage.jpg',
                 'starting_price' => null,
+                'meta_title' => 'Stage by Stage Building Inspection Melbourne | New Builds',
+                'meta_description' => 'Stage-by-stage building inspections in Melbourne—slab, frame, lock-up, fixing & handover. Catch defects early. VBA licensed. Get a quote today.',
+                'meta_keywords' => 'stage by stage inspection, new build inspection Melbourne, slab inspection, frame inspection, lock up inspection, building stages',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -50,6 +58,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'A new build handover inspection provides an independent review of accessible areas of your newly constructed property before handover. We look for visible defects, incomplete works, workmanship concerns, damage and other areas that may require attention. The inspection can help property owners understand outstanding issues before accepting their new home.',
                 'image' => 'images/new-build-handover.jpg',
                 'starting_price' => 450.00,
+                'meta_title' => 'New Build Handover Inspection Melbourne | From $450',
+                'meta_description' => 'New build handover inspection in Melbourne. VBA-licensed inspector finds defects before settlement. Detailed report in 24 hrs. From $450, book now.',
+                'meta_keywords' => 'new build handover inspection, practical completion inspection Melbourne, handover inspection PCI, defect report new home, PCI inspection',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -63,6 +75,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'A rising damp inspection helps investigate visible signs of moisture and dampness within accessible areas of a property. Our inspection considers signs such as damp or deteriorated wall surfaces, staining, moisture-related damage and other visible conditions that may require further investigation. Modern moisture detection equipment may be used where appropriate.',
                 'image' => 'images/rising-damp.jpg',
                 'starting_price' => null,
+                'meta_title' => 'Rising Damp Inspection Melbourne | Moisture Detection',
+                'meta_description' => 'Rising damp inspection in Melbourne. Detect moisture, peeling paint & hidden damage with advanced tools. Licensed inspector. Book your inspection today.',
+                'meta_keywords' => 'rising damp inspection, moisture detection Melbourne, subfloor damp inspection, damp proofing inspection, timber moisture testing',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -76,6 +92,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'Our pool barrier inspection assesses the visible condition of accessible pool barrier areas, including fencing, gates, latches and related components. The inspection is designed to help identify visible issues that may require attention and improve awareness of potential pool barrier safety concerns.',
                 'image' => 'images/pool-barrier.jpg',
                 'starting_price' => 250.00,
+                'meta_title' => 'Pool Barrier Inspection Melbourne | Compliance Certificate | From $250',
+                'meta_description' => 'Pool barrier compliance inspection in Melbourne. Meet Victoria safety regulations, avoid fines & keep family safe. Certified checks. From $250, book fast.',
+                'meta_keywords' => 'pool barrier inspection, pool fence compliance Melbourne, pool safety certificate Victoria, pool barrier certificate, swimming pool inspection',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -89,6 +109,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'Apartment building inspections are designed to help buyers understand the visible condition of an apartment before making a purchase. We inspect accessible areas for building defects, cracking, moisture concerns, deterioration, workmanship issues and other observable conditions. The inspection provides useful information to help you make a confident property decision.',
                 'image' => 'images/apartment.jpeg',
                 'starting_price' => null,
+                'meta_title' => 'Apartment Building Inspection Melbourne | VBA Licensed',
+                'meta_description' => 'Apartment inspection in Melbourne. We check structure, common areas, HVAC, electrical & fire safety. Clear photo report delivered within 24 hrs.',
+                'meta_keywords' => 'apartment building inspection, unit inspection Melbourne, strata inspection, apartment pre purchase inspection, body corporate defects',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -102,6 +126,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'A dilapidation inspection records the existing visible condition of a property before nearby construction, excavation or building works commence. The inspection provides photographic documentation of accessible areas and existing visible conditions so that there is a clear record of the property condition at the time of inspection.',
                 'image' => 'images/dilapidation.jpg',
                 'starting_price' => null,
+                'meta_title' => 'Dilapidation Report Melbourne | Pre-Construction Property Condition',
+                'meta_description' => 'Dilapidation report in Melbourne. Photographic evidence of existing property condition before construction. Protect against disputes. Book today.',
+                'meta_keywords' => 'dilapidation report Melbourne, dilapidation inspection, pre construction condition report, property dilapidation, council condition report',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -115,6 +143,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'A vendor inspection helps property owners understand the visible condition of their property before putting it on the market. Identifying building defects, maintenance concerns, moisture issues, pest-related observations and other visible conditions can help vendors prepare their property and better understand potential issues before sale.',
                 'image' => 'images/vendor.jpg',
                 'starting_price' => null,
+                'meta_title' => 'Vendor Building Inspection Melbourne | Sell With Confidence',
+                'meta_description' => 'Pre-sale building inspection in Melbourne. Identify issues early, boost value & avoid renegotiation. Know your property before buyers do. Book today.',
+                'meta_keywords' => 'vendor inspection Melbourne, pre sale building inspection, seller property inspection, vendor condition report, property sales inspection',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -128,6 +160,10 @@ class ServiceSeeder extends Seeder
                 'description' => 'A builders warranty inspection helps property owners identify visible defects, workmanship concerns and areas requiring attention before applicable warranty periods expire. Our inspection focuses on accessible areas of the property and provides documented observations to help owners understand issues that may need to be addressed.',
                 'image' => 'images/builders-warranty.jpg',
                 'starting_price' => null,
+                'meta_title' => 'Builder Warranty Inspection Melbourne | Don\'t Let It Expire',
+                'meta_description' => 'Builder warranty inspection in Melbourne. VBA-licensed inspector finds structural defects & workmanship issues before claim expiry. Book now.',
+                'meta_keywords' => 'builder warranty inspection Melbourne, 6 year warranty inspection Victoria, building warranty claim inspection, domestic building insurance report',
+                'author' => 'Premium Building & Pest Inspections',
                 'status' => true,
             ],
 
@@ -145,13 +181,17 @@ class ServiceSeeder extends Seeder
                     'description' => $service['description'],
                     'image' => $service['image'],
                     'starting_price' => $service['starting_price'],
+                    'meta_title' => $service['meta_title'],
+                    'meta_description' => $service['meta_description'],
+                    'meta_keywords' => $service['meta_keywords'],
+                    'author' => $service['author'],
                     'status' => $service['status'],
                 ]
             );
         }
 
         $this->command->info(
-            '9 Premium Building & Pest Inspection services have been seeded successfully.'
+            '9 Premium Building & Pest Inspection services have been seeded successfully with dynamic SEO meta properties.'
         );
     }
 }

@@ -1,7 +1,32 @@
 @extends('layouts.app')
 
-@section('title', 'Pool Barrier Inspection Melbourne | Compliance Certificate | From $250')
-@section('meta_description', 'Pool barrier compliance inspection in Melbourne. Meet Victoria safety regulations, avoid fines & keep family safe. Certified checks. From $250, book fast.')
+@php
+    $defaultTitle = 'Pool Barrier Inspection Melbourne | Compliance Certificate | From $250';
+    $defaultDesc = 'Pool barrier compliance inspection in Melbourne. Meet Victoria safety regulations, avoid fines & keep family safe. Certified checks. From $250, book fast.';
+    $defaultKeywords = 'pool barrier inspection, pool fence compliance Melbourne, pool safety certificate Victoria, pool barrier certificate, swimming pool inspection';
+    $metaTitle = !empty($service?->meta_title) ? $service->meta_title : (!empty($service?->og_title) ? $service->og_title : $defaultTitle);
+    $metaDesc = !empty($service?->meta_description) ? $service->meta_description : (!empty($service?->og_description) ? $service->og_description : $defaultDesc);
+    $metaKeywords = !empty($service?->meta_keywords) ? $service->meta_keywords : $defaultKeywords;
+    $metaAuthor = !empty($service?->author) ? $service->author : 'Premium Building & Pest Inspections';
+@endphp
+
+@section('title', $metaTitle)
+@section('meta_description', $metaDesc)
+@section('meta_keywords', $metaKeywords)
+@section('meta_author', $metaAuthor)
+
+@if(!empty($service?->og_title))
+@section('og_title', $service->og_title)
+@endif
+@if(!empty($service?->og_description))
+@section('og_description', $service->og_description)
+@endif
+@if(!empty($service?->og_image_url) || !empty($service?->image_url))
+@section('og_image', $service->og_image_url ?: $service->image_url)
+@endif
+@if(!empty($service?->og_url))
+@section('og_url', $service->og_url)
+@endif
 
 @section('content')
 

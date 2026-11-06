@@ -2,6 +2,8 @@
 
 @section('title', 'Our Inspection Services | Premium Building & Pest')
 @section('meta_description', 'We offer a full range of building & pest inspection services, including pre-purchase, handover, and warranty reports. Protect your investment.')
+@section('meta_keywords', 'building inspection services, pest inspection Melbourne, pre purchase inspection, property inspection services, handover inspection')
+@section('meta_author', 'Premium Building & Pest Inspections')
 
 @section('content')
 

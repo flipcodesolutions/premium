@@ -1,7 +1,32 @@
 @extends('layouts.app')
 
-@section('title', "Builder Warranty Inspection Melbourne | Don't Let It Expire")
-@section('meta_description', 'Builder warranty inspection in Melbourne. VBA-licensed inspector finds structural defects & workmanship issues before claim expiry. Book now.')
+@php
+    $defaultTitle = 'Builder Warranty Inspection Melbourne | Don\'t Let It Expire';
+    $defaultDesc = 'Builder warranty inspection in Melbourne. VBA-licensed inspector finds structural defects & workmanship issues before claim expiry. Book now.';
+    $defaultKeywords = 'builder warranty inspection Melbourne, 6 year warranty inspection Victoria, building warranty claim inspection, domestic building insurance report';
+    $metaTitle = !empty($service?->meta_title) ? $service->meta_title : (!empty($service?->og_title) ? $service->og_title : $defaultTitle);
+    $metaDesc = !empty($service?->meta_description) ? $service->meta_description : (!empty($service?->og_description) ? $service->og_description : $defaultDesc);
+    $metaKeywords = !empty($service?->meta_keywords) ? $service->meta_keywords : $defaultKeywords;
+    $metaAuthor = !empty($service?->author) ? $service->author : 'Premium Building & Pest Inspections';
+@endphp
+
+@section('title', $metaTitle)
+@section('meta_description', $metaDesc)
+@section('meta_keywords', $metaKeywords)
+@section('meta_author', $metaAuthor)
+
+@if(!empty($service?->og_title))
+@section('og_title', $service->og_title)
+@endif
+@if(!empty($service?->og_description))
+@section('og_description', $service->og_description)
+@endif
+@if(!empty($service?->og_image_url) || !empty($service?->image_url))
+@section('og_image', $service->og_image_url ?: $service->image_url)
+@endif
+@if(!empty($service?->og_url))
+@section('og_url', $service->og_url)
+@endif
 
 @section('content')
 
