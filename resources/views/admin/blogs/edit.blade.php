@@ -116,6 +116,7 @@
                             </label>
                             <small class="text-muted">Turn on to pick a future date and time for automatic publishing.</small>
                         </div>
+                        <input type="hidden" name="is_scheduled" value="0">
                         <input class="form-check-input ms-3"
                                type="checkbox"
                                role="switch"
@@ -138,8 +139,9 @@
                                        class="form-control border-primary @error('scheduled_at') is-invalid @enderror"
                                        id="scheduled_at"
                                        name="scheduled_at"
-                                       data-utc="{{ ($post->published_at) ? $post->published_at->toISOString() : '' }}"
-                                       value="{{ old('scheduled_at') }}">
+                                       data-utc="{{ ($isScheduled && $post->published_at) ? $post->published_at->toISOString() : '' }}"
+                                       value="{{ old('scheduled_at') }}"
+                                       {{ old('is_scheduled', $isScheduled ? '1' : '0') == '1' ? '' : 'disabled' }}>
                                 @error('scheduled_at')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
@@ -172,6 +174,7 @@
                             </label>
                             <small class="text-muted">Turn off to save as a Draft (completely hidden and unpublished).</small>
                         </div>
+                        <input type="hidden" name="status" value="0">
                         <input class="form-check-input ms-3"
                                type="checkbox"
                                role="switch"
@@ -230,8 +233,34 @@
     function toggleScheduleDateBox() {
         const switchEl = document.getElementById('is_scheduled');
         const box = document.getElementById('schedule_date_box');
+        const scheduledInput = document.getElementById('scheduled_at');
+
         if (switchEl && box) {
-            box.style.display = switchEl.checked ? 'block' : 'none';
+            if (switchEl.checked) {
+                box.style.display = 'block';
+                if (scheduledInput) {
+                    scheduledInput.disabled = false;
+                    scheduledInput.required = true;
+
+                    // Ensure minimum date constraint is fresh
+                    const now = new Date();
+                    const nowLocal = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+                    const minStr = nowLocal.toISOString().slice(0, 16);
+                    scheduledInput.min = minStr;
+
+                    if (!scheduledInput.value || scheduledInput.value < minStr) {
+                        const tomorrow = new Date(now.getTime() + 86400000 - now.getTimezoneOffset() * 60000);
+                        scheduledInput.value = tomorrow.toISOString().slice(0, 16);
+                    }
+                }
+            } else {
+                box.style.display = 'none';
+                if (scheduledInput) {
+                    scheduledInput.disabled = true;
+                    scheduledInput.required = false;
+                    scheduledInput.setCustomValidity('');
+                }
+            }
         }
     }
 
@@ -240,7 +269,6 @@
         if (switchEl) {
             switchEl.addEventListener('change', toggleScheduleDateBox);
         }
-        toggleScheduleDateBox();
 
         // Set user timezone and convert UTC scheduled date to local time
         try {
@@ -254,13 +282,20 @@
             if (scheduledInput) {
                 const now = new Date();
                 const nowLocal = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-                scheduledInput.min = nowLocal.toISOString().slice(0, 16);
+                const minStr = nowLocal.toISOString().slice(0, 16);
+                scheduledInput.min = minStr;
 
                 const utcStr = scheduledInput.dataset.utc;
-                if (!scheduledInput.value && utcStr) {
+                if (utcStr) {
                     const postDate = new Date(utcStr);
                     const localDate = new Date(postDate.getTime() - postDate.getTimezoneOffset() * 60000);
-                    scheduledInput.value = localDate.toISOString().slice(0, 16);
+                    const formattedDate = localDate.toISOString().slice(0, 16);
+                    if (formattedDate >= minStr) {
+                        scheduledInput.value = formattedDate;
+                    } else {
+                        const tomorrow = new Date(now.getTime() + 86400000 - now.getTimezoneOffset() * 60000);
+                        scheduledInput.value = tomorrow.toISOString().slice(0, 16);
+                    }
                 } else if (!scheduledInput.value) {
                     const tomorrow = new Date(now.getTime() + 86400000 - now.getTimezoneOffset() * 60000);
                     scheduledInput.value = tomorrow.toISOString().slice(0, 16);
@@ -270,9 +305,11 @@
             console.error('Timezone detection error:', e);
         }
 
+        toggleScheduleDateBox();
+
         // CKEditor initialization for Blog Content
         const contentEl = document.querySelector('#content');
-        if (contentEl) {
+        if (contentEl && typeof ClassicEditor !== 'undefined') {
             ClassicEditor
                 .create(contentEl, {
                     toolbar: [

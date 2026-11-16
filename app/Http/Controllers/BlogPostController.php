@@ -116,6 +116,16 @@ class BlogPostController extends Controller
             });
         }
 
+        // Search filter (supports 'search' and 's')
+        if ($request->filled('search') || $request->filled('s')) {
+            $searchTerm = $request->get('search') ?: $request->get('s');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('title', 'like', "%{$searchTerm}%")
+                  ->orWhere('excerpt', 'like', "%{$searchTerm}%")
+                  ->orWhere('content', 'like', "%{$searchTerm}%");
+            });
+        }
+
         $posts = $query
             ->paginate(6)
             ->withQueryString();
@@ -150,12 +160,12 @@ class BlogPostController extends Controller
         $post = $query->firstOrFail();
 
 
-        // Latest blog posts
+        // Latest blog posts (take 6 for sidebar)
         $latestPosts = BlogPost::with('category')
             ->published()
             ->where('id', '!=', $post->id)
             ->latest('published_at')
-            ->take(5)
+            ->take(6)
             ->get();
 
 

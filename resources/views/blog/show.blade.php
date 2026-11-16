@@ -3,9 +3,14 @@
 @php
     $defaultBlogKeywords = strtolower($post->title ?? 'building inspection') . ', building inspection blog, property inspection Melbourne, pest inspection guide, Melbourne building inspector';
     $postKeywords = !empty($post->meta_keywords) ? $post->meta_keywords : $defaultBlogKeywords;
-    $postAuthor = !empty($post->author) ? $post->author : 'Premium Building & Pest Inspections';
+    $postAuthor = (!empty($post->author) && !str_contains($post->author, '@')) ? $post->author : 'Premium Building & Pest Inspections';
     $postTitle = ($post->meta_title ?: $post->og_title) ?: (($post->title ?? 'Blog Article') . ' | Premium Building & Pest Inspections');
     $postDesc = ($post->meta_description ?: $post->og_description) ?: Str::limit(strip_tags($post->excerpt ?? ($post->content ?? '')), 155);
+    $postImageUrl = $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image));
+
+    // Normalize content: remove duplicate title/date/img prefix from WordPress import if present
+    $cleanContent = $post->content;
+    $cleanContent = preg_replace('/^\s*(?:<p>\s*<strong>.*?<\/strong>\s*<\/p>\s*)?(?:<p>&nbsp;<\/p>\s*)?(?:<ul>\s*<li>.*?<\/li>\s*<\/ul>\s*)?(?:<p>\s*<img[^>]+>\s*<\/p>\s*)?/is', '', $cleanContent);
 @endphp
 
 @section('title', $postTitle)
@@ -19,8 +24,8 @@
 @if(!empty($post->og_description))
 @section('og_description', $post->og_description)
 @endif
-@if(!empty($post->og_image_url) || !empty($post->image_url))
-@section('og_image', $post->og_image_url ?: $post->image_url)
+@if($postImageUrl)
+@section('og_image', $postImageUrl)
 @endif
 @if(!empty($post->og_url))
 @section('og_url', $post->og_url)
@@ -29,2663 +34,714 @@
 @section('content')
 
 {{-- =========================================================
-     BLOG DETAIL HERO
+     BLOG POST DETAIL SECTION (MATCHING SCREENSHOT DESIGN)
 ========================================================= --}}
-
-<section class="blog-detail-hero">
-
-    <div class="container">
-
-        <div class="blog-detail-hero-content">
-
-            <div class="breadcrumb-area">
-
-                <a href="{{ route('home') }}">
-                    Home
-                </a>
-
-                <i class="bi bi-chevron-right"></i>
-
-                <a href="{{ route('blog.index') }}">
-                    Blog
-                </a>
-
-                <i class="bi bi-chevron-right"></i>
-
-                <span>
-                    Article
-                </span>
-
-            </div>
-
-
-            @if($post->category)
-
-                <span class="article-category">
-
-                    {{ $post->category->name }}
-
-                </span>
-
-            @endif
-
-
-            <h1>
-                {{ $post->title }}
-            </h1>
-
-
-            <div class="article-meta">
-
-                @if($post->published_at)
-
-                    <span>
-
-                        <i class="bi bi-calendar3"></i>
-
-                        {{ $post->published_at->format('d M Y') }}
-
-                    </span>
-
-                @endif
-
-
-                <span>
-
-                    <i class="bi bi-shield-check"></i>
-
-                    Premium Building & Pest Inspections
-
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-{{-- =========================================================
-     ARTICLE CONTENT
-========================================================= --}}
-
-<section class="article-section">
-
-    <div class="container">
-
-        <div class="row g-5">
-
+<div class="blog-detail-page">
+    <div class="container py-4 py-lg-5">
+        <div class="row g-4 g-lg-5">
 
             {{-- =================================================
-                 MAIN ARTICLE
+                 LEFT COLUMN: MAIN ARTICLE
             ================================================== --}}
-
             <div class="col-lg-8">
+                <article class="blog-main-article">
 
-                <article class="article-content">
-
-
-                    {{-- =================================================
-                         FEATURED IMAGE
-                    ================================================== --}}
-
-                    @if($post->image_url || $post->image)
-                        <div class="article-featured-image">
-                            <img
-                                src="{{ $post->image_url ?? (\Illuminate\Support\Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/' . $post->image)) }}"
-                                alt="{{ $post->title }}"
-                                title="{{ $post->title }}"
-                                onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
-                            >
-                        </div>
-                    @endif
-
-
-                    {{-- =================================================
-                         EXCERPT
-                    ================================================== --}}
-
-                    @if($post->excerpt)
-
-                        <div class="article-introduction">
-
-                            {{ $post->excerpt }}
-
-                        </div>
-
-                    @endif
-
-
-                    {{-- =================================================
-                         CONTENT
-                    ================================================== --}}
-
-                    <div class="article-body">
-
-                        @if($post->content)
-
-                            {!! $post->content !!}
-
+                    {{-- Category Tag --}}
+                    <div class="blog-post-category-tag">
+                        @if($post->category)
+                            <a href="{{ route('blog.index', ['category' => $post->category->slug]) }}">
+                                {{ $post->category->name }}
+                            </a>
                         @else
+                            <span>BUYING A PROPERTY</span>
+                        @endif
+                    </div>
 
-                            <p>
-                                This article provides useful property
-                                inspection information to help property
-                                buyers, sellers and homeowners make
-                                informed decisions.
-                            </p>
+                    {{-- Main Title --}}
+                    <h1 class="blog-post-main-title">
+                        {{ $post->title }}
+                    </h1>
 
+                    {{-- Post Meta Info --}}
+                    <div class="blog-post-meta-row">
+                        <span class="meta-date">
+                            <i class="bi bi-calendar3"></i>
+                            {{ $post->published_at ? $post->published_at->format('F j, Y') : ($post->created_at ? $post->created_at->format('F j, Y') : 'July 23, 2026') }}
+                        </span>
+                        <span class="meta-dot">•</span>
+                        <span class="meta-author">
+                            <i class="bi bi-shield-check"></i>
+                            {{ $postAuthor }}
+                        </span>
+                    </div>
+
+                    {{-- Featured Image --}}
+                    @if($postImageUrl)
+                        <div class="blog-post-featured-image-wrapper">
+                            <img src="{{ $postImageUrl }}"
+                                 alt="{{ $post->title }}"
+                                 title="{{ $post->title }}"
+                                 class="blog-post-featured-image"
+                                 onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
+                        </div>
+                    @endif
+
+                    {{-- Article Content --}}
+                    <div class="blog-post-content-body">
+                        @if($post->excerpt && !str_contains($cleanContent, Str::limit(strip_tags($post->excerpt), 40)))
+                            <div class="blog-post-lead-excerpt">
+                                {{ $post->excerpt }}
+                            </div>
                         @endif
 
+                        {!! $cleanContent !!}
                     </div>
 
-
-                    {{-- =================================================
-                         ARTICLE FOOTER
-                    ================================================== --}}
-
-                    <div class="article-footer">
-
-                        <div class="article-tags">
-
-                            <span>
-                                Property Inspection
-                            </span>
-
-                            <span>
-                                Building Inspection
-                            </span>
-
-                            <span>
-                                Property Advice
-                            </span>
-
-                        </div>
-
-
-                        <div class="share-area">
-
-                            <strong>
-                                Share this article
-                            </strong>
-
-                            <div class="share-buttons">
-
-                                <a
-                                    href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
-                                    target="_blank"
-                                    rel="noopener"
-                                    aria-label="Share on Facebook"
-                                >
-                                    <i class="bi bi-facebook"></i>
-                                </a>
-
-
-                                <a
-                                    href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(request()->fullUrl()) }}"
-                                    target="_blank"
-                                    rel="noopener"
-                                    aria-label="Share on LinkedIn"
-                                >
-                                    <i class="bi bi-linkedin"></i>
-                                </a>
-
-
-                                <a
-                                    href="https://wa.me/?text={{ urlencode($post->title . ' ' . request()->fullUrl()) }}"
-                                    target="_blank"
-                                    rel="noopener"
-                                    aria-label="Share on WhatsApp"
-                                >
-                                    <i class="bi bi-whatsapp"></i>
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    {{-- =================================================
-                         AUTHOR BOX
-                    ================================================== --}}
-
-                    <div class="author-box">
-
-                        <div class="author-icon">
-
-                            <i class="bi bi-person-badge"></i>
-
-                        </div>
-
-
-                        <div class="author-info">
-
-                            <span>
-                                INSPECTION PROFESSIONAL
-                            </span>
-
-                            <h3>
-                                Ronak Gami
-                            </h3>
-
-                            <p>
-                                Licensed and experienced building
-                                inspector providing professional
-                                building and pest inspection services
-                                across Melbourne and surrounding areas.
-                            </p>
-
-                            <div class="licence-details">
-
-                                <span>
-                                    VBA Building Inspector Licence:
-                                    <strong>IN-PS 74654</strong>
-                                </span>
-
-                                <span>
-                                    Domestic Builder Licence:
-                                    <strong>DB-L 100200</strong>
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    {{-- =================================================
-                         ARTICLE CTA
-                    ================================================== --}}
-
-                    <div class="article-cta">
-
-                        <div class="article-cta-icon">
-
-                            <i class="bi bi-search"></i>
-
-                        </div>
-
-                        <div>
-
-                            <span>
-                                BUYING OR SELLING A PROPERTY?
-                            </span>
-
-                            <h3>
-                                Don't Rely on Appearances Alone.
-                            </h3>
-
-                            <p>
-                                Get professional inspection information
-                                before making an important property
-                                decision.
-                            </p>
-
-                        </div>
-
-
-                        <a
-                            href="{{ route('contact') }}"
-                            class="article-cta-button"
-                        >
-                            Get an Estimate
-                            <i class="bi bi-arrow-right"></i>
+                    {{-- Back To Blog Link --}}
+                    <div class="mt-4 pt-2">
+                        <a href="{{ route('blog.index') }}" class="back-to-blog-link">
+                            <i class="bi bi-arrow-left"></i> Back to Blog Articles
                         </a>
-
                     </div>
 
                 </article>
-
             </div>
 
 
             {{-- =================================================
-                 SIDEBAR
+                 RIGHT COLUMN: SIDEBAR
             ================================================== --}}
-
             <div class="col-lg-4">
+                <aside class="blog-sidebar-sticky">
 
-                <aside class="article-sidebar">
-
-
-                    {{-- =================================================
-                         BACK TO BLOG
-                    ================================================== --}}
-
-                    <div class="sidebar-back">
-
-                        <a href="{{ route('blog.index') }}">
-
-                            <i class="bi bi-arrow-left"></i>
-
-                            Back to Blog
-
-                        </a>
-
+                    {{-- 01. Search Widget --}}
+                    <div class="sidebar-widget search-widget">
+                        <form action="{{ route('blog.index') }}" method="GET" class="sidebar-search-form">
+                            <input type="text"
+                                   name="search"
+                                   value="{{ request('search') ?? request('s') }}"
+                                   class="sidebar-search-input"
+                                   placeholder="Search..."
+                                   aria-label="Search blog articles"
+                                   required>
+                            <button type="submit" class="sidebar-search-btn" aria-label="Submit Search">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </form>
                     </div>
 
-
-                    {{-- =================================================
-                         LATEST POSTS
-                    ================================================== --}}
-
+                    {{-- 02. Recent Posts Widget --}}
                     @if(isset($latestPosts) && $latestPosts->count())
-
-                        <div class="sidebar-box">
-
-                            <div class="sidebar-title">
-
-                                <span></span>
-
-                                <h3>
-                                    Latest Articles
-                                </h3>
-
-                            </div>
-
-
-                            <div class="latest-posts">
-
+                        <div class="sidebar-widget recent-posts-widget">
+                            <h3 class="sidebar-widget-title">Recent Posts</h3>
+                            <div class="recent-posts-list">
                                 @foreach($latestPosts as $latest)
-
-                                    @if($latest->id != $post->id)
-
-                                        <div class="latest-post">
-
-                                            @if($latest->image_url || $latest->image)
-                                                <a
-                                                    href="{{ route('blog.show', $latest->slug) }}"
-                                                    class="latest-image"
-                                                >
-                                                    <img
-                                                        src="{{ $latest->image_url ?? (\Illuminate\Support\Str::startsWith($latest->image, ['http://', 'https://']) ? $latest->image : asset('storage/' . $latest->image)) }}"
-                                                        alt="{{ $latest->title }}"
-                                                        title="{{ $latest->title }}"
-                                                        onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
-                                                    >
+                                    @php
+                                        $latestImg = $latest->image_url ?? (\Illuminate\Support\Str::startsWith($latest->image, ['http://', 'https://']) ? $latest->image : asset('storage/' . $latest->image));
+                                    @endphp
+                                    <article class="recent-post-item">
+                                        @if($latestImg)
+                                            <a href="{{ route('blog.show', $latest->slug) }}" class="recent-post-thumb">
+                                                <img src="{{ $latestImg }}"
+                                                     alt="{{ $latest->title }}"
+                                                     title="{{ $latest->title }}"
+                                                     loading="lazy"
+                                                     onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';">
+                                            </a>
+                                        @endif
+                                        <div class="recent-post-content">
+                                            <h4 class="recent-post-title">
+                                                <a href="{{ route('blog.show', $latest->slug) }}">
+                                                    {{ $latest->title }}
                                                 </a>
-                                            @endif
-
-
-                                            <div class="latest-content">
-
-                                                <span>
-
-                                                    @if($latest->published_at)
-
-                                                        {{ $latest->published_at->format('d M Y') }}
-
-                                                    @else
-
-                                                        Property Insights
-
-                                                    @endif
-
-                                                </span>
-
-
-                                                <h4>
-
-                                                    <a
-                                                        href="{{ route('blog.show', $latest->slug) }}"
-                                                    >
-                                                        {{ \Illuminate\Support\Str::limit($latest->title, 65) }}
-                                                    </a>
-
-                                                </h4>
-
+                                            </h4>
+                                            <div class="recent-post-date">
+                                                {{ $latest->published_at ? $latest->published_at->format('F j, Y') : ($latest->created_at ? $latest->created_at->format('F j, Y') : 'July 23, 2026') }}
                                             </div>
-
                                         </div>
-
-                                    @endif
-
+                                    </article>
                                 @endforeach
-
                             </div>
-
                         </div>
-
                     @endif
 
+                    {{-- 03. Fast Quote / Inspection CTA Card --}}
+                    <div class="sidebar-widget inspection-cta-widget">
+                        <div class="cta-icon-wrap">
+                            <i class="bi bi-clipboard2-check"></i>
+                        </div>
+                        <h4>Need an Inspection?</h4>
+                        <p>Fast, accredited same-day building and timber pest inspection reports across Melbourne.</p>
+                        <a href="tel:0466001551" class="sidebar-cta-phone">
+                            <i class="bi bi-telephone-fill"></i> 0466 001 551
+                        </a>
+                        <a href="{{ route('contact') }}" class="sidebar-cta-btn">
+                            Book Inspection <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
 
-                    {{-- =================================================
-                         CATEGORIES
-                    ================================================== --}}
-
+                    {{-- 04. Categories List Widget --}}
                     @if(isset($categories) && $categories->count())
-
-                        <div class="sidebar-box">
-
-                            <div class="sidebar-title">
-
-                                <span></span>
-
-                                <h3>
-                                    Categories
-                                </h3>
-
-                            </div>
-
-
-                            <ul class="category-list">
-
+                        <div class="sidebar-widget categories-widget">
+                            <h3 class="sidebar-widget-title">Categories</h3>
+                            <ul class="sidebar-categories-list">
                                 @foreach($categories as $category)
-
                                     <li>
-
-                                        <a
-                                            href="{{ route('blog.index', ['category' => $category->slug]) }}"
-                                        >
-
-                                            <span>
-
-                                                <i class="bi bi-chevron-right"></i>
-
-                                                {{ $category->name }}
-
-                                            </span>
-
+                                        <a href="{{ route('blog.index', ['category' => $category->slug]) }}">
+                                            <span><i class="bi bi-chevron-right me-1 text-success"></i> {{ $category->name }}</span>
+                                            @if(isset($category->posts_count))
+                                                <span class="category-count">({{ $category->posts_count }})</span>
+                                            @endif
                                         </a>
-
                                     </li>
-
                                 @endforeach
-
                             </ul>
-
                         </div>
-
                     @endif
-
-
-                    {{-- =================================================
-                         SERVICES
-                    ================================================== --}}
-
-                    <div class="sidebar-box">
-
-                        <div class="sidebar-title">
-
-                            <span></span>
-
-                            <h3>
-                                Inspection Services
-                            </h3>
-
-                        </div>
-
-
-                        <ul class="service-list">
-
-                            <li>
-
-                                <a href="{{ route('services.pre-purchase') }}">
-
-                                    <i class="bi bi-house-check"></i>
-
-                                    Pre-Purchase Building & Pest
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a href="{{ route('services.building-stage') }}">
-
-                                    <i class="bi bi-building-check"></i>
-
-                                    Stage by Stage Inspection
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a href="{{ route('services.apartment') }}">
-
-                                    <i class="bi bi-buildings"></i>
-
-                                    Apartment Building Inspection
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a href="{{ route('services.rising-damp') }}">
-
-                                    <i class="bi bi-droplet"></i>
-
-                                    Rising Damp Inspection
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a href="{{ route('services.pool-barrier') }}">
-
-                                    <i class="bi bi-water"></i>
-
-                                    Pool Barrier Inspection
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a href="{{ route('services.new-build-handover') }}">
-
-                                    <i class="bi bi-key"></i>
-
-                                    New Build Handover
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a href="{{ route('services.vendor') }}">
-
-                                    <i class="bi bi-person-check"></i>
-
-                                    Vendor Inspection
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a href="{{ route('services.builders-warranty') }}">
-
-                                    <i class="bi bi-shield-check"></i>
-
-                                    Builders Warranty
-
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    {{-- =================================================
-                         SIDEBAR CTA
-                    ================================================== --}}
-
-                    <div class="sidebar-contact">
-
-                        <div class="contact-icon">
-
-                            <i class="bi bi-telephone-fill"></i>
-
-                        </div>
-
-                        <h3>
-                            Need an Inspection?
-                        </h3>
-
-                        <p>
-                            Speak with our team about your property
-                            inspection requirements.
-                        </p>
-
-
-                        <a
-                            href="tel:0466001551"
-                            class="contact-phone"
-                        >
-
-                            <i class="bi bi-telephone"></i>
-
-                            0466 001 551
-
-                        </a>
-
-
-                        <a
-                            href="{{ route('contact') }}"
-                            class="contact-button"
-                        >
-                            Contact Us
-                        </a>
-
-                    </div>
 
                 </aside>
-
             </div>
 
         </div>
-
     </div>
-
-</section>
+</div>
 
 
 {{-- =========================================================
-     RELATED ARTICLES
+     PAGE STYLING (MATCHING SCREENSHOT PRECISION)
 ========================================================= --}}
-
-@if(isset($relatedPosts) && $relatedPosts->count())
-
-<section class="related-section">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <span>
-                KEEP READING
-            </span>
-
-            <h2>
-                Related <strong>Articles</strong>
-            </h2>
-
-            <p>
-                More property inspection insights and useful advice.
-            </p>
-
-        </div>
-
-
-        <div class="row g-4">
-
-            @foreach($relatedPosts as $related)
-
-                <div class="col-md-6 col-lg-4">
-
-                    <article class="related-card">
-
-                        @if($related->image_url || $related->image)
-                            <div class="related-image">
-                                <a href="{{ route('blog.show', $related->slug) }}">
-                                    <img
-                                        src="{{ $related->image_url ?? (\Illuminate\Support\Str::startsWith($related->image, ['http://', 'https://']) ? $related->image : asset('storage/' . $related->image)) }}"
-                                        alt="{{ $related->title }}"
-                                        title="{{ $related->title }}"
-                                        loading="lazy"
-                                        onerror="this.onerror=null; this.src='{{ asset('images/service banner.jpg') }}';"
-                                    >
-                                </a>
-                            </div>
-                        @endif
-
-
-                        <div class="related-body">
-
-                            @if($related->published_at)
-
-                                <span class="related-date">
-
-                                    <i class="bi bi-calendar3"></i>
-
-                                    {{ $related->published_at->format('d M Y') }}
-
-                                </span>
-
-                            @endif
-
-
-                            <h3>
-
-                                <a
-                                    href="{{ route('blog.show', $related->slug) }}"
-                                >
-                                    {{ $related->title }}
-                                </a>
-
-                            </h3>
-
-
-                            <p>
-
-                                @if($related->excerpt)
-
-                                    {{ \Illuminate\Support\Str::limit($related->excerpt, 110) }}
-
-                                @elseif($related->content)
-
-                                    {{ \Illuminate\Support\Str::limit(strip_tags($related->content), 110) }}
-
-                                @endif
-
-                            </p>
-
-
-                            <a
-                                href="{{ route('blog.show', $related->slug) }}"
-                                class="related-read"
-                            >
-
-                                Read Article
-
-                                <i class="bi bi-arrow-right"></i>
-
-                            </a>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</section>
-
-@endif
-
-
-{{-- =========================================================
-     FINAL CTA
-========================================================= --}}
-
-<section class="blog-detail-final-cta">
-
-    <div class="container">
-
-        <div class="final-cta-inner">
-
-            <div>
-
-                <span>
-                    PREMIUM BUILDING & PEST INSPECTIONS
-                </span>
-
-                <h2>
-                    Know Before You Buy.
-                    <strong>Inspect Before You Invest.</strong>
-                </h2>
-
-                <p>
-                    Professional building and pest inspections
-                    designed to give you clearer information about
-                    the property you're considering.
-                </p>
-
-            </div>
-
-
-            <div class="final-cta-buttons">
-
-                <a
-                    href="{{ route('contact') }}"
-                    class="final-button"
-                >
-
-                    Book an Inspection
-
-                    <i class="bi bi-arrow-right"></i>
-
-                </a>
-
-
-                <a
-                    href="tel:0466001551"
-                    class="final-phone"
-                >
-
-                    <i class="bi bi-telephone-fill"></i>
-
-                    0466 001 551
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-{{-- =========================================================
-     PAGE CSS
-========================================================= --}}
-
 <style>
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-
-    --article-navy: #0b1f3a;
-
-    --article-blue: #123f67;
-
-    --article-orange: #ff6b00;
-
-    --article-green: #48a900;
-
-    --article-light: #f6f8fa;
-
-    --article-border: #e5ebef;
-
-    --article-text: #647281;
-
+/* ---------------------------------------------------------
+   PAGE LAYOUT
+--------------------------------------------------------- */
+.blog-detail-page {
+    background-color: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #475569;
 }
 
-
-/* =========================================================
-   GENERAL
-========================================================= */
-
-.blog-detail-hero,
-.article-section,
-.related-section,
-.blog-detail-final-cta {
-
-    font-family: 'Inter', sans-serif;
-
+/* ---------------------------------------------------------
+   CATEGORY BADGE / LINK
+--------------------------------------------------------- */
+.blog-post-category-tag {
+    margin-bottom: 8px;
 }
 
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.blog-detail-hero {
-
-    position: relative;
-
-    min-height: 450px;
-
-    display: flex;
-
-    align-items: center;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(5, 21, 40, 0.96),
-            rgba(10, 39, 65, 0.82),
-            rgba(10, 39, 65, 0.55)
-        ),
-        url('{{ asset('images/service banner.jpg') }}')
-        center / cover no-repeat;
-
-}
-
-
-.blog-detail-hero-content {
-
-    max-width: 900px;
-
-    padding: 75px 0;
-
-}
-
-
-.breadcrumb-area {
-
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-bottom: 25px;
-
-    color: rgba(255,255,255,0.65);
-
-    font-size: 11px;
-
-}
-
-
-.breadcrumb-area a {
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-}
-
-
-.breadcrumb-area a:hover {
-
-    color: var(--article-green);
-
-}
-
-
-.breadcrumb-area i {
-
-    color: var(--article-orange);
-
-    font-size: 8px;
-
-}
-
-
-.article-category {
-
+.blog-post-category-tag a,
+.blog-post-category-tag span {
     display: inline-block;
-
-    margin-bottom: 15px;
-
-    padding: 6px 13px;
-
-    background: var(--article-orange);
-
-    color: #ffffff;
-
-    border-radius: 3px;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
+    color: #48a900;
+    font-size: 13px;
+    font-weight: 800;
     text-transform: uppercase;
-
     letter-spacing: 0.8px;
-
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
+.blog-post-category-tag a:hover {
+    color: #388600;
+    text-decoration: underline;
+}
 
-.blog-detail-hero h1 {
-
-    max-width: 900px;
-
-    margin: 0 0 20px;
-
-    color: #ffffff;
-
+/* ---------------------------------------------------------
+   MAIN TITLE (H1)
+--------------------------------------------------------- */
+.blog-post-main-title {
     font-family: 'Inter', sans-serif;
-
-    font-size: clamp(34px, 5vw, 60px);
-
-    font-weight: 800;
-
-    line-height: 1.1;
-
-}
-
-
-.article-meta {
-
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 20px;
-
-    color: rgba(255,255,255,0.8);
-
-    font-size: 11px;
-
-}
-
-
-.article-meta i {
-
-    margin-right: 5px;
-
-    color: var(--article-green);
-
-}
-
-
-/* =========================================================
-   ARTICLE SECTION
-========================================================= */
-
-.article-section {
-
-    padding: 80px 0;
-
-    background: #ffffff;
-
-}
-
-
-.article-content {
-
-    min-width: 0;
-
-}
-
-
-/* =========================================================
-   FEATURED IMAGE
-========================================================= */
-
-.article-featured-image {
-
-    width: 100%;
-
-    height: 470px;
-
-    overflow: hidden;
-
-    margin-bottom: 30px;
-
-    border-radius: 8px;
-
-    box-shadow: 0 10px 35px rgba(11,31,58,0.10);
-
-}
-
-
-.article-featured-image img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-}
-
-
-/* =========================================================
-   INTRODUCTION
-========================================================= */
-
-.article-introduction {
-
-    position: relative;
-
-    margin-bottom: 30px;
-
-    padding: 25px 28px;
-
-    background: #f2f8ee;
-
-    border-left: 4px solid var(--article-green);
-
-    color: var(--article-navy);
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    line-height: 1.8;
-
-}
-
-
-/* =========================================================
-   ARTICLE BODY
-========================================================= */
-
-.article-body {
-
-    color: var(--article-text);
-
-    font-size: 14px;
-
-    line-height: 1.95;
-
-}
-
-
-.article-body p {
-
-    margin-bottom: 20px;
-
-}
-
-
-.article-body h1 {
-    margin-top: 44px;
-    margin-bottom: 18px;
-    color: var(--article-navy);
-    font-family: 'Inter', sans-serif;
-    font-size: 34px;
-    font-weight: 800;
+    font-size: clamp(24px, 3.2vw, 36px);
+    font-weight: 900;
+    color: #05213F;
     line-height: 1.25;
+    margin: 6px 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
 }
 
-.article-body h2 {
-    margin-top: 38px;
-    margin-bottom: 16px;
-    color: var(--article-navy);
+/* ---------------------------------------------------------
+   POST META
+--------------------------------------------------------- */
+.blog-post-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: #8c9ba5;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+.blog-post-meta-row i {
+    color: #48a900;
+    margin-right: 4px;
+}
+
+.meta-dot {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+/* ---------------------------------------------------------
+   FEATURED IMAGE
+--------------------------------------------------------- */
+.blog-post-featured-image-wrapper {
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    background: #f1f5f9;
+    box-shadow: 0 4px 20px rgba(5, 33, 63, 0.05);
+}
+
+.blog-post-featured-image {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ---------------------------------------------------------
+   ARTICLE CONTENT TYPOGRAPHY
+--------------------------------------------------------- */
+.blog-post-content-body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #475569;
+}
+
+.blog-post-lead-excerpt {
+    font-size: 16.5px;
+    font-weight: 500;
+    line-height: 1.8;
+    color: #1e293b;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.blog-post-content-body p {
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: #475569;
+}
+
+.blog-post-content-body h1,
+.blog-post-content-body h2 {
     font-family: 'Inter', sans-serif;
-    font-size: 28px;
-    font-weight: 750;
+    font-size: 23px;
+    font-weight: 800;
+    color: #05213F;
+    text-transform: uppercase;
+    margin-top: 36px;
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
     line-height: 1.3;
 }
 
-.article-body h3 {
-    margin-top: 30px;
-    margin-bottom: 13px;
-    color: var(--article-blue);
+.blog-post-content-body h3 {
     font-family: 'Inter', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 19px;
+    font-weight: 750;
+    color: #05213F;
+    margin-top: 28px;
+    margin-bottom: 12px;
     line-height: 1.35;
 }
 
-.article-body h4 {
-    margin-top: 24px;
+.blog-post-content-body h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: #05213F;
+    margin-top: 22px;
     margin-bottom: 10px;
-    color: var(--article-navy);
-    font-size: 18px;
-    font-weight: 700;
     line-height: 1.4;
 }
 
-.article-body h5 {
-    margin-top: 20px;
-    margin-bottom: 8px;
-    color: var(--article-blue);
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
+.blog-post-content-body strong {
+    color: #05213F;
+    font-weight: 700;
+}
+
+.blog-post-content-body a {
+    color: #48a900;
+    text-decoration: underline;
     font-weight: 600;
-    line-height: 1.45;
+    transition: color 0.2s ease;
 }
 
-.article-body h6 {
-    margin-top: 16px;
-    margin-bottom: 8px;
-    color: var(--article-text);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.5;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.blog-post-content-body a:hover {
+    color: #05213F;
 }
 
-
-.article-body ul,
-.article-body ol {
-
-    margin-bottom: 25px;
-
-    padding-left: 25px;
-
+.blog-post-content-body ul,
+.blog-post-content-body ol {
+    margin: 16px 0 24px 0;
+    padding-left: 24px;
 }
 
-
-.article-body li {
-
+.blog-post-content-body li {
     margin-bottom: 9px;
-
+    line-height: 1.75;
+    color: #475569;
 }
 
-
-.article-body strong {
-
-    color: var(--article-navy);
-
-}
-
-
-.article-body a {
-
-    color: var(--article-green);
-
-    font-weight: 600;
-
-}
-
-
-.article-body blockquote {
-
-    margin: 30px 0;
-
-    padding: 25px 30px;
-
-    background: var(--article-light);
-
-    border-left: 4px solid var(--article-orange);
-
-    color: var(--article-navy);
-
-    font-size: 16px;
-
+.blog-post-content-body blockquote {
+    background: #f8fafc;
+    border-left: 4px solid #48a900;
+    padding: 20px 24px;
+    margin: 26px 0;
+    border-radius: 0 4px 4px 0;
+    color: #1e293b;
     font-style: italic;
-
+    line-height: 1.75;
 }
 
-
-/* =========================================================
-   ARTICLE FOOTER
-========================================================= */
-
-.article-footer {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 25px;
-
-    flex-wrap: wrap;
-
-    margin-top: 45px;
-
-    padding-top: 25px;
-
-    border-top: 1px solid var(--article-border);
-
-}
-
-
-.article-tags {
-
-    display: flex;
-
-    gap: 7px;
-
-    flex-wrap: wrap;
-
-}
-
-
-.article-tags span {
-
-    padding: 6px 10px;
-
-    background: #f3f5f7;
-
-    color: #6c7782;
-
-    border-radius: 3px;
-
-    font-size: 9px;
-
-    font-weight: 600;
-
-}
-
-
-.share-area {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-}
-
-
-.share-area strong {
-
-    color: var(--article-navy);
-
-    font-size: 10px;
-
-}
-
-
-.share-buttons {
-
-    display: flex;
-
-    gap: 6px;
-
-}
-
-
-.share-buttons a {
-
-    width: 32px;
-
-    height: 32px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: var(--article-light);
-
-    color: var(--article-navy);
-
-    border-radius: 50%;
-
-    text-decoration: none;
-
-    font-size: 12px;
-
-    transition: 0.2s ease;
-
-}
-
-
-.share-buttons a:hover {
-
-    background: var(--article-green);
-
-    color: #ffffff;
-
-}
-
-
-/* =========================================================
-   AUTHOR BOX
-========================================================= */
-
-.author-box {
-
-    display: flex;
-
-    gap: 20px;
-
-    margin-top: 45px;
-
-    padding: 28px;
-
-    background: var(--article-light);
-
-    border-radius: 8px;
-
-}
-
-
-.author-icon {
-
-    width: 65px;
-
-    height: 65px;
-
-    min-width: 65px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: var(--article-navy);
-
-    color: #ffffff;
-
-    border-radius: 50%;
-
-    font-size: 25px;
-
-}
-
-
-.author-info > span {
-
-    color: var(--article-orange);
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.2px;
-
-}
-
-
-.author-info h3 {
-
-    margin: 5px 0 8px;
-
-    color: var(--article-navy);
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-}
-
-
-.author-info p {
-
-    margin-bottom: 12px;
-
-    color: var(--article-text);
-
-    font-size: 11px;
-
-    line-height: 1.7;
-
-}
-
-
-.licence-details {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px 18px;
-
-}
-
-
-.licence-details span {
-
-    color: #7a8793;
-
-    font-size: 9px;
-
-}
-
-
-.licence-details strong {
-
-    color: var(--article-navy);
-
-}
-
-
-/* =========================================================
-   ARTICLE CTA
-========================================================= */
-
-.article-cta {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    margin-top: 30px;
-
-    padding: 25px;
-
-    background: var(--article-green);
-
-    border-radius: 7px;
-
-}
-
-
-.article-cta-icon {
-
-    width: 50px;
-
-    height: 50px;
-
-    min-width: 50px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: rgba(255,255,255,0.15);
-
-    color: #ffffff;
-
-    border-radius: 50%;
-
-    font-size: 19px;
-
-}
-
-
-.article-cta > div:nth-child(2) {
-
-    flex: 1;
-
-}
-
-
-.article-cta span {
-
-    color: rgba(255,255,255,0.75);
-
-    font-size: 8px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-
-}
-
-
-.article-cta h3 {
-
-    margin: 4px 0 5px;
-
-    color: #ffffff;
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: 18px;
-
-    font-weight: 700;
-
-}
-
-
-.article-cta p {
-
-    margin: 0;
-
-    color: rgba(255,255,255,0.8);
-
-    font-size: 10px;
-
-    line-height: 1.6;
-
-}
-
-
-.article-cta-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    padding: 11px 17px;
-
-    background: #ffffff;
-
-    color: var(--article-navy);
-
+.blog-post-content-body img {
+    max-width: 100%;
+    height: auto;
     border-radius: 4px;
-
-    text-decoration: none;
-
-    white-space: nowrap;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
+    margin: 20px 0;
 }
 
-
-.article-cta-button:hover {
-
-    background: var(--article-navy);
-
-    color: #ffffff;
-
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-.article-sidebar {
-
-    position: sticky;
-
-    top: 95px;
-
-}
-
-
-.sidebar-back {
-
-    margin-bottom: 20px;
-
-}
-
-
-.sidebar-back a {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    color: var(--article-green);
-
-    text-decoration: none;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-}
-
-
-.sidebar-back a:hover {
-
-    color: var(--article-orange);
-
-}
-
-
-.sidebar-box {
-
-    margin-bottom: 25px;
-
-    padding: 24px;
-
-    background: #ffffff;
-
-    border: 1px solid var(--article-border);
-
-    border-radius: 7px;
-
-    box-shadow: 0 5px 20px rgba(11,31,58,0.04);
-
-}
-
-
-.sidebar-title {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 18px;
-
-}
-
-
-.sidebar-title span {
-
-    width: 4px;
-
-    height: 25px;
-
-    background: var(--article-orange);
-
-}
-
-
-.sidebar-title h3 {
-
-    margin: 0;
-
-    color: var(--article-navy);
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: 17px;
-
-    font-weight: 700;
-
-}
-
-
-/* =========================================================
-   LATEST POSTS
-========================================================= */
-
-.latest-post {
-
-    display: flex;
-
-    gap: 12px;
-
-    padding: 12px 0;
-
-    border-bottom: 1px solid #edf0f2;
-
-}
-
-
-.latest-post:first-child {
-
-    padding-top: 0;
-
-}
-
-
-.latest-post:last-child {
-
-    padding-bottom: 0;
-
-    border-bottom: none;
-
-}
-
-
-.latest-image {
-
-    width: 80px;
-
-    height: 65px;
-
-    min-width: 80px;
-
-    overflow: hidden;
-
-    border-radius: 4px;
-
-}
-
-
-.latest-image img {
-
+/* ---------------------------------------------------------
+   TABLE STYLING (COMPARISON BOXES FROM SCREENSHOT)
+--------------------------------------------------------- */
+.blog-post-content-body table {
     width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    transition: 0.3s ease;
-
-}
-
-
-.latest-image:hover img {
-
-    transform: scale(1.05);
-
-}
-
-
-.latest-content > span {
-
-    color: #9ba5af;
-
-    font-size: 8px;
-
-}
-
-
-.latest-content h4 {
-
-    margin: 4px 0 0;
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: 12px;
-
-    line-height: 1.45;
-
-}
-
-
-.latest-content h4 a {
-
-    color: var(--article-navy);
-
-    text-decoration: none;
-
-}
-
-
-.latest-content h4 a:hover {
-
-    color: var(--article-green);
-
-}
-
-
-/* =========================================================
-   CATEGORY LIST
-========================================================= */
-
-.category-list {
-
-    padding: 0;
-
-    margin: 0;
-
-    list-style: none;
-
-}
-
-
-.category-list li {
-
-    border-bottom: 1px solid #edf0f2;
-
-}
-
-
-.category-list li:last-child {
-
-    border-bottom: none;
-
-}
-
-
-.category-list a {
-
-    display: block;
-
-    padding: 10px 0;
-
-    color: #647281;
-
-    text-decoration: none;
-
-    font-size: 11px;
-
-    transition: 0.2s ease;
-
-}
-
-
-.category-list a:hover {
-
-    padding-left: 4px;
-
-    color: var(--article-green);
-
-}
-
-
-.category-list i {
-
-    margin-right: 7px;
-
-    color: var(--article-orange);
-
-    font-size: 8px;
-
-}
-
-
-/* =========================================================
-   SERVICE LIST
-========================================================= */
-
-.service-list {
-
-    padding: 0;
-
-    margin: 0;
-
-    list-style: none;
-
-}
-
-
-.service-list li {
-
-    margin-bottom: 7px;
-
-}
-
-
-.service-list a {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 9px;
-
-    background: #f7f9fa;
-
-    color: #596775;
-
-    border-radius: 4px;
-
-    text-decoration: none;
-
-    font-size: 10px;
-
-    font-weight: 600;
-
-    transition: 0.2s ease;
-
-}
-
-
-.service-list a:hover {
-
-    background: #eef7e9;
-
-    color: var(--article-green);
-
-}
-
-
-.service-list i {
-
-    width: 20px;
-
-    color: var(--article-orange);
-
-    text-align: center;
-
-    font-size: 13px;
-
-}
-
-
-/* =========================================================
-   SIDEBAR CONTACT
-========================================================= */
-
-.sidebar-contact {
-
-    padding: 28px 22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--article-navy),
-            var(--article-blue)
-        );
-
-    border-radius: 7px;
-
-    text-align: center;
-
-}
-
-
-.contact-icon {
-
-    width: 50px;
-
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin: 0 auto 14px;
-
-    background: rgba(255,255,255,0.1);
-
-    color: #ffffff;
-
-    border-radius: 50%;
-
-    font-size: 19px;
-
-}
-
-
-.sidebar-contact h3 {
-
-    margin-bottom: 8px;
-
-    color: #ffffff;
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: 19px;
-
-    font-weight: 700;
-
-}
-
-
-.sidebar-contact p {
-
-    margin-bottom: 15px;
-
-    color: rgba(255,255,255,0.72);
-
-    font-size: 10px;
-
-    line-height: 1.7;
-
-}
-
-
-.contact-phone {
-
-    display: block;
-
-    margin-bottom: 15px;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
+    border-collapse: collapse;
+    margin: 26px 0;
     font-size: 14px;
-
-    font-weight: 700;
-
-}
-
-
-.contact-phone i {
-
-    color: var(--article-green);
-
-    margin-right: 5px;
-
-}
-
-
-.contact-button {
-
-    display: block;
-
-    padding: 11px;
-
-    background: var(--article-green);
-
-    color: #ffffff;
-
+    border: 1px solid #e2e8f0;
     border-radius: 4px;
-
-    text-decoration: none;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-}
-
-
-.contact-button:hover {
-
-    background: #398d00;
-
-    color: #ffffff;
-
-}
-
-
-/* =========================================================
-   RELATED ARTICLES
-========================================================= */
-
-.related-section {
-
-    padding: 80px 0;
-
-    background: var(--article-light);
-
-}
-
-
-.section-heading {
-
-    margin-bottom: 35px;
-
-}
-
-
-.section-heading > span {
-
-    color: var(--article-orange);
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.8px;
-
-}
-
-
-.section-heading h2 {
-
-    margin: 7px 0 8px;
-
-    color: var(--article-navy);
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: 35px;
-
-    font-weight: 800;
-
-}
-
-
-.section-heading h2 strong {
-
-    color: var(--article-green);
-
-}
-
-
-.section-heading p {
-
-    margin: 0;
-
-    color: #73808c;
-
-    font-size: 12px;
-
-}
-
-
-.related-card {
-
-    height: 100%;
-
     overflow: hidden;
-
-    background: #ffffff;
-
-    border: 1px solid var(--article-border);
-
-    border-radius: 7px;
-
-    box-shadow: 0 5px 18px rgba(11,31,58,0.05);
-
-    transition: 0.3s ease;
-
 }
 
-
-.related-card:hover {
-
-    transform: translateY(-5px);
-
-    box-shadow: 0 12px 30px rgba(11,31,58,0.1);
-
-}
-
-
-.related-image {
-
-    height: 210px;
-
-    overflow: hidden;
-
-}
-
-
-.related-image img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    transition: 0.4s ease;
-
-}
-
-
-.related-card:hover .related-image img {
-
-    transform: scale(1.05);
-
-}
-
-
-.related-body {
-
-    padding: 21px;
-
-}
-
-
-.related-date {
-
-    color: #909ba5;
-
-    font-size: 9px;
-
-}
-
-
-.related-date i {
-
-    color: var(--article-green);
-
-    margin-right: 4px;
-
-}
-
-
-.related-body h3 {
-
-    margin: 9px 0 10px;
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: 18px;
-
-    line-height: 1.4;
-
-}
-
-
-.related-body h3 a {
-
-    color: var(--article-navy);
-
-    text-decoration: none;
-
-}
-
-
-.related-body h3 a:hover {
-
-    color: var(--article-green);
-
-}
-
-
-.related-body p {
-
-    min-height: 42px;
-
-    margin-bottom: 15px;
-
-    color: #73808c;
-
-    font-size: 11px;
-
-    line-height: 1.7;
-
-}
-
-
-.related-read {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    color: var(--article-green);
-
-    text-decoration: none;
-
-    font-size: 10px;
-
+.blog-post-content-body th {
+    background: #f1f5f9;
+    color: #05213F;
     font-weight: 700;
-
-}
-
-
-.related-read:hover {
-
-    color: var(--article-orange);
-
-}
-
-
-/* =========================================================
-   FINAL CTA
-========================================================= */
-
-.blog-detail-final-cta {
-
-    padding: 65px 0;
-
-    background: var(--article-green);
-
-}
-
-
-.final-cta-inner {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 40px;
-
-}
-
-
-.final-cta-inner > div:first-child {
-
-    max-width: 720px;
-
-}
-
-
-.final-cta-inner span {
-
-    display: block;
-
-    margin-bottom: 9px;
-
-    color: rgba(255,255,255,0.75);
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.8px;
-
-}
-
-
-.final-cta-inner h2 {
-
-    margin-bottom: 12px;
-
-    color: #ffffff;
-
-    font-family: 'Inter', sans-serif;
-
-    font-size: clamp(25px, 3vw, 37px);
-
-    font-weight: 700;
-
-    line-height: 1.25;
-
-}
-
-
-.final-cta-inner h2 strong {
-
-    display: block;
-
-    font-weight: 800;
-
-}
-
-
-.final-cta-inner p {
-
-    max-width: 650px;
-
-    margin: 0;
-
-    color: rgba(255,255,255,0.82);
-
-    font-size: 11px;
-
-    line-height: 1.8;
-
-}
-
-
-.final-cta-buttons {
-
-    min-width: 210px;
-
-}
-
-
-.final-button {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    margin-bottom: 13px;
-
-    padding: 13px 18px;
-
-    background: #ffffff;
-
-    color: var(--article-navy);
-
-    border-radius: 4px;
-
-    text-decoration: none;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-}
-
-
-.final-button:hover {
-
-    background: var(--article-navy);
-
-    color: #ffffff;
-
-}
-
-
-.final-phone {
-
-    display: block;
-
-    color: #ffffff;
-
-    text-align: center;
-
-    text-decoration: none;
-
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+    text-transform: uppercase;
     font-size: 13px;
+    letter-spacing: 0.3px;
+}
 
+.blog-post-content-body td {
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    line-height: 1.6;
+    vertical-align: top;
+}
+
+.blog-post-content-body tr:nth-child(even) td {
+    background: #fafbfc;
+}
+
+.back-to-blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #05213F;
+    font-size: 13px;
     font-weight: 700;
-
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-
-.final-phone i {
-
-    margin-right: 5px;
-
+.back-to-blog-link:hover {
+    color: #48a900;
+    text-decoration: underline;
 }
 
+/* ---------------------------------------------------------
+   SIDEBAR
+--------------------------------------------------------- */
+@media (min-width: 992px) {
+    .blog-sidebar-sticky {
+        position: sticky;
+        top: 90px;
+    }
+}
 
-/* =========================================================
+.sidebar-widget {
+    margin-bottom: 26px;
+}
+
+/* 01. Search Widget */
+.sidebar-search-form {
+    display: flex;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(5, 33, 63, 0.04);
+}
+
+.sidebar-search-input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 16px;
+    font-size: 14px;
+    border: 1px solid #d9e2ec;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    background: #ffffff;
+    color: #334155;
+    transition: border-color 0.2s ease;
+}
+
+.sidebar-search-input:focus {
+    border-color: #48a900;
+}
+
+.sidebar-search-btn {
+    width: 50px;
+    background: #48a900;
+    color: #ffffff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.sidebar-search-btn:hover {
+    background: #3da800;
+}
+
+/* 02. Recent Posts Widget */
+.recent-posts-widget {
+    background: #f4f8fb;
+    border: 1px solid #e2edf6;
+    border-radius: 6px;
+    padding: 22px 18px;
+}
+
+.sidebar-widget-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 16.5px;
+    font-weight: 800;
+    color: #05213F;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2edf6;
+}
+
+.recent-post-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e7eff6;
+}
+
+.recent-post-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.recent-post-thumb {
+    width: 68px;
+    height: 52px;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #e2e8f0;
+}
+
+.recent-post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.recent-post-thumb:hover img {
+    transform: scale(1.06);
+}
+
+.recent-post-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.recent-post-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 4px 0;
+}
+
+.recent-post-title a {
+    color: #05213F;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s ease;
+}
+
+.recent-post-title a:hover {
+    color: #48a900;
+}
+
+.recent-post-date {
+    font-size: 11px;
+    color: #8c9ba5;
+    font-weight: 500;
+}
+
+/* 03. Sidebar CTA Widget */
+.inspection-cta-widget {
+    background: linear-gradient(135deg, #05213F 0%, #0d3866 100%);
+    border-radius: 6px;
+    padding: 24px 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.cta-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #48a900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin: 0 auto 12px;
+}
+
+.inspection-cta-widget h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+}
+
+.inspection-cta-widget p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.sidebar-cta-phone {
+    display: block;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: color 0.2s ease;
+}
+
+.sidebar-cta-phone i {
+    color: #48a900;
+    margin-right: 4px;
+}
+
+.sidebar-cta-phone:hover {
+    color: #48a900;
+}
+
+.sidebar-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 16px;
+    background: #48a900;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.sidebar-cta-btn:hover {
+    background: #3da800;
+    color: #ffffff;
+}
+
+/* 04. Categories Widget */
+.categories-widget {
+    background: #ffffff;
+    border: 1px solid #e2edf6;
+    border-radius: 6px;
+    padding: 22px 18px;
+}
+
+.sidebar-categories-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-categories-list li {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.sidebar-categories-list li:last-child {
+    border-bottom: none;
+}
+
+.sidebar-categories-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.sidebar-categories-list a:hover {
+    color: #48a900;
+    padding-left: 4px;
+}
+
+.category-count {
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+/* ---------------------------------------------------------
    RESPONSIVE
-========================================================= */
-
+--------------------------------------------------------- */
 @media (max-width: 991px) {
-
-    .article-sidebar {
-
-        position: static;
-
-        margin-top: 15px;
-
+    .blog-sidebar-sticky {
+        margin-top: 20px;
     }
-
-
-    .final-cta-inner {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
+    .blog-post-featured-image {
+        max-height: 360px;
     }
-
-
-    .final-cta-buttons {
-
-        width: 100%;
-
-        max-width: 280px;
-
-    }
-
 }
-
-
-@media (max-width: 767px) {
-
-    .blog-detail-hero {
-
-        min-height: 430px;
-
-    }
-
-
-    .blog-detail-hero-content {
-
-        padding: 60px 15px;
-
-    }
-
-
-    .blog-detail-hero h1 {
-
-        font-size: 37px;
-
-    }
-
-
-    .article-section {
-
-        padding: 55px 0;
-
-    }
-
-
-    .article-featured-image {
-
-        height: 300px;
-
-    }
-
-
-    .article-introduction {
-
-        padding: 20px;
-
-        font-size: 14px;
-
-    }
-
-
-    .article-body {
-
-        font-size: 13px;
-
-    }
-
-    .article-body h1 { font-size: 26px; margin-top: 32px; margin-bottom: 14px; }
-    .article-body h2 { font-size: 22px; margin-top: 28px; margin-bottom: 12px; }
-    .article-body h3 { font-size: 19px; margin-top: 24px; margin-bottom: 10px; }
-    .article-body h4 { font-size: 17px; margin-top: 20px; margin-bottom: 8px; }
-    .article-body h5 { font-size: 15px; margin-top: 18px; margin-bottom: 6px; }
-    .article-body h6 { font-size: 13.5px; margin-top: 16px; margin-bottom: 6px; }
-
-
-    .article-cta {
-
-        flex-wrap: wrap;
-
-    }
-
-
-    .article-cta-button {
-
-        width: 100%;
-
-    }
-
-
-    .author-box {
-
-        flex-direction: column;
-
-    }
-
-
-    .related-section {
-
-        padding: 55px 0;
-
-    }
-
-}
-
 
 @media (max-width: 575px) {
-
-    .blog-detail-hero {
-
-        min-height: 450px;
-
+    .blog-post-featured-image {
+        max-height: 250px;
     }
-
-
-    .blog-detail-hero h1 {
-
-        font-size: 32px;
-
-    }
-
-
-    .article-meta {
-
-        gap: 10px;
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-    }
-
-
-    .article-featured-image {
-
-        height: 240px;
-
-    }
-
-
-    .article-footer {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-    }
-
-
-    .share-area {
-
-        flex-wrap: wrap;
-
-    }
-
-
-    .article-cta {
-
-        padding: 20px;
-
-    }
-
-
-    .section-heading h2 {
-
-        font-size: 29px;
-
-    }
-
 }
-
 </style>
 
 @endsection

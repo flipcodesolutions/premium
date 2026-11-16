@@ -23,6 +23,17 @@
 <section class="blog-posts-section">
     <div class="container">
 
+        @if(request('search') || request('s'))
+            <div class="mb-4 d-flex align-items-center justify-content-between flex-wrap gap-2 pb-3 border-bottom">
+                <p class="mb-0 text-secondary" style="font-size: 15px;">
+                    Showing results for: <strong class="text-dark">"{{ request('search') ?: request('s') }}"</strong>
+                </p>
+                <a href="{{ route('blog.index') }}" class="btn btn-sm btn-outline-secondary" style="font-size: 12px; font-weight: 600;">
+                    Clear Search
+                </a>
+            </div>
+        @endif
+
         @if(isset($posts) && $posts->count())
 
             <div class="blog-posts-grid">

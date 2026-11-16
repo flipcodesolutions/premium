@@ -115,7 +115,7 @@ class BlogPostController extends Controller
         }
 
         $isScheduled = $request->boolean('is_scheduled');
-        $isActive = $request->boolean('status', true);
+        $isActive = $request->boolean('status');
 
         if ($isScheduled && $request->filled('scheduled_at')) {
             $status = true;
@@ -145,13 +145,13 @@ class BlogPostController extends Controller
             'excerpt' => $validated['excerpt'] ?? null,
             'content' => $validated['content'],
             'image' => $imagePath,
-            'meta_title' => $validated['meta_title'] ?? $validated['og_title'] ?? null,
+            'meta_title' => $validated['meta_title'] ?? null,
             'meta_description' => $validated['meta_description'] ?? null,
             'meta_keywords' => $validated['meta_keywords'] ?? null,
-            'og_title' => $validated['og_title'] ?? $validated['meta_title'] ?? null,
-            'og_description' => $validated['og_description'] ?? null,
+            'og_title' => $validated['og_title'] ?? $validated['meta_title'] ?? $validated['title'] ?? null,
+            'og_description' => $validated['og_description'] ?? $validated['meta_description'] ?? $validated['excerpt'] ?? null,
             'og_image' => $ogImagePath,
-            'og_url' => $validated['og_url'] ?? null,
+            'og_url' => $validated['og_url'] ?? route('blog.show', $slug),
             'author' => $validated['author'] ?? null,
             'status' => $status,
             'published_at' => $publishedAt,
@@ -200,7 +200,14 @@ class BlogPostController extends Controller
             'author.max' => 'Author name must not exceed 100 characters.',
         ]);
 
-        $slug = $validated['slug'] ?? Str::slug($validated['title']);
+        $slug = !empty($validated['slug']) ? Str::slug($validated['slug']) : Str::slug($validated['title']);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (BlogPost::where('slug', $slug)->where('id', '!=', $post->id)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
 
         $imagePath = $post->image;
         if ($request->hasFile('image')) {
@@ -219,7 +226,7 @@ class BlogPostController extends Controller
         }
 
         $isScheduled = $request->boolean('is_scheduled');
-        $isActive = $request->boolean('status', true);
+        $isActive = $request->boolean('status');
 
         if ($isScheduled && $request->filled('scheduled_at')) {
             $status = true;
@@ -239,7 +246,7 @@ class BlogPostController extends Controller
         } else {
             $status = true;
             $publishedAt = ($post->published_at && $post->published_at->isPast()) ? $post->published_at : now();
-            $message = 'Blog post updated and published successfully.';
+            $message = 'Blog post updated successfully.';
         }
 
         $post->update([
@@ -249,13 +256,13 @@ class BlogPostController extends Controller
             'excerpt' => $validated['excerpt'] ?? null,
             'content' => $validated['content'],
             'image' => $imagePath,
-            'meta_title' => $validated['meta_title'] ?? $validated['og_title'] ?? null,
+            'meta_title' => $validated['meta_title'] ?? null,
             'meta_description' => $validated['meta_description'] ?? null,
             'meta_keywords' => $validated['meta_keywords'] ?? null,
-            'og_title' => $validated['og_title'] ?? $validated['meta_title'] ?? null,
-            'og_description' => $validated['og_description'] ?? null,
+            'og_title' => $validated['og_title'] ?? $validated['meta_title'] ?? $validated['title'] ?? null,
+            'og_description' => $validated['og_description'] ?? $validated['meta_description'] ?? $validated['excerpt'] ?? null,
             'og_image' => $ogImagePath,
-            'og_url' => $validated['og_url'] ?? null,
+            'og_url' => $validated['og_url'] ?? route('blog.show', $slug),
             'author' => $validated['author'] ?? null,
             'status' => $status,
             'published_at' => $publishedAt,
