@@ -180,25 +180,6 @@
                         </a>
                     </div>
 
-                    {{-- 04. Categories List Widget --}}
-                    @if(isset($categories) && $categories->count())
-                        <div class="sidebar-widget categories-widget">
-                            <h3 class="sidebar-widget-title">Categories</h3>
-                            <ul class="sidebar-categories-list">
-                                @foreach($categories as $category)
-                                    <li>
-                                        <a href="{{ route('blog.index', ['category' => $category->slug]) }}">
-                                            <span><i class="bi bi-chevron-right me-1 text-success"></i> {{ $category->name }}</span>
-                                            @if(isset($category->posts_count))
-                                                <span class="category-count">({{ $category->posts_count }})</span>
-                                            @endif
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                 </aside>
             </div>
 

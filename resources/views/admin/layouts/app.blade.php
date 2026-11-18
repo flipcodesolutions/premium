@@ -828,12 +828,6 @@
 
             <div class="sidebar-heading">System</div>
 
-            <!-- Change Password -->
-            <a href="{{ route('admin.password.edit') }}" class="nav-item-link {{ request()->routeIs('admin.password.*') ? 'active' : '' }}">
-                <i class="bi bi-shield-lock"></i>
-                <span>Change Password</span>
-            </a>
-
             <!-- Frontend Website -->
             <a href="{{ route('home') }}" target="_blank" class="nav-item-link">
                 <i class="bi bi-box-arrow-up-right"></i>
