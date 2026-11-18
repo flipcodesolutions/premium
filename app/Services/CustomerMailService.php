@@ -47,7 +47,7 @@ class CustomerMailService
             Mail::send('emails.booking-notification', [
                 'booking' => $booking,
                 'subjectLine' => $subject,
-                'introMessage' => 'Thank you for submitting your inspection booking request with Premium Building & Pest Inspections. We have received your booking details and our team will contact you shortly to confirm your scheduled appointment.',
+                'introMessage' => 'Thank you for choosing Premium Building & Pest Inspections. We have received your booking request and our licensed inspection team is currently organizing your property inspection.',
                 'customMessage' => null,
             ], function ($message) use ($booking, $subject, $fromAddress, $fromName) {
                 $message->to($booking->email, $booking->name)
@@ -187,38 +187,47 @@ class CustomerMailService
      */
     public static function sendQuoteConfirmation(QuoteRequest $quote): bool
     {
-        $recipientEmail = trim($quote->email ?? '');
-        if (empty($recipientEmail)) {
-            return false;
-        }
-
         try {
-            $subject = 'Quote Request Received - Ref #' . $quote->id . ' - Premium Building & Pest Inspections';
             $fromAddress = self::getFromAddress();
             $fromName = self::getFromName();
-            $recipientName = trim($quote->name ?? '') ?: 'Valued Client';
+            $adminEmail = $fromAddress;
+            $customerEmail = trim($quote->email ?? '');
+            $customerName = trim($quote->name ?? '') ?: 'Valued Client';
 
-            Mail::send('emails.quote-notification', [
+            // 1. Send Admin Notification to Admin Team
+            $adminSubject = 'New Quote Request - Ref #' . $quote->id . ($quote->name ? (' - ' . $quote->name) : '') . ' - Premium Building & Pest Inspections';
+
+            Mail::send('emails.quote-admin-notification', [
                 'quote' => $quote,
-                'subjectLine' => $subject,
-                'introMessage' => 'Thank you for requesting an estimate from Premium Building & Pest Inspections. We have received your inquiry and our team is preparing a comprehensive quote for your inspection needs.',
-                'customMessage' => null,
-            ], function ($message) use ($recipientEmail, $recipientName, $subject, $fromAddress, $fromName) {
-                $message->to($recipientEmail, $recipientName)
+                'subjectLine' => $adminSubject,
+            ], function ($message) use ($adminEmail, $customerEmail, $customerName, $adminSubject, $fromAddress, $fromName) {
+                $message->to($adminEmail, 'Admin Team')
                         ->from($fromAddress, $fromName)
-                        ->replyTo($fromAddress, $fromName)
-                        ->subject($subject);
-
-                // Send a confirmation BCC to company email if recipient is different
-                if (strtolower($recipientEmail) !== strtolower($fromAddress)) {
-                    $message->bcc($fromAddress, $fromName);
-                }
+                        ->replyTo($customerEmail ?: $fromAddress, $customerName)
+                        ->subject($adminSubject);
             });
 
-            Log::info("Quote confirmation email sent to {$recipientEmail} for Quote #{$quote->id}");
+            // 2. Send Customer Confirmation directly to Customer (addressing "Hello {name}")
+            if (!empty($customerEmail) && strtolower($customerEmail) !== strtolower($adminEmail)) {
+                $customerSubject = 'Thank you for your Quote Request - Ref #' . $quote->id . ' - Premium Building & Pest Inspections';
+
+                Mail::send('emails.quote-notification', [
+                    'quote' => $quote,
+                    'subjectLine' => $customerSubject,
+                    'introMessage' => 'Thank you for reaching out to Premium Building & Pest Inspections. We have received your inquiry and our licensed inspection team is currently preparing a transparent, fixed-price quote tailored to your property.',
+                    'customMessage' => null,
+                ], function ($message) use ($customerEmail, $customerName, $customerSubject, $fromAddress, $fromName) {
+                    $message->to($customerEmail, $customerName)
+                            ->from($fromAddress, $fromName)
+                            ->replyTo($fromAddress, $fromName)
+                            ->subject($customerSubject);
+                });
+            }
+
+            Log::info("Quote confirmation notification sent for Quote #{$quote->id} to {$adminEmail}");
             return true;
         } catch (\Throwable $e) {
-            Log::error("Failed to send quote confirmation to {$recipientEmail}: " . $e->getMessage());
+            Log::error("Failed to send quote confirmation for Quote #{$quote->id}: " . $e->getMessage());
             return false;
         }
     }
@@ -226,7 +235,7 @@ class CustomerMailService
     /**
      * Send quote status update to customer.
      */
-    public static function sendQuoteStatusUpdate(QuoteRequest $quote, ?string $customNote = null): bool
+    public static function sendQuoteStatusUpdate(QuoteRequest $quote, ?string $customNote = null, ?string $quoteAmount = null, ?string $quoteDescription = null): bool
     {
         $recipientEmail = trim($quote->email ?? '');
         if (empty($recipientEmail)) {
@@ -236,11 +245,11 @@ class CustomerMailService
 
         try {
             $statusTitle = ucfirst($quote->status);
-            $subject = "Quote Request #{$quote->id} Update: {$statusTitle} - Premium Building & Pest Inspections";
+            $subject = "Quotation Details for Quote #{$quote->id} - Premium Building & Pest Inspections";
 
             $intro = match ($quote->status) {
                 'contacted' => 'Our team has reviewed your quote request and our inspector has reached out to discuss your property inspection requirements.',
-                'quoted' => 'Your inspection quote has been prepared. Please review the details below or contact our office to schedule your inspection appointment.',
+                'quoted' => 'Your inspection quote has been prepared. Based on your enquiry, please find the quotation details below:',
                 'closed' => "Your quote request has been marked as completed/closed. Thank you for considering Premium Building & Pest Inspections.",
                 default => "Your quote request status has been updated to {$statusTitle}.",
             };
@@ -254,6 +263,8 @@ class CustomerMailService
                 'subjectLine' => $subject,
                 'introMessage' => $intro,
                 'customMessage' => $customNote,
+                'quoteAmount' => $quoteAmount ?: $quote->quote_amount,
+                'quoteDescription' => $quoteDescription ?: ($quote->quote_description ?: $customNote),
             ], function ($message) use ($recipientEmail, $recipientName, $subject, $fromAddress, $fromName) {
                 $message->to($recipientEmail, $recipientName)
                         ->from($fromAddress, $fromName)

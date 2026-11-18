@@ -18,6 +18,8 @@ class QuoteRequest extends Model
         'property_address',
         'service_type',
         'message',
+        'quote_amount',
+        'quote_description',
         'status',
     ];
 

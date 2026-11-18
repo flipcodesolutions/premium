@@ -765,7 +765,7 @@
                                     name="email"
                                     class="auth-input"
                                     placeholder="Enter your admin email"
-                                    value="{{ old('email') }}"
+                                    value="{{ old('email', 'premiumbapi@gmail.com') }}"
                                     autocomplete="email"
                                     required
                                     autofocus

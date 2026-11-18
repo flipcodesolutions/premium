@@ -828,6 +828,12 @@
 
             <div class="sidebar-heading">System</div>
 
+            <!-- Change Password -->
+            <a href="{{ route('admin.password.edit') }}" class="nav-item-link {{ request()->routeIs('admin.password.*') ? 'active' : '' }}">
+                <i class="bi bi-shield-lock"></i>
+                <span>Change Password</span>
+            </a>
+
             <!-- Frontend Website -->
             <a href="{{ route('home') }}" target="_blank" class="nav-item-link">
                 <i class="bi bi-box-arrow-up-right"></i>
@@ -910,7 +916,7 @@
                         </div>
                         <i class="bi bi-chevron-down text-muted small ms-1 d-none d-md-inline"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border p-1 mt-2" style="min-width: 160px;">
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border p-1 mt-2" style="min-width: 175px;">
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -919,6 +925,13 @@
                                     <span>Log Out</span>
                                 </button>
                             </form>
+                        </li>
+                        <li><hr class="dropdown-divider my-1"></li>
+                        <li>
+                            <a href="{{ route('admin.password.edit') }}" class="dropdown-item small py-2 text-dark d-flex align-items-center">
+                                <i class="bi bi-key me-2 text-primary"></i>
+                                <span>Change Password</span>
+                            </a>
                         </li>
                     </ul>
                 </div>

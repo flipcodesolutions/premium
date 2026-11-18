@@ -67,11 +67,22 @@ class QuoteRequestController extends Controller
             'status' => 'required|in:pending,contacted,quoted,closed',
             'notify_customer' => 'nullable|boolean',
             'note' => 'nullable|string|max:1000',
+            'quote_amount' => 'nullable|string|max:100',
+            'quote_description' => 'nullable|string|max:2000',
         ]);
 
-        $quote->update([
+        $updateData = [
             'status' => $validated['status'],
-        ]);
+        ];
+
+        if ($request->filled('quote_amount')) {
+            $updateData['quote_amount'] = $request->input('quote_amount');
+        }
+        if ($request->filled('quote_description')) {
+            $updateData['quote_description'] = $request->input('quote_description');
+        }
+
+        $quote->update($updateData);
 
         if ($request->boolean('notify_customer')) {
             if (empty(trim($quote->email ?? ''))) {
@@ -80,11 +91,16 @@ class QuoteRequestController extends Controller
                     ->with('warning', 'Quote status updated to ' . ucfirst($quote->status) . ', but client has no email address on file.');
             }
 
-            $sent = CustomerMailService::sendQuoteStatusUpdate($quote, $request->input('note'));
+            $sent = CustomerMailService::sendQuoteStatusUpdate(
+                $quote,
+                $request->input('note'),
+                $request->input('quote_amount'),
+                $request->input('quote_description')
+            );
             if ($sent) {
                 return redirect()
                     ->back()
-                    ->with('success', 'Quote status updated to ' . ucfirst($quote->status) . ' and notification email sent to ' . $quote->email . '. (A confirmation copy was also archived).');
+                    ->with('success', 'Quote status updated to ' . ucfirst($quote->status) . ' and quotation email sent to ' . $quote->email . '. (A confirmation copy was also archived).');
             }
 
             return redirect()

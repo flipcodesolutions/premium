@@ -71,12 +71,24 @@
                                 <i class="bi bi-check-lg me-1"></i>Save Status Change
                             </button>
                         </div>
-                        <div class="mt-2">
-                            <input type="text"
-                                   name="note"
-                                   class="form-control form-control-sm"
-                                   placeholder="Optional inspector note / quote details to include in email (e.g. Quoted Price: $450, proposed inspection date, etc.)"
-                                   value="{{ old('note') }}">
+                        <div class="row g-2 mt-2">
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text fw-semibold bg-white"><i class="bi bi-currency-dollar me-1 text-success"></i>Quote Amount</span>
+                                    <input type="text"
+                                           name="quote_amount"
+                                           class="form-control form-control-sm"
+                                           placeholder="e.g. $450 AUD"
+                                           value="{{ old('quote_amount', $quote->quote_amount) }}">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text"
+                                       name="quote_description"
+                                       class="form-control form-control-sm"
+                                       placeholder="Additional Information (e.g. Comprehensive building & pest report delivered in 24 hrs)"
+                                       value="{{ old('quote_description', $quote->quote_description) }}">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -132,6 +144,15 @@
                                     <span class="badge bg-light text-secondary border ms-1">{{ $quote->australian_timezone_abbr }}</span>
                                     <div class="text-muted" style="font-size: 0.75rem;">Australian Time Zone &bull; {{ $quote->created_at ? $quote->created_at->diffForHumans() : '' }}</div>
                                 </dd>
+
+                                @if($quote->quote_amount)
+                                    <dt class="col-sm-5 text-muted">Quote Amount:</dt>
+                                    <dd class="col-sm-7 fw-bold text-success">{{ $quote->quote_amount }}</dd>
+                                @endif
+                                @if($quote->quote_description)
+                                    <dt class="col-sm-5 text-muted">Additional Info:</dt>
+                                    <dd class="col-sm-7 text-dark">{{ $quote->quote_description }}</dd>
+                                @endif
                             </dl>
                         </div>
                     </div>
@@ -208,28 +229,35 @@
 
                     <div class="mb-3">
                         <label for="emailSubject" class="form-label fw-bold small text-dark">Subject <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="emailSubject" name="subject" value="Regarding your quote request #{{ $quote->id }} - Premium Inspections" required>
+                        <input type="text" class="form-control" id="emailSubject" name="subject" value="Quotation Details for Quote #{{ $quote->id }} - Premium Building & Pest Inspections" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="emailMessage" class="form-label fw-bold small text-dark">Message / Quote Details <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="emailMessage" name="message" rows="7" placeholder="Type your message or quote estimate to the client here..." required>Dear {{ $quote->name }},
+                        <textarea class="form-control" id="emailMessage" name="message" rows="12" placeholder="Type your message or quote estimate to the client here..." required>Hello {{ $quote->name }},
 
-Thank you for requesting an estimate with Premium Building & Pest Inspections.
+Thank you for contacting Premium Building & Pest Inspections and for your interest in our inspection services.
+We have received your quote request and reviewed the details provided. We appreciate the opportunity to assist you with your property inspection requirements.
+Based on your enquiry, please find the quotation details below:
 
-We have reviewed your request for: {{ $quote->service_type ?? 'Building & Pest Inspection' }}.
-Target Property: {{ $quote->property_address ?? 'Your designated property' }}
+Inspection Details
+Customer Name: {{ $quote->name }}
+Property Address: {{ $quote->property_address ?? 'Not specified' }}
+Inspection Service: {{ $quote->service_type ?? 'Pre-Purchase Building & Pest Inspection' }}
 
-Estimated Cost: $
-Includes:
-- Comprehensive Thermal Imaging
-- Licensed & Insured Inspector
-- Same-Day Detailed Digital Report
+Quotation Details
+Quote Amount: {{ $quote->quote_amount ?: '$450 AUD (Inclusive of GST)' }}
+Additional Information: {{ $quote->quote_description ?: 'Comprehensive building and timber pest inspection report compliant with AS 4349.1 & AS 4349.3, delivered within 24 hours.' }}
 
-To proceed with your inspection or discuss your requirements, please feel free to call us at 0468 444 786.
+Please review the quotation and let us know if you would like to proceed with the inspection. If you have any questions or require further clarification, please feel free to contact our team.
 
-Kind regards,
-Premium Building & Pest Inspections Team</textarea>
+Thank you for considering Premium Building & Pest Inspections. We look forward to assisting you.
+
+Kind Regards,
+Premium Building & Pest Inspections Team
+Phone: 0466 001 551
+Email: info@premiumbuildinginspections.com.au
+Website: https://premiumbuildinginspections.com.au/</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

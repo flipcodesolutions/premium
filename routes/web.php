@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\InspectionAgreementController as AdminInspectionAgreementController;
 use App\Http\Controllers\Admin\CrmMasterController as AdminCrmMasterController;
+use App\Http\Controllers\Admin\PasswordController as AdminPasswordController;
 
 
 // =========================================================
@@ -779,6 +780,21 @@ Route::middleware(['admin'])
             '/crm-masters/{crmMaster}/toggle-status',
             [AdminCrmMasterController::class, 'toggleStatus']
         )->name('crm-masters.toggle-status');
+
+
+        // =================================================
+        // ADMIN CHANGE PASSWORD
+        // =================================================
+
+        Route::get(
+            '/change-password',
+            [AdminPasswordController::class, 'edit']
+        )->name('password.edit');
+
+        Route::put(
+            '/change-password',
+            [AdminPasswordController::class, 'update']
+        )->name('password.update');
 
         Route::redirect('/inspection-agreements', '/admin/agreements');
         Route::redirect('/inspection-agreement', '/admin/agreements');
